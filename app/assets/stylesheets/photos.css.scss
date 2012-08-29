@@ -1,0 +1,134 @@
+// Place all the styles related to the photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.photos-list {
+	margin-left: 10px;
+	margin-right: 10px;
+	
+	div.photos-list-item {
+		padding: 14px;
+		height: 300px;
+		width: 256px;
+		text-align: center;
+		font-size: x-large;
+		display: inline-block;
+	}
+}
+
+span.photo-title {
+	display: block;
+	font-weight: bold
+}
+
+span.photo-datum {
+	display: block;
+	font-size: 0.7em;
+	color: #666
+}
+
+span.photo-description {
+	display: block;
+	font-size: 0.7em;
+	color: #666
+}
+
+span.photo-date {
+	display: block;
+	font-size: 0.7em;
+	color: #666;
+}
+
+span.photo-statistics{
+	display: block;
+	font-size: 0.7em;
+	color: #666
+}
+
+img.photo-thumbnail {
+	border: 5px #111 solid
+}
+
+div.photo {
+	display: inline-block;
+	
+	a {
+		&:visited {
+			color: #551A8B;
+		}
+		
+		&:hover {
+			color: purple;
+		}
+	}
+}
+
+div.navigate-photo-link {
+	display: inline-block;
+	position: relative;
+	//background-color: purple;
+	overflow: none;
+	
+	a {
+		display: block;
+		width: 50px;
+		color: white;
+		text-decoration: none;
+		white-space: nowrap;
+		overflow: hidden;
+		
+		&:visited {
+			color: white;
+		}
+		
+		&:hover {
+			color: purple;
+		}
+	}
+}
+
+div.commentary {
+	span.user {
+		color: gray
+	}
+	
+	span.date {
+		color: white
+	}
+	
+	#new-comment {
+		display: none;
+	}
+}
+
+div.tags-list {
+	span.tag a {
+		background-color: green;
+		padding-left: 5px;
+		padding-right: 5px;
+		text-decoration: none;
+		color: white;
+		font-size: 18px;
+		
+		&:hover {
+			background-color: red;
+		};
+	}
+	
+	span.remove-tag a {
+		background-color: red;
+		padding-left: 5px;
+		padding-right: 5px;
+		text-decoration: none;
+		color: black;
+		font-size: 18px;
+		
+		&:hover {
+			background-color: green;
+		};
+	}
+}
+
+div.indented {
+	margin-left: 54px;
+}

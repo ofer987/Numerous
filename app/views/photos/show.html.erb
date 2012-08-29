@@ -1,0 +1,63 @@
+<% home_url = "http://localhost:3000/assets/" %>
+
+<div class="main-form">
+  <div>
+    <%= link_to "Back", photos_path(tags: params[:tags]) %>
+  </div>
+	<div class="navigate-photo-link">
+		<% unless (@is_first_photo) %>
+			<%= link_to '<------', photo_path(@selected_photos[@current_photo_index - 1], tags: params[:tags]) %>
+		<% end %>
+	</div>
+	<div class="photo">
+		<div>
+			<img id="displayed-photo" src="<%= home_url + @displayed_fichier.filename %>" />
+		</div>
+		<div>
+			<a href="<%= home_url + @photo.select_fichier("small").filename %>">Small</a>
+			<% if @photo.select_fichier("medium") != nil %>
+				<a href="<%= home_url + @photo.select_fichier("medium").filename %>">Medium</a>
+			<% end %>
+			<% if @photo.select_fichier("large") != nil %>
+				<a href="<%= home_url + @photo.select_fichier("large").filename %>">Large</a>
+			<% end %>
+			<a href="<%= home_url + @photo.select_fichier("original").filename %>">Original</a>
+		</div>
+	</div>
+	<div class="navigate-photo-link">
+		<% unless (@is_last_photo) %>
+			<%= link_to '------>', photo_path(@selected_photos[@current_photo_index + 1], tags: params[:tags]) %>
+		<% end %>
+	</div>
+	<br />
+	<br />
+	
+	<div class="<% unless @is_first_photo %>indented<% end %>">
+	  <div class="tags-list">
+	    <% @photo.tags.each do |tag| %>
+        <span class="tag"><%= link_to tag.name, photos_path(tags: tag.name) %></span>
+	    <% end %>
+	  </div>
+	  <% if @photo.tags.count >= 1 %><br /><% end %>
+	  
+    <div class="commentary">
+	  	<h2>Comments</h2>
+	  	<table>
+	  		<% @photo.comments.select { |c| c.id != nil }.each do |comment| %>
+	  		<% comment_date = comment.created_at.localtime.strftime("%b %-d at %-H:%-M") %>
+	  			<tr>
+	  				<td><%= strip_tags(comment.content) %> – <span class="user"><%= strip_tags(comment.user) %></span> <span class="date"><%= strip_tags(comment_date) %></span></td>
+	  			</tr>
+	  		<% end %>
+	  	</table>
+	  	<div>
+	  		<p id="notice"><%= notice %></p>
+	  		
+	  		<button id="add-comment-button">New comment</button>
+	  		<div id="new-comment">
+	  			<%= render 'comments/form' %>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+</div>

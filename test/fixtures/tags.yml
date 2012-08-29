@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+toronto:
+  name: Toronto
+
+montreal:
+  name: Montreal
+  
+quebec:
+  name: Quebec
+
+england:
+  name: England

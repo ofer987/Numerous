@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+eaton_college_original:
+  photo: eaton_college
+  filesize_type: original
+
+eaton_college_thumbnail:
+  photo: eaton_college
+  filesize_type: thumbnail
+  
+eaton_college_small:
+  photo: eaton_college
+  filesize_type: small
+
+nobody_commented_original:
+  photo: nobody_commented
+  filesize_type: original
+  
+nobody_commented_thumbnail:
+  photo: nobody_commented
+  filesize_type: thumbnail
+  
+nobody_commented_small:
+  photo: nobody_commented
+  filesize_type: small

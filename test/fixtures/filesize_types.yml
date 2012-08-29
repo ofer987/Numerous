@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+original:
+  name: original
+  width: 
+  height: 
+
+thumbnail:
+  name: thumbnail
+  width: 150
+  height: 150
+
+large:
+  name: large
+  width: 2000
+  height: 2000
+
+medium:
+  name: medium
+  width: 1000
+  height: 1000    
+  
+small:
+  name: small
+  width: 800
+  height: 800
