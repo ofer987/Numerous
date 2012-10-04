@@ -1,5 +1,3 @@
-<% home_url = "http://localhost:3000/assets/" %>
-
 <div class="main-form">
   <div>
     <%= link_to "Back", photos_path(tags: params[:tags]) %>
@@ -11,17 +9,17 @@
 	</div>
 	<div class="photo">
 		<div>
-			<img id="displayed-photo" src="<%= home_url + @displayed_fichier.filename %>" />
+			<img id="displayed-photo" src="<%= @home_url + @displayed_fichier.filename %>" />
 		</div>
 		<div>
-			<a href="<%= home_url + @photo.select_fichier("small").filename %>">Small</a>
+			<a href="<%= @home_url + @photo.select_fichier("small").filename %>">Small</a>
 			<% if @photo.select_fichier("medium") != nil %>
-				<a href="<%= home_url + @photo.select_fichier("medium").filename %>">Medium</a>
+				<a href="<%= @home_url + @photo.select_fichier("medium").filename %>">Medium</a>
 			<% end %>
 			<% if @photo.select_fichier("large") != nil %>
-				<a href="<%= home_url + @photo.select_fichier("large").filename %>">Large</a>
+				<a href="<%= @home_url + @photo.select_fichier("large").filename %>">Large</a>
 			<% end %>
-			<a href="<%= home_url + @photo.select_fichier("original").filename %>">Original</a>
+			<a href="<%= @home_url + @photo.select_fichier("original").filename %>">Original</a>
 		</div>
 	</div>
 	<div class="navigate-photo-link">

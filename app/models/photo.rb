@@ -25,7 +25,7 @@ class Photo < ActiveRecord::Base
   #  :message => "is invalid, needs to be in date format YYYY-MM-DD HH:MM:SS"
  
   # Root directory of the photo public/photos
-  PHOTO_STORE = Rails.root.join('app', 'assets', 'images')
+  PHOTO_STORE = Rails.root.join('app', 'assets', 'images', 'photos')
   
   # Invoke save_photo method when save is completed
   before_save :before_save
