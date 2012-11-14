@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   
   private
   
-      def ensure_an_admin_remains
-        if User.count.zero?
-          raise 'Cannot delete the last user'
-        end
-      end
+  def ensure_an_admin_remains
+    if User.count.zero?
+      raise 'Cannot delete the last user'
+    end
+  end
 end

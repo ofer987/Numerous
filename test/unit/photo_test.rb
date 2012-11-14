@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PhotoTest < ActiveSupport::TestCase
   setup do
-    @filename = 'photo_store/games.jpg'
+    @filename = 'test/images/games.jpg'
   end
   
   test "photo attributes must not be empty" do

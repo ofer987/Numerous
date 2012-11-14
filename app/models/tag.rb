@@ -10,7 +10,4 @@ class Tag < ActiveRecord::Base
   
   has_many :photo_tags, dependent: :delete_all
   has_many :photos, through: :photo_tags
-  
-  validates_presence_of :name, on: :create, :message => "can't be blank"
-  validates_uniqueness_of :name, on: :create, message: "must be unique", case_sensitive: false
 end
