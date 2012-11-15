@@ -5,7 +5,7 @@ module PhotosHelper
       	<% for photo in @photos %>
       	  <% photo_date = photo.taken_date.strftime("%b %-d at %-I:%-M") %>
       		<div class="photos-list-item" id="item_<%= photo.id %>">
-      			<%= link_to image_tag(@home_url + photo.select_fichier('thumbnail').filename,
+      			<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
       				class: "photo-thumbnail"), photo_path(photo), class: "kaka" %>
       			<span class="photo-title"><%= strip_tags(photo.title) %></span>
       			<span class="photo-description"><%= strip_tags(photo.description) %></span>
