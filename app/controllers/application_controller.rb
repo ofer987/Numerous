@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_home_url
-      @home_url = "http://localhost:3000/assets/photos/";
+      @photos_dir = "/assets/photos/";
     end
     
     def authorize
