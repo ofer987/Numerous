@@ -8,96 +8,111 @@ div.photos-list {
 	
 	div.photos-list-item {
 		padding: 14px;
-		height: 300px;
+		height: 316px;
 		width: 256px;
 		text-align: center;
 		font-size: x-large;
 		display: inline-block;
 	}
-}
-
-span.photo-title {
-	display: block;
-	font-weight: bold
-}
-
-span.photo-datum {
-	display: block;
-	font-size: 0.7em;
-	color: #666
-}
-
-span.photo-description {
-	display: block;
-	font-size: 0.7em;
-	color: #666
-}
-
-span.photo-date {
-	display: block;
-	font-size: 0.7em;
-	color: #666;
-}
-
-span.photo-statistics{
-	display: block;
-	font-size: 0.7em;
-	color: #666
-}
-
-img.photo-thumbnail {
-	border: 5px #111 solid
-}
-
-div.photo {
-	display: inline-block;
 	
-	a {
-		&:visited {
-			color: #551A8B;
-		}
-		
-		&:hover {
-			color: purple;
-		}
-	}
-}
-
-div.navigate-photo-link {
-	display: inline-block;
-	position: relative;
-	//background-color: purple;
-	overflow: none;
-	
-	a {
+	span.photo-title {
 		display: block;
-		width: 50px;
-		color: white;
-		text-decoration: none;
-		white-space: nowrap;
+		font-weight: bold
+	}
+
+	span.photo-datum {
+		display: block;
+		font-size: 0.7em;
+		color: #666
+	}
+
+	span.photo-description {
+		display: block;
+		height: 100px;
 		overflow: hidden;
-		
-		&:visited {
-			color: white;
-		}
-		
-		&:hover {
-			color: purple;
-		}
+		margin-bottom: 2px;
+		font-size: 0.7em;
+		color: #666
+	}
+
+	span.photo-date {
+		display: block;
+		font-size: 0.7em;
+		color: #666;
+	}
+
+	span.photo-statistics{
+		display: block;
+		font-size: 0.7em;
+		color: #666
+	}
+
+	img.photo-thumbnail {
+		border: 5px #111 solid
 	}
 }
 
-div.commentary {
-	span.user {
-		color: gray
+div.photo-form {
+	width: 940px;
+	font-size: 16px;
+	
+	div.photo {
+		display: inline-block;
+
+		a {
+			&:visited {
+				color: #551A8B;
+			}
+
+			&:hover {
+				color: purple;
+			}
+		}
+	}	
+	
+	div.navigate-photo-link {
+		display: inline-block;
+		position: relative;
+		//background-color: purple;
+		overflow: none;
+
+		a {
+			display: block;
+			width: 50px;
+			color: white;
+			text-decoration: none;
+			white-space: nowrap;
+			overflow: hidden;
+
+			&:visited {
+				color: white;
+			}
+
+			&:hover {
+				color: purple;
+			}
+		}
 	}
 	
-	span.date {
-		color: white
+	div.description {
+		width: 800px;
+		color: gray;
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
-	
-	#new-comment {
-		display: none;
+
+	div.commentary {
+		span.user {
+			color: gray
+		}
+
+		span.date {
+			color: white
+		}
+
+		#new-comment {
+			display: none;
+		}
 	}
 }
 
@@ -109,12 +124,12 @@ div.tags-list {
 		text-decoration: none;
 		color: white;
 		font-size: 18px;
-		
+
 		&:hover {
 			background-color: red;
 		};
 	}
-	
+
 	span.remove-tag a {
 		background-color: red;
 		padding-left: 5px;
@@ -122,7 +137,7 @@ div.tags-list {
 		text-decoration: none;
 		color: black;
 		font-size: 18px;
-		
+
 		&:hover {
 			background-color: green;
 		};

@@ -1,4 +1,4 @@
-<div class="main-form">
+<div class="photo-form">
   <div>
     <%= link_to "Back", photos_path(tags: params[:tags]) %>
   </div>
@@ -28,7 +28,6 @@
 		<% end %>
 	</div>
 	<br />
-	<br />
 	
 	<div class="<% unless @is_first_photo %>indented<% end %>">
 	  <div class="tags-list">
@@ -37,6 +36,10 @@
 	    <% end %>
 	  </div>
 	  <% if @photo.tags.count >= 1 %><br /><% end %>
+	  
+	  <div class="description">
+	    <%= @photo.description %>
+	  </div>
 	  
     <div class="commentary">
 	  	<h2>Comments</h2>
