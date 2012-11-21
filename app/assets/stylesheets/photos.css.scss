@@ -8,8 +8,7 @@ div.photos-list {
 	
 	div.photos-list-item {
 		padding: 14px;
-		height: 316px;
-		width: 256px;
+		width: 260px;
 		text-align: center;
 		font-size: x-large;
 		display: inline-block;
@@ -48,17 +47,21 @@ div.photos-list {
 	}
 
 	img.photo-thumbnail {
-		border: 5px #111 solid
+		border: 5px #111 solid;
 	}
 }
 
-div.photo-form {
+div.photo-item {
 	width: 940px;
 	font-size: 16px;
 	
 	div.photo {
 		display: inline-block;
-
+		
+		div img {
+			border: 5px #111 solid;
+		}
+		
 		a {
 			&:visited {
 				color: #551A8B;
@@ -73,8 +76,7 @@ div.photo-form {
 	div.navigate-photo-link {
 		display: inline-block;
 		position: relative;
-		//background-color: purple;
-		overflow: none;
+		width: 50px;
 
 		a {
 			display: block;
@@ -94,56 +96,31 @@ div.photo-form {
 		}
 	}
 	
-	div.description {
-		width: 800px;
-		color: gray;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-
-	div.commentary {
-		span.user {
-			color: gray
+	div.meta-data {
+		padding-top: 10px;
+		
+		div.description {
+			width: 800px;
+			color: gray;
+			padding: 10px 0;
 		}
-
-		span.date {
-			color: white
+  	
+		div.commentary {
+			span.user {
+				color: gray
+			}
+  	
+			span.date {
+				color: white
+			}
+  	
+			#new-comment {
+				display: none;
+			}
 		}
-
-		#new-comment {
-			display: none;
-		}
-	}
-}
-
-div.tags-list {
-	span.tag a {
-		background-color: green;
-		padding-left: 5px;
-		padding-right: 5px;
-		text-decoration: none;
-		color: white;
-		font-size: 18px;
-
-		&:hover {
-			background-color: red;
-		};
 	}
 
-	span.remove-tag a {
-		background-color: red;
-		padding-left: 5px;
-		padding-right: 5px;
-		text-decoration: none;
-		color: black;
-		font-size: 18px;
-
-		&:hover {
-			background-color: green;
-		};
+	div.indented {
+		margin-left: 54px;
 	}
-}
-
-div.indented {
-	margin-left: 54px;
 }

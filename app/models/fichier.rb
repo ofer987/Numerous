@@ -11,6 +11,8 @@ class Fichier < ActiveRecord::Base
   before_validation :ensure_filesize_type_exists
   before_validation :ensure_belongs_to_photo
   
+  before_destroy :before_destroy
+  
   #validates_inclusion_of :filesize_type_id, :in => FilesizeType.all.map { |type| type.id }, :on => :create, :message => "should use a valid FilesizeType"
   
   # get the filename
@@ -45,5 +47,15 @@ class Fichier < ActiveRecord::Base
       errors.add(:base, "Photo does not exist")
       false
     end
+  end
+  
+  def file_dir
+    "app/assets/images/photos/"
+  end
+  
+  def before_destroy
+    if File.delete(file_dir + self.filename) == 0
+      raise "Could not delete file or file not found: #{fichier.filename}\n"
+    end 
   end
 end

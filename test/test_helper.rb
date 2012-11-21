@@ -21,4 +21,12 @@ class ActiveSupport::TestCase
   def setup
     login_as(:admin) if defined? session and !@manual_login
   end 
+  
+  def photos_test_dir
+    "test/photos/"
+  end
+  
+  def photos_dir
+    "app/assets/images/photos/"
+  end
 end

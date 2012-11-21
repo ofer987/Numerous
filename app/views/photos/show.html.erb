@@ -1,7 +1,4 @@
-<div class="photo-form">
-  <div>
-    <%= link_to "Back", photos_path(tags: params[:tags]) %>
-  </div>
+<div class="photo-item">
 	<div class="navigate-photo-link">
 		<% unless (@is_first_photo) %>
 			<%= link_to '<------', photo_path(@selected_photos[@current_photo_index - 1], tags: params[:tags]) %>
@@ -27,15 +24,13 @@
 			<%= link_to '------>', photo_path(@selected_photos[@current_photo_index + 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
-	<br />
 	
-	<div class="<% unless @is_first_photo %>indented<% end %>">
+	<div class="meta-data indented">
 	  <div class="tags-list">
 	    <% @photo.tags.each do |tag| %>
         <span class="tag"><%= link_to tag.name, photos_path(tags: tag.name) %></span>
 	    <% end %>
 	  </div>
-	  <% if @photo.tags.count >= 1 %><br /><% end %>
 	  
 	  <div class="description">
 	    <%= @photo.description %>

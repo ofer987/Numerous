@@ -20,8 +20,8 @@
 			<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
 				class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]), class: "kaka" %>
 			<span class="photo-title"><%= strip_tags(photo.title) %></span>
-			<span class="photo-description"><%= strip_tags(photo.description) %></span>
 			<span class="photo-date"><%= strip_tags(photo_date) %></span>
+			<span class="photo-description"><%= strip_tags(photo.description) %></span>
 		</div>
 	<% end %>
 </div>

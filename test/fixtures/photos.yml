@@ -3,9 +3,14 @@
 eaton_college:
   title: Keren sticks out her tongue
   description: "On the first day of arriving in Windsor England, Keren took me to visit Eaton College"
-  filename: img_3137.jpg
+  filename: keren.jpg
   
 nobody_commented:
-  title: Very bad photo
-  description: This photo is so bad that nobody bothered to comment it
-  filename: img_3137.jpg
+  title: Celina
+  description: My cat
+  filename: celina_the_cat.jpg
+  
+package:
+  title: This is the only example of a photo with files
+  description: It has files!
+  filename: package.jpg

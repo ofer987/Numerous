@@ -8,7 +8,8 @@
 
 Fichier.delete_all
 Photo.delete_all
-Phototag.delete_all
+Tag.delete_all
+PhotoTag.delete_all
 
 # Create photos
 
@@ -19,6 +20,7 @@ for i in 0..99
   photo.title = "Photo_#{i}"
   photo.description = "This is photo #{i}"
   photo.filename = 'img_3137.jpg'
+  photo.save
   
   photo.taken_date = start_datetime.advance(minutes: i)
   
@@ -30,6 +32,4 @@ for i in 0..99
   
   # create a thumbnail for this photo 
   photo.fichiers.create(filesize_type: FilesizeType['thumbnail'])
-  
-  photo.save  
 end
