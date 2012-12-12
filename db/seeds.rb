@@ -10,6 +10,7 @@ Fichier.delete_all
 Photo.delete_all
 Tag.delete_all
 PhotoTag.delete_all
+Comment.delete_all
 
 # Create photos
 

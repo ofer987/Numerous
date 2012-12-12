@@ -37,3 +37,24 @@ $(document).ready(function() {
 		
 	});
 });
+
+$(document).ready(function() {
+  document.onkeyup = NavigatePhoto;
+});
+
+function NavigatePhoto(e)
+{
+  var KeyId = window.event ? event.keyCode : e.keyCode;
+
+	switch (KeyId)
+	{
+		case 37:
+			PrevImageId = $(".prev").find("a").attr("href").match("\\d*$");
+			window.location = "/photos/" + PrevImageId;
+			break;
+		case 39:
+			NextImageId = $(".next").find("a").attr("href").match("\\d*$");
+			window.location = "/photos/" + NextImageId
+			break;
+	}
+}

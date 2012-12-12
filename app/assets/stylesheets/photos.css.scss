@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$border-color: #F0E0D6;
+$link-color: black;
+
 div.photos-list {
 	margin-left: 10px;
 	margin-right: 10px;
@@ -14,15 +17,20 @@ div.photos-list {
 		display: inline-block;
 	}
 	
+	span {
+		background-color: $border-color;
+		color: gray;
+	}
+	
 	span.photo-title {
 		display: block;
-		font-weight: bold
+		font-weight: bold;
+		color: black;
 	}
 
 	span.photo-datum {
 		display: block;
 		font-size: 0.7em;
-		color: #666
 	}
 
 	span.photo-description {
@@ -31,23 +39,20 @@ div.photos-list {
 		overflow: hidden;
 		margin-bottom: 2px;
 		font-size: 0.7em;
-		color: #666
 	}
 
 	span.photo-date {
 		display: block;
 		font-size: 0.7em;
-		color: #666;
 	}
 
 	span.photo-statistics{
 		display: block;
 		font-size: 0.7em;
-		color: #666
 	}
 
 	img.photo-thumbnail {
-		border: 5px #111 solid;
+		border: 5px $border-color solid;
 	}
 }
 
@@ -59,16 +64,14 @@ div.photo-item {
 		display: inline-block;
 		
 		div img {
-			border: 5px #111 solid;
+			border: 5px $border-color solid;
 		}
 		
 		a {
 			&:visited {
-				color: #551A8B;
 			}
 
 			&:hover {
-				color: purple;
 			}
 		}
 	}	
@@ -81,33 +84,36 @@ div.photo-item {
 		a {
 			display: block;
 			width: 50px;
-			color: white;
+			color: black;
 			text-decoration: none;
 			white-space: nowrap;
 			overflow: hidden;
+			font-size: 36px;
 
 			&:visited {
-				color: white;
+				color: black;
 			}
 
 			&:hover {
-				color: purple;
+				color: black;
 			}
 		}
 	}
 	
 	div.meta-data {
 		padding-top: 10px;
+		background-color: $border-color;
 		
 		div.description {
 			width: 800px;
-			color: gray;
+			color: $link-color;
 			padding: 10px 0;
 		}
   	
 		div.commentary {
+			color: gray;
+			
 			span.user {
-				color: gray
 			}
   	
 			span.date {
@@ -122,5 +128,6 @@ div.photo-item {
 
 	div.indented {
 		margin-left: 54px;
+		margin-right: 76px;
 	}
 }
