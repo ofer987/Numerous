@@ -34,7 +34,8 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#add-comment-button").click(function () {
 		$("#new-comment").toggle();
-		
+		$("#comment_content").focus();
+		$.scrollTo($("#new_comment")[0], 0);
 	});
 });
 

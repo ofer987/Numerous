@@ -69,21 +69,14 @@ div.header {
 		
 		h1 {
 			padding-top: 30px;
-			font-size: 36px;
-		}
-
-		p {
-			margin: 0;
-			padding: 98px 0 0 2px;
-			letter-spacing: -.05em;
-			font-size: 16px;
-			color: #FFFFFF;
-		} 
-  	
-		a {
-			background: none;
-			text-decoration: none;
-			color: #000;
+			font-size: 30px;
+			
+			a {
+				background: none;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: #000;
+			}
 		}
 	}
 }
@@ -155,23 +148,18 @@ div.page {
 /* Footer */
 
 .footer {
-	width: 950px;
-	margin: 0 auto;
 	padding: 30px 0;
 	height: 60px;
-	//background: url(application/img02.jpg) no-repeat left top;
-	//font-family: Arial, Helvetica, sans-serif;
-	color: #FFFFFF;
+	color: #000;
+	font-size: 12px;
 	
 	p {
-		margin: 0;
 		line-height: normal;
-		font-size: 9px;
 		text-transform: uppercase;
 		text-align: center;
 	}
 
 	a {
-		color: #FFFFFF;
+		color: #000;
 	}
 }
