@@ -2,58 +2,72 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$border-color: #F0E0D6;
+//$border-color: #F0E0D6;
+$border-color: rgb(220, 220, 220);
 $link-color: black;
 
 div.photos-list {
-	margin-left: 10px;
-	margin-right: 10px;
+	width: 908px;
 	
 	div.photos-list-item {
-		padding: 14px;
+		margin: 20px;
 		width: 260px;
-		text-align: center;
+		text-align: left;
 		font-size: x-large;
 		display: inline-block;
-	}
-	
-	span {
-		background-color: $border-color;
-		color: gray;
-	}
-	
-	span.photo-title {
-		display: block;
-		font-weight: bold;
-		color: black;
-	}
-
-	span.photo-datum {
-		display: block;
-		font-size: 0.7em;
-	}
-
-	span.photo-description {
-		display: block;
-		height: 100px;
 		overflow: hidden;
-		margin-bottom: 2px;
-		font-size: 0.7em;
+	
+		span {
+			background-color: $border-color;
+			color: gray;
+		}
+		
+		span.photo-title {
+			display: block;
+			font-weight: bold;
+			color: black;
+			text-align: center;
+		}
+  	
+		span.photo-datum {
+			display: block;
+			font-size: 0.7em;
+			text-align: center;
+		}
+  	
+		span.photo-description {
+			display: block;
+			overflow: hidden;
+			font-size: 0.7em;
+			text-align: center;
+		}
+  	
+		span.photo-date {
+			display: block;
+			font-size: 0.7em;
+			text-align: center;
+		}
+  	
+		span.photo-statistics {
+			display: block;
+			font-size: 0.7em;
+			text-align: center;
+		}
+		
+		div.photo-tags {
+			background-color: $border-color;
+			height: 100px;
+			overflow: hidden;
+		}
+  	
+		img.photo-thumbnail {
+			border: 5px $border-color solid;
+		}
 	}
+}
 
-	span.photo-date {
-		display: block;
-		font-size: 0.7em;
-	}
-
-	span.photo-statistics{
-		display: block;
-		font-size: 0.7em;
-	}
-
-	img.photo-thumbnail {
-		border: 5px $border-color solid;
-	}
+div.tags-padding {
+	padding: 0 20px;
 }
 
 div.photo-item {

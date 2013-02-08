@@ -1,16 +1,19 @@
-<div class="tags-list">
-  <% @all_tags.each do |tag| %>
-    <% if @selected_tag_names.any? { |selected_tag_name| Tag.name_equals?(selected_tag_name, tag.name) } %>
-      <% removed_tag_names = Array.new(@selected_tag_names) %>
-      <% removed_tag_names.delete(tag.name) %>
-      <span class="remove-tag"><%= link_to tag.name, photos_path(tags: removed_tag_names.join(",")) %></span>
-    <% else %>
-      <% added_tag_names = Array.new(@selected_tag_names) %>
-      <% added_tag_names.push(tag.name) %>
-      <span class="tag"><%= link_to tag.name, photos_path(tags: added_tag_names.join(",")) %></span>
+<div class="tags-padding">
+  <div class="tags-list">
+    <span>Tags</span>
+    <% @all_tags.each do |tag| %>
+      <% if @selected_tag_names.any? { |selected_tag_name| Tag.name_equals?(selected_tag_name, tag.name) } %>
+        <% removed_tag_names = Array.new(@selected_tag_names) %>
+        <% removed_tag_names.delete(tag.name) %>
+        <span class="remove-tag"><%= link_to tag.name, photos_path(tags: removed_tag_names.join(",")) %></span>
+      <% else %>
+        <% added_tag_names = Array.new(@selected_tag_names) %>
+        <% added_tag_names.push(tag.name) %>
+        <span class="tag"><%= link_to tag.name, photos_path(tags: added_tag_names.join(",")) %></span>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  </div>
 <br />
 
 <div class="photos-list">
@@ -22,6 +25,12 @@
 			<span class="photo-title"><%= strip_tags(photo.title) %></span>
 			<span class="photo-date"><%= strip_tags(photo_date) %></span>
 			<span class="photo-description"><%= strip_tags(photo.description) %></span>
+			<div class="photo-tags">
+        <% if photo.tags.count == 0 %><br /><% end %>
+			  <% photo.tags.each do |tag| %>
+			    <span class="tag"><%= link_to tag.name, photos_path(tags: tag.name) %></span>
+			  <% end %>
+			</div>
 		</div>
 	<% end %>
 </div>

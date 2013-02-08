@@ -9,7 +9,7 @@ class PhotosController < ApplicationController
     @selected_tag_names = get_selected_tag_names
     @photos = Photo.all(order: @sql_order).select { |photo| photo.any_selected_tag_names?(@selected_tag_names) }
     @all_tags = Tag.all(order: 'name DESC')
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @photos }
@@ -23,7 +23,10 @@ class PhotosController < ApplicationController
     @displayed_fichier = @photo.select_fichier('small')
     
     @selected_tag_names = get_selected_tag_names
-    @selected_photos = Photo.all(order: @sql_order).select { |photo| photo.any_selected_tag_names?(@selected_tag_names) }
+    @selected_photos = 
+      Photo.all(order: @sql_order).select do |photo|   
+        photo.any_selected_tag_names?(@selected_tag_names)
+      end
     
     @current_photo_index = @selected_photos.rindex(@photo)
     
@@ -60,11 +63,6 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(params[:photo])
-    #@photo.title = 'hello'
-    #@photo.description = 'mon cher ami'
-    #@photo.filename = 'kaka.jpg'
-    #@photo.thumbnail = 'thumb.jpg'
-    #@photo.taken_date = DateTime.current
     
     add_tags
     

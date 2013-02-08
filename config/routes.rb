@@ -20,6 +20,8 @@ Numerous::Application.routes.draw do
   resources :photos do
     resources :comments
   end
+  
+  get "cv" => "curriculum#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
