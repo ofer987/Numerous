@@ -14,3 +14,9 @@ app/assets/images/.DS_Store
 # Specific Ruby/RVM stuff
 .rvmrc*
 Gemfile.lock
+
+# We do not need the databases
+db/*.sqlite3
+
+# nor do we need the automatically-generated schema migration file
+db/schema.rb
