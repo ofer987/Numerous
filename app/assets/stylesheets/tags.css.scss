@@ -2,31 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$border-color: rgb(240, 240, 240);
+$max-page-width: 908px;
+$link-color: black;
+$text-color-primary: black;
+$text-color-secondary: gray;
+
 div.tags-list {
+	width: $max-page-width;
+	border-left: solid 1px;
 	font-size: 18px;
-}
-
-span.tag a {
-	font-size: 18px;
-	color: white;
-	background-color: black;
-	padding-left: 5px;
-	padding-right: 5px;
-	text-decoration: none;
+	color: $text-color-primary;
 	
-	&:hover {
-	};
-}
-
-span.remove-tag a {
-	font-size: 18px;
-	color: white;
-	background-color: black;
-	padding-left: 5px;
-	padding-right: 5px;
-	text-decoration: none;
-	
-	&:hover {
-		color: black;
-	};
+	form.select-tags-form, span.tag {
+		display: inline;
+		color: $text-color-secondary;
+	}
 }

@@ -27,8 +27,9 @@
 	
 	<div class="meta-data indented">
 	  <div class="tags-list">
+	    <span>Tags</span>
 	    <% @photo.tags.each do |tag| %>
-        <span class="tag"><%= link_to tag.name, photos_path(tags: tag.name) %></span>
+        <span class="tag"><%= strip_tags(tag.name) %></span>
 	    <% end %>
 	  </div>
 	  
@@ -42,7 +43,7 @@
 	  		<% @photo.comments.select { |c| c.id != nil }.each do |comment| %>
 	  		<% comment_date = comment.created_at.localtime.strftime("%b %-d at %-H:%-M") %>
 	  			<tr>
-	  				<td><%= strip_tags(comment.content) %> – <span class="user"><%= strip_tags(comment.user) %></span> <span class="date"><%= strip_tags(comment_date) %></span></td>
+	  				<td><%= strip_tags(comment.content) %> – by <span class="user"><%= strip_tags(comment.user) %></span> on <span class="date"><%= strip_tags(comment_date) %></span></td>
 	  			</tr>
 	  		<% end %>
 	  	</table>

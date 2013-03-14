@@ -3,11 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //$border-color: #F0E0D6;
-$border-color: rgb(220, 220, 220);
+$border-color: rgb(240, 240, 240);
+$max-page-width: 908px;
+$max-photo-width: 800px;
 $link-color: black;
+$text-color-primary: black;
+$text-color-secondary: gray;
 
 div.photos-list {
-	width: 908px;
+	border-left: solid 1px;
+	width: $max-page-width;
 	
 	div.photos-list-item {
 		margin: 20px;
@@ -18,50 +23,43 @@ div.photos-list {
 		overflow: hidden;
 	
 		span {
-			background-color: $border-color;
-			color: gray;
+			color: $text-color-secondary;
+			font-size: 0.7em;
 		}
 		
 		span.photo-title {
 			display: block;
-			font-weight: bold;
-			color: black;
 			text-align: center;
 		}
   	
 		span.photo-datum {
 			display: block;
-			font-size: 0.7em;
 			text-align: center;
 		}
   	
 		span.photo-description {
 			display: block;
 			overflow: hidden;
-			font-size: 0.7em;
 			text-align: center;
 		}
   	
 		span.photo-date {
 			display: block;
-			font-size: 0.7em;
 			text-align: center;
 		}
   	
 		span.photo-statistics {
 			display: block;
-			font-size: 0.7em;
 			text-align: center;
 		}
 		
 		div.photo-tags {
-			background-color: $border-color;
 			height: 100px;
 			overflow: hidden;
 		}
   	
 		img.photo-thumbnail {
-			border: 5px $border-color solid;
+			//border: 5px $border-color solid;
 		}
 	}
 }
@@ -71,14 +69,15 @@ div.tags-padding {
 }
 
 div.photo-item {
-	width: 940px;
+	width: $max-page-width;
 	font-size: 16px;
+	border-left: solid 1px;
 	
 	div.photo {
 		display: inline-block;
 		
 		div img {
-			border: 5px $border-color solid;
+			width: $max-photo-width;
 		}
 		
 		a {
@@ -98,40 +97,39 @@ div.photo-item {
 		a {
 			display: block;
 			width: 50px;
-			color: black;
+			color: $link-color;
 			text-decoration: none;
 			white-space: nowrap;
 			overflow: hidden;
 			font-size: 36px;
 
 			&:visited {
-				color: black;
+				color: $link-color;
 			}
 
 			&:hover {
-				color: black;
+				color: $link-color;
 			}
 		}
 	}
 	
 	div.meta-data {
-		padding-top: 10px;
 		background-color: $border-color;
+		width: $max-photo-width;
 		
 		div.description {
 			width: 800px;
 			color: $link-color;
-			padding: 10px 0;
 		}
   	
 		div.commentary {
-			color: gray;
+			color: $text-color-primary;
 			
 			span.user {
 			}
   	
 			span.date {
-				color: white
+				color: $text-color-primary
 			}
   	
 			#new-comment {
@@ -142,6 +140,6 @@ div.photo-item {
 
 	div.indented {
 		margin-left: 54px;
-		margin-right: 76px;
+		//margin-right: 76px;
 	}
 }

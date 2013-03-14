@@ -6,8 +6,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @selected_tag_names = get_selected_tag_names
-    @photos = Photo.all(order: @sql_order).select { |photo| photo.any_selected_tag_names?(@selected_tag_names) }
+    @photos = Photo.all(order: @sql_order)
     @all_tags = Tag.all(order: 'name DESC')
     
     respond_to do |format|
@@ -22,11 +21,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @displayed_fichier = @photo.select_fichier('small')
     
-    @selected_tag_names = get_selected_tag_names
-    @selected_photos = 
-      Photo.all(order: @sql_order).select do |photo|   
-        photo.any_selected_tag_names?(@selected_tag_names)
-      end
+    @selected_photos = Photo.all(order: @sql_order)
     
     @current_photo_index = @selected_photos.rindex(@photo)
     

@@ -12,6 +12,12 @@ jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 })
 
+function clearTagSelections() {
+	$(".photos-list").children(".photos-list-item").each(function() {
+		$(this).css("display", "inline-block");
+	});
+}
+
 jQuery.fn.submitWithAjax = function() {
   this.submit(function() {
     $.post(this.action, $(this).serialize(), null, "script");
@@ -40,6 +46,58 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {	
+	$(".select-tags-form").children("input.checkbox").click(function() {
+		selectedTags = []
+		
+		$(".select-tags-form").children("input.checkbox").each(function() {
+			if ($(this).prop("checked") == true) {
+				// Put the name of the selected tag in the list
+				selectedTags.push($(this).attr("value"))
+			}
+		});
+		
+		// If no tags were selected then
+		// show all the photos
+		if (selectedTags.length == 0) {
+			clearTagSelections();
+		} else {
+			// Only display photos (DIVs) that have a tag in the selected tag list
+			$(".photos-list").children(".photos-list-item").each(function() {
+				isDisplayPhoto = false;
+				// Get the photos tags; 
+				// remove the trailing space;
+				// store the tags in an array.
+				photoTags = $(this).attr("tags").trim().split(" ");
+				
+				// Does the photo have a tag in the selected tags?
+				for (i = 0; i < photoTags.length; i++) {
+					for (j = 0; j < selectedTags.length; j++) {
+						if (photoTags[i] == selectedTags[j]) {
+							isDisplayPhoto = true;
+						}
+					}
+				}
+				
+				// Display the photo or not?
+				$(this).css("display", isDisplayPhoto ? "inline-block" : "none");
+			});
+		}
+	
+		//return false;
+	});
+	
+	$(".clear-tags-form").click(function() {
+		$(".select-tags-form").children("input.checkbox").each(function() {
+			$(this).prop("checked", false);
+		});
+		
+		clearTagSelections();
+		
+		return false;
+	});
+});
+
 $(document).ready(function() {
   document.onkeyup = NavigatePhoto;
 });
@@ -53,7 +111,7 @@ function NavigatePhoto(e)
 		case 37:
 			PrevImageId = $(".prev").find("a").attr("href").match("\\d*$");
 			window.location = "/photos/" + PrevImageId;
-			break;
+			break;e 
 		case 39:
 			NextImageId = $(".next").find("a").attr("href").match("\\d*$");
 			window.location = "/photos/" + NextImageId
