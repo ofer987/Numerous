@@ -46,19 +46,11 @@ class CommentsController < ApplicationController
   def create
     @comment = @photo.comments.build(params[:comment])
 
-    puts "Photo_id is #{@photo.id}\n"
-    puts "Photo title is #{@photo.title}\n"
-    puts "Hello: #{params[:comment]}\n"
-    puts "New comment = #{@comment.attributes}\n"
-
     respond_to do |format|
       if @comment.save
-        puts "able to save\n"
         format.html { redirect_to photo_path(@photo), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        puts "failed to save\n"
-        puts "Errors: #{@comment.errors.full_messages}\n"
         format.html { redirect_to photo_path(@photo), notice: 'Fill in missing fields' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end

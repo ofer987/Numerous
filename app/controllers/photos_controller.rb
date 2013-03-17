@@ -59,7 +59,7 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     
-    add_tags
+    add_tags_to_new_photo
     
     respond_to do |format|
       if @photo.save
@@ -109,6 +109,7 @@ class PhotosController < ApplicationController
   end
   
   def add_tags
+    debugger
     tags = params[:tags] || ""
     tag_names = tags.split(",")
     
@@ -125,6 +126,19 @@ class PhotosController < ApplicationController
       tag = Tag[name] || Tag.create(name: name)
       
       @photo.tags.find_by_name(name) || @photo.tags.push(tag)
+    end
+  end
+  
+  def add_tags_to_new_photo
+    tags = params[:tags] || ""
+    tag_names = tags.split(",")
+    
+    # Add tags
+    tag_names.each do |name|
+      name = name.strip.downcase
+      tag = Tag[name] || Tag.create(name: name)
+
+      @photo.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
     end
   end
 end
