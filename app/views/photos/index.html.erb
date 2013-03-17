@@ -1,3 +1,4 @@
+<% if @all_tags.count > 0 %>
 <div class="tags-list tags-padding">
   <span>Tags</span>
   <form class="select-tags-form">
@@ -7,6 +8,7 @@
   <input class="clear-tags-form" type="submit" value="clear" />
   </form>
 </div>
+<% end %>
 
 <div class="photos-list">
 	<% @photos.each do |photo| %>

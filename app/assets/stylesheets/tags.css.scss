@@ -7,15 +7,3 @@ $max-page-width: 908px;
 $link-color: black;
 $text-color-primary: black;
 $text-color-secondary: gray;
-
-div.tags-list {
-	width: $max-page-width;
-	border-left: solid 1px;
-	font-size: 18px;
-	color: $text-color-primary;
-	
-	form.select-tags-form, span.tag {
-		display: inline;
-		color: $text-color-secondary;
-	}
-}

@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//$border-color: #F0E0D6;
 $border-color: rgb(240, 240, 240);
 $max-page-width: 908px;
 $max-photo-width: 800px;
@@ -10,10 +9,17 @@ $link-color: black;
 $text-color-primary: black;
 $text-color-secondary: gray;
 
+div.tags-list {
+	font-size: 18px;
+	color: $text-color-primary;
+
+	form.select-tags-form, span.tag {
+		display: inline;
+		color: $text-color-secondary;
+	}
+}
+
 div.photos-list {
-	border-left: solid 1px;
-	width: $max-page-width;
-	
 	div.photos-list-item {
 		margin: 20px;
 		width: 260px;
@@ -59,7 +65,6 @@ div.photos-list {
 		}
   	
 		img.photo-thumbnail {
-			//border: 5px $border-color solid;
 		}
 	}
 }
@@ -69,9 +74,7 @@ div.tags-padding {
 }
 
 div.photo-item {
-	width: $max-page-width;
 	font-size: 16px;
-	border-left: solid 1px;
 	
 	div.photo {
 		display: inline-block;
@@ -140,6 +143,5 @@ div.photo-item {
 
 	div.indented {
 		margin-left: 54px;
-		//margin-right: 76px;
 	}
 }
