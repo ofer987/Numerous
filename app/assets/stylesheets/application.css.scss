@@ -9,6 +9,7 @@
 $max-page-width: 908px;
 $text-color-primary: black;
 $text-color-secondary: gray;
+$main-content-left-padding: 10px;
 
 html {
 	font-family: Arial, Helvetica, sans-serif;
@@ -103,6 +104,10 @@ div.page {
 	margin: 0 auto;
 	font-family: Arial, sans-serif;
 	border-left: 1px solid black;
+	
+	.text-content {
+		padding-left: $main-content-left-padding;
+	}
 }
 
 /* Footer */

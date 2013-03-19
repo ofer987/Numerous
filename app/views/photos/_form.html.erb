@@ -20,13 +20,24 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :tags, "Tags" %><br />
+    <%= f.label :existing_tags, "Existing Tags" %>
+    <% Tag.all.each do |tag| %>
+      <% tag_check_box_symbol = tag.to_tag_param_sym %>
+      <% is_checked = false %>
+      <% @photo.tags { |existing_photo_tag| is_checked = true if existing_photo_tag.id == tag.id } %>
+      <%= check_box_tag tag_check_box_symbol, params[tag_check_box_symbol] %>
+      <%= f.label tag_check_box_symbol, tag.name %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :tags, "New Tags" %><br />
     <%= text_field_tag :tags, params[:tags] %>
   </div>
 	<div class="field">
 		<%= f.label :load_photo_file %><br />
 		<%= f.file_field :load_photo_file, accept: "image/jpeg" %>
 	</div>
+	<br />
   <div class="actions">
     <%= f.submit %>
   </div>

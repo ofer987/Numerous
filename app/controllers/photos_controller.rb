@@ -7,7 +7,7 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.all(order: @sql_order)
-    @all_tags = Tag.all(order: 'name DESC')
+    @all_tags = Tag.all(order: 'name ASC')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -51,7 +51,7 @@ class PhotosController < ApplicationController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
-    params[:tags] = @photo.tags.map { |tag| tag.name }.join(", ")
+    #params[:tags] = @photo.tags.map { |tag| tag.name }.join(", ")
   end
 
   # POST /photos
@@ -59,7 +59,8 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     
-    add_tags_to_new_photo
+    add_existing_tags
+    add_new_tags
     
     respond_to do |format|
       if @photo.save
@@ -75,9 +76,10 @@ class PhotosController < ApplicationController
   # PUT /photos/1
   # PUT /photos/1.json
   def update
-    @photo = Photo.find(params[:id])
+    @photo = Photo.find(params[:id])  
       
-    add_tags  
+    add_existing_tags
+    add_new_tags  
       
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
@@ -108,37 +110,39 @@ class PhotosController < ApplicationController
     @sql_order = 'created_at DESC'
   end
   
-  def add_tags
-    debugger
-    tags = params[:tags] || ""
-    tag_names = tags.split(",")
-    
-    # Remove tags
-    @photo.tags.each do |tag|
-      if !tag_names.any? { |supplied_name| supplied_name.strip.downcase == tag.name.strip.downcase }
-        @photo.tags.destroy(tag)
+  def add_existing_tags
+    # Add/remove existing tags to this photo's collection of tags
+    Tag.all.each do |tag|
+      # Was this tag selected?
+      if params[tag.to_tag_param_sym] == "on"
+        # Add this tag to this photo, only if it does not already exist
+        unless @photo.photo_tags.where(tag_id: tag.id).any?
+          @photo.photo_tags.build do |new_photo_tag|
+            new_photo_tag.tag_id = tag.id
+          end
+        end
+      else
+        # The checkbox was unchecked: Remove the tag
+        @photo.photo_tags.where(tag_id: tag.id).destroy_all
       end
-    end
-    
-    # Add tags
-    tag_names.each do |name|
-      name = name.strip.downcase
-      tag = Tag[name] || Tag.create(name: name)
-      
-      @photo.tags.find_by_name(name) || @photo.tags.push(tag)
     end
   end
   
-  def add_tags_to_new_photo
+  def add_new_tags
     tags = params[:tags] || ""
     tag_names = tags.split(",")
     
     # Add tags
     tag_names.each do |name|
       name = name.strip.downcase
+      
+      # Create a new tag if it does not already exist
       tag = Tag[name] || Tag.create(name: name)
-
-      @photo.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
+      
+      # Add the tag to this photo's tag collection unless it already exists in it
+      unless @photo.photo_tags.find_by_tag_id(tag.id)
+        @photo.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
+      end
     end
   end
 end
