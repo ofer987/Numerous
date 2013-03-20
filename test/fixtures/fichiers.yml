@@ -47,3 +47,11 @@ package_medium:
 package_large:
   photo: package
   filesize_type: large
+  
+no_tags_original:
+  photo: no_tags
+  filesize_type: original
+
+no_tags_thumbnail:
+  photo: no_tags
+  filesize_type: thumbnail

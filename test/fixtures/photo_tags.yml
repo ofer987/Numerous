@@ -7,3 +7,11 @@ one:
 two:
   photo: nobody_commented
   tag: england
+  
+three:
+  photo: package
+  tag: quebec
+
+four:
+  photo: package
+  tag: montreal

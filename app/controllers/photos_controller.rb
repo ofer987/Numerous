@@ -80,7 +80,7 @@ class PhotosController < ApplicationController
       
     add_existing_tags
     add_new_tags  
-      
+    
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
         format.html { redirect_to photo_url(@photo), notice: 'Photo was successfully updated.' }
