@@ -38,18 +38,30 @@ class TagTest < ActiveSupport::TestCase
   #end
   
   test "tags are reusable" do
-    assert_equal photos(:eaton_college).tags.find_by_name(tags(:england).name), photos(:nobody_commented).tags.find_by_name(tags(:england).name), "Should be the same tag"
+    assert_equal photos(:eaton_college).tags.find_by_name(tags(:england).name), photos(:nobody_commented).tags.find_by_name(tags(:england).name), "should be the same tag"
   end
   
   test "unused tags delete themselves" do
+    # The england tag is used by two photos
+    tag = tags(:england)
     photo = photos(:eaton_college)
-    tag = photo.tags.first
-    tag_id = tag.id
     
-    photo.tags.destroy(tag)
-    assert_not_nil Tag.find_by_id(tag_id)
+    # Remove the tag from the first photo
+    # The tag should still exist because it is in use by the second photo
+    photo.photo_tags.where(tag_id: tag.id).destroy_all
+    assert_not_nil Tag.find_by_id(tag.id)
     
-    photos(:nobody_commented).tags.destroy(tag)
-    assert_nil Tag.find_by_id(tag_id)
+    # Remove the tag from the second photo
+    # Tag is no longer used: the tag should have deleted itself
+    photos(:nobody_commented).photo_tags.where(tag_id: tag.id).destroy_all
+    assert_nil Tag.find_by_id(tag.id)
+  end
+  
+  test "tags are unique" do
+    tag = tags(:quebec)
+    
+    new_tag_with_same_name = Tag.create(name: 'quebec')
+    
+    assert new_tag_with_same_name.invalid?, 'tags should only have unique names'
   end
 end

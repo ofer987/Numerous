@@ -20,12 +20,12 @@ class PhotoTagTest < ActiveSupport::TestCase
     join.photo_id = nil
     join.tag_id = tags(:toronto).id
     
-    assert join.invalid?, "tag_id is nil"
+    assert join.valid?, "the photo_id might be nil in order to allow tags to new photos before they are saved to the database"
     
     join = PhotoTag.new
     join.photo_id = photos(:eaton_college).id
     join.tag_id = nil
     
-    assert join.invalid?, "photo_id is nil"
+    assert join.invalid?, "the tag_id should not be nil"
   end
 end

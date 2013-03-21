@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PhotoTest < ActiveSupport::TestCase
   setup do
-    @filename = 'test/images/games.jpg'
+    @filename = 'test/photos/games.jpg'
   end
   
   test "photo attributes must not be empty" do
@@ -69,6 +69,17 @@ class PhotoTest < ActiveSupport::TestCase
   #  # do not add any fichiers, least my photo not have an original ficihier!
   #  assert new_photo.valid?, "should not be able to save a photo that does not have an original fichier" 
   #end
+  
+  test "tags must be unique" do
+    # This photo contains the tag "england"
+    photo = photos(:eaton_college)
+    england_tag = photo.tags[0]
+    
+    # It should not be possible to add the same tag a second time
+    photo.photo_tags.build { |same_tag| same_tag.tag_id = england_tag.id }
+    
+    assert photo.invalid?, "should not be possible for a photo to have the same tag twice"
+  end
   
   def get_photo(filename)
     # return some test photo fixture
