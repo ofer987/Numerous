@@ -10,6 +10,7 @@ app/assets/images/photos/*
 app/assets/images/.DS_Store
 
 .DS_Store
+app/views/.DS_Store
 
 # Specific Ruby/RVM stuff
 .rvmrc*
