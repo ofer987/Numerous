@@ -15,6 +15,7 @@ Numerous::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
+  # Disregard the above comment, for now we will use live compiling
   config.assets.compile = false
 
   # Generate digests for assets URLs
