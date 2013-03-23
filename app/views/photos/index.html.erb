@@ -14,7 +14,7 @@
 	<% @photos.each do |photo| %>
 	  <% photo_date = photo.taken_date.strftime("%b %-d at %-I:%-M") %>
 		<div class="photos-list-item" id="item_<%= photo.id %>" 
-		  tags="<% photo.tags.each do |tag| %><%= strip_tags(tag.name) %> <% end %>">
+		  tags="<% photo.tags.each { |tag| %><%= strip_tags(tag.name) %>,<% } %>">
 			<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
 				class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]), class: "kaka" %>
 			<span class="photo-title"><%= strip_tags(photo.title) %></span>

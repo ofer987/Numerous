@@ -26,7 +26,7 @@ $ ->
 				# Get the photos tags; 
 				# remove the trailing space;
 				# store the tags in an array.
-				photoTags = $(photoItem).attr("tags").trim().split " "
+				photoTags = $(photoItem).attr("tags").split ","
 				
 				# Does the photo have a tag in the selected tags?
 				for photoTag in photoTags
