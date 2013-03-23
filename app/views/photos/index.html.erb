@@ -12,7 +12,7 @@
 
 <div class="photos-list">
 	<% @photos.each do |photo| %>
-	  <% photo_date = photo.taken_date.strftime("%b %-d at %-I:%-M") %>
+	  <% photo_date = photo.taken_date.strftime("%b %-d at %H:%M") %>
 		<div class="photos-list-item" id="item_<%= photo.id %>" 
 		  tags="<% photo.tags.each { |tag| %><%= strip_tags(tag.name) %>,<% } %>">
 			<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
