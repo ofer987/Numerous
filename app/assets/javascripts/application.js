@@ -8,18 +8,19 @@
 //= require jquery_ujs
 //= require_tree .
 
-jQuery.ajaxSetup({ 
-  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-})
-
-jQuery.fn.submitWithAjax = function() {
-  this.submit(function() {
-    $.post(this.action, $(this).serialize(), null, "script");
-    return false;
-  })
-  return this;
-};
-
 $(document).ready(function() {
-  $("#kaka").submitWithAjax();
+  findPageNameRegExp = /\/{1}(\w+)/i;
+	
+	pageNameMatch = window.location.pathname.match(findPageNameRegExp);
+	
+	if (pageNameMatch != null && pageNameMatch.length > 1) {
+		pageName = pageNameMatch[1];
+		pageNameItem = pageName + "-item";
+		
+		$("li#" + pageNameItem).addClass("selected-item");
+	}	else if (window.location.pathname == "/") {
+		// Special case: the photos page is the index page
+		$("li#photos-item").addClass("selected-item");
+	}
 });
+
