@@ -16,13 +16,17 @@ div.tags-list {
 	form.select-tags-form, span.tag {
 		display: inline;
 		color: $text-color-secondary;
+		
+		span.checkbox-text {
+			margin-right: 5px;
+		}
 	}
 }
 
 div.photos-list {
 	div.photos-list-item {
-		margin: 20px;
-		width: 260px;
+		margin: 25px;
+		width: 250px;
 		text-align: left;
 		font-size: x-large;
 		display: inline-block;
@@ -65,6 +69,8 @@ div.photos-list {
 		}
   	
 		img.photo-thumbnail {
+			display: block;
+			margin: auto;
 		}
 	}
 }

@@ -5,37 +5,49 @@
 DisplayAllPhotos = ->
 	$(photoItem).css "display", "inline-block" for photoItem in $(".photos-list").children(".photos-list-item")
 
-# index:
+# index
 # Display only the photos that have the selected tags 
+DisplaySelectedPhotos = ->
+	selectedTags = []
+	for tagCheckBox in $(".select-tags-form").children("input.checkbox")
+		if $(tagCheckBox).prop("checked") == true
+			# Put the name of the selected tag in the list
+			selectedTags.push $(tagCheckBox).attr("value")
+	
+	# If no tags were selected then
+	# show all the photos
+	if selectedTags.length == 0
+		DisplayAllPhotos()
+	else
+		# Only display photos (DIVs) that have a tag in the selected tag list
+		for photoItem in $(".photos-list").children(".photos-list-item")
+			isDisplayPhoto = false
+			# Get the photos tags; 
+			# remove the trailing space;
+			# store the tags in an array.
+			photoTags = $(photoItem).attr("tags").split ","
+			
+			# Does the photo have a tag in the selected tags?
+			for photoTag in photoTags
+				for selectedTag in selectedTags 
+					if photoTag == selectedTag
+						isDisplayPhoto = true
+			
+			# Display the photo or not?
+			$(photoItem).css("display", if isDisplayPhoto then "inline-block" else "none");
+
+# index:
+# Add the click event handlers to the tags (both checkboxes and the adjecent text span)
+# Add the functionality to the clear button (to show all the photos)
 $ ->
 	$(".select-tags-form").children("input.checkbox").click ->
-		selectedTags = []
-		for tagCheckBox in $(".select-tags-form").children("input.checkbox")
-			if $(tagCheckBox).prop("checked") == true
-				# Put the name of the selected tag in the list
-				selectedTags.push $(tagCheckBox).attr("value")
-		
-		# If no tags were selected then
-		# show all the photos
-		if selectedTags.length == 0
-			DisplayAllPhotos()
-		else
-			# Only display photos (DIVs) that have a tag in the selected tag list
-			for photoItem in $(".photos-list").children(".photos-list-item")
-				isDisplayPhoto = false
-				# Get the photos tags; 
-				# remove the trailing space;
-				# store the tags in an array.
-				photoTags = $(photoItem).attr("tags").split ","
-				
-				# Does the photo have a tag in the selected tags?
-				for photoTag in photoTags
-					for selectedTag in selectedTags 
-						if photoTag == selectedTag
-							isDisplayPhoto = true
-				
-				# Display the photo or not?
-				$(photoItem).css("display", if isDisplayPhoto then "inline-block" else "none");
+		DisplaySelectedPhotos()
+
+	$(".select-tags-form").children("span").click ->
+		tagCheckBox = $(this).prev()
+		isClicked = tagCheckBox.prop "checked"
+		tagCheckBox.prop "checked", !isClicked
+		DisplaySelectedPhotos()
 
 	$(".clear-tags-form").click ->
 		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-form").children("input.checkbox")

@@ -3,7 +3,9 @@
   <span>Tags</span>
   <form class="select-tags-form">
   <% @all_tags.each do |tag| %>
-    <input class="checkbox" type="checkbox" value="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></input>
+    <input class="checkbox" id="<%= strip_tags(tag.name) %>" type="checkbox" 
+      value="<%= strip_tags(tag.name) %>" />
+    <span class="checkbox-text" id="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></span>
   <% end %>
   <input class="clear-tags-form" type="submit" value="clear" />
   </form>
