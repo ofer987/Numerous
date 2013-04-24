@@ -13,12 +13,28 @@ div.tags-list {
 	font-size: 18px;
 	color: $text-color-primary;
 
-	form.select-tags-form, span.tag {
-		display: inline;
+	.heading {
+		display: inline-block;
+		width: 50px;
+		vertical-align: top;
+	}
+
+	form.select-tags-form {
+		display: inline-block;
+		width: 800px;
 		color: $text-color-secondary;
 		
-		span.checkbox-text {
-			margin-right: 5px;
+		.tag-inline-block {
+			display: inline-block;
+			
+			input.checkbox {
+				margin-left: 0px;
+				margin-right: 0px;
+			}
+			
+			span.checkbox-text {
+				margin-right: 10px;
+			}	
 		}
 	}
 }
@@ -125,6 +141,25 @@ div.photo-item {
 	div.meta-data {
 		background-color: $border-color;
 		width: $max-photo-width;
+		
+		.tags {
+			.heading {
+				display: inline-block;
+				width: 50px;
+				vertical-align: top;
+			}
+			
+			div.tags-list {
+				display: inline-block;
+				width: 700px;
+				font-size: 18px;
+				color: $text-color-primary;
+				
+				span.tag {
+					color: $text-color-secondary;	
+				}
+			}
+		}
 		
 		div.description {
 			width: 800px;
