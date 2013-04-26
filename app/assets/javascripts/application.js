@@ -9,7 +9,7 @@
 //= require_tree .
 
 $(document).ready(function() {
-  findPageNameRegExp = /\/{1}(\w+)/i;
+  findPageNameRegExp = /^\/{1}(\w+)/i;
 	
 	pageNameMatch = window.location.pathname.match(findPageNameRegExp);
 	

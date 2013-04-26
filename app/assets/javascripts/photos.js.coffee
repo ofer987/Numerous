@@ -9,7 +9,7 @@ DisplayAllPhotos = ->
 # Display only the photos that have the selected tags 
 DisplaySelectedPhotos = ->
 	selectedTags = []
-	for tagCheckBox in $(".select-tags-form").find("input.checkbox")
+	for tagCheckBox in $(".select-tags-list").find("input.checkbox")
 		if $(tagCheckBox).prop("checked") == true
 			# Put the name of the selected tag in the list
 			selectedTags.push $(tagCheckBox).attr("value")
@@ -40,17 +40,17 @@ DisplaySelectedPhotos = ->
 # Add the click event handlers to the tags (both checkboxes and the adjecent text span)
 # Add the functionality to the clear button (to show all the photos)
 $ ->
-	$(".select-tags-form").find("input.checkbox").click ->
+	$(".select-tags-list").find("input.checkbox").click ->
 		DisplaySelectedPhotos()
 
-	$(".select-tags-form").find("span.checkbox-text").click ->
+	$(".select-tags-list").find("span.text").click ->
 		tagCheckBox = $(this).prev()
 		isClicked = tagCheckBox.prop "checked"
 		tagCheckBox.prop "checked", !isClicked
 		DisplaySelectedPhotos()
 
-	$(".clear-tags-form").click ->
-		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-form").find("input.checkbox")
+	$(".clear-tags-button").click ->
+		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-list").find("input.checkbox")
 		
 		DisplayAllPhotos()
 		

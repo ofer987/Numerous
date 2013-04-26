@@ -1,17 +1,16 @@
 <% if @all_tags.count > 0 %>
-<div class="tags-list tags-padding">
-  <div class="heading">Tags</div>
-  <form class="select-tags-form">
-    <% @all_tags.each do |tag| %>
-      <div class="tag-inline-block">
-        <input class="checkbox" id="<%= strip_tags(tag.name) %>" type="checkbox" 
-          value="<%= strip_tags(tag.name) %>" />
-        <span class="checkbox-text" id="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></span>
-      </div>
-    <% end %>
-    <input class="clear-tags-form" type="submit" value="clear" />
-  </form>
-</div>
+<ul class="select-tags-list tags-padding">
+  <% @all_tags.each do |tag| %>
+  <li>
+    <input class="checkbox" id="<%= strip_tags(tag.name) %>" type="checkbox" 
+      value="<%= strip_tags(tag.name) %>" />
+    <span class="text" id="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></span>
+  </li>
+  <% end %>
+  <li>
+    <input class="clear-tags-button" type="submit" value="clear" />
+  </li>
+</ul>
 <% end %>
 
 <div class="photos-list">

@@ -9,37 +9,32 @@ $link-color: black;
 $text-color-primary: black;
 $text-color-secondary: gray;
 
-div.tags-list {
-	font-size: 18px;
-	color: $text-color-primary;
-
-	.heading {
-		display: inline-block;
-		width: 50px;
-		vertical-align: top;
-	}
-
-	form.select-tags-form {
-		display: inline-block;
-		width: 800px;
-		color: $text-color-secondary;
+ul.select-tags-list {
+	font-size: 1.8em;
+	list-style: none;
+	margin: 0;
+	float: left;
+	width: 800px;
+	color: $text-color-secondary;
+	
+	li {
+		float: left;
+		//display: inline-block;
 		
-		.tag-inline-block {
-			display: inline-block;
-			
-			input.checkbox {
-				margin-left: 0px;
-				margin-right: 0px;
-			}
-			
-			span.checkbox-text {
-				margin-right: 10px;
-			}	
+		input.checkbox {
+			margin-left: 0px;
+			margin-right: 0px;
 		}
+		
+		span.text {
+			margin-right: 10px;
+		}	
 	}
 }
 
 div.photos-list {
+	clear: left;
+	
 	div.photos-list-item {
 		margin: 25px;
 		width: 250px;
