@@ -1,5 +1,5 @@
 <% if @all_tags.count > 0 %>
-<ul class="select-tags-list tags-padding">
+<ul class="select-tags-list">
   <% @all_tags.each do |tag| %>
   <li>
     <input class="checkbox" id="<%= strip_tags(tag.name) %>" type="checkbox" 
@@ -13,15 +13,21 @@
 </ul>
 <% end %>
 
-<div class="photos-list">
+<ul class="photos-list">
 	<% @photos.each do |photo| %>
 	  <% photo_date = photo.taken_date.strftime("%b %-d at %H:%M") %>
-		<div class="photos-list-item" id="item_<%= photo.id %>" 
+		<li class="photo-item" id="item_<%= photo.id %>" 
 		  tags="<% photo.tags.each { |tag| %><%= strip_tags(tag.name) %>,<% } %>">
-			<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
-				class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]), class: "kaka" %>
+			<div class="image-vertical-align">
+			  <div class="image-horizontal-align">
+			    <%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
+            class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
+        </div>
+			</div>
 			<span class="photo-title"><%= strip_tags(photo.title) %></span>
 			<span class="photo-date"><%= strip_tags(photo_date) %></span>
-		</div>
+		</li>
 	<% end %>
-</div>
+</ul>
+
+<div class="empty" style="clear: both;"></div>

@@ -3,23 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $border-color: rgb(240, 240, 240);
-$max-page-width: 908px;
+$max-page-width: 900px;
 $max-photo-width: 800px;
-$link-color: black;
-$text-color-primary: black;
-$text-color-secondary: gray;
+$header-color: black;
+$link-color: rgb(174, 198, 218);
+$text-color: gray;
+$background-color: white;
+$navigation-arrow-color: black;
 
 ul.select-tags-list {
 	font-size: 1.8em;
 	list-style: none;
 	margin: 0;
+	padding: 0;
 	float: left;
-	width: 800px;
-	color: $text-color-secondary;
+	color: $text-color;
 	
 	li {
 		float: left;
-		//display: inline-block;
 		
 		input.checkbox {
 			margin-left: 0px;
@@ -32,20 +33,40 @@ ul.select-tags-list {
 	}
 }
 
-div.photos-list {
-	clear: left;
+ul.photos-list {
+	list-style: none;
+	float: left;
+	padding: 0;
+	margin: 0;
 	
-	div.photos-list-item {
-		margin: 25px;
+	li.photo-item {
+		margin: 10px;
 		width: 250px;
 		text-align: left;
-		font-size: x-large;
-		display: inline-block;
+		float: left;
+		height: 300px;
 		overflow: hidden;
 	
+		.image-vertical-align {
+			width: 250px;
+			height: 250px;
+			position: relative;
+			
+			.image-horizontal-align {
+				position: absolute;
+				width: 250px;
+				bottom: 0px;
+				
+				img.photo-thumbnail {
+					display: block;
+					margin: auto;
+				}
+			}
+		}
+	
 		span {
-			color: $text-color-secondary;
-			font-size: 0.7em;
+			color: $text-color;
+			font-size: 1.6em;
 		}
 		
 		span.photo-title {
@@ -78,97 +99,98 @@ div.photos-list {
 			height: 100px;
 			overflow: hidden;
 		}
-  	
-		img.photo-thumbnail {
-			display: block;
-			margin: auto;
-		}
 	}
 }
 
-div.tags-padding {
-	padding: 0 20px;
-}
-
 div.photo-item {
-	font-size: 16px;
 	
 	div.photo {
-		display: inline-block;
+		display: block;
+		float: left;
+		margin-bottom: 1em;
 		
-		div img {
+		img {
 			width: $max-photo-width;
 		}
 		
-		a {
-			&:visited {
-			}
+		ul.sizes-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			font-size: 1.6em;
+			height: 1em;
+			
+			li {
+				float: left;
+				padding-right: 1em;
+				
+				a {
+					&:visited {
+						color: blue;
+					}
 
-			&:hover {
+					&:hover {
+						color: blue;
+					}
+				}
 			}
 		}
 	}	
 	
 	div.navigate-photo-link {
-		display: inline-block;
+		display: block;
 		position: relative;
 		width: 50px;
+		float: left;
 
 		a {
 			display: block;
-			width: 50px;
-			color: $link-color;
+			position: absolute;
+			color: $navigation-arrow-color;
 			text-decoration: none;
 			white-space: nowrap;
 			overflow: hidden;
-			font-size: 36px;
-
-			&:visited {
-				color: $link-color;
-			}
-
-			&:hover {
-				color: $link-color;
-			}
 		}
 	}
 	
 	div.meta-data {
-		background-color: $border-color;
+		clear: both;
 		width: $max-photo-width;
+		font-size: 1.6em;
 		
-		.tags {
-			.heading {
-				display: inline-block;
-				width: 50px;
-				vertical-align: top;
+		ul.tags-list {
+			padding: 0;
+			margin: 0 0 1em 0;
+			list-style: none;
+			height: 1em;
+			
+			li {
+				float: left;
+				color: $text-color;
 			}
 			
-			div.tags-list {
-				display: inline-block;
-				width: 700px;
-				font-size: 18px;
-				color: $text-color-primary;
-				
-				span.tag {
-					color: $text-color-secondary;	
-				}
+			li.seperation-item {
+				margin: 0 0.3em 0 0.3em;
+				color: $text-color;
 			}
 		}
 		
 		div.description {
-			width: 800px;
-			color: $link-color;
+			clear: both;
+			margin-top: 2em;
+			color: $text-color;
+			margin: 0 0 1em 0;
 		}
   	
 		div.commentary {
-			color: $text-color-primary;
+			color: $text-color;
+			margin: 0 0 0 0;
 			
 			span.user {
 			}
   	
 			span.date {
-				color: $text-color-primary
+				color: $text-color
 			}
   	
 			#new-comment {
@@ -178,6 +200,6 @@ div.photo-item {
 	}
 
 	div.indented {
-		margin-left: 54px;
+		margin-left: 50px;
 	}
 }

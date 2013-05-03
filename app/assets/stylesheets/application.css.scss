@@ -6,16 +6,46 @@
  *= require_tree . 
 */
 
-$max-page-width: 908px;
-$text-color-primary: black;
-$text-color-secondary: gray;
+$max-page-width: 900px;
+$header-color: black;
+$link-color: rgb(174, 198, 218);
+$mucho-text-color: black;
+$poco-text-color: gray;
+$background-color: white;
 $main-content-left-padding: 10px;
 
 html {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Lucida Grande, Helvetica, Arial, sans-serif;
 	font-size: 62.5%;
 	color: #000;
 	background-color: #FFF;
+	
+	h1 {
+		font-size: 3em;
+		height: 0.5em;
+		color: $header-color;
+		
+		a {
+			color: $header-color;
+		}
+	}
+	
+	h2 {
+		font-size: 1.6em;
+		margin: 0;
+		font-weight: normal;
+		color: $header-color;
+	}
+	
+	h3 {
+		margin: 0.2em 0 0.2em 0;
+		color: $header-color;
+	}
+	
+	p {
+		color: $mucho-text-color;
+		font-size: 1.6em;
+	}
 	
 	//p, ul, ol {
 	//	margin-top: 0;
@@ -24,23 +54,18 @@ html {
 
 	header {
 		height: 10em;
-		width: $max-page-width + 1px;
-		margin: 0 auto;
-		
-		h1 {
-			font-size: 3em;
-			text-transform: lowercase;
-			height: 0.5em;
-		}
+		width: $max-page-width;
+		margin: 0 auto 2em auto;
+		border-bottom: 1px solid black;
 		
 		a {
 			background: none;
 			text-decoration: none;
-			color: $text-color-primary;
 		}
 		
 		ul.navigation {
 			font-size: 1.6em;
+			margin: 0;
 			padding: 1em 0 0 0;
 			list-style: none;
 			
@@ -48,16 +73,15 @@ html {
 				display: inline;
 				
 				a {
-					text-transform: lowercase;
 					text-decoration: none;
 					padding-right: 1.2em;
-					color: $text-color-secondary;
+					color: gray;
 				}
 			}
 			
 			li.selected-item {
 				a {
-					color: $text-color-primary;
+					color: black;
 				}
 			}
 		}
@@ -66,7 +90,6 @@ html {
 	.page {
 		width: $max-page-width;
 		margin: 0 auto;
-		border-left: 1px solid black;
 		
 		.text-content {
 			padding-left: $main-content-left-padding;
@@ -74,14 +97,14 @@ html {
 	}
 	
 	footer {
+		clear: both;
 		padding: 3em 0;
 		height: 6em;
-		color: $text-color-primary;
+		color: $poco-text-color;
 		
 		p {
 			font-size: 1.2em;
 			line-height: normal;
-			text-transform: uppercase;
 			text-align: center;
 		}
 	}

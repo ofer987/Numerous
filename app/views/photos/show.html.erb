@@ -1,45 +1,56 @@
 <div class="photo-item">
 	<div class="navigate-photo-link prev">
 		<% unless (@is_first_photo) %>
-			<%= link_to '<--', photo_path(@selected_photos[@current_photo_index - 1], tags: params[:tags]) %>
+			<%= link_to image_tag(@images_dir + 'back.png'), photo_path(@selected_photos[@current_photo_index - 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
 	<div class="photo">
-		<div>
-			<img id="displayed-photo" src="<%= @photos_dir + @displayed_fichier.filename %>" />
-		</div>
-		<div>
-			<a href="<%= @photos_dir + @photo.select_fichier("small").filename %>">Small</a>
+		<img id="displayed-photo" src="<%= @photos_dir + @displayed_fichier.filename %>" />
+		<ul class="sizes-list">
+			<li>
+			  <a href="<%= @photos_dir + @photo.select_fichier("small").filename %>">Small</a>
+			</li>
 			<% if @photo.select_fichier("medium") != nil %>
-				<a href="<%= @photos_dir + @photo.select_fichier("medium").filename %>">Medium</a>
+				<li>
+				  <a href="<%= @photos_dir + @photo.select_fichier("medium").filename %>">Medium</a>
+				</li>
 			<% end %>
 			<% if @photo.select_fichier("large") != nil %>
-				<a href="<%= @photos_dir + @photo.select_fichier("large").filename %>">Large</a>
+				<li>
+				  <a href="<%= @photos_dir + @photo.select_fichier("large").filename %>">Large</a>
+				</li>
 			<% end %>
-			<a href="<%= @photos_dir + @photo.select_fichier("original").filename %>">Original</a>
-		</div>
+			<li>
+			  <a href="<%= @photos_dir + @photo.select_fichier("original").filename %>">Original</a>
+			</li>
+		</ul>
 	</div>
 	<div class="navigate-photo-link next">
 		<% unless (@is_last_photo) %>
-			<%= link_to '-->', photo_path(@selected_photos[@current_photo_index + 1], tags: params[:tags]) %>
+			<%= link_to image_tag(@images_dir + 'next.png'), photo_path(@selected_photos[@current_photo_index + 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
 	
 	<div class="meta-data indented">
 	  <% if @photo.tags.count > 0 %>
-	  <div class="tags">
-	    <div class="heading">Tags</div>
-	    <div class="tags-list">
-	      <% @photo.tags.each_index do |index| %>
+	  <h2>Tags</h2>
+	  <ul class="tags-list">
+	    <% @photo.tags.each_index do |index| %>
+        <li>
           <% tag = @photo.tags[index] %>
-          <span class="tag"><%= strip_tags(tag.name) %></span>
-          <% if index < @photo.tags.count - 1 %><span>|</span><% end %>
-	      <% end %>
-	    </div>
-	  </div>
+          <%= strip_tags(tag.name) %>
+        </li>
+        <% if index < @photo.tags.count - 1 %>
+          <li class="seperation-item">
+            |
+          </li>
+        <% end %>
+	    <% end %>
+	  </ul>
 	  <% end %>
 	  
 	  <div class="description">
+	    <h2>Description</h2>
 	    <%= @photo.description %>
 	  </div>
 	  

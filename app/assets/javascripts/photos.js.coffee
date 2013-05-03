@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 DisplayAllPhotos = ->
-	$(photoItem).css "display", "inline-block" for photoItem in $(".photos-list").children(".photos-list-item")
+	$(photoItem).css "display", "inline-block" for photoItem in $(".photos-list").children(".photo-item")
 
 # index
 # Display only the photos that have the selected tags 
@@ -20,7 +20,7 @@ DisplaySelectedPhotos = ->
 		DisplayAllPhotos()
 	else
 		# Only display photos (DIVs) that have a tag in the selected tag list
-		for photoItem in $(".photos-list").children(".photos-list-item")
+		for photoItem in $(".photos-list").children(".photo-item")
 			isDisplayPhoto = false
 			# Get the photos tags; 
 			# remove the trailing space;
@@ -72,7 +72,11 @@ $ ->
 $ ->
 	$("#displayed-photo").load ->
 		imageHeight = $(this).height()
-		$(".navigate-photo-link").css "bottom", imageHeight / 2
+		$(".navigate-photo-link").height(imageHeight)
+		
+		# -25px to align the image because it is 50px tall
+		alignImage = imageHeight / 2 - 25
+		$(".navigate-photo-link").children("a").css "bottom", alignImage
 
 # show:
 # the left keyboard button: go to previous photo
