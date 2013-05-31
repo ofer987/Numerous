@@ -1,0 +1,43 @@
+// Place all the styles related to the books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$max-page-width: 900px;
+$header-color: black;
+$link-color: rgb(174, 198, 218);
+$mucho-text-color: black;
+$poco-text-color: gray;
+$background-color: white;
+$main-content-left-padding: 10px;
+
+ul.book-metadata {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 250px;
+	font-size: 1.6em;
+
+	li {
+		float: left;
+		overflow: hidden;
+		
+		&#image {
+			width: 100px;
+			margin-right: 50px;
+		}
+		
+		&#title {
+			width: 150px;
+			padding-right: 20px;
+		}
+		
+		&#author {
+			width: 150px;
+			padding-right: 20px;
+		}
+		
+		&#read-at {
+			width: 150px;
+		}
+	};
+}

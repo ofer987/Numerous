@@ -1,4 +1,6 @@
 Numerous::Application.routes.draw do
+  get "books/read"
+
   resources :tags
 
   get "admin" => "admin#index"
