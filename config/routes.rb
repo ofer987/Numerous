@@ -1,4 +1,11 @@
 Numerous::Application.routes.draw do
+  get "blogs/index"
+  get "blogs/article"
+
+  resources :gazettes do
+    resources :articles
+  end
+
   get "books/read"
 
   resources :tags
@@ -12,9 +19,7 @@ Numerous::Application.routes.draw do
   end
   
   get "sessions/new"
-
   get "sessions/create"
-
   get "sessions/destroy"
 
   resources :users

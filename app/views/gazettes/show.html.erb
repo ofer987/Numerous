@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @gazette.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @gazette.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_gazette_path(@gazette) %> |
+<%= link_to 'Articles', gazette_articles_path(@gazette) %> |
+<%= link_to 'Back', gazettes_path %>

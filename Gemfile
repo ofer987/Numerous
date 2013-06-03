@@ -33,3 +33,7 @@ gem 'rmagick', :require => "RMagick.rb"
 gem 'bcrypt-ruby', "~> 3.0.0"
 
 gem 'goodreads'
+
+gem 'mini_fb'
+
+gem 'rake', '~> 10.0.4'

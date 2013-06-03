@@ -1,0 +1,11 @@
+<!-- selected_tags -->
+
+<% Tag.all.each do |tag| %>
+  <% tag_check_box_symbol = tag.to_param_sym %>
+  <% is_checked = false %>
+  <% if defined? selected_tags and selected_tags != nil
+    selected_tags.each { |selected_tag| is_checked = true if selected_tag.id == tag.id }
+  end %>
+  <%= check_box_tag tag_check_box_symbol, params[tag_check_box_symbol], checked = is_checked %>
+  <%= label_tag tag_check_box_symbol, tag.name %>
+<% end %>

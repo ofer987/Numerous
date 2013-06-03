@@ -65,21 +65,21 @@ class PhotosControllerTest < ActionController::TestCase
     assert_redirected_to photos_path
   end
   
-  test "Add a tag to a photo" do
+  test "should add a tag to a photo" do
     package_photo = photos(:package)
     
     # Add the tag "mail"
     tag = tags(:mail)
     params = { 
       id: package_photo.to_param,
-      tag.to_tag_param_sym => "on"
+      tag.to_param_sym => "on"
       }
     # the photo should have these expected tags post update
     expected_tags = []
     expected_tags << tag
     package_photo.tags.each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_tag_param_sym => "on" })
+      params.merge!({ existing_tag.to_param_sym => "on" })
     end
     
     # update the photo: add the new tag
@@ -95,7 +95,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
   end
   
-  test "Remove a tag from a photo" do
+  test "should remove a tag from a photo" do
     package_photo = photos(:package)
     params = {
       id: package_photo.to_param
@@ -107,7 +107,7 @@ class PhotosControllerTest < ActionController::TestCase
     # Remove the first tag
     package_photo.tags[1..-1].each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_tag_param_sym => "on" })
+      params.merge!({ existing_tag.to_param_sym => "on" })
     end
     
     # update the photo: remove the first tag
@@ -123,7 +123,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
   end
   
-  test "add a newly created tag to a photo" do
+  test "should add a newly created tag to a photo" do
     photo = photos(:no_tags)
     
     # This photo has two new tags called "new tag", and "second_tag"

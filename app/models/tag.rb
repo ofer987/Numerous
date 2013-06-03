@@ -11,7 +11,7 @@ class Tag < ActiveRecord::Base
   has_many :photo_tags, dependent: :delete_all
   has_many :photos, through: :photo_tags
   
-  def to_tag_param_sym
+  def to_param_sym
     "tag_#{self.name}".to_sym
   end
 end

@@ -114,7 +114,7 @@ class PhotosController < ApplicationController
     # Add/remove existing tags to this photo's collection of tags
     Tag.all.each do |tag|
       # Was this tag selected?
-      if params[tag.to_tag_param_sym] == "on"
+      if params[tag.to_param_sym] == "on"
         # Add this tag to this photo, only if it does not already exist
         unless @photo.photo_tags.where(tag_id: tag.id).any?
           @photo.photo_tags.build do |new_photo_tag|

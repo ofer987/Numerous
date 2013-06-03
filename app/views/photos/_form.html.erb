@@ -20,14 +20,8 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :existing_tags, "Existing Tags" %>
-    <% Tag.all.each do |tag| %>
-      <% tag_check_box_symbol = tag.to_tag_param_sym %>
-      <% is_checked = false %>
-      <% @photo.tags { |existing_photo_tag| is_checked = true if existing_photo_tag.id == tag.id } %>
-      <%= check_box_tag tag_check_box_symbol, params[tag_check_box_symbol] %>
-      <%= f.label tag_check_box_symbol, tag.name %>
-    <% end %>
+    <%= f.label :existing_tags, "Existing Tags" %><br />
+    <%= render partial: 'tags/existing_tags' %>
   </div>
   <div class="field">
     <%= f.label :tags, "New Tags" %><br />
