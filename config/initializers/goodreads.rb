@@ -1,3 +1,3 @@
 Goodreads.configure(
-  api_key: '42yxwUDPDuCo9b5x7SUL9w',
-  api_secret: 'FehpbirAnEVXxk5KfVBvgeUt9pf2hjDy2bxY1CfE8IQ')
+  api_key: 1234567, #your API key, get it on http://www.goodreads.com/api/keys
+  api_secret: 0123456789ABCDEF, #your API secret, http://www.goodreads.com/api/keys)
