@@ -21,3 +21,7 @@ db/*.sqlite3
 
 # nor do we need the automatically-generated schema migration file
 db/schema.rb
+
+# The user should add his own credentials to the GoodReads configuration file
+# The API key and secret can be generated at http://www.goodreads.com/api/keys
+config/initializers/goodreads.rb
