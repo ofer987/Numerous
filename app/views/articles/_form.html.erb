@@ -15,7 +15,7 @@
     <legend>Enter article</legend>
     <div class="field">
       <%= f.label :gazette_id, "Gazette" %><br />
-      <%= render partial: 'gazettes/existing_gazettes', locals: { existing_gazette: @article.gazette } %>
+      <%= render partial: 'gazettes/existing_gazettes' %>
     </div>
     <div class="field">
       <%= f.label :title %><br />

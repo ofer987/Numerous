@@ -1,12 +1,5 @@
-<!-- selected_gazette -->
-
-<% is_first = true %>
 <% Gazette.all.each do |gazette| %> 
-  <% gazette_radio_button_symbol = gazette.to_param_sym %>
-  <% is_checked = defined? selected_gazette and
-    selected_gazette != nil and
-    selected_gazette.id == gazette.id %>
-  <%= radio_button_tag gazette_radio_button_symbol, params[gazette_radio_button_symbol], checked = is_first or is_checked %>
-  <%= label_tag gazette_radio_button_symbol, gazette.name %>
-  <% is_first = false %>
+  <% is_checked = gazette.id == params[:gazette_id].to_i %>
+  <%= radio_button_tag "existing_gazettes", gazette.name, checked = is_checked %>
+  <%= label_tag gazette.name %>
 <% end %>

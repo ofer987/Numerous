@@ -68,9 +68,12 @@ html {
 			margin: 0;
 			padding: 1em 0 0 0;
 			list-style: none;
+			float: left;
+			height: 1.5em;
 			
 			li {
 				display: inline;
+				float: left;
 				
 				a {
 					text-decoration: none;

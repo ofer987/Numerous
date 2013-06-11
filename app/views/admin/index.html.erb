@@ -2,11 +2,19 @@
   <h1>Admin</h1>
 </div>
 
-<div>
-  <%= link_to 'Add new photo', new_photo_url %>
-</div>
-<br />
+<ul class="new-content">
+  <li id="photos">
+    <div>
+      <%= link_to 'Add new photo', new_photo_url %>
+    </div>
+  </li>
+  <li id="blog">
+    <div>
+      <%= link_to 'Add new gazette', gazettes_url %>
+    </div>
+  </li>
+</ul>
 
-<div>
+<div class="logout">
   <%= link_to 'Logout', logout_url %>
 </div>

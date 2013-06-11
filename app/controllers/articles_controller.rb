@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.find_all_by_gazette_id(params[:gazette_id])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -52,12 +52,12 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     
     Gazette.all.each do |gazette|
-      if params[gazette.to_param_sym] == "on"
+      if params[:existing_gazettes] == gazette.name
         @article.gazette_id = gazette.id
         break
       end
     end
-    
+  
     respond_to do |format|
       if @article.save
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
@@ -78,7 +78,7 @@ class ArticlesController < ApplicationController
         break
       end
     end
-    
+ 
     respond_to do |format|
       if @article.update_attributes(params[:article])
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
