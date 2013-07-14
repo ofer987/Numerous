@@ -9,7 +9,7 @@ class Article < ActiveRecord::Base
 
   attr_accessible :gazette_id, :title, :sub_title, :content
   
-  has_many :article_photos
+  has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
   
   belongs_to :gazette
