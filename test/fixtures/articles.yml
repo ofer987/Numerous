@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  gazette_id: 1
-  content: MyText
-
-two:
-  gazette_id: 1
-  content: MyText
+cusco_trip:
+  gazette: peru_stories
+  title: Cusco Trip
+  sub_title: Cusco is amazing
+  content: We arrived in cusco

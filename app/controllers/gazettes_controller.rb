@@ -50,7 +50,7 @@ class GazettesController < ApplicationController
     
     respond_to do |format|
       if @gazette.save
-        format.html { redirect_to '/blogs/index' }
+        format.html { redirect_to @gazette }
         format.json { render json: @gazette, status: :created, location: @gazette }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class GazettesController < ApplicationController
     
     respond_to do |format|
       if @gazette.update_attributes(params[:gazette])
-        format.html { redirect_to 'blogs/index' }
+        format.html { redirect_to @gazette }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

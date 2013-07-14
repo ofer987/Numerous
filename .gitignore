@@ -5,6 +5,8 @@ tmp/*
 # No need for log files; they should be local per machine
 log/*
 
+.ruby-version
+
 # We do not want local images copied to the repo
 app/assets/images/photos/*
 app/assets/images/.DS_Store

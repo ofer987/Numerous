@@ -1,7 +1,30 @@
 require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @valid_article = Article.new do |article|
+      article.gazette = gazettes(:peru_stories)
+      article.title = "Interesting Story"
+      article.sub_title = "You Should Read This!"
+      article.content = "Lots of interesting things to read here."
+    end
+  end
+  
+  test "article should belong to a gazette" do
+    new_article = Article.new
+    
+    assert new_article.invalid?, 'should not be able to save an article without belonging to a gazette'
+    
+    new_article.gazette = gazettes(:peru_stories)
+    assert new_article.valid?, 'should be able to save an article that belongs to a gazette'
+  end
+  
+  test "should remove carriage returns and newlines in content field" do
+    @valid_article.content = 
+    'Hello
+    There is a newline on the previous line'
+    
+    assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
+    assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
+  end
 end

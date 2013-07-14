@@ -47,6 +47,11 @@ html {
 		font-size: 1.6em;
 	}
 	
+	a {
+		text-decoration: none;
+		color: $poco-text-color;
+	}
+	
 	//p, ul, ol {
 	//	margin-top: 0;
 	//	line-height: 180%;

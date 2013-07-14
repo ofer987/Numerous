@@ -14,10 +14,6 @@
   <fieldset>
     <legend>Enter article</legend>
     <div class="field">
-      <%= f.label :gazette_id, "Gazette" %><br />
-      <%= render partial: 'gazettes/existing_gazettes' %>
-    </div>
-    <div class="field">
       <%= f.label :title %><br />
       <%= f.text_field :title, size: 40 %>
     </div>
@@ -28,6 +24,14 @@
     <div class="field">
       <%= f.label :content %><br />
       <%= f.text_area :content %>
+    </div>
+    <div>
+      <%= f.label :photos %><br />
+      <% @all_photos.each do |photo| %>
+        <%= check_box_tag "photo_#{photo.id}", photo.id %>
+        <%= label_tag "photo #{photo.id}" %>
+        <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
+      <% end %>
     </div>
     <div class="actions">
       <%= f.submit %>

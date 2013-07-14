@@ -19,3 +19,8 @@ no_tags:
   title: No name
   description: This photo does not have an existing tags
   filename: keren.jpg
+
+llama_photo:
+  title: llama
+  description: He tried to spit on me
+  filename: llama.jpg

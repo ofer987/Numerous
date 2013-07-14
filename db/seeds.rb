@@ -11,6 +11,12 @@ Photo.delete_all
 Tag.delete_all
 PhotoTag.delete_all
 Comment.delete_all
+Gazette.delete_all
+Article.delete_all
+
+# Create administrator account
+admin = User.new(name: 'admin', password_digest: BCrypt::Password.create('default'))
+admin.save
 
 # Create photos
 

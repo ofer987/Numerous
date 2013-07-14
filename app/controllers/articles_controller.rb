@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
+  skip_before_filter :authorize, only: [:index]
+  
   def index
     @articles = Article.find_all_by_gazette_id(params[:gazette_id])
+    @is_authenticated = User.find_by_id(session[:user_id]) != nil
     
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +13,6 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by_id(params[:id])
-    @gazette = Gazette.find_by_id(params[:gazette_id])
     
     respond_to do |format|
       format.html # show.html.erb
@@ -36,6 +38,7 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
     @gazette = Gazette.find_by_id(params[:gazette_id])
+    @all_photos = Photo.all
     
     respond_to do |format|
       format.html # new.html.erb
@@ -46,17 +49,12 @@ class ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
     @gazette = Gazette.find(params[:gazette_id])
+    @all_photos = Photo.all
   end
   
   def create
     @article = Article.new(params[:article])
-    
-    Gazette.all.each do |gazette|
-      if params[:existing_gazettes] == gazette.name
-        @article.gazette_id = gazette.id
-        break
-      end
-    end
+    @article.gazette_id = params[:gazette_id]
   
     respond_to do |format|
       if @article.save
@@ -71,12 +69,10 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
-    
-    Gazette.all.each do |gazette|
-      if params[gazette.to_param_sym] == "on"
-        @article.gazette_id = gazette.id
-        break
-      end
+
+    params.select { |param| param.start_with? 'photo' }.each do |param|
+      photo_id = param[1]
+      @article.article_photos.build { |article_photo| article_photo.photo_id = photo_id }
     end
  
     respond_to do |format|

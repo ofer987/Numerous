@@ -12,6 +12,9 @@ class Photo < ActiveRecord::Base
   
   has_many :fichiers, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
+  has_many :article_photos
+  has_many :articles, through: :article_photos
     
   validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
   validates_length_of :description, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"

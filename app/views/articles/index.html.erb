@@ -20,8 +20,10 @@
     <td><%= article.sub_title %></td>
     <td><%= article.content %></td>
     <td><%= link_to 'Show', gazette_article_path(params[:gazette_id], article) %></td>
-    <td><%= link_to 'Edit', edit_gazette_article_path(params[:gazette_id], article) %></td>
-    <td><%= link_to 'Destroy', [article.gazette, article], data: { confirm: "Are you sure?" }, method: :delete %></td>
+    <% if @is_authenticated %>
+      <td><%= link_to 'Edit', edit_gazette_article_path(params[:gazette_id], article) %></td>
+      <td><%= link_to 'Destroy', [article.gazette, article], data: { confirm: "Are you sure?" }, method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

@@ -6,8 +6,7 @@ class DropPhototag < ActiveRecord::Migration
   def down
     create_table :phototags do |t|
       t.integer :photo_id
-      t.intger :tag_id, null: true
-      t.string :name
+      t.integer :tag_id, null: true
 
       t.timestamps
     end

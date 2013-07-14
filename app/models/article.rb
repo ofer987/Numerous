@@ -9,7 +9,12 @@ class Article < ActiveRecord::Base
 
   attr_accessible :gazette_id, :title, :sub_title, :content
   
+  has_many :article_photos
+  has_many :photos, through: :article_photos
+  
   belongs_to :gazette
+  
+  before_validation :gazette_exists?, :content_does_not_contain_whitespace
   
   def content=(value)
     # It is assumed that the entry is written in paragraph form (at least one paragraph)
@@ -19,5 +24,30 @@ class Article < ActiveRecord::Base
     value.gsub!(/(\r{0,1}\n{1})+/, "</p><p>")
     
     self[:content] = value
+  end
+  
+  private
+  
+  def content_does_not_contain_whitespace
+    if (self.content =~ /\r/) != nil
+      errors.add(:base, "Content should not contain a carriage return")
+      return false
+    end
+    
+    if (self.content =~ /\n/) != nil
+      errors.add(:base, "Content should not contain a newline")
+      return false
+    end
+    
+    return true;
+  end
+  
+  def gazette_exists?
+    if Gazette.all.any? { |gazette| gazette.id == self.gazette_id }
+      true
+    else
+      errors.add(:base, "Gazette #{self.gazette_id} does not exist")
+      false
+    end
   end
 end

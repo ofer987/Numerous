@@ -1,6 +1,5 @@
 Numerous::Application.routes.draw do
   get "blogs/index"
-  get "blogs/article"
 
   resources :gazettes do
     resources :articles
