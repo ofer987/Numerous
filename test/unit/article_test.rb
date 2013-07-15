@@ -27,4 +27,11 @@ class ArticleTest < ActiveSupport::TestCase
     assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
     assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
   end
+  
+  test "should be able to modify an article's created_at date" do
+    new_article = Article.new(gazette_id: gazettes(:peru_stories).id, created_at: DateTime.new(2012, 5, 12))
+    
+    assert new_article.save, "should be able to modify an article's created_at datetime"
+    assert new_article.created_at == DateTime.new(2012, 5, 12), "the article cannot save its selected datetime"
+  end
 end

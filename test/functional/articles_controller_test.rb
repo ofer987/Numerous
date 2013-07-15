@@ -44,4 +44,13 @@ class ArticlesControllerTest < ActionController::TestCase
     
     assert Article.where(id: @cusco_trip_article).count == 0, 'The cusco story article should have been deleted'
   end
+  
+  test "should be able to modify an article's created_at date" do
+    modified_date = DateTime.new(2010, 5, 12)
+    
+    @cusco_trip_article.created_at = modified_date
+    
+    post :update, gazette_id: @cusco_trip_article.gazette_id, id: @cusco_trip_article, article: { created_at: modified_date }
+    assert assigns(:article).created_at == modified_date, "The article should be able to modify its created_at datetime"
+  end
 end

@@ -25,6 +25,10 @@
       <%= f.label :content %><br />
       <%= f.text_area :content %>
     </div>
+    <div class="field">
+      <%= f.label :created_at %><br />
+      <%= f.datetime_select :created_at %>
+    </div>
     <div>
       <%= f.label :photos %><br />
       <% @all_photos.each do |photo| %>

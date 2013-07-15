@@ -15,6 +15,11 @@
   <%= @article.content %>
 </p>
 
+<p>
+  <b>Created date:<b>
+  <%= @article.created_at %>
+</p>
+
 <% @article.photos.each do |photo| %>
   <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
 <% end %>

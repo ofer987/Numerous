@@ -36,10 +36,6 @@ package_thumbnail:
   photo: package
   filesize_type: thumbnail
   
-package_small:
-  photo: package
-  filesize_type: small
-  
 package_medium:
   photo: package
   filesize_type: medium
@@ -55,3 +51,11 @@ no_tags_original:
 no_tags_thumbnail:
   photo: no_tags
   filesize_type: thumbnail
+  
+llama_thumbnail:
+  photo: llama
+  filesize_type: thumbnail
+  
+llama_original:
+  photo: llama
+  filesize_type: original
