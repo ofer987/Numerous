@@ -4,14 +4,10 @@ class Tag < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
-  include Tagable
+  include Tagable, Selectable
   
   attr_accessible :name
   
   has_many :photo_tags, dependent: :delete_all
   has_many :photos, through: :photo_tags
-  
-  def to_param_sym
-    "tag_#{self.name}".to_sym
-  end
 end

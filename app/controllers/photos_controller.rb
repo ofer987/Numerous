@@ -110,20 +110,24 @@ class PhotosController < ApplicationController
     @sql_order = 'created_at DESC'
   end
   
+  # Add/remove existing tags to this photo's collection of tags
   def add_existing_tags
-    # Add/remove existing tags to this photo's collection of tags
-    Tag.all.each do |tag|
-      # Was this tag selected?
-      if params[tag.to_param_sym] == "on"
-        # Add this tag to this photo, only if it does not already exist
-        unless @photo.photo_tags.where(tag_id: tag.id).any?
-          @photo.photo_tags.build do |new_photo_tag|
-            new_photo_tag.tag_id = tag.id
-          end
+    selected_tag_ids = Tag.find_selected_ids(params)
+    
+    # Remove tags that were not selected
+    @photo.photo_tags.each do |photo_tag|
+      if !selected_tag_ids.any? { |selected_tag_id| photo_tag.tag_id == selected_tag_id.to_i }
+        photo_tag.destroy
+      end
+    end
+    
+    # Add selected tags, unless they were previously selected 
+    selected_tag_ids.each do |selected_tag_id|
+      # Add this tag to this photo, only if it does not already exist
+      unless @photo.photo_tags.where(tag_id: selected_tag_id).any?
+        @photo.photo_tags.build do |new_photo_tag|
+          new_photo_tag.tag_id = selected_tag_id
         end
-      else
-        # The checkbox was unchecked: Remove the tag
-        @photo.photo_tags.where(tag_id: tag.id).destroy_all
       end
     end
   end

@@ -32,7 +32,7 @@
     <div>
       <%= f.label :photos %><br />
       <% @all_photos.each do |photo| %>
-        <%= check_box_tag "photo_#{photo.id}", photo.id %>
+        <%= check_box_tag photo.to_name_id, photo.to_id %>
         <%= label_tag "photo #{photo.id}" %>
         <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
       <% end %>

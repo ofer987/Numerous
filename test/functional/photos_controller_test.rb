@@ -70,16 +70,18 @@ class PhotosControllerTest < ActionController::TestCase
     
     # Add the tag "mail"
     tag = tags(:mail)
-    params = { 
-      id: package_photo.to_param,
-      tag.to_param_sym => "on"
+    params = 
+      { 
+        id: package_photo.id,
+        tag.to_name_id => tag.to_id
       }
-    # the photo should have these expected tags post update
+      
+    # the photo should have these expected tags after the update
     expected_tags = []
     expected_tags << tag
     package_photo.tags.each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_param_sym => "on" })
+      params.merge!({ existing_tag.to_name_id => existing_tag.to_id })
     end
     
     # update the photo: add the new tag
@@ -89,7 +91,7 @@ class PhotosControllerTest < ActionController::TestCase
     
     assert_equal expected_tags.count, package_photo.photo_tags.count, "The new tag was not added"
     
-    # Those the photo have all the expected_tags?
+    # Does the photo have all the expected_tags?
     expected_tags.each do |tag|
       assert package_photo.photo_tags.any? { |verify_photo_tag| verify_photo_tag.tag_id == tag.id }, "The photo is missing the tag #{tag.name}"
     end
@@ -98,7 +100,7 @@ class PhotosControllerTest < ActionController::TestCase
   test "should remove a tag from a photo" do
     package_photo = photos(:package)
     params = {
-      id: package_photo.to_param
+      id: package_photo.id
     }
     
     # These are the expected tags post-update
@@ -107,7 +109,7 @@ class PhotosControllerTest < ActionController::TestCase
     # Remove the first tag
     package_photo.tags[1..-1].each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_param_sym => "on" })
+      params.merge!({ existing_tag.to_name_id => existing_tag.to_id })
     end
     
     # update the photo: remove the first tag
