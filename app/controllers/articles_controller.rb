@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:index]
+  skip_before_filter :authorize, only: [:index, :show]
   
   def index
     @articles = Article.find_all_by_gazette_id(params[:gazette_id])
@@ -13,6 +13,10 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by_id(params[:id])
+    
+    # New comment
+    # Note: we do not know for which article this comment should be.
+    @comment = Comment.new
     
     respond_to do |format|
       format.html # show.html.erb

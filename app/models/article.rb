@@ -11,6 +11,7 @@ class Article < ActiveRecord::Base
   
   has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
+  has_many :comments, as: :commentable, dependent: :destroy
   
   belongs_to :gazette
   

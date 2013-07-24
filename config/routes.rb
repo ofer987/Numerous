@@ -2,7 +2,13 @@ Numerous::Application.routes.draw do
   get "blogs/index"
 
   resources :gazettes do
-    resources :articles
+    resources :articles do
+      resources :comments
+    end
+  end
+  
+  resources :articles do
+    resources :comments
   end
 
   get "books/read"
