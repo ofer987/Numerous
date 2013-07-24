@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = @photo.comments
+    @comments = @commentable.comments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-    @comment = @photo.comments.new
+    @comment = @commentable.comments.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,14 +44,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @photo.comments.build(params[:comment])
+    @comment = @commentable.comments.build(params[:comment])
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to photo_path(@photo), notice: 'Comment was successfully created.' }
+        format.html { redirect_to photo_path(@commentable), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.html { redirect_to photo_path(@photo), notice: 'Fill in missing fields' }
+        format.html { redirect_to photo_path(@commentable), notice: 'Fill in missing fields' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -80,7 +80,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to photo_url(@photo) }
+      format.html { redirect_to root_path }
       format.json { head :ok }
     end
   end
@@ -88,6 +88,12 @@ class CommentsController < ApplicationController
   private
   
   def init_variables
-    @photo = Photo.find_by_id(params[:photo_id])
+    if params[:photo_id] != nil
+      @commentable = Photo.find_by_id params[:photo_id]
+    elsif params[:article_id] != nil
+      @commentable = Article.find_by_id params[:article_id]
+    else
+      raise "Who does comment belong to?"
+    end
   end
 end

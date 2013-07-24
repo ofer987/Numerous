@@ -6,9 +6,10 @@ class CommentTest < ActiveSupport::TestCase
     assert empty_comment.invalid?, 'empty comments should not be allowed'
   end
   
-  test "Comment should belong to a photo" do
+  test "comment should belong to a commentable" do
     photoless_comment = Comment.new
-    photoless_comment.photo_id = rand(12345567) # Probably this id will not exist
+    photoless_comment.commentable_id = rand(12345567) # Probably this id will not exist
+    photoless_comment.commentable_type = 'Photo'
     photoless_comment.content = "nothing"
     photoless_comment.user = "Harold"
     

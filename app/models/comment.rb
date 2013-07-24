@@ -6,22 +6,32 @@ class Comment < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
-  belongs_to :photo
+  belongs_to :commentable, polymorphic: true
   
   validates_length_of :content, minimum: 1, allow_nil: false, allow_blank: false, message: "must be present"
   validates_length_of :user, minimum: 1, allow_nil: false, allow_blank: false, message: "must be present"
-  #validates_inclusion_of :photo_id, :in => Photo.all.map { |photo| photo.id }, :on => :create, :message => "does not exist"
   
-  before_validation :photo_exists?
+  before_validation :commentable_exists?
+  
+  def self.commentable_class(commentable_type)
+    commentable_type.constantize
+  end
   
   private
   
-  def photo_exists?
-    if Photo.all.any? { |photo| photo.id == self.photo_id }
-      true
+  def commentable_exists?
+    begin
+      commentable_class = self.commentable_type.constantize
+    rescue
+      errors.add(:base, "Could not find an appropriate class of #{self.commentable_type}")
+      return false
+    end
+    
+    if commentable_class.all.any? { |commentable| commentable.id == self.commentable_id }
+      return true
     else
-      errors.add(:base, "Photo #{self.photo_id} does not exist")
-      false
+      errors.add(:base, "#{self.commentable_type} #{self.commentable_id} does not exist")
+      return false
     end
   end
 end

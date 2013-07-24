@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
   has_many :tags, through: :photo_tags
   
   has_many :fichiers, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
   
   has_many :article_photos, dependent: :delete_all
   has_many :articles, through: :article_photos

@@ -69,7 +69,7 @@
 	  		
 	  		<button id="add-comment-button">New comment</button>
 	  		<div id="new-comment">
-	  			<%= render 'comments/form' %>
+	  			<%= render partial: 'comments/form', locals: { commentable: @photo } %>
 	  		</div>
 	  	</div>
 	  </div>

@@ -1,3 +1,5 @@
+<!-- locals: article -->
+
 <h1><%= strip_tags(article.title) %></h1>
 <h2><%= strip_tags(article.sub_title) %></h2>
 <h3>Published in <%= link_to article.gazette.name, gazette_articles_url(article.gazette) %></h3>

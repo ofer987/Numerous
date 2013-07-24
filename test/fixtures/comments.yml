@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 eaton_college_comment:
-  photo: eaton_college 
+  commentable: eaton_college (Photo) 
   content: All my friends think you are funny
   user: Dan
