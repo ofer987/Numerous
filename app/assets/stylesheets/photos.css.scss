@@ -165,7 +165,7 @@ div.photo-item {
 			height: 1em;
 			
 			li {
-				float: left;
+				float: leftft;
 				color: $text-color;
 			}
 			
@@ -180,23 +180,7 @@ div.photo-item {
 			margin-top: 2em;
 			color: $text-color;
 			margin: 0 0 1em 0;
-		}
-  	
-		div.commentary {
-			color: $text-color;
-			margin: 0 0 0 0;
-			
-			span.user {
-			}
-  	
-			span.date {
-				color: $text-color
-			}
-  	
-			#new-comment {
-				display: none;
-			}
-		}
+		}  	
 	}
 
 	div.indented {

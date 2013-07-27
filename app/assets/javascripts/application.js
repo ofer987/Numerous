@@ -20,7 +20,7 @@ $(document).ready(function() {
 		$("li#" + pageNameItem).addClass("selected-item");
 	}	else if (window.location.pathname == "/") {
 		// Special case: the photos page is the index page
-		$("li#photos-item").addClass("selected-item");
+		$("li#cv-item").addClass("selected-item");
 	}
 });
 

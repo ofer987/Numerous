@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize
-    unless User.find_by_id(session[:user_id])
+    @is_logged_in = User.find_by_id(session[:user_id])
+    unless @is_logged_in
       redirect_to login_url, notice: 'Please log in'
     end
   end

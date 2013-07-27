@@ -18,6 +18,10 @@
       </ul>
     </header>
     <div class="page">
+      <% if notice %>
+        <p id="notice"><%= notice %></p>
+      <% end %>
+      
     	<%= yield %>
     </div>
     <footer>
