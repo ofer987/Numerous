@@ -13,12 +13,17 @@ $(document).ready(function() {
 	
 	pageNameMatch = window.location.pathname.match(findPageNameRegExp);
 	
-	if (pageNameMatch != null && pageNameMatch.length > 1) {
+	if (pageNameMatch !== null && pageNameMatch.length > 1) {
 		pageName = pageNameMatch[1];
+		if (pageName === "articles" || pageName === "gazettes") {
+			pageName = "blogs";
+		}
+		
 		pageNameItem = pageName + "-item";
 		
 		$("li#" + pageNameItem).addClass("selected-item");
-	}	else if (window.location.pathname == "/") {
+	}
+	else if (window.location.pathname === "/") {
 		// Special case: the photos page is the index page
 		$("li#cv-item").addClass("selected-item");
 	}

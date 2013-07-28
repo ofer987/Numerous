@@ -1,11 +1,11 @@
-<!-- locals: article -->
+<%# locals: article %>
 
 <div class="article">
   <h1><%= link_to strip_tags(article.title), gazette_article_url(article.gazette, article) %></h1>
   <h2><%= strip_tags(article.sub_title) %></h2>
   <h3>Published in <%= link_to article.gazette.name, gazette_articles_url(article.gazette) %></h3>
   
-  <!-- We want to display the article's html tags -->
+  <%# We want to display the article's html tags %>
   <p><%= raw(article.content) %></p>
 </div>
 
