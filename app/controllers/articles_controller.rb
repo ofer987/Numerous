@@ -3,7 +3,6 @@ class ArticlesController < ApplicationController
   
   def index
     @articles = Article.find_all_by_gazette_id(params[:gazette_id])
-    @is_authenticated = User.find_by_id(session[:user_id]) != nil
     
     respond_to do |format|
       format.html # index.html.erb
