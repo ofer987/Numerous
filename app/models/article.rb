@@ -19,7 +19,7 @@ class Article < ActiveRecord::Base
   
   def content=(value)
     # It is assumed that the entry is written in paragraph form (at least one paragraph)
-    value = "<p>#{value}</p>"
+    value = "<p>#{value.strip}</p>"
     
     # replace every newline (and/or carriage return) with a </p<p>
     value.gsub!(/(\r{0,1}\n{1})+/, "</p><p>")

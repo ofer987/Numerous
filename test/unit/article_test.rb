@@ -22,7 +22,9 @@ class ArticleTest < ActiveSupport::TestCase
   test "should remove carriage returns and newlines in content field" do
     @valid_article.content = 
     'Hello
-    There is a newline on the previous line'
+    There is a newline on the previous line
+    
+    '
     
     assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
     assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
