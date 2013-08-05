@@ -51,7 +51,6 @@ class PhotosController < ApplicationController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
-    #params[:tags] = @photo.tags.map { |tag| tag.name }.join(", ")
   end
 
   # POST /photos
@@ -59,8 +58,8 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(params[:photo])
     
-    add_existing_tags
-    add_new_tags
+    @photo.tags_attributes = params[:photo][:tags_attributes]
+    @photo.new_tags = params[:tags]
     
     respond_to do |format|
       if @photo.save
@@ -77,12 +76,13 @@ class PhotosController < ApplicationController
   # PUT /photos/1.json
   def update
     @photo = Photo.find(params[:id])  
-      
-    add_existing_tags
-    add_new_tags  
+    
+    @photo.attributes = params[:photo]  
+    @photo.tags_attributes = params[:photo][:tags_attributes]
+    @photo.new_tags = params[:tags]  
     
     respond_to do |format|
-      if @photo.update_attributes(params[:photo])
+      if @photo.save
         format.html { redirect_to photo_url(@photo), notice: 'Photo was successfully updated.' }
         format.json { head :ok }
       else
@@ -108,45 +108,5 @@ class PhotosController < ApplicationController
     
   def init_variables
     @sql_order = 'created_at DESC'
-  end
-  
-  # Add/remove existing tags to this photo's collection of tags
-  def add_existing_tags
-    selected_tag_ids = Tag.find_selected_ids(params)
-    
-    # Remove tags that were not selected
-    @photo.photo_tags.each do |photo_tag|
-      if !selected_tag_ids.any? { |selected_tag_id| photo_tag.tag_id == selected_tag_id.to_i }
-        photo_tag.destroy
-      end
-    end
-    
-    # Add selected tags, unless they were previously selected 
-    selected_tag_ids.each do |selected_tag_id|
-      # Add this tag to this photo, only if it does not already exist
-      unless @photo.photo_tags.where(tag_id: selected_tag_id).any?
-        @photo.photo_tags.build do |new_photo_tag|
-          new_photo_tag.tag_id = selected_tag_id
-        end
-      end
-    end
-  end
-  
-  def add_new_tags
-    tags = params[:tags] || ""
-    tag_names = tags.split(",")
-    
-    # Add tags
-    tag_names.each do |name|
-      name = name.strip.downcase
-      
-      # Create a new tag if it does not already exist
-      tag = Tag[name] || Tag.create(name: name)
-      
-      # Add the tag to this photo's tag collection unless it already exists in it
-      unless @photo.photo_tags.find_by_tag_id(tag.id)
-        @photo.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
-      end
-    end
   end
 end

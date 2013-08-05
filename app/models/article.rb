@@ -7,11 +7,11 @@ class Article < ActiveRecord::Base
   # updated_at: datetime
   # created_at: datetime
 
-  attr_accessible :gazette_id, :title, :sub_title, :content, :created_at
+  attr_accessible :gazette_id, :title, :sub_title, :content, :created_at, :photos
   
   has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
-  accepts_nested_attributes_for :article_photos
+  #accepts_nested_attributes_for :photos
   
   has_many :comments, as: :commentable, dependent: :destroy
   
@@ -19,7 +19,23 @@ class Article < ActiveRecord::Base
   
   before_validation :gazette_exists?
   
+  def photos_attributes=(attributes)
+    if attributes != nil
+      add_remove_photos(attributes)
+    end
+  end
+  
   private
+  
+  def add_remove_photos(photos_attributes)
+    photos_attributes.each do |index, photo|
+      self.article_photos.where(photo_id: photo[:id].to_i).destroy_all if photo[:is_selected] == "0"
+      
+      if photo[:is_selected] == "1" && !self.article_photos.where(photo_id: photo[:id].to_i).any?
+        self.article_photos.build(photo_id: photo[:id].to_i)
+      end
+    end
+  end
   
   def content_does_not_contain_whitespace
     if (self.content =~ /\r/) != nil

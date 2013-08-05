@@ -7,6 +7,11 @@ class PhotosControllerTest < ActionController::TestCase
       title: 'Lorem Ipsum Photo',
       description: 'Description for Lorem Ipsum' 
     }
+    
+    @all_tags_attributes = Hash.new
+    Tag.all.each_with_index do |tag, index|
+      @all_tag_attributes["#{index}"] = { id: tag.id.to_s, is_selected: "0" }
+    end
   end
 
   test "should get index" do
@@ -72,8 +77,8 @@ class PhotosControllerTest < ActionController::TestCase
     tag = tags(:mail)
     params = 
       { 
-        id: package_photo.id,
-        tag.to_name_id => tag.to_id
+        id: package_photo.id
+        #tag.to_name_id => tag.to_id
       }
       
     # the photo should have these expected tags after the update

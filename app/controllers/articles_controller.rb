@@ -56,24 +56,27 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    @article = Article.new(params[:article])
-    @article.gazette_id = params[:gazette_id]
-
     if params[:is_convert_to_html] == "1"
       params[:article][:content] = params[:article][:content].to_html
     end
-
+    
+    @article = Article.new(params[:article])
+    @article.gazette_id = params[:gazette_id]
+    
     respond_to do |format|
-      is_saved = @article.save
-      if is_saved
-        add_photos
-        @article.save
-        format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
-        format.json { render json: @article, status: :created, location: @article }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+      # Save the article first and then the dependent associations
+      if @article.save
+        @article.photos_attributes = params[:article][:photos_attributes]
+        if @article.save
+          format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
+          format.json { render json: @article, status: :created, location: @article }
+        end
       end
+      
+      # Save failed
+      @all_photos = Photo.all
+      format.html { render new_gazette_article_path(params[:gazette_id]) }
+      format.json { render json: @article.errors, status: :unprocessable_entity }
     end
   end
   
@@ -84,11 +87,11 @@ class ArticlesController < ApplicationController
       params[:article][:content] = params[:article][:content].to_html
     end
     
-    remove_photos
-    add_photos
+    @article.attributes = params[:article] 
+    @article.photos_attributes = params[:article][:photos_attributes]
  
     respond_to do |format|
-      if @article.update_attributes(params[:article])
+      if @article.save
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
         format.json { head :ok }
       else

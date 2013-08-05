@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :existing_tags, "Existing Tags" %><br />
-    <%= render partial: 'tags/existing_tags' %>
+    <%= render partial: 'tags/existing_tags', locals: { parent_form: f, existing_tags: @photo.tags } %>
   </div>
   <div class="field">
     <%= f.label :tags, "New Tags" %><br />

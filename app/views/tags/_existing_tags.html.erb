@@ -1,10 +1,12 @@
-<%# selected_tags %>
+<%# Create a fields_for for an existing form. %>
+<%# Locals: %>
+<%# parent_form %>
+<%# existing_tags %>
 
 <% Tag.all.each do |tag| %>
-  <% is_checked = false %>
-  <% if defined? selected_tags and selected_tags != nil
-    selected_tags.each { |selected_tag| is_checked = true if selected_tag.id == tag.id }
-  end %>
-  <%= check_box_tag tag.to_name_id, tag.to_id, checked = is_checked %>
-  <%= label_tag tag.to_name_id, tag.name %>
+  <%= parent_form.fields_for :tags, tag do |tag_form| %>
+    <% is_checked = existing_tags.any? { |existing_tag| existing_tag.id == tag.id } %>
+    <%= tag_form.check_box :is_selected, { checked: is_checked } %>
+    <%= tag_form.label :is_selected, tag.name %>
+  <% end %>
 <% end %>

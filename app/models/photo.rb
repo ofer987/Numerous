@@ -7,8 +7,6 @@ class Photo < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
-  include Selectable
-  
   has_many :photo_tags, dependent: :destroy
   has_many :tags, through: :photo_tags
   
@@ -35,6 +33,28 @@ class Photo < ActiveRecord::Base
   # Invoke save_photo method when save is completed
   before_save :before_save
   after_save  :after_save
+
+  def tags_attributes=(attributes)
+    add_remove_tags(attributes)
+  end
+  
+  def new_tags=(new_tags)
+    new_tags ||= ""
+    tag_names = new_tags.split(",")
+    
+    # Add tags
+    tag_names.each do |name|
+      name = name.strip.downcase
+      
+      # Create a new tag if it does not already exist
+      tag = Tag[name] || Tag.create(name: name)
+      
+      # Add the tag to this photo's tag collection unless it already exists in it
+      unless self.photo_tags.find_by_tag_id(tag.id)
+        self.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
+      end
+    end
+  end
 
   def any_selected_tag_names?(tag_names)
     if (tag_names != nil and !tag_names.empty?)
@@ -178,6 +198,19 @@ class Photo < ActiveRecord::Base
           errors.add(:base, "duplicate fichiers of type #{verify1.filesize_type.name}")
           return
         end
+      end
+    end
+  end
+  
+  # Add/remove existing tags to this photo's collection of tags
+  def add_remove_tags(tags_attributes)
+    tags_attributes.each do |index, tag|
+      # Remove tags that were not selected/deselected
+      self.photo_tags.where(tag_id: tag[:id].to_i).destroy_all if tag[:is_selected] == "0"
+      
+      # Add tags that are selected and had not been previously selected
+      if tag[:is_selected] == "1" && !self.photo_tags.any? { |pt| pt.tag_id == tag[:id].to_i }
+        self.photo_tags.build(tag_id: tag[:id].to_i)
       end
     end
   end

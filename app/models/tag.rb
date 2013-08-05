@@ -4,7 +4,7 @@ class Tag < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
-  include Tagable, Selectable
+  include Tagable
   
   attr_accessible :name
   
