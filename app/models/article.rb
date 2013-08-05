@@ -11,13 +11,22 @@ class Article < ActiveRecord::Base
   
   has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
-  #accepts_nested_attributes_for :photos
   
   has_many :comments, as: :commentable, dependent: :destroy
   
   belongs_to :gazette
   
   before_validation :gazette_exists?
+  
+  attr_accessor :is_convert_to_html
+  
+  def content=(value)
+    if @is_convert_to_html
+      value = value.to_html
+    end
+    
+    self[:content] = value
+  end
   
   def photos_attributes=(attributes)
     if attributes != nil

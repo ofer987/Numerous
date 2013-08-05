@@ -19,15 +19,28 @@ class ArticleTest < ActiveSupport::TestCase
     assert new_article.valid?, 'should be able to save an article that belongs to a gazette'
   end
   
-  test "should remove carriage returns and newlines in content field" do
-    @valid_article.content = 
+  test "should remove carriage returns and newlines in content field if convert to html" do
+    @valid_article.is_convert_to_html = true
+    original_content = 
     'Hello
     There is a newline on the previous line
     
     '
-    
+    @valid_article.content = original_content
+
     assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
     assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
+  end
+  
+  test "should not remove carriage returns and newlines in content field if convert to html" do
+    @valid_article.is_convert_to_html = false
+    original_content = 
+    'Hello
+    There is a newline on the previous line
+    
+    '
+    @valid_article.content = original_content
+    assert_equal @valid_article.content, original_content, "article's should not contain carriage return or newline characters"
   end
   
   test "should be able to modify an article's created_at date" do
