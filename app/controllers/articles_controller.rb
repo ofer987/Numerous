@@ -56,8 +56,8 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    @article.is_convert_to_html = params[:is_convert_to_html] == "1"    
     @article = Article.new(params[:article])
+    @article.convert_content_to_html if params[:is_convert_to_html] == "1"
     @article.gazette_id = params[:gazette_id]
     
     respond_to do |format|
@@ -80,7 +80,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     
-    @article.is_convert_to_html = params[:is_convert_to_html] == "1"
+    @article.convert_content_to_html if params[:is_convert_to_html] == "1"
     @article.attributes = params[:article] 
     @article.photos_attributes = params[:article][:photos_attributes]
  

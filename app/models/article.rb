@@ -18,14 +18,8 @@ class Article < ActiveRecord::Base
   
   before_validation :gazette_exists?
   
-  attr_accessor :is_convert_to_html
-  
-  def content=(value)
-    if @is_convert_to_html
-      value = value.to_html
-    end
-    
-    self[:content] = value
+  def convert_content_to_html
+    self[:content] = self[:content].to_html
   end
   
   def photos_attributes=(attributes)

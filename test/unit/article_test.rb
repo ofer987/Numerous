@@ -20,26 +20,26 @@ class ArticleTest < ActiveSupport::TestCase
   end
   
   test "should remove carriage returns and newlines in content field if convert to html" do
-    @valid_article.is_convert_to_html = true
     original_content = 
     'Hello
     There is a newline on the previous line
     
     '
     @valid_article.content = original_content
+    @valid_article.convert_content_to_html
 
     assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
     assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
   end
   
   test "should not remove carriage returns and newlines in content field if convert to html" do
-    @valid_article.is_convert_to_html = false
     original_content = 
     'Hello
     There is a newline on the previous line
     
     '
     @valid_article.content = original_content
+    
     assert_equal @valid_article.content, original_content, "article's should not contain carriage return or newline characters"
   end
   

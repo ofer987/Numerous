@@ -25,7 +25,8 @@ class ArticlesControllerTest < ActionController::TestCase
     new_article = {
       gazette_id: @peru_stories_gazette.id,
       content: 'new story',
-      photos_attributes: @all_photos_attributes
+      photos_attributes: @all_photos_attributes,
+      is_convert_to_html: false
     }
     new_article[:photos_attributes].each do |index, article_photo|
       article_photo[:is_selected] = "1" if article_photo[:id].to_i == photos(:eaton_college).id || article_photo[:id].to_i == photos(:nobody_commented).id
@@ -80,7 +81,8 @@ class ArticlesControllerTest < ActionController::TestCase
       { 
         id: article.id,
         gazette_id: article.gazette_id,
-        photos_attributes: @all_photos_attributes
+        photos_attributes: @all_photos_attributes,
+        is_convert_to_html: false
       }
     params[:photos_attributes].each do |key, value|
       value[:is_selected] = "1" if value[:id].to_i == photo.id
@@ -114,7 +116,8 @@ class ArticlesControllerTest < ActionController::TestCase
     params = {
       gazette_id: article.gazette_id,
       id: article.id,
-      photos_attributes: @all_photos_attributes
+      photos_attributes: @all_photos_attributes,
+      is_convert_to_html: false
     }
     
     # These are the expected photos post-update
