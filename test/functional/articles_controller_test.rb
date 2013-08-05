@@ -4,6 +4,11 @@ class ArticlesControllerTest < ActionController::TestCase
   setup do
     @peru_stories_gazette = gazettes(:peru_stories)
     @cusco_trip_article = articles(:cusco_trip)
+    
+    @all_photos_attributes = Hash.new
+    Photo.all.each_with_index do |photo, index|
+      @all_photos_attributes["#{index}"] = { is_selected: "0", id: "#{photo.id}" }
+    end
   end
 
   test "should get index" do
@@ -17,14 +22,22 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should create article" do
-    new_article = Article.new
-    new_article.gazette_id = @peru_stories_gazette.id
-    new_article.content = 'new story'
+    new_article = {
+      gazette_id: @peru_stories_gazette.id,
+      content: 'new story',
+      article_photos_attributes: @all_photos_attributes
+    }
+    new_article[:article_photos_attributes].each do |index, article_photo|
+      article_photo[:is_selected] = "1" if article_photo[:id].to_i == photos(:eaton_college).id || article_photo[:id].to_i == photos(:nobody_commented).id
+    end
     
+    pre_article_photos_count = ArticlePhoto.count
     assert_difference('Article.count') do
       post :create, gazette_id: @peru_stories_gazette.id, article: new_article
     end
+    post_article_photos_count = ArticlePhoto.count
     
+    assert_equal pre_article_photos_count + 2, post_article_photos_count, "Did not add the two photos to the new article" 
     assert_redirected_to gazette_article_path(@peru_stories_gazette.id, assigns(:article))
   end
   
@@ -34,8 +47,12 @@ class ArticlesControllerTest < ActionController::TestCase
   end
   
   test "should update article" do
-    put :update, gazette_id: @peru_stories_gazette, id: @cusco_trip_article, article: { content: 'This is an awesome collection of stories' }
+    old_content = @cusco_trip_article.content
+    new_content = 'This is an awesome story'
+    
+    put :update, gazette_id: @peru_stories_gazette, id: @cusco_trip_article, article: { content: old_content }
     assert_redirected_to gazette_article_path(@cusco_trip_article.gazette, assigns(:article))
+    assert_equal new_content, Article.find_by_id(@cusco_trip_article.id).content, "The article's content should have been updated"
   end
   
   test "should delete article" do
@@ -63,22 +80,26 @@ class ArticlesControllerTest < ActionController::TestCase
       { 
         id: article.id,
         gazette_id: article.gazette_id,
-        photo.to_name_id => photo.to_id
+        article_photos_attributes: @all_photos_attributes
       }
+    params[:article_photos_attributes].each do |key, value|
+      value[:is_selected] = "1" if value[:id].to_i == photo.id
+    end
       
     # the photo should have these expected tags after the update, including its current photos
     expected_photos = []
     expected_photos << photo
+    
     article.photos.each do |existing_photo|
       expected_photos << existing_photo
-      params.merge!({ existing_photo.to_name_id => existing_photo.to_id })
+      params[:article_photos_attributes].each do |key, value|
+        value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
+      end
     end
     
     # update the article: add the new photo
-    put :update, params
-    
+    put :update, article: params, id: article.id, gazette_id: article.gazette_id
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article)) 
-    
     assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added"
     
     # Does the article have all the expected_photos?
@@ -87,12 +108,13 @@ class ArticlesControllerTest < ActionController::TestCase
     end
   end
   
-  test "should remove a tag from a photo" do
+  test "should remove a photo from an article" do
     # This article should have at least two photos
     article = articles(:cusco_trip)
     params = {
       gazette_id: article.gazette_id,
-      id: article.id
+      id: article.id,
+      article_photos_attributes: @all_photos_attributes
     }
     
     # These are the expected photos post-update
@@ -101,15 +123,15 @@ class ArticlesControllerTest < ActionController::TestCase
     # Remove the first photo
     article.photos[1..-1].each do |existing_photo|
       expected_photos << existing_photo
-      params.merge!({ existing_photo.to_name_id => existing_photo.to_id })
+      params[:article_photos_attributes].each do |key, value|
+        value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
+      end
     end
     
-    # update the article: remove the first photo
-    put :update, params
-    
+    # update the article: it should remove the first photo
+    put :update, article: params, gazette_id: article.gazette_id, id: article.id
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article))
-    
-    assert_equal expected_photos.count, article.photos.count, "The tag was not removed"
+    assert_equal expected_photos.count, assigns(:article).photos.count, "The photo was not removed"
     
     # Check that the article does not have any extraneous photos
     article.article_photos.each do |actual_article_photo|

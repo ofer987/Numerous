@@ -21,12 +21,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @displayed_fichier = @photo.select_fichier('small')
     
-    @selected_photos = Photo.all(order: @sql_order)
+    @photos = Photo.all(order: @sql_order)
     
-    @current_photo_index = @selected_photos.rindex(@photo)
+    @current_photo_index = @photos.rindex(@photo)
     
     @is_first_photo = @current_photo_index == 0
-    @is_last_photo = @current_photo_index == @selected_photos.count - 1
+    @is_last_photo = @current_photo_index == @photos.count - 1
     
     # new comment
     @comment = @photo.comments.new

@@ -13,6 +13,13 @@
 
   <fieldset>
     <legend>Enter article</legend>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <div class="field">
+      <%= label_tag "Convert to HTML" %><br />
+      <%= check_box_tag :is_convert_to_html %>
+    </div>
     <div class="field">
       <%= f.label :title %><br />
       <%= f.text_field :title, size: 40 %>
@@ -32,14 +39,13 @@
     <div>
       <%= f.label :photos %><br />
       <% @all_photos.each do |photo| %>
-        <% is_photo_exist = @article.photos.any? { |existing_photo| existing_photo.id == photo.id } %>
-        <%= check_box_tag photo.to_name_id, photo.to_id, checked = is_photo_exist %>
-        <%= label_tag "photo #{photo.id}" %>
-        <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
+        <%= f.fields_for :article_photos, photo do |article_photos_form| %>
+          <% is_photo_selected = @article.photos.any? { |existing_photo| existing_photo.id == photo.id } %>
+          <%= article_photos_form.check_box :is_selected, { checked: is_photo_selected } %>
+          <%= label_tag "photo #{photo.id}" %>
+          <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
+        <% end %>
       <% end %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
     </div>
   </fieldset>
 <% end %>

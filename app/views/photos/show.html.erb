@@ -1,7 +1,7 @@
 <div class="photo-item">
 	<div class="navigate-photo-link prev">
 		<% unless (@is_first_photo) %>
-			<%= link_to image_tag(@images_dir + 'back.png'), photo_path(@selected_photos[@current_photo_index - 1], tags: params[:tags]) %>
+			<%= link_to image_tag(@images_dir + 'back.png'), photo_path(@photos[@current_photo_index - 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
 	<div class="photo">
@@ -27,7 +27,7 @@
 	</div>
 	<div class="navigate-photo-link next">
 		<% unless (@is_last_photo) %>
-			<%= link_to image_tag(@images_dir + 'next.png'), photo_path(@selected_photos[@current_photo_index + 1], tags: params[:tags]) %>
+			<%= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
 	

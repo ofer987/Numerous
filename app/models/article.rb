@@ -11,21 +11,13 @@ class Article < ActiveRecord::Base
   
   has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
+  accepts_nested_attributes_for :article_photos
+  
   has_many :comments, as: :commentable, dependent: :destroy
   
   belongs_to :gazette
   
-  before_validation :gazette_exists?, :content_does_not_contain_whitespace
-  
-  def content=(value)
-    # It is assumed that the entry is written in paragraph form (at least one paragraph)
-    value = "<p>#{value.strip}</p>"
-    
-    # replace every newline (and/or carriage return) with a </p<p>
-    value.gsub!(/(\r{0,1}\n{1})+/, "</p><p>")
-    
-    self[:content] = value
-  end
+  before_validation :gazette_exists?
   
   private
   

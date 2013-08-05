@@ -58,11 +58,16 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params[:article])
     @article.gazette_id = params[:gazette_id]
-  
-    add_photos
-  
+
+    if params[:is_convert_to_html] == "1"
+      params[:article][:content] = params[:article][:content].to_html
+    end
+
     respond_to do |format|
-      if @article.save
+      is_saved = @article.save
+      if is_saved
+        add_photos
+        @article.save
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
         format.json { render json: @article, status: :created, location: @article }
       else
@@ -74,6 +79,11 @@ class ArticlesController < ApplicationController
   
   def update
     @article = Article.find(params[:id])
+    
+    if params[:is_convert_to_html] == "1"
+      params[:article][:content] = params[:article][:content].to_html
+    end
+    
     remove_photos
     add_photos
  
@@ -82,7 +92,8 @@ class ArticlesController < ApplicationController
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        @all_photos = Photo.all
+        format.html { redirect_to edit_gazette_article_path(@article.gazette_id, @article) }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
@@ -91,21 +102,19 @@ class ArticlesController < ApplicationController
   private
   
   def remove_photos
-    selected_photo_ids = Photo.find_selected_ids(params)
+    article_photos = params[:article][:article_photos_attributes] ? params[:article][:article_photos_attributes] : Hash.new
     
-    @article.article_photos.each do |article_photo|
-      if !selected_photo_ids.any? { |selected_photo_id| selected_photo_id.to_i == article_photo.photo_id }
-        article_photo.destroy
-      end
+    article_photos.each do |index, article_photo|
+      @article.article_photos.where(photo_id: article_photo[:id].to_i).destroy_all if article_photo[:is_selected] == "0"
     end
   end
   
   def add_photos
-    selected_photo_ids = Photo.find_selected_ids(params)
+    article_photos = params[:article][:article_photos_attributes] ? params[:article][:article_photos_attributes] : Hash.new
     
-    selected_photo_ids.each do |selected_photo_id|
-      unless @article.article_photos.where(photo_id: selected_photo_id).any?
-        @article.article_photos.build(photo_id: selected_photo_id)
+    article_photos.each do |index, article_photo|
+      if article_photo[:is_selected] == "1" && !@article.article_photos.where(photo_id: article_photo[:id].to_i).any?
+        @article.article_photos.build(photo_id: article_photo[:id].to_i)
       end
     end
   end
