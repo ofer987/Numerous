@@ -59,7 +59,7 @@ class PhotosController < ApplicationController
     @photo = Photo.new(params[:photo])
     
     @photo.tags_attributes = params[:photo][:tags_attributes]
-    @photo.new_tags = params[:tags]
+    @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
       if @photo.save
@@ -79,7 +79,7 @@ class PhotosController < ApplicationController
     
     @photo.attributes = params[:photo]  
     @photo.tags_attributes = params[:photo][:tags_attributes]
-    @photo.new_tags = params[:tags]  
+    @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
       if @photo.save

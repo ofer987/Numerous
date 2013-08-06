@@ -2,16 +2,17 @@ require 'test_helper'
 
 class PhotosControllerTest < ActionController::TestCase
   setup do
-    @photo = photos(:eaton_college)
-    @eaton_college_update = {
-      title: 'Lorem Ipsum Photo',
-      description: 'Description for Lorem Ipsum' 
-    }
-    
+    @photo = photos(:eaton_college)  
     @all_tags_attributes = Hash.new
     Tag.all.each_with_index do |tag, index|
-      @all_tag_attributes["#{index}"] = { id: tag.id.to_s, is_selected: "0" }
+      @all_tags_attributes["#{index}"] = { id: tag.id.to_s, is_selected: "0" }
     end
+    
+    @eaton_college_update = {
+      title: 'Lorem Ipsum Photo',
+      description: 'Description for Lorem Ipsum',
+      tags_attributes: @all_tags_attributes
+    }
   end
 
   test "should get index" do
@@ -44,7 +45,7 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should update photo" do
-    put :update, id: @photo.to_param, photo: @eaton_centre_update
+    put :update, id: @photo.to_param, photo: @eaton_college_update
     assert_redirected_to photo_path(assigns(:photo))
   end
 
@@ -77,8 +78,8 @@ class PhotosControllerTest < ActionController::TestCase
     tag = tags(:mail)
     params = 
       { 
-        id: package_photo.id
-        #tag.to_name_id => tag.to_id
+        id: package_photo.id,
+        tags_attributes: @all_tags_attributes
       }
       
     # the photo should have these expected tags after the update
@@ -86,14 +87,15 @@ class PhotosControllerTest < ActionController::TestCase
     expected_tags << tag
     package_photo.tags.each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_name_id => existing_tag.to_id })
+    end
+    params[:tags_attributes].each do |index, tag_attributes|
+      tag_attributes[:is_selected] = "1" if expected_tags.any? { |tag| tag.id == tag_attributes[:id].to_i } 
     end
     
     # update the photo: add the new tag
-    put :update, params
+    put :update, id: package_photo.id, photo: params
     
     assert_redirected_to photo_path(assigns(:photo)) 
-    
     assert_equal expected_tags.count, package_photo.photo_tags.count, "The new tag was not added"
     
     # Does the photo have all the expected_tags?
@@ -105,7 +107,8 @@ class PhotosControllerTest < ActionController::TestCase
   test "should remove a tag from a photo" do
     package_photo = photos(:package)
     params = {
-      id: package_photo.id
+      id: package_photo.id,
+      tags_attributes: @all_tags_attributes
     }
     
     # These are the expected tags post-update
@@ -114,11 +117,13 @@ class PhotosControllerTest < ActionController::TestCase
     # Remove the first tag
     package_photo.tags[1..-1].each do |existing_tag|
       expected_tags << existing_tag
-      params.merge!({ existing_tag.to_name_id => existing_tag.to_id })
+    end
+    params[:tags_attributes].each do |index, tag_attributes|
+      tag_attributes[:is_selected] = "1" if expected_tags.any? { |tag| tag.id == tag_attributes[:id].to_i } 
     end
     
     # update the photo: remove the first tag
-    put :update, params
+    put :update, id: package_photo.id, photo: params
     
     assert_redirected_to photo_path(assigns(:photo))
     
@@ -136,10 +141,10 @@ class PhotosControllerTest < ActionController::TestCase
     # This photo has two new tags called "new tag", and "second_tag"
     params = {
       id: photo.to_param,
-      tags: "new tag, second_tag"
+      tags_attributes: @all_tags_attributes
     }
     
-    put :update, params
+    put :update, id: photo.id, photo: params, new_tags: "new tag, second_tag"
     
     assert_equal photo.photo_tags.count, 2, "The two new tags were not created"
   end
