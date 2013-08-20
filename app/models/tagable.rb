@@ -18,16 +18,6 @@ module Tagable
   end
   
   module InstanceMethods
-    #def ==(other)
-    #  return false if other == nil
-    #  return self.name.strip.downcase == other.name.strip.downcase
-    #end
-    
-    #def <=>(other)
-    #  return false if other == nil
-    #  return self.name.strip.downcase <=> other.name.strip.downcase
-    #end
-    
     def to_s
       name
     end

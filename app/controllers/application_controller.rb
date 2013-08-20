@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_home_url
+  before_action :set_home_url
   
-  before_filter :authorize
+  before_action :authorize
 
   protected
 

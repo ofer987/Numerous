@@ -1,13 +1,13 @@
 class PhotosController < ApplicationController
-  before_filter :init_variables
+  before_action :init_variables
   
-  skip_before_filter :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show]
   
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all(order: @sql_order)
-    @all_tags = Tag.all(order: 'name ASC')
+    @photos = Photo.order(@sql_order)
+    @all_tags = Tag.order('name ASC')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +21,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @displayed_fichier = @photo.select_fichier('small')
     
-    @photos = Photo.all(order: @sql_order)
+    @photos = Photo.order(@sql_order)
     
     @current_photo_index = @photos.rindex(@photo)
     
@@ -56,9 +56,9 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new(photo_params)
     
-    @photo.tags_attributes = params[:photo][:tags_attributes]
+    #@photo.tags_attributes = photo_params[:tags_attributes]
     @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
@@ -77,8 +77,8 @@ class PhotosController < ApplicationController
   def update
     @photo = Photo.find(params[:id])  
     
-    @photo.attributes = params[:photo]  
-    @photo.tags_attributes = params[:photo][:tags_attributes]
+    @photo.attributes = photo_params  
+    #@photo.tags_attributes = photo_params[:tags_attributes]
     @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
@@ -108,5 +108,9 @@ class PhotosController < ApplicationController
     
   def init_variables
     @sql_order = 'created_at DESC'
+  end
+  
+  def photo_params
+    params.require(:photo).permit(:title, :description, :filename, tags_attributes: [:is_selected, :id])
   end
 end

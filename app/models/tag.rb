@@ -6,8 +6,6 @@ class Tag < ActiveRecord::Base
   
   include Tagable
   
-  attr_accessible :name
-  
   has_many :photo_tags, dependent: :delete_all
   has_many :photos, through: :photo_tags
 end

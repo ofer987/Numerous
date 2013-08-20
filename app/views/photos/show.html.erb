@@ -37,7 +37,7 @@
 	  <ul class="tags-list">
 	    <% @photo.tags.each_index do |index| %>
         <li>
-          <% tag = @photo.tags[index] %>
+          <% tag = @photo.tags.to_a[index] %>
           <%= strip_tags(tag.name) %>
         </li>
         <% if index < @photo.tags.count - 1 %>

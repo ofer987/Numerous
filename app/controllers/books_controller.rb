@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
-  before_filter :set_goodreads_client
+  before_action :set_goodreads_client
   
-  skip_before_filter :authorize, only: [:read] 
+  skip_before_action :authorize, only: [:read] 
   
   def read
     dan_id = 7297148

@@ -46,7 +46,7 @@ class GazettesController < ApplicationController
   end
   
   def create
-    @gazette = Gazette.new(params[:gazette])
+    @gazette = Gazette.new(gazette_params)
     
     respond_to do |format|
       if @gazette.save
@@ -63,7 +63,7 @@ class GazettesController < ApplicationController
     @gazette = Gazette.find(params[:id])  
     
     respond_to do |format|
-      if @gazette.update_attributes(params[:gazette])
+      if @gazette.update_attributes(gazette_params)
         format.html { redirect_to @gazette }
         format.json { head :ok }
       else
@@ -71,5 +71,11 @@ class GazettesController < ApplicationController
         format.json { render json: @gazette.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  private
+  
+  def gazette_params
+    params.require(:gazette).permit(:name, :description)
   end
 end

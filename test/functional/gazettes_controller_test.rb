@@ -16,7 +16,10 @@ class GazettesControllerTest < ActionController::TestCase
   end
 
   test "should create gazette" do
-    new_gazette = Gazette.new
+    new_gazette = {
+      name: "New Gazette",
+      description: "Some Description"
+    }
     
     assert_difference('Gazette.count') do
       post :create, gazette: new_gazette

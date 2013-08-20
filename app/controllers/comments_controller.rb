@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
-  before_filter :init_variables
+  before_action :init_variables
   
-  skip_before_filter :authorize
+  skip_before_action :authorize
 
   # GET /comments
   # GET /comments.json
@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @commentable.comments.build(params[:comment])
+    @comment = @commentable.comments.build(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -63,7 +63,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
+      if @comment.update_attributes(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
         format.json { head :ok }
       else
@@ -95,5 +95,9 @@ class CommentsController < ApplicationController
     else
       raise "Who does comment belong to?"
     end
+  end
+  
+  def comment_params
+    params.require(:comment).permit(:content, :user)
   end
 end

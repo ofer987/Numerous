@@ -4,12 +4,10 @@ class ArticlePhoto < ActiveRecord::Base
   # updated_at: datetime
   # created_at: datetime
   
-  attr_accessible :article_id, :photo_id
-  
   belongs_to :article
   belongs_to :photo
   
-  before_validation :article_exists?, :photo_exists?
+  #before_validation :article_exists?, :photo_exists?
   
   private
   

@@ -20,7 +20,7 @@ class Photo < ActiveRecord::Base
   validates_length_of :description, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
   validates_presence_of :filename, on: :create, :message => "must be specified"
   validates_presence_of :taken_date, on: :create, :message => "must have a date, at least a default one"
-  validates_format_of :filename, :with => /\.(jpg|png)$/i, :message => "is invalid"
+  validates_format_of :filename, :with => /\.(jpg|png)\z/i, :message => "is invalid"
   
   validate :validate_has_unique_fichiers
   

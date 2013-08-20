@@ -25,8 +25,7 @@ class ArticlesControllerTest < ActionController::TestCase
     new_article = {
       gazette_id: @peru_stories_gazette.id,
       content: 'new story',
-      photos_attributes: @all_photos_attributes,
-      is_convert_to_html: false
+      photos_attributes: @all_photos_attributes
     }
     new_article[:photos_attributes].each do |index, article_photo|
       article_photo[:is_selected] = "1" if article_photo[:id].to_i == photos(:eaton_college).id || article_photo[:id].to_i == photos(:nobody_commented).id
@@ -34,7 +33,7 @@ class ArticlesControllerTest < ActionController::TestCase
     
     pre_article_photos_count = ArticlePhoto.count
     assert_difference('Article.count') do
-      post :create, gazette_id: @peru_stories_gazette.id, article: new_article
+      post :create, gazette_id: @peru_stories_gazette.id, article: new_article, is_convert_to_html: false
     end
     post_article_photos_count = ArticlePhoto.count
     
@@ -81,8 +80,7 @@ class ArticlesControllerTest < ActionController::TestCase
       { 
         id: article.id,
         gazette_id: article.gazette_id,
-        photos_attributes: @all_photos_attributes,
-        is_convert_to_html: false
+        photos_attributes: @all_photos_attributes
       }
     params[:photos_attributes].each do |key, value|
       value[:is_selected] = "1" if value[:id].to_i == photo.id
@@ -100,7 +98,7 @@ class ArticlesControllerTest < ActionController::TestCase
     end
     
     # update the article: add the new photo
-    put :update, article: params, id: article.id, gazette_id: article.gazette_id
+    put :update, article: params, id: article.id, gazette_id: article.gazette_id, is_convert_to_html: false
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article)) 
     assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added"
     
@@ -116,8 +114,7 @@ class ArticlesControllerTest < ActionController::TestCase
     params = {
       gazette_id: article.gazette_id,
       id: article.id,
-      photos_attributes: @all_photos_attributes,
-      is_convert_to_html: false
+      photos_attributes: @all_photos_attributes
     }
     
     # These are the expected photos post-update
@@ -132,7 +129,7 @@ class ArticlesControllerTest < ActionController::TestCase
     end
     
     # update the article: it should remove the first photo
-    put :update, article: params, gazette_id: article.gazette_id, id: article.id
+    put :update, article: params, gazette_id: article.gazette_id, id: article.id, is_convert_to_html: false
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article))
     assert_equal expected_photos.count, assigns(:article).photos.count, "The photo was not removed"
     

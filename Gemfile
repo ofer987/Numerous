@@ -1,19 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.2.13'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'rails', '~> 4.0.0'
+#gem 'activesupport', '~> 4.0.0'
 
 gem 'sqlite3'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails', "  ~> 3.2.0"
-  gem 'coffee-rails', "~> 3.2.0"
-  gem 'uglifier'
-end
+gem 'sass-rails', "~> 4.0.0"
+gem 'coffee-rails', "~> 4.0.0"
+gem 'uglifier', '>= 1.3.0'
 
 gem 'jquery-rails'
 
@@ -30,10 +24,11 @@ gem 'with_action'
 
 gem 'rmagick', :require => "RMagick.rb"
 
-gem 'bcrypt-ruby', "~> 3.0.0"
+gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'goodreads'
+#gem 'goodreads', "~> 0.2"
+#gem 'xml-simple'
 
 gem 'mini_fb'
 
-gem 'rake', '~> 10.0.4'
+gem 'rake'

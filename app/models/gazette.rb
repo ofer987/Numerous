@@ -5,8 +5,6 @@ class Gazette < ActiveRecord::Base
   # created_at: datetime
   # updated_at: datetime
 
-  attr_accessible :name, :description
-  
   has_many :articles, dependent: :destroy
   
   def find_by_param_sym(param_sym)

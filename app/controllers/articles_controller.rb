@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show]
   
   def index
-    @articles = Article.find_all_by_gazette_id(params[:gazette_id])
+    @articles = Article.where(gazette_id: params[:gazette_id])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -56,24 +56,20 @@ class ArticlesController < ApplicationController
   end
   
   def create
-    @article = Article.new(params[:article])
+    @article = Article.new(article_params)
     @article.convert_content_to_html if params[:is_convert_to_html] == "1"
     @article.gazette_id = params[:gazette_id]
     
     respond_to do |format|
       # Save the article first and then the dependent associations
       if @article.save
-        @article.photos_attributes = params[:article][:photos_attributes]
-        if @article.save
-          format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
-          format.json { render json: @article, status: :created, location: @article }
-        end
-      end
-      
-      # Save failed
-      @all_photos = Photo.all
-      format.html { render new_gazette_article_path(params[:gazette_id]) }
-      format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
+        format.json { render json: @article, status: :created, location: @article }
+      else
+        # Save failed
+        format.html { redirect_to new_gazette_article_path(params[:gazette_id]) }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+    end
     end
   end
   
@@ -81,15 +77,14 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     
     @article.convert_content_to_html if params[:is_convert_to_html] == "1"
-    @article.attributes = params[:article] 
-    @article.photos_attributes = params[:article][:photos_attributes]
+    @article.attributes = article_params
+    #@article.photos_attributes = article_params[:photos_attributes]
  
     respond_to do |format|
       if @article.save
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
         format.json { head :ok }
       else
-        @all_photos = Photo.all
         format.html { redirect_to edit_gazette_article_path(@article.gazette_id, @article) }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
@@ -98,21 +93,7 @@ class ArticlesController < ApplicationController
   
   private
   
-  def remove_photos
-    article_photos = params[:article][:article_photos_attributes] ? params[:article][:article_photos_attributes] : Hash.new
-    
-    article_photos.each do |index, article_photo|
-      @article.article_photos.where(photo_id: article_photo[:id].to_i).destroy_all if article_photo[:is_selected] == "0"
-    end
-  end
-  
-  def add_photos
-    article_photos = params[:article][:article_photos_attributes] ? params[:article][:article_photos_attributes] : Hash.new
-    
-    article_photos.each do |index, article_photo|
-      if article_photo[:is_selected] == "1" && !@article.article_photos.where(photo_id: article_photo[:id].to_i).any?
-        @article.article_photos.build(photo_id: article_photo[:id].to_i)
-      end
-    end
+  def article_params
+    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :created_at, photos_attributes: [:is_selected, :id])
   end
 end

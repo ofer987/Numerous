@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  skip_before_filter :authorize, only: [:index, :show]
+  skip_before_action :authorize, only: [:index, :show]
 
   def index
     @articles = Article.order('created_at DESC')

@@ -13,8 +13,6 @@ class Fichier < ActiveRecord::Base
   
   before_destroy :before_destroy
   
-  #validates_inclusion_of :filesize_type_id, :in => FilesizeType.all.map { |type| type.id }, :on => :create, :message => "should use a valid FilesizeType"
-  
   # get the filename
   def filename
     if (self.filesize_type.name == 'original')

@@ -7,8 +7,6 @@ class Article < ActiveRecord::Base
   # updated_at: datetime
   # created_at: datetime
 
-  attr_accessible :gazette_id, :title, :sub_title, :content, :created_at, :photos
-  
   has_many :article_photos, dependent: :delete_all
   has_many :photos, through: :article_photos
   

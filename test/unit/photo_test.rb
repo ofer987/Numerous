@@ -73,7 +73,7 @@ class PhotoTest < ActiveSupport::TestCase
   test "tags must be unique" do
     # This photo contains the tag "england"
     photo = photos(:eaton_college)
-    england_tag = photo.tags[0]
+    england_tag = photo.tags.first
     
     # It should not be possible to add the same tag a second time
     photo.photo_tags.build { |same_tag| same_tag.tag_id = england_tag.id }
