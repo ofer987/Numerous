@@ -52,7 +52,7 @@ class PhotosControllerTest < ActionController::TestCase
   test "should destroy photo" do
     # Setup the files for this photo in the assets dir
     @package = photos(:package)
-    copy_fichier_files(@package)
+    copy_fichier_´files(@package)
 
     # Before delete the photos we need to know the fichiers that
     # have been destroyed as well
