@@ -30,7 +30,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $(".parent:checkbox").each(function () {
+    $(".clickable-parent:checkbox").each(function () {
         var checkbox = this;
         $(this).parent().click(function() {
             $(checkbox).click();

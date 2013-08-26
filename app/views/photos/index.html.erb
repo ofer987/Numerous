@@ -3,7 +3,8 @@
   <% @all_tags.each do |tag| %>
   <% is_checked = @selected_tag_name == tag.name %>
   <li>
-    <%= check_box_tag strip_tags(tag.name), strip_tags(tag.name), checked=is_checked, options={ class: "parent checkbox" } %>
+    <%= check_box_tag strip_tags(tag.name), strip_tags(tag.name), checked=is_checked,
+                      options={ class: "clickable-parent checkbox" } %>
     <span class="text" id="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></span>
   </li>
   <% end %>

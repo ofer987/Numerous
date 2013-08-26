@@ -43,12 +43,6 @@ $ ->
 	$(".select-tags-list").find("input.checkbox").click ->
 		DisplaySelectedPhotos()
 
-	###$(".select-tags-list").find("span.text").click ->
-		tagCheckBox = $(this).prev()
-		isClicked = tagCheckBox.prop "checked"
-		tagCheckBox.prop "checked", !isClicked
-		DisplaySelectedPhotos()
-###
 	$(".clear-tags-button").click ->
 		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-list").find("input.checkbox")
 		
