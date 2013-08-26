@@ -10,34 +10,40 @@ $poco-text-color: gray;
 $background-color: white;
 $main-content-left-padding: 10px;
 
-ul.book-metadata {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	height: 250px;
-	font-size: 1.6em;
+.books {
+  ul.book-headers {
+    height: 1em;
+  }
 
-	li {
-		float: left;
-		overflow: hidden;
-		
-		&#image {
-			width: 100px;
-			margin-right: 50px;
-		}
-		
-		&#title {
-			width: 150px;
-			padding-right: 20px;
-		}
-		
-		&#author {
-			width: 150px;
-			padding-right: 20px;
-		}
-		
-		&#read-at {
-			width: 150px;
-		}
-	};
+  ul.book-metadata {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      height: 250px;
+      font-size: 1.6em;
+
+      li {
+          float: left;
+          overflow: hidden;
+
+          &#image {
+              width: 100px;
+              margin-right: 50px;
+          }
+
+          &#title {
+              width: 150px;
+              padding-right: 20px;
+          }
+
+          &#author {
+              width: 150px;
+              padding-right: 20px;
+          }
+
+          &#read-at {
+              width: 150px;
+          }
+      };
+  }
 }

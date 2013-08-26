@@ -43,12 +43,12 @@ $ ->
 	$(".select-tags-list").find("input.checkbox").click ->
 		DisplaySelectedPhotos()
 
-	$(".select-tags-list").find("span.text").click ->
+	###$(".select-tags-list").find("span.text").click ->
 		tagCheckBox = $(this).prev()
 		isClicked = tagCheckBox.prop "checked"
 		tagCheckBox.prop "checked", !isClicked
 		DisplaySelectedPhotos()
-
+###
 	$(".clear-tags-button").click ->
 		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-list").find("input.checkbox")
 		
@@ -56,6 +56,12 @@ $ ->
 		
 		# Do not refresh the page
 		false;
+
+# index:
+# Display the photos with the selected tag
+# One tag can be passed in the query string
+$ ->
+  DisplaySelectedPhotos()
 
 # show: 
 # Pressing the new comment button, displays a text area

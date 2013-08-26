@@ -3,10 +3,14 @@
 <%# parent_form %>
 <%# existing_tags %>
 
+<ul class="select-existing-tags-list">
 <% Tag.all.each do |tag| %>
+  <li>
   <%= parent_form.fields_for :tags, tag do |tag_form| %>
     <% is_checked = existing_tags.any? { |existing_tag| existing_tag.id == tag.id } %>
     <%= tag_form.check_box :is_selected, { checked: is_checked } %>
     <%= tag_form.label :is_selected, tag.name %>
   <% end %>
+  </li>
 <% end %>
+</ul>

@@ -1,3 +1,17 @@
+<div class="books">
+<ul class="book-metadata book-headers">
+  <li id="image" />
+  <li id="title">
+    <span>Book</span>
+  </li>
+  <li id="author">
+    <span>Author</span>
+  </li>
+  <li id="read-at">
+    <span>Read Date</span>
+  </li>
+</ul>
+
 <% @shelf.books.each do |book| %>
   <ul class="book-metadata">
     <li id="image">
@@ -16,3 +30,4 @@
     </li>
   </ul>
 <% end %>
+</div>

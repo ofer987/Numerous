@@ -37,13 +37,11 @@
 	  <ul class="tags-list">
 	    <% @photo.tags.each_index do |index| %>
         <li>
-          <% tag = @photo.tags.to_a[index] %>
-          <%= strip_tags(tag.name) %>
+          <% tag_name = strip_tags(@photo.tags.to_a[index].name) %>
+          <%= link_to tag_name, photos_path(tag: "#{tag_name}")  %>
         </li>
         <% if index < @photo.tags.count - 1 %>
-          <li class="seperation-item">
-            |
-          </li>
+          <li class="seperation-item">|</li>
         <% end %>
 	    <% end %>
 	  </ul>

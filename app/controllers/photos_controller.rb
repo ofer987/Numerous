@@ -8,6 +8,8 @@ class PhotosController < ApplicationController
   def index
     @photos = Photo.order(@sql_order)
     @all_tags = Tag.order('name ASC')
+
+    @selected_tag_name = params[:tag]
     
     respond_to do |format|
       format.html # index.html.erb
