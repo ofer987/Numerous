@@ -18,17 +18,14 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-gem 'debugger'
-
-gem 'with_action'
+group :development, :test do
+  gem 'debugger'
+end
 
 gem 'rmagick', :require => "RMagick.rb"
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-#gem 'goodreads', "~> 0.2"
-#gem 'xml-simple'
-
-gem 'mini_fb'
+gem 'goodreads', git: 'https://github.com/ofer987/goodreads'
 
 gem 'rake'

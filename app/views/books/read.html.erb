@@ -1,5 +1,5 @@
 <div class="books">
-<ul class="book-metadata book-headers">
+<ul class="book book-header">
   <li id="image" />
   <li id="title">
     <span>Book</span>
@@ -13,7 +13,7 @@
 </ul>
 
 <% @shelf.books.each do |book| %>
-  <ul class="book-metadata">
+  <ul class="book book-metadata">
     <li id="image">
       <img src="<%= book.book.image_url %>" alt="book cover image" />
     </li>

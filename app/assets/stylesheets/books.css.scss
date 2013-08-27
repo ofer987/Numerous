@@ -11,15 +11,18 @@ $background-color: white;
 $main-content-left-padding: 10px;
 
 .books {
-  ul.book-headers {
-    height: 1em;
+  ul.book-header {
+    font-weight: bold;
+    height: 50px;
   }
 
   ul.book-metadata {
-      list-style: none;
+    height: 250px;
+  }
+
+  ul.book {
       margin: 0;
       padding: 0;
-      height: 250px;
       font-size: 1.6em;
 
       li {
