@@ -24,8 +24,8 @@ $(document).ready(function() {
 		$("li#" + pageNameItem).addClass("selected-item");
 	}
 	else if (window.location.pathname === "/") {
-		// Special case: the photos page is the index page
-		$("li#cv-item").addClass("selected-item");
+		// Special case: the blogs#index page is the default page
+		$("li#blogs-item").addClass("selected-item");
 	}
 });
 
