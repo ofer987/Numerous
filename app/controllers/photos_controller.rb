@@ -109,7 +109,7 @@ class PhotosController < ApplicationController
   private
     
   def init_variables
-    @sql_order = 'created_at DESC'
+    @sql_order = 'taken_date DESC'
   end
   
   def photo_params
