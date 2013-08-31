@@ -52,7 +52,7 @@ class PhotosControllerTest < ActionController::TestCase
   test "should destroy photo" do
     # Setup the files for this photo in the assets dir
     @package = photos(:package)
-    copy_fichier_´files(@package)
+    copy_fichier_files(@package)
 
     # Before delete the photos we need to know the fichiers that
     # have been destroyed as well
@@ -113,7 +113,6 @@ class PhotosControllerTest < ActionController::TestCase
     expected_tags = []
     
     # Remove the first tag
-    puts "THe class is #{package_photo.tags.scope}"
     package_photo.tags.to_a[1..-1].each do |existing_tag|
       expected_tags << existing_tag
     end

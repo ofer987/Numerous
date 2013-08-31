@@ -4,6 +4,7 @@ class Article < ActiveRecord::Base
   # title: string, NOT NULL, Default ''
   # sub_title: string
   # content: text, NOT NULL, Default ''
+  # published_at: datetime, NOT NULL, Default: now
   # updated_at: datetime
   # created_at: datetime
 

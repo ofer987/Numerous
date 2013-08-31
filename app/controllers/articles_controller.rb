@@ -93,6 +93,6 @@ class ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :created_at, photos_attributes: [:is_selected, :id])
+    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, photos_attributes: [:is_selected, :id])
   end
 end
