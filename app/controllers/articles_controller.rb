@@ -78,7 +78,6 @@ class ArticlesController < ApplicationController
     
     @article.convert_content_to_html if params[:is_convert_to_html] == "1"
     @article.attributes = article_params
-    #@article.photos_attributes = article_params[:photos_attributes]
  
     respond_to do |format|
       if @article.save
