@@ -79,8 +79,7 @@ class PhotosController < ApplicationController
   def update
     @photo = Photo.find(params[:id])  
     
-    @photo.attributes = photo_params  
-    #@photo.tags_attributes = photo_params[:tags_attributes]
+    @photo.attributes = photo_params
     @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
@@ -113,6 +112,7 @@ class PhotosController < ApplicationController
   end
   
   def photo_params
-    params.require(:photo).permit(:title, :description, :filename, tags_attributes: [:is_selected, :id])
+    debugger
+    params.require(:photo).permit(:title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
   end
 end
