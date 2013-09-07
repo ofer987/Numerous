@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_home_url
-    @photos_dir = "/assets/photos/";
-    @images_dir = "/assets/application/"
+    @photos_dir = "photos/"
+    @images_dir = "application/"
   end
   
   def authorize
