@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   skip_before_action :authorize, only: [:index, :show]
   
   def index
-    @articles = Article.where(gazette_id: params[:gazette_id])
+    @articles = Article.where(gazette_id: params[:gazette_id]).order("published_at desc")
     
     respond_to do |format|
       format.html # index.html.erb
@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
     @gazette = Gazette.find(params[:gazette_id])
     @all_photos = Photo.all
   end
-  
+
   def create
     @article = Article.new(article_params)
     @article.convert_content_to_html if params[:is_convert_to_html] == "1"
