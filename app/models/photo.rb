@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   #id: integer, PKEY, NOT NULL
   #title: varchar(255), NOT NULL
-  #description: text, NOT NULL
+  #description: text, NOT NULL, DEFAULT: ''
   #filename: varchar(255), NOT NULL
   #taken_date: datetime, NOT NULL, DEFAULT: DateTime.current
   #created_at: datetime
@@ -15,7 +15,10 @@ class Photo < ActiveRecord::Base
   
   has_many :article_photos, dependent: :delete_all
   has_many :articles, through: :article_photos
-    
+
+  before_validation :set_description
+
+  validates_presence_of :description, allow_blank: true
   validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
   validates_presence_of :filename, on: :create, :message => "must be specified"
   validates_presence_of :taken_date, on: :create, :message => "must have a date, at least a default one"
@@ -108,7 +111,11 @@ class Photo < ActiveRecord::Base
     set_filename(filename)
     @photo_data = data
   end
-  
+
+  def set_description
+    self.description ||= ''
+  end
+
   def before_save   
     if @photo_data
       # Write the data out to a file
@@ -119,7 +126,7 @@ class Photo < ActiveRecord::Base
       end
             
       # Load the image
-      @saved_image = Magick::ImageList.new(full_filename) 
+      @saved_image = Magick::ImageList.new(full_filename)
     
       # Store the date the image as taken
       image_datetime = @saved_image.get_exif_by_entry('DateTime')[0][1]

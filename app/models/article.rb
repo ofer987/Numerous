@@ -14,8 +14,9 @@ class Article < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   
   belongs_to :gazette
-  
-  before_validation :gazette_exists?
+
+  after_initialize :set_published_at_to_now
+  before_validation :gazette_exists?, :set_published_at_to_now
   
   def convert_content_to_html
     self[:content] = self[:content].to_html
@@ -50,7 +51,7 @@ class Article < ActiveRecord::Base
       return false
     end
     
-    return true;
+    return true
   end
   
   def gazette_exists?
@@ -60,5 +61,9 @@ class Article < ActiveRecord::Base
       errors.add(:base, "Gazette #{self.gazette_id} does not exist")
       false
     end
+  end
+
+  def set_published_at_to_now
+    self.published_at ||= DateTime.now
   end
 end

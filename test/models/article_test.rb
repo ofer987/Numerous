@@ -43,15 +43,15 @@ class ArticleTest < ActiveSupport::TestCase
     assert_equal @valid_article.content, original_content, "article's should not contain carriage return or newline characters"
   end
   
-  test "should be able to modify an article's created_at date" do
-    new_article = Article.new(gazette_id: gazettes(:peru_stories).id, created_at: DateTime.new(2012, 5, 12))
+  test "should be able to modify an article's published_at date" do
+    new_article = Article.new(gazette_id: gazettes(:peru_stories).id, published_at: DateTime.new(2012, 5, 12).getutc)
     
-    assert new_article.save, "should be able to modify an article's created_at datetime"
-    assert new_article.created_at == DateTime.new(2012, 5, 12), "the article cannot save its selected datetime"
+    assert new_article.save, "should be able to modify an article's published_at datetime"
+    assert new_article.published_at == DateTime.new(2012, 5, 12).getutc, "the article cannot save its selected datetime"
   end
 
   test "article's default time published_at is now" do
-    now_expected = DateTime.now
+    now_expected = DateTime.now.getutc
     new_article = Article.new(gazette_id: gazettes(:peru_stories).id)
 
     assert new_article.published_at.year == now_expected.year &&

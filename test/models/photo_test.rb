@@ -80,6 +80,27 @@ class PhotoTest < ActiveSupport::TestCase
     
     assert photo.invalid?, "should not be possible for a photo to have the same tag twice"
   end
+
+  test "photo description may be nil" do
+    photo = Photo.new do |photo|
+      photo.title = 'Foo'
+      photo.filename = 'foo.jpg'
+    end
+
+    # Test photo with null description
+    assert photo.valid?, "description should be able to be nil"
+  end
+
+  test "photo description could be non-nil" do
+    photo = Photo.new do |photo|
+      photo.title = 'Foo'
+      photo.filename = 'foo.jpg'
+      photo.description = 'non-empty description'
+    end
+
+    # Test photo with non-empty description
+    assert photo.valid?, 'description should be able to be non-nil and non-empty'
+  end
   
   def get_photo(filename)
     # return some test photo fixture
