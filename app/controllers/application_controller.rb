@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
-  before_action :set_home_url
-  
-  before_action :authorize
+
+  before_action :get_logged_in
+  before_action :authorize, :set_home_url
 
   protected
 
@@ -13,9 +12,14 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize
-    @is_logged_in = User.find_by_id(session[:user_id])
     unless @is_logged_in
       redirect_to login_url, notice: 'Please log in'
     end
+  end
+
+  private
+
+  def get_logged_in
+    @is_logged_in = User.find_by_id(session[:user_id])
   end
 end

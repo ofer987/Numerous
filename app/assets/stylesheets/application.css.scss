@@ -67,7 +67,27 @@ html {
 			background: none;
 			text-decoration: none;
 		}
-		
+
+        ul.admin {
+          font-size: 1.6em;
+          margin: 0;
+          padding: 1em 0 0 0;
+          list-style: none;
+          float: left;
+          height: 1.5em;
+
+          li {
+            display: inline;
+            float: left;
+
+            a {
+              text-decoration: none;
+              padding-right: 1.2em;
+              color: gray;
+            }
+          }
+        }
+
 		ul.navigation {
 			font-size: 1.6em;
 			margin: 0;
@@ -92,10 +112,6 @@ html {
 					color: black;
 				}
 			}
-			
-			li#admin-item {
-				display: none;
-			}
 		}
 	}
 	
@@ -105,6 +121,7 @@ html {
 		
 		.text-content {
 			padding-left: $main-content-left-padding;
+            font-size: 2.0em; // High font readability for creating new content
 		}
 	}
 	

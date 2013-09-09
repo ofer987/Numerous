@@ -14,7 +14,9 @@
         <li id="photos-item"><%= link_to "Photos", photos_path %></li>
         <li id="books-item"><%= link_to "Books", books_read_path %></li>
         <li id="cv-item"><%= link_to "About", "/cv" %></li>
-        <li id="admin-item"><%= link_to "Admin", admin_url %></li>
+        <% if @is_logged_in %>
+          <li id="admin"><%= link_to "Admin", admin_url %></li>
+        <% end %>
       </ul>
     </header>
     <div class="page">
