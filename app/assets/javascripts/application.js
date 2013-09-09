@@ -29,6 +29,8 @@ $(document).ready(function() {
 	}
 });
 
+// If a row has a checkbox, then clicking anywhere in the row behaves
+// like clicking on the checkbox
 $(document).ready(function() {
     $(".clickable-parent:checkbox").each(function () {
         var checkbox = this;

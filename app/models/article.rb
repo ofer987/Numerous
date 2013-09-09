@@ -23,10 +23,6 @@ class Article < ActiveRecord::Base
   validates_presence_of :content, allow_blank: true
   validates_presence_of :published_at
 
-  def convert_content_to_html
-    self[:content] = self[:content].to_html
-  end
-  
   def photos_attributes=(attributes)
     if attributes != nil
       add_remove_photos(attributes)

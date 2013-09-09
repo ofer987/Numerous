@@ -20,30 +20,21 @@ class ArticleTest < ActiveSupport::TestCase
     assert new_article.valid?, 'should be able to save an article that belongs to a gazette'
   end
   
-  test "should remove carriage returns and newlines in content field if convert to html" do
+  test "to_html extension method should remove carriage returns and newlines in content field" do
     original_content = 
-    'Hello
-    There is a newline on the previous line
+'Hello
+There is a newline on the previous line
     
-    '
-    @valid_article.content = original_content
-    @valid_article.convert_content_to_html
+'
+    expected_content =
+    '<p>Hello</p><p>There is a newline on the previous line</p>'
+    actual_content = original_content.to_html
 
-    assert (@valid_article.content =~ /\r/) == nil, "article's content should not contain a carriage return character"
-    assert (@valid_article.content =~ /\n/) == nil, "article's content should not contain a newline character"
+    assert (actual_content =~ /\r/) == nil, "article's content should not contain a carriage return character"
+    assert (actual_content =~ /\n/) == nil, "article's content should not contain a newline character"
+    assert expected_content == actual_content, "The to_html message did not create paragraphs, expected html: #{expected_content}"
   end
-  
-  test "should not remove carriage returns and newlines in content field if convert to html" do
-    original_content = 
-    'Hello
-    There is a newline on the previous line
-    
-    '
-    @valid_article.content = original_content
-    
-    assert_equal @valid_article.content, original_content, "article's should not contain carriage return or newline characters"
-  end
-  
+
   test "should be able to modify an article's published_at date" do
     new_article = Article.new(gazette_id: gazettes(:peru_stories).id, published_at: DateTime.new(2012, 5, 12).getutc)
     
