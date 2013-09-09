@@ -7,6 +7,7 @@ class ArticleTest < ActiveSupport::TestCase
       article.title = "Interesting Story"
       article.sub_title = "You Should Read This!"
       article.content = "Lots of interesting things to read here."
+      article.published_at = DateTime.now
     end
   end
   
@@ -59,5 +60,11 @@ class ArticleTest < ActiveSupport::TestCase
                new_article.published_at.day == now_expected.day
 
     assert new_article.valid?
+  end
+
+  test "article has default published_at date" do
+    @valid_article.published_at = nil
+
+    assert @valid_article.valid?, "Published_at = nil should have been converted to DateTime.now"
   end
 end

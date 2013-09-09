@@ -17,7 +17,12 @@ class Article < ActiveRecord::Base
 
   after_initialize :set_published_at_to_now
   before_validation :gazette_exists?, :set_published_at_to_now
-  
+
+  validates_presence_of :gazette_id
+  validates_presence_of :title, allow_blank: true
+  validates_presence_of :content, allow_blank: true
+  validates_presence_of :published_at
+
   def convert_content_to_html
     self[:content] = self[:content].to_html
   end
