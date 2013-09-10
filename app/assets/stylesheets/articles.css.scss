@@ -8,6 +8,18 @@ $background-color: white;
 $navigation-arrow-color: black;
 
 .article {
+  .date {
+    font-weight: bold;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    font-size: 0.75em; // 12px
+  }
+
+  .gazette {
+    font-weight: bold;
+    font-size: 0.75em; // 12px
+  }
+
   .content {
     color: rgb(66, 71, 74);
   }
