@@ -67,7 +67,6 @@ ul.photos-list {
 	
 		span {
 			color: $text-color;
-			font-size: 1.6em;
 		}
 		
 		span.photo-title {
@@ -118,7 +117,6 @@ div.photo-item {
 			list-style: none;
 			padding: 0;
 			margin: 0;
-			font-size: 1.6em;
 			height: 1em;
 			
 			li {
@@ -151,7 +149,6 @@ div.photo-item {
 	div.meta-data {
 		clear: both;
 		width: $max-photo-width;
-		font-size: 1.6em;
 		
 		ul.tags-list {
 			padding: 0;

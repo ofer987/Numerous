@@ -17,20 +17,16 @@
       <%= f.submit %>
     </div>
     <div class="field">
-      <%= label_tag "Convert to HTML" %><br />
-      <%= check_box_tag :is_convert_to_html %>
-    </div>
-    <div class="field">
       <%= f.label :title %><br />
-      <%= f.text_field :title, size: 40 %>
+      <%= f.text_field :title, size: 120 %>
     </div>
     <div class="field">
       <%= f.label :sub_title %><br />
-      <%= f.text_field :sub_title, size: 40 %>
+      <%= f.text_field :sub_title, size: 120 %>
     </div>
     <div class="field">
       <%= f.label :content %><br />
-      <%= f.text_area :content %>
+      <%= f.text_area :content, size: "85x30" %>
     </div>
     <div class="field">
       <%= f.label :published_at %><br />

@@ -16,12 +16,12 @@ $main-content-left-padding: 10px;
 
 html {
 	font-family: Lucida Grande, Helvetica, Arial, sans-serif;
-	font-size: 62.5%;
+	font-size: 16px;
 	color: #000;
 	background-color: #FFF;
 	
 	h1 {
-		font-size: 3em;
+		font-size: 2em;
 		height: 0.5em;
 		color: $header-color;
 		
@@ -31,7 +31,6 @@ html {
 	}
 	
 	h2 {
-		font-size: 1.6em;
 		margin: 0;
 		font-weight: normal;
 		color: $header-color;
@@ -44,7 +43,6 @@ html {
 	
 	p {
 		color: $mucho-text-color;
-		font-size: 1.6em;
         line-height: 1.4em;
 	}
 	
@@ -59,7 +57,7 @@ html {
 	//}
 
 	header {
-		height: 10em;
+		height: 6em;
 		width: $max-page-width;
 		margin: 0 auto 2em auto;
 		border-bottom: 1px solid black;
@@ -70,7 +68,6 @@ html {
 		}
 
         ul.admin {
-          font-size: 1.6em;
           margin: 0;
           padding: 1em 0 0 0;
           list-style: none;
@@ -90,7 +87,6 @@ html {
         }
 
 		ul.navigation {
-			font-size: 1.6em;
 			margin: 0;
 			padding: 1em 0 0 0;
 			list-style: none;
@@ -121,18 +117,29 @@ html {
 		margin: 0 auto;
 		
 		.text-content {
-            font-size: 2.0em; // High font readability for creating new content
+          //font-size: 2.0em; // High font readability for creating new content
 		}
+
+        .field {
+          input {
+            font-size: inherit;
+          }
+
+          textarea {
+            font-size: inherit;
+          }
+        }
 	}
 	
 	footer {
+        //font-size: 0.625em; // 10px
 		clear: both;
 		padding: 3em 0;
-		height: 6em;
+		height: 2em;
 		color: $poco-text-color;
 		
 		p {
-			font-size: 1.2em;
+			font-size: 0.75em; // 12px
 			line-height: normal;
 			text-align: center;
 		}
