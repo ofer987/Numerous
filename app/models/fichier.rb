@@ -1,7 +1,7 @@
 class Fichier < ActiveRecord::Base
   #id: integer, PKEY, NOT NULL
   #photo_id: integer, FKEY, NOT NULL
-  #filesize_type_id: integer, NOT NULL
+  #filesize_type_id: integer, FKEY, NOT NULL
   #created_at: datetime
   #updated_at: datetime
   

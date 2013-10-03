@@ -12,7 +12,7 @@
   </li>
 </ul>
 
-<% @shelf.books.each do |book| %>
+<% @sorted_books.each do |book| %>
   <ul class="book book-metadata">
     <li id="image">
       <img src="<%= book.book.image_url %>" alt="book cover image" />
