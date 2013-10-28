@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PhotosControllerTest < ActionController::TestCase
+  IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'assets', 'images')
+  
   setup do
     @photo = photos(:eaton_college)  
     @all_tags_attributes = Hash.new
@@ -12,6 +14,11 @@ class PhotosControllerTest < ActionController::TestCase
       title: 'Lorem Ipsum Photo',
       description: 'Description for Lorem Ipsum',
       tags_attributes: @all_tags_attributes
+    }
+    
+    @new_photo = {
+        description: 'This is a beautiful new photo',
+        title: "My mom's photo"
     }
   end
 
@@ -26,12 +33,15 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should create photo" do
-    #assert_difference('Photo.count') do
-    #  post :create, photo: @photo
-    #end
-    #
-    #assert_redirected_to photo_path(assigns(:photo))
-    assert true # for now, until you can make the file field and save to hard drive in test mode work
+    assert_difference('Photo.count') do
+      post :create, photo: {
+          description: @new_photo[:description],
+          load_photo_file: photo_data,
+          title: @new_photo[:title]
+      }
+    end
+
+    assert_redirected_to photo_path(assigns(:photo))
   end
 
   test "should show photo" do
@@ -153,5 +163,14 @@ class PhotosControllerTest < ActionController::TestCase
     photo.fichiers.each do |fichier|
       puts `cp #{photos_test_dir}#{fichier.filename} #{photos_dir}`
     end
+  end
+  
+  def photo_data
+    ActionDispatch::Http::UploadedFile.new({
+                                               filename: 'DSC01740.JPG',
+                                               type: 'image/jpg',
+                                               tempfile: IMAGE_SOURCE_FOLDER.join('DSC01740.JPG'),
+                                               head: "Content-Disposition: form-data; name=\"photo[load_photo_file]\"; filename=\"DSC01740.JPG\"\r\nContent-Type: image/jpeg\r\n"
+                                           })
   end
 end

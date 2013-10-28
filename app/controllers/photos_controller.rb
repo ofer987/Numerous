@@ -112,7 +112,6 @@ class PhotosController < ApplicationController
   end
   
   def photo_params
-    debugger
     params.require(:photo).permit(:title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
   end
 end

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class PhotoTest < ActiveSupport::TestCase
+  IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'assets', 'images')
+  
   setup do
     @filename = 'test/photos/games.jpg'
   end
@@ -100,6 +102,25 @@ class PhotoTest < ActiveSupport::TestCase
 
     # Test photo with non-empty description
     assert photo.valid?, 'description should be able to be non-nil and non-empty'
+  end
+  
+  test "should create a new photo with file" do
+    photo = Photo.new do |photo|
+      photo.title = "My mom's photo"      
+      photo.description = 'This is a beautiful new photo'
+    end
+    
+    photo.load_photo_file = photo_data
+    assert photo.save, 'Failed to save a new photo with a file'
+  end
+  
+  def photo_data
+    ActionDispatch::Http::UploadedFile.new({
+                                               filename: 'DSC01740.JPG',
+                                               type: 'image/jpg',
+                                               tempfile: IMAGE_SOURCE_FOLDER.join('DSC01740.JPG'),
+                                               head: "Content-Disposition: form-data; name=\"photo[load_photo_file]\"; filename=\"DSC01740.JPG\"\r\nContent-Type: image/jpeg\r\n"
+                                           })
   end
   
   def get_photo(filename)

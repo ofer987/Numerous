@@ -13,6 +13,10 @@ class Fichier < ActiveRecord::Base
   
   before_destroy :before_destroy
   
+  attr_accessor :saved_image
+
+  after_save :write_file
+  
   # get the filename
   def filename
     if (self.filesize_type.name == 'original')
@@ -56,4 +60,23 @@ class Fichier < ActiveRecord::Base
       raise "Could not delete file or file not found: #{fichier.filename}\n"
     end 
   end
+  
+  private
+    def write_file
+      resized_image = self.saved_image
+
+      begin
+        # resize the image unless photosize is original
+        unless self.photosize.name == 'original'
+          resized_image = self.saved_image.resize_to_fit(self.photosize.width, self.photosize.height)
+        end
+
+        # write the image to file
+        resized_image.write(self.absolute_filename)
+      rescue
+        return false
+      ensure
+        self.saved_image = nil
+      end
+    end
 end

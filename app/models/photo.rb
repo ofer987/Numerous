@@ -29,12 +29,13 @@ class Photo < ActiveRecord::Base
   #validates_format_of :taken_date, :with => /^\d\d\d\d-\d\d-\d\d\s\d\d:\d\d:\d\d$/, :on => :create, 
   #  :message => "is invalid, needs to be in date format YYYY-MM-DD HH:MM:SS"
  
+  before_create :before_create
+  before_update :before_update
+
   # Root directory of the photo public/photos
-  PHOTO_STORE = Rails.root.join('app', 'assets', 'images', 'photos')
-  
-  # Invoke save_photo method when save is completed
-  before_save :before_save
-  after_save  :after_save
+  def photo_store
+    Rails.root.join('app', 'assets', 'images', 'photos')
+  end
 
   def tags_attributes=(attributes)
     add_remove_tags(attributes)
@@ -104,74 +105,98 @@ class Photo < ActiveRecord::Base
     if data.respond_to? ('original_filename')
       filename = data.original_filename
     else
-      filename = 'random.jpg'
+      raise 'Error: file does not have a filename'
     end
-    
+
     # Store the data for later use
-    set_filename(filename)
+    self.filename = filename
     @photo_data = data
   end
 
   def set_description
     self.description ||= ''
   end
+  
+  private
 
-  def before_save   
-    if @photo_data
-      # Write the data out to a file
-      full_filename = File.join(PHOTO_STORE, self.filename)      
-      
-      File.open(full_filename, 'wb') do |f|
-        f.write(@photo_data.read)
-      end
-            
-      # Load the image
-      @saved_image = Magick::ImageList.new(full_filename)
-    
-      # Store the date the image as taken
-      image_datetime = @saved_image.get_exif_by_entry('DateTime')[0][1]
-      if (image_datetime == nil)
-        image_datetime = @saved_image.get_exif_by_entry('DateTimeOriginal')[0][1]
-      end
-      if (image_datetime != nil)
-        self.taken_date = DateTime.strptime(image_datetime, '%Y:%m:%d %H:%M:%S')
-      end
-    end
+  def before_update
+    write_file unless @photo_data.nil?
   end
-  
-  def after_save
-    if @photo_data
-      # Create the files
-      create_and_resize_fichiers
-            
-      @photo_data = nil
-    end
+
+  def before_create
+    return false if @photo_data.nil?
+
+    write_file
   end
-  
-  def set_filename(new_filename)
+
+  def filename=(new_filename)
     /^([^\.]+)\.(jpg|png)/i =~ new_filename
     new_filename_simple = $1
     new_filename_extension = $2
-    
+
     # If another photo already uses the same file,
     # then add a number to the end of the filename untill unique
     i = 0
     while true
-      existing_full_filename = File.join(PHOTO_STORE, new_filename)
-            
+      existing_full_filename = File.join(self.photo_store, new_filename)
+
       if File.exists?(existing_full_filename)
         i=i+1
-        new_filename = new_filename_simple + "_" + i.to_s + "." + new_filename_extension 
+        new_filename = "#{new_filename_simple}_#{i.to_s}.#{new_filename_extension}"
       else
         break
       end
     end
-    
-    self.filename = new_filename
+
+    self[:filename] = new_filename
+  end
+
+  def write_file
+    # Load the image
+    begin
+      @saved_image = Magick::ImageList.new(@photo_data.tempfile)
+    rescue
+      return false
+    end
+
+    # Set the metadata
+    set_metadata
+
+    # Create files of different sizes and fichier relationships
+    set_fichiers
+
+    # Clear the image data from application memory
+    @photo_data = nil
+  end
+
+  def set_metadata
+    # Store the date the image as taken
+    image_datetime = @saved_image.get_exif_by_entry('DateTime')[0][1]
+    self.taken_date = DateTime.strptime(image_datetime, '%Y:%m:%d %H:%M:%S') if image_datetime != nil
+  end
+
+  def set_fichiers
+    FilesizeType.all.each do |filesize_type|
+      case filesize_type.name
+        when 'original'
+          # Just create a fichier record in the db
+          # no need to save the file to hdd because the original file has
+          # already been saved
+          fichier = self.fichiers.build(filesize_type: filesize_type)
+          fichier.saved_image = @saved_image
+        when 'thumbnail'
+          # Always create a small version of this photo,
+          fichier = self.fichiers.build(filesize_type: filesize_type)
+          fichier.saved_image = @saved_image
+        else
+          if filesize_type.width < @saved_image.columns or filesize_type.height < @saved_image.rows then
+            fichier = self.fichiers.build(filesize_type: filesize_type)
+            fichier.saved_image = @saved_image
+          end
+      end
+    end
   end
  
-  private
-  
   def create_and_resize_fichiers
     for filesize_type in FilesizeType.all do
       if (filesize_type.name == 'original')
