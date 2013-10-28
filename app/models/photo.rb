@@ -197,30 +197,6 @@ class Photo < ActiveRecord::Base
     end
   end
  
-  def create_and_resize_fichiers
-    for filesize_type in FilesizeType.all do
-      if (filesize_type.name == 'original')
-        # Just create a fichier record in the db
-        # no need to save the file to hdd because the original file has
-        # already been saved
-        fichier = self.fichiers.create(filesize_type: filesize_type)
-      elsif (filesize_type.name == 'small' or
-        filesize_type.width < @saved_image.columns or
-        filesize_type.height < @saved_image.rows) then
-        # Always create a small version of this photo, 
-        # and other sizes if possible
-        fichier = self.fichiers.create(filesize_type: filesize_type)
-        resized_image = @saved_image.resize_to_fit(filesize_type.width, filesize_type.height)
-      
-        # get the filename
-        resized_image_filename = File.join(PHOTO_STORE, fichier.filename)
-        
-        # write the file
-        resized_image.write(resized_image_filename)
-      end
-    end
-  end
-  
   def validate_has_unique_fichiers
     self.fichiers.each do |verify1|
       self.fichiers.each do |verify2|

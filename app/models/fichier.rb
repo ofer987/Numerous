@@ -51,12 +51,8 @@ class Fichier < ActiveRecord::Base
     end
   end
   
-  def file_dir
-    "app/assets/images/photos/"
-  end
-  
   def before_destroy
-    if File.delete(file_dir + self.filename) == 0
+    if File.delete(File.join(self.photo.photo_store + self.filename)) == 0
       raise "Could not delete file or file not found: #{fichier.filename}\n"
     end 
   end
