@@ -154,8 +154,8 @@ class Photo < ActiveRecord::Base
   def write_file
     # Load the image
     begin
-      @saved_image = Magick::ImageList.new(@photo_data.tempfile)
-    rescue
+      @saved_image = Magick::ImageList.new(@photo_data.tempfile.path)
+    rescue Exception => e
       return false
     end
 
