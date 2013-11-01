@@ -1,10 +1,33 @@
 require 'test_helper'
 
+IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'resources', 'images')
+IMAGE_DEST_FOLDER = Rails.root.join('test', 'assets', 'images', 'photos')
+
+# For testing purposes
+# The test photos should not be mixed in the real assets folder  
+class Photo
+  def photo_store
+    IMAGE_DEST_FOLDER
+  end
+end
+
 class PhotoTest < ActiveSupport::TestCase
-  IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'assets', 'images')
-  
-  setup do
+  def setup
+    # Recreate the destination  subdir
+    FileUtils.mkdir_p(IMAGE_DEST_FOLDER)    
+    
     @filename = 'test/photos/games.jpg'
+  end
+  
+  def teardown
+    # Remove the destination subdir
+    FileUtils.rm_rf(IMAGE_DEST_FOLDER)
+
+    # Recreate the destination  subdir
+    FileUtils.mkdir_p(IMAGE_DEST_FOLDER)
+    
+    # Delete the temporary file
+    @tmpfile.unlink unless @tmpfile == nil
   end
   
   test "photo attributes must not be empty" do
@@ -112,13 +135,24 @@ class PhotoTest < ActiveSupport::TestCase
     
     photo.load_photo_file = photo_data
     assert photo.save, 'Failed to save a new photo with a file'
+    
+    assert photo.fichiers.size > 0, 'Fichiers were not created'
+    photo.fichiers.each do |fichier|
+      assert IMAGE_DEST_FOLDER.opendir.any? { |file| file == fichier.filename },
+             "Could not find the file (#{fichier.filename}) for photosize=#{fichier.filesize_type.name}"
+    end
   end
   
   def photo_data
+    filename = 'DSC01740.JPG'
+    @tmpfile = Tempfile.new(filename)
+    File.open(@tmpfile.path, 'wb') do |dest_file|
+      dest_file.write(IO.read(IMAGE_SOURCE_FOLDER.join(filename)))
+    end
     ActionDispatch::Http::UploadedFile.new({
                                                filename: 'DSC01740.JPG',
                                                type: 'image/jpg',
-                                               tempfile: IMAGE_SOURCE_FOLDER.join('DSC01740.JPG'),
+                                               tempfile: @tmpfile,
                                                head: "Content-Disposition: form-data; name=\"photo[load_photo_file]\"; filename=\"DSC01740.JPG\"\r\nContent-Type: image/jpeg\r\n"
                                            })
   end

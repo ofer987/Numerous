@@ -8,15 +8,15 @@ class Fichier < ActiveRecord::Base
   belongs_to :photo
   belongs_to :filesize_type
   
-  before_validation :ensure_filesize_type_exists
-  before_validation :ensure_belongs_to_photo
+  #before_validation :ensure_filesize_type_exists
+  #before_validation :ensure_belongs_to_photo
   
-  before_destroy :before_destroy
+  #before_destroy :before_destroy
   
   attr_accessor :saved_image
 
-  after_create :after_create
-  after_update :after_update
+  after_save :write_file
+  #after_update :write_file
   
   # get the filename
   def filename
@@ -38,55 +38,49 @@ class Fichier < ActiveRecord::Base
   
   private
   
-    def ensure_filesize_type_exists
-      if FilesizeType.all.any? { |filesize_type| filesize_type.id == self.filesize_type_id }
-        true
-      else
-        errors.add(:base, "FilesizeType does not exist")
-        false
-      end
+  def ensure_filesize_type_exists
+    if FilesizeType.all.any? { |filesize_type| filesize_type.id == self.filesize_type_id }
+      true
+    else
+      errors.add(:base, "FilesizeType does not exist")
+      false
     end
-  
-    def ensure_belongs_to_photo
-      if Photo.all.any? { |photo| photo.id == self.photo_id }
-        true
-      else
-        errors.add(:base, "Photo does not exist")
-        false
-      end
-    end
-  
-    def before_destroy
-      begin
-        File.delete(File.join(self.photo.photo_store + self.filename))
-      rescue Exception => e
-        return false
-      end 
-    end
-  
-    def after_create
-      self.photo.destroy unless write_file
-    end
-    
-    def after_update
-      write_file
-    end
-  
-    def write_file
-      resized_image = self.saved_image
+  end
 
-      begin
-        # resize the image unless filesize_type is original
-        unless self.filesize_type.name == 'original'
-          resized_image = self.saved_image.resize_to_fit(self.filesize_type.width, self.filesize_type.height)
-        end
-
-        # write the image to file
-        resized_image.write(self.absolute_filename)
-      rescue Exception => e
-        return false
-      ensure
-        self.saved_image = nil
-      end
+  def ensure_belongs_to_photo
+    if Photo.all.any? { |photo| photo.id == self.photo_id }
+      true
+    else
+      errors.add(:base, "Photo does not exist")
+      false
     end
+  end
+
+  def before_destroy
+    begin
+      File.delete(File.join(self.photo.photo_store + self.filename))
+    rescue Exception => e
+      errors.add(:base, e.message)
+      return false
+    end 
+  end
+
+  def write_file
+    resized_image = self.saved_image
+
+    begin
+      # resize the image unless filesize_type is original
+      unless self.filesize_type.name == 'original'
+        resized_image = self.saved_image.resize_to_fit(self.filesize_type.width, self.filesize_type.height)
+      end
+
+      # write the image to file
+      resized_image.write(self.absolute_filename)
+    rescue Exception => e
+      errors.add(:base, e.message)
+      return false
+    ensure
+      self.saved_image = nil
+    end
+  end
 end

@@ -16,7 +16,7 @@ class Photo < ActiveRecord::Base
   has_many :article_photos, dependent: :delete_all
   has_many :articles, through: :article_photos
 
-  before_validation :set_description
+  after_initialize :set_description
 
   validates_presence_of :description, allow_blank: true
   validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
@@ -156,6 +156,7 @@ class Photo < ActiveRecord::Base
     begin
       @saved_image = Magick::ImageList.new(@photo_data.tempfile.path)
     rescue Exception => e
+      errors.add(:base, e.message)
       return false
     end
 
@@ -179,19 +180,15 @@ class Photo < ActiveRecord::Base
     FilesizeType.all.each do |filesize_type|
       case filesize_type.name
         when 'original'
-          # Just create a fichier record in the db
-          # no need to save the file to hdd because the original file has
-          # already been saved
-          fichier = self.fichiers.build(filesize_type: filesize_type)
-          fichier.saved_image = @saved_image
+          # Always create a fichier record in the db
+          self.fichiers.build(filesize_type: filesize_type, saved_image: @saved_image)
         when 'thumbnail'
           # Always create a small version of this photo,
-          fichier = self.fichiers.build(filesize_type: filesize_type)
-          fichier.saved_image = @saved_image
+          self.fichiers.build(filesize_type: filesize_type, saved_image: @saved_image)
         else
+          # Created the other fichiers if their dimensions satisfy the size requirements
           if filesize_type.width < @saved_image.columns or filesize_type.height < @saved_image.rows then
-            fichier = self.fichiers.build(filesize_type: filesize_type)
-            fichier.saved_image = @saved_image
+            self.fichiers.build(filesize_type: filesize_type, saved_image: @saved_image)
           end
       end
     end
