@@ -23,6 +23,11 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @displayed_fichier = @photo.select_fichier('small')
     
+    if @displayed_fichier == nil
+      redirect_to '/photos' 
+      return
+    end
+    
     @photos = Photo.order(@sql_order)
     
     @current_photo_index = @photos.rindex(@photo)

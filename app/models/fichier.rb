@@ -8,15 +8,14 @@ class Fichier < ActiveRecord::Base
   belongs_to :photo
   belongs_to :filesize_type
   
-  #before_validation :ensure_filesize_type_exists
-  #before_validation :ensure_belongs_to_photo
+  before_validation :ensure_filesize_type_exists
+  before_validation :ensure_belongs_to_photo
   
-  #before_destroy :before_destroy
+  before_destroy :before_destroy
   
   attr_accessor :saved_image
 
-  after_save :write_file
-  #after_update :write_file
+  before_save :write_file
   
   # get the filename
   def filename

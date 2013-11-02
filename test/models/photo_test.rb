@@ -134,9 +134,12 @@ class PhotoTest < ActiveSupport::TestCase
     end
     
     photo.load_photo_file = photo_data
-    assert photo.save, 'Failed to save a new photo with a file'
+    photo.save
+    #assert photo.save!, 'Failed to save a new photo with a file'
+    #assert photo.new_record?
     
     assert photo.fichiers.size > 0, 'Fichiers were not created'
+    debugger
     photo.fichiers.each do |fichier|
       assert IMAGE_DEST_FOLDER.opendir.any? { |file| file == fichier.filename },
              "Could not find the file (#{fichier.filename}) for photosize=#{fichier.filesize_type.name}"
