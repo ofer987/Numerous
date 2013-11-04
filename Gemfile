@@ -29,3 +29,5 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'goodreads', git: 'https://github.com/ofer987/goodreads'
 
 gem 'rake'
+
+gem 'slim'

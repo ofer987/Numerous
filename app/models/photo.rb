@@ -19,7 +19,8 @@ class Photo < ActiveRecord::Base
   after_initialize :set_description
 
   validates_presence_of :description, allow_blank: true
-  validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
+  validates_presence_of :title, allow_blank: true
+  #validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
   validates_presence_of :filename, on: :create, :message => "must be specified"
   validates_presence_of :taken_date, on: :create, :message => "must have a date, at least a default one"
   validates_format_of :filename, :with => /\.(jpg|png)\z/i, :message => "is invalid"

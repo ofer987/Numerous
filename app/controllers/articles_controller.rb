@@ -68,7 +68,7 @@ class ArticlesController < ApplicationController
         # Save failed
         format.html { redirect_to new_gazette_article_path(params[:gazette_id]) }
         format.json { render json: @article.errors, status: :unprocessable_entity }
-    end
+      end
     end
   end
   
@@ -91,6 +91,7 @@ class ArticlesController < ApplicationController
   private
   
   def article_params
-    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, photos_attributes: [:is_selected, :id])
+    # maybe should be article_photos_attributes instead of article_photos
+    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, article_photos: [:is_selected, :id])
   end
 end

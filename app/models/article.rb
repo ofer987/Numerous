@@ -24,6 +24,12 @@ class Article < ActiveRecord::Base
   validates_presence_of :published_at
 
   def photos_attributes=(attributes)
+    attributes[:load_photo_file].each do |uploaded_file|
+      self.photos.build(title: '', load_photo_file: uploaded_file)
+    end
+  end
+  
+  def article_photos_attributes=(attributes)
     if attributes != nil
       add_remove_photos(attributes)
     end

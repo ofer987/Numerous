@@ -1,4 +1,11 @@
 Numerous::Application.routes.draw do
+  controller :stories do
+    get 'stories/files' => :files
+    get 'stories/upload' => :upload
+    get 'stories/new' => :new
+    post 'stories/' => :create
+  end
+  
   get "blogs/index"
 
   resources :gazettes do

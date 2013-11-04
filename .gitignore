@@ -30,3 +30,6 @@ config/initializers/goodreads.rb
 
 # Remove any RubyMine IDE user-customization files
 .idea/*
+
+# Remove any local files that I use for designing this software
+plans/*

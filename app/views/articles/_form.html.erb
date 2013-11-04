@@ -37,7 +37,7 @@
       <ul class="select-photos-list">
       <% @all_photos.each do |photo| %>
         <li>
-        <%= f.fields_for :photos, photo do |photo_form| %>
+        <%= f.fields_for :article_photos, photo do |photo_form| %>
           <% is_photo_selected = @article.photos.any? { |existing_photo| existing_photo.id == photo.id } %>
           <%= photo_form.check_box :is_selected, { checked: is_photo_selected, class: "clickable-parent" } %>
           <%= label_tag "photo #{photo.id}" %>
