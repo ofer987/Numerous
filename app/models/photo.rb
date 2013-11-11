@@ -17,6 +17,7 @@ class Photo < ActiveRecord::Base
   has_many :articles, through: :article_photos
 
   after_initialize :set_description
+  after_initialize :set_title
 
   validates_presence_of :description, allow_blank: true
   validates_presence_of :title, allow_blank: true
@@ -116,6 +117,10 @@ class Photo < ActiveRecord::Base
 
   def set_description
     self.description ||= ''
+  end
+  
+  def set_title
+    self.title ||= ''
   end
   
   private

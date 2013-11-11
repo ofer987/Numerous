@@ -32,7 +32,7 @@ class StoriesControllerTest < ActionController::TestCase
   end
 
   test "should post new story with one photo" do
-    @article['photos_attributes'] = { load_photo_file: [ photo_data ] }
+    @article['photos_attributes'] = { load_photo_files: [ photo_data ] }
     
     assert_difference('Photo.count', 1) do
       post :create, article: @article
@@ -41,7 +41,7 @@ class StoriesControllerTest < ActionController::TestCase
   end
   
   test "should post new story with two photos" do
-    @article['photos_attributes'] = { load_photo_file: [ self.photo_data, self.photo_data ] }
+    @article['photos_attributes'] = { load_photo_files: [ self.photo_data, self.photo_data ] }
     
     assert_difference('Photo.count', 2) do
       post :create, article: @article

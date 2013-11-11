@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
   validates_presence_of :published_at
 
   def photos_attributes=(attributes)
-    attributes[:load_photo_file].each do |uploaded_file|
+    attributes[:load_photo_files].each do |uploaded_file|
       self.photos.build(title: '', load_photo_file: uploaded_file)
     end
   end

@@ -63,6 +63,7 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
+    debugger
     @photo = Photo.new(photo_params)
     
     #@photo.tags_attributes = photo_params[:tags_attributes]
@@ -117,6 +118,6 @@ class PhotosController < ApplicationController
   end
   
   def photo_params
-    params.require(:photo).permit(:title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
+    params.require(:photo).permit(:id, :title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
   end
 end

@@ -1,0 +1,6 @@
+= form_for(@article.photos.build, url: "/stories/#{@article.to_param}/create_photo") do |f|
+	div id="dropbox" style="height: 200px; width: 400px"
+		= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]'
+		= f.submit name: "file_upload"
+		
+div id="preview"

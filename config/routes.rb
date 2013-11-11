@@ -1,9 +1,11 @@
 Numerous::Application.routes.draw do
   controller :stories do
     get 'stories/files' => :files
-    get 'stories/upload' => :upload
+    get 'stories/:article_id/new_photo' => :new_photo
     get 'stories/new' => :new
     post 'stories/' => :create
+    #post 'stories/:article_id/create_photo' => :create
+    post 'stories/:article_id/create_photo' => :create_photo
   end
   
   get "blogs/index"

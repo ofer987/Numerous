@@ -1,25 +1,22 @@
-= form_for(@article, url: '/stories') do |f|
-	fieldset
-		div
-			= f.label :gazette_id
-			= f.select :gazette_id, Gazette.all.map { |gazette| [gazette.name, gazette.id] }
-		div
-			= f.label :title
-			= f.text_field :title
-		div
-			= f.label :sub_title
-			= f.text_field :sub_title
-		div
-			= f.label :content
-			= f.text_area :content
-		div
-			= f.label :published_at
-			= f.date_select :published_at		
-		div
-			= f.label :photos
-			= f.fields_for :photos_attributes, @article.photos do |photo_form|
-				div
-					= photo_form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true
-		div
-			= f.submit
+= form_for(@article) do |f|
+	div id="dropbox"
+		fieldset
+			div
+				= f.label :gazette_id
+				= f.select :gazette_id, Gazette.all.map { |gazette| [gazette.name, gazette.id] }
+			div
+				= f.label :title
+				= f.text_field :title
+			div
+				= f.label :sub_title
+				= f.text_field :sub_title
+			div
+				= f.label :content
+				= f.text_area :content
+			div
+				= f.label :published_at
+				= f.date_select :published_at
+			div
+				= f.submit name: create_article
 			
+div id="preview"
