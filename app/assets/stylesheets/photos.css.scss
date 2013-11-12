@@ -167,11 +167,16 @@ div.photo-item {
 			}
 		}
 		
+		div.edit {
+			clear: both;
+			color: $text-color;		
+			margin: 2em 0 1em 0;
+		}
+		
 		div.description {
 			clear: both;
-			margin-top: 2em;
 			color: $text-color;
-			margin: 0 0 1em 0;
+			margin: 1em 0 1em 0;
 		}  	
 	}
 

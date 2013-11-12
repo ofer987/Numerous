@@ -110,6 +110,13 @@ class PhotosController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def rotate_clockwise
+    @photo = Photo.find(params[:id])
+    @photo.rotate!
+    
+    redirect_to @photo
+  end
     
   private
     

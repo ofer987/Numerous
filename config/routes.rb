@@ -3,7 +3,7 @@ Numerous::Application.routes.draw do
     get 'stories/files' => :files
     get 'stories/:article_id/new_photo' => :new_photo
     get 'stories/new' => :new
-    post 'stories/' => :create
+    post 'stories' => :create_article
     #post 'stories/:article_id/create_photo' => :create
     post 'stories/:article_id/create_photo' => :create_photo
   end
@@ -38,7 +38,11 @@ Numerous::Application.routes.draw do
 
   resources :users
 
-  resources :photos do
+  controller :photos do
+    patch 'photos/:id/rotate_clockwise' => :rotate_clockwise 
+  end
+
+  resources :photos do    
     resources :comments
   end
   

@@ -1,6 +1,10 @@
 = form_for(@article.photos.build, url: "/stories/#{@article.to_param}/create_photo") do |f|
-	div id="dropbox" style="height: 200px; width: 400px"
-		= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]'
-		= f.submit name: "file_upload"
+	div class="photo-dropbox"
+		div class="instructions" Drop Photos
+		= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
 		
-div id="preview"
+= link_to "Finish", gazette_article_path(@article.gazette, @article)		
+		
+div class="preview"
+
+== render partial: 'photos/index', locals: { photos: @article.photos }

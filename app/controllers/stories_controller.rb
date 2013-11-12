@@ -18,21 +18,12 @@ class StoriesController < ApplicationController
     end
   end
 
-  def create
-    with_action do |action|
-      action.create_article
-      action.file_upload
-    end
-  end
-  
   def create_photo
     @article = Article.find_by_id(params[:article_id])
     
     @photo = @article.photos.create(load_photo_file: photo_params[:load_photo_file])
     #article_photo = @article.article_photos.create(photo_id: @photo.id) 
   end
-  
-  private
   
   def create_article
     @article = Article.new(article_params)    
@@ -49,6 +40,8 @@ class StoriesController < ApplicationController
       end
     end
   end
+  
+  private
     
   def photo_params
     params.require(:photo).permit(:load_photo_file)

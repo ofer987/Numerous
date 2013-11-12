@@ -1,1 +1,1 @@
-$("#preview").append(" <img id='displayed-photo' src='<%= asset_path(@photos_dir + @photo.select_fichier('thumbnail').filename) %>' /> ")
+$(".photos-list").append("<%= j render @photo %>");

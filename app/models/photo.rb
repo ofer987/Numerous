@@ -123,6 +123,12 @@ class Photo < ActiveRecord::Base
     self.title ||= ''
   end
   
+  def rotate!
+    self.fichiers.each do |fichier|
+      fichier.rotate!
+    end
+  end
+  
   private
 
   def before_update

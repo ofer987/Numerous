@@ -35,6 +35,25 @@ class Fichier < ActiveRecord::Base
     self.find_by_filesize_type_id(FilesizeType.find_by_name(name))
   end
   
+  def rotate!
+    begin
+      image = Magick::ImageList.new(self.absolute_filename)
+    rescue Exception => e
+      errors.add(:base, "Could not open the file #{self.absolute_filename} to rotate")
+    end
+    
+    image.rotate!(90)
+    if image == nil
+      errors.add(:base, "Failed to rotate the image #{self.absolute_filename}")
+    else
+      begin    
+        image.write(self.absolute_filename)
+      rescue Exception => e
+        errors.add(:base, "Failed to save the rotated image #{self.absolute_filename}")
+      end
+    end
+  end
+  
   private
   
   def ensure_filesize_type_exists

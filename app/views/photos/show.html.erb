@@ -30,7 +30,7 @@
 			<%= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags]) %>
 		<% end %>
 	</div>
-	
+		
 	<div class="meta-data indented">
 	  <% if @photo.tags.count > 0 %>
 	  <h2>Tags</h2>
@@ -47,12 +47,20 @@
 	  </ul>
 	  <% end %>
 	  
+	
+		<% if @is_logged_in %>
+			<div class="edit">
+				<h2>Edit</h2>
+				<%= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch %>
+			</div>
+		<% end %>
+	  
 	  <div class="description">
-	    <h2>Description</h2>
-	    <%= @photo.description %>
+		  <h2>Description</h2>
+		  <%= @photo.description %>
 	  </div>
 	  
-    <div class="commentary">
+	  <div class="commentary">
 	  	<h2>Comments</h2>
 	  	<ul>
 	  		<% @photo.comments.select { |c| c.id != nil }.each do |comment| %>
