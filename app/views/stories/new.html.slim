@@ -1,19 +1,19 @@
-= form_for(@article) do |f|
+= form_for(@article, url: '/stories') do |f|
 	div id="dropbox"
 		fieldset
-			div
+			div class="field"
 				= f.label :gazette_id
 				= f.select :gazette_id, Gazette.all.map { |gazette| [gazette.name, gazette.id] }
-			div
+			div class="field"
 				= f.label :title
 				= f.text_field :title
-			div
+			div class="field"
 				= f.label :sub_title
 				= f.text_field :sub_title
-			div
+			div class="field"
 				= f.label :content
 				= f.text_area :content
-			div
+			div class="field"
 				= f.label :published_at
 				= f.date_select :published_at
 			div
