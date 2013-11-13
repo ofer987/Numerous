@@ -104,6 +104,7 @@ class Photo < ActiveRecord::Base
   # This method only store the information
   # The file saving is done in before_save
   def load_photo_file=(data)
+    raise 'Error: File is not an image' unless data.content_type.match(/image\/jpe?g/)
     if data.respond_to? ('original_filename')
       filename = data.original_filename
     else

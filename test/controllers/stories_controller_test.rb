@@ -21,32 +21,24 @@ class StoriesControllerTest < ActionController::TestCase
     teardown_photo_files
   end
 
-  test "should get new" do
-    get :new
+  test "should get new_article" do
+    get :new_article
     assert_response :success
   end
 
-  test "should post new photoless story" do
-    post :create, article: @article
-    assert_redirected_to assigns(:article)
+  test "should post new article and go to new_photo page" do
+    assert_difference('Article.count', 1) do
+      post :create_article, article: @article
+    end
+        
+    assert_redirected_to "/stories/#{assigns(:article).id}/new_photo", 'Did not redirect to Stories#NewPhoto'
   end
 
-  test "should post new story with one photo" do
-    @article['photos_attributes'] = { load_photo_files: [ photo_data ] }
+  test "should post new photo to existing article" do    
+    existing_article = articles(:cusco_trip)
     
     assert_difference('Photo.count', 1) do
-      post :create, article: @article
+      post :create_photo, remote: true, { article_id: existing_article.id, photo: { load_photo_file: self.photo_data } }
     end
-    assert_redirected_to assigns(:article)
   end
-  
-  test "should post new story with two photos" do
-    @article['photos_attributes'] = { load_photo_files: [ self.photo_data, self.photo_data ] }
-    
-    assert_difference('Photo.count', 2) do
-      post :create, article: @article
-    end
-    assert_redirected_to assigns(:article)
-  end
-
 end

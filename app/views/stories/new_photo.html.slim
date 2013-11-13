@@ -5,6 +5,6 @@
 		
 = link_to "Finish", gazette_article_path(@article.gazette, @article)		
 		
-div class="preview"
+div id="notice"
 
 == render partial: 'photos/index', locals: { photos: @article.photos }
