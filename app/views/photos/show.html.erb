@@ -5,7 +5,7 @@
 		<% end %>
 	</div>
 	<div class="photo">
-		<img id="displayed-photo" src="<%= asset_path("/photos/#{@displayed_fichier.filename}", type: :image) %>" />
+		<img id="displayed-photo" src="<%= asset_path("/photos/#{@displayed_fichier.filename}", type: :images) %>" />
 		<ul class="sizes-list">
 			<li>
 			  <a href="<%= asset_path(@photo.select_fichier("small").filename) %>">Small</a>
