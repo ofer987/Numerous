@@ -27,7 +27,7 @@ Numerous::Application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  # Fallback to assets pipeline if a precompiled asset is missing.
   config.assets.compile = true
 
   # Generate digests for assets URLs.
