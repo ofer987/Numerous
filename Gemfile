@@ -20,6 +20,8 @@ gem 'jquery-rails'
 # To use debugger
 group :development, :test do
   gem 'debugger'
+  gem 'pry'
+  gem 'pry-debugger'
 end
 
 gem 'rmagick', :require => "RMagick.rb"
