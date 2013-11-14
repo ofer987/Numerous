@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_home_url
-    @photos_dir = "photos/"
-    @images_dir = "application/"
+    @photos_dir = "/photos/"
+    @images_dir = "/application/"
   end
   
   def authorize

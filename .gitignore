@@ -33,3 +33,7 @@ config/initializers/goodreads.rb
 
 # Remove any local files that I use for designing this software
 plans/*
+
+# Do not include the compiled-assets
+public/assets/*
+public/assets/**/
