@@ -1,4 +1,9 @@
 module PhotosHelper
+  def fichier_path(photo_filename)
+    #asset_path(photo_filename) || photo_filename
+    photo_filename
+  end
+  
   def photos_list(tags=nil)
     html = <<HTML 
       <div class="photos-list">
