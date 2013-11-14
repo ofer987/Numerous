@@ -1,3 +1,4 @@
+<% debugger %>
 <div class="photo-item">
 	<div class="navigate-photo-link prev">
 		<% unless (@is_first_photo) %>
@@ -5,7 +6,7 @@
 		<% end %>
 	</div>
 	<div class="photo">
-		<img id="displayed-photo" src="<%= asset_path("#{@photos_dir}#{@displayed_fichier.filename}") %>" />
+		<img id="displayed-photo" src="<%= asset_path("#{@photos_dir}#{@displayed_fichier.filename}", type: :image) %>" />
 		<ul class="sizes-list">
 			<li>
 			  <a href="<%= asset_path("#{@photos_dir}#{@photo.select_fichier("small").filename}") %>">Small</a>
