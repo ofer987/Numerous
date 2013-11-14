@@ -12,16 +12,16 @@
 			</li>
 			<% if @photo.select_fichier("medium") != nil %>
 				<li>
-				  <a href="<%= asset_path("/images/photos/#{@photo.select_fichier("medium").filename}") %>">Medium</a>
+				  <a href="<%= asset_path("photos/#{@photo.select_fichier("medium").filename}") %>">Medium</a>
 				</li>
 			<% end %>
 			<% if @photo.select_fichier("large") != nil %>
 				<li>
-				  <a href="<%= asset_path("/images/photos/#{@photo.select_fichier("large").filename}") %>">Large</a>
+				  <a href="<%= asset_path("photos/#{@photo.select_fichier("large").filename}") %>">Large</a>
 				</li>
 			<% end %>
 			<li>
-			  <a href="<%= asset_path("/images/photos/#{@photo.select_fichier("original").filename}") %>">Original</a>
+			  <a href="<%= asset_path("photos/#{@photo.select_fichier("original").filename}") %>">Original</a>
 			</li>
 		</ul>
 	</div>

@@ -8,7 +8,7 @@
 	  <div class="image-horizontal-align">
 		  <% thumbnail_fichier = photo.select_fichier('thumbnail') %>
 		  <% unless thumbnail_fichier == nil %>
-	    	<%= link_to image_tag("/images/" + @photos_dir + photo.select_fichier('thumbnail').filename,
+	    	<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
     			class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
 		  <% end %>
       </div>
