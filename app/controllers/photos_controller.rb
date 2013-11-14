@@ -63,7 +63,6 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    debugger
     @photo = Photo.new(photo_params)
     
     #@photo.tags_attributes = photo_params[:tags_attributes]
