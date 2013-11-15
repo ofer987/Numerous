@@ -1,6 +1,9 @@
 class PhotosController < ApplicationController
   before_action :init_variables
   
+  # Negative captcha
+  before_action :setup_comment_negative_captcha, only: :show
+  
   skip_before_action :authorize, only: [:index, :show]
   
   # GET /photos
@@ -125,5 +128,14 @@ class PhotosController < ApplicationController
   
   def photo_params
     params.require(:photo).permit(:id, :title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
+  end
+  
+  def setup_comment_negative_captcha
+    @captcha = NegativeCaptcha.new(
+      secret: Numerous::Application.config.negative_captcha_secret,
+      spinner: request.remote_ip,
+      fields: [:content, :user],
+      params: params
+      )
   end
 end

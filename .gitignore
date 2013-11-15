@@ -28,6 +28,10 @@ db/schema.rb
 # The API key and secret can be generated at http://www.goodreads.com/api/keys
 config/initializers/goodreads.rb
 
+# Do not include the secret key for negative captchas.
+# Each user should generate his own using 'rake secret'
+config/initializers/negative_captcha.rb
+
 # Remove any RubyMine IDE user-customization files
 .idea/*
 

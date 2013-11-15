@@ -47,10 +47,10 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @commentable.comments.build(comment_params)
+    @comment = @commentable.comments.build(@captcha.values)
 
     respond_to do |format|
-      if @comment.save
+      if @captcha.valid? && @comment.save
         format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
@@ -66,7 +66,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
 
     respond_to do |format|
-      if @comment.update_attributes(comment_params)
+      if @comment.update_attributes(@captcha.values)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
         format.json { head :ok }
       else
@@ -106,10 +106,10 @@ class CommentsController < ApplicationController
   
   def setup_negative_captcha
     @captcha = NegativeCaptcha.new(
-      secret: ,
-      spinner: request.remote_ip),
+      secret: Numerous::Application.config.negative_captcha_secret,
+      spinner: request.remote_ip,
       fields: [:content, :user],
-      params: comment_params
+      params: params
       )
   end
 end
