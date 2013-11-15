@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
   before_action :init_variables
   
+  # Negative captchas
+  before_action :setup_negative_captcha, only: [:new, :create]
+  
   skip_before_action :authorize
 
   # GET /comments
@@ -99,5 +102,14 @@ class CommentsController < ApplicationController
   
   def comment_params
     params.require(:comment).permit(:content, :user)
+  end
+  
+  def setup_negative_captcha
+    @captcha = NegativeCaptcha.new(
+      secret: ,
+      spinner: request.remote_ip),
+      fields: [:content, :user],
+      params: comment_params
+      )
   end
 end
