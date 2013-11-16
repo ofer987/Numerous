@@ -26,15 +26,4 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_redirected_to article
   end
-
-  test "should destroy comment for photo" do
-    photo = photos(:eaton_college)
-    comment = photo.comments.first
-
-    assert_difference('Comment.count', -1) do
-      delete :destroy, id: comment.to_param, photo_id: photo.id
-    end
-    
-    assert_redirected_to root_path
-  end
 end

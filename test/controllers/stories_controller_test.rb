@@ -34,11 +34,11 @@ class StoriesControllerTest < ActionController::TestCase
     assert_redirected_to "/stories/#{assigns(:article).id}/new_photo", 'Did not redirect to Stories#NewPhoto'
   end
 
-  test "should post new photo to existing article" do    
+  test "should post new photo to existing article" do
     existing_article = articles(:cusco_trip)
     
     assert_difference('Photo.count', 1) do
-      post :create_photo, remote: true, { article_id: existing_article.id, photo: { load_photo_file: self.photo_data } }
+      post :create_photo, { remote: true, article_id: existing_article.id, photo: { load_photo_file: self.photo_data } }
     end
   end
 end

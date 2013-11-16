@@ -22,42 +22,6 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.errors[:filename].any?
   end
 
-  test "title must not be nil and could not be blank" do
-    photo = photos(:eaton_college)
-    
-    photo.title = nil
-    assert photo.invalid?, 'should not be able to accept nil title'
-    
-    photo.title = ''
-    assert photo.invalid?, 'should not be able to accept blank title'
-    
-    photo.title = 'long title'
-    assert photo.valid?, 'should be able to accept a title with words'
-  end
-  
-  test "filename" do
-    ok = %w{ fred.jpg fred.png FRED.JPG FRED.Jpg }
-    bad = %w{ fred.doc fred.gif/more fred.gif.more fred.gif fred.bmp }
-    
-    ok.each do |name|
-      assert get_photo(name).valid?, "#{name} shouldn't be invalid"
-    end
-  
-    bad.each do |name|
-      assert get_photo(name).invalid?, "#{name} shouldn't be valid"
-    end 
-  end
-  
-  test "upload new photo" do
-    games_photo = Photo.new()
-    games_photo.title = 'Games Photo'
-    games_photo.description = 'description 01'
-    
-    games_photo.load_photo_file = File.open(@filename)
-    
-    assert games_photo.valid?, "Cannot upload the photo #{@filename}"
-  end
-  
   test "cannot have two fichiers of same type" do
     FilesizeType.all.each do |filesize_type|
       photo = photos(:eaton_college)
@@ -71,16 +35,6 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.comments.count == 0
   end
   
-  #test "must have original fichier" do
-  #  new_photo = Photo.new
-  #  new_photo.title = 'two flirty men'
-  #  new_photo.description = 'wearing plaid shirts'
-  #  new_photo.filename = 'uninspiring.jpg'
-  #  
-  #  # do not add any fichiers, least my photo not have an original ficihier!
-  #  assert new_photo.valid?, "should not be able to save a photo that does not have an original fichier" 
-  #end
-  
   test "tags must be unique" do
     # This photo contains the tag "england"
     photo = photos(:eaton_college)
@@ -92,27 +46,6 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.invalid?, "should not be possible for a photo to have the same tag twice"
   end
 
-  test "photo description may be nil" do
-    photo = Photo.new do |photo|
-      photo.title = 'Foo'
-      photo.filename = 'foo.jpg'
-    end
-
-    # Test photo with null description
-    assert photo.valid?, "description should be able to be nil"
-  end
-
-  test "photo description could be non-nil" do
-    photo = Photo.new do |photo|
-      photo.title = 'Foo'
-      photo.filename = 'foo.jpg'
-      photo.description = 'non-empty description'
-    end
-
-    # Test photo with non-empty description
-    assert photo.valid?, 'description should be able to be non-nil and non-empty'
-  end
-  
   test "should create a new photo with file" do
     photo = Photo.new do |photo|
       photo.title = "My mom's photo"      
@@ -121,21 +54,11 @@ class PhotoTest < ActiveSupport::TestCase
     
     photo.load_photo_file = photo_data
     photo.save
-    #assert photo.save!, 'Failed to save a new photo with a file'
-    #assert photo.new_record?
     
     assert photo.fichiers.size > 0, 'Fichiers were not created'
     photo.fichiers.each do |fichier|
       assert IMAGE_DEST_FOLDER.opendir.any? { |file| file == fichier.filename },
              "Could not find the file (#{fichier.filename}) for photosize=#{fichier.filesize_type.name}"
     end
-  end
-  
-  def get_photo(filename)
-    # return some test photo fixture
-    photo = photos(:eaton_college)
-    photo.filename = filename
-    
-    return photo
   end
 end

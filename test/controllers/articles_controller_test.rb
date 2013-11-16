@@ -21,14 +21,16 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "Should fail to create an article when published_at is not set" do
+  test "should default published_at to now" do
     new_article = {
         gazette_id: @peru_stories_gazette.id,
         content: 'new story',
         published_at: nil
     }
 
-    assert_raise(ActiveRecord::StatementInvalid) { post :create, gazette_id: @peru_stories_gazette.id, article: new_article, is_convert_to_html: false }
+    assert_difference('Article.count') do
+      post :create, gazette_id: @peru_stories_gazette.id, article: new_article, is_convert_to_html: false
+    end
   end
 
   test "should create article" do
@@ -110,7 +112,7 @@ class ArticlesControllerTest < ActionController::TestCase
     # update the article: add the new photo
     put :update, article: params, id: article.id, gazette_id: article.gazette_id, is_convert_to_html: false
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article)) 
-    assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added"
+    assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added. Errors: #{article.article_photos.errors.full_messages}"
     
     # Does the article have all the expected_photos?
     expected_photos.each do |photo|
