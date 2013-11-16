@@ -8,20 +8,20 @@
 		<img id="displayed-photo" src="<%= asset_path("#{@photos_dir}#{@displayed_fichier.filename}", type: :image) %>" />
 		<ul class="sizes-list">
 			<li>
-			  <a href="<%= asset_path("#{@photos_dir}#{@photo.select_fichier("small").filename}", type: :image) %>">Small</a>
+			  <a href="<%= asset_path("#{@photos_dir}#{@photo.small_fichier.filename}", type: :image) %>">Small</a>
 			</li>
-			<% if @photo.select_fichier("medium") != nil %>
+			<% if @photo.medium_fichier != nil %>
 				<li>
-				  <a href="<%= asset_path("#{@photos_dir}#{@photo.select_fichier("medium").filename}", type: :image) %>">Medium</a>
+				  <a href="<%= asset_path("#{@photos_dir}#{@photo.medium_fichier.filename}", type: :image) %>">Medium</a>
 				</li>
 			<% end %>
-			<% if @photo.select_fichier("large") != nil %>
+			<% if @photo.large_fichier != nil %>
 				<li>
-				  <a href="<%= asset_path("#{@photos_dir}#{@photo.select_fichier("large").filename}", type: :image) %>">Large</a>
+				  <a href="<%= asset_path("#{@photos_dir}#{@photo.large_fichier.filename}", type: :image) %>">Large</a>
 				</li>
 			<% end %>
 			<li>
-			  <a href="<%= asset_path("#{@photos_dir}#{@photo.select_fichier("original").filename}", type: :image) %>">Original</a>
+			  <a href="<%= asset_path("#{@photos_dir}#{@photo.original_fichier.filename}", type: :image) %>">Original</a>
 			</li>
 		</ul>
 	</div>

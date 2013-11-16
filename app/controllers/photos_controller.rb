@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo = Photo.find(params[:id])
-    @displayed_fichier = @photo.select_fichier('small')
+    @displayed_fichier = @photo.small_fichier
     
     if @displayed_fichier == nil
       redirect_to '/photos' 

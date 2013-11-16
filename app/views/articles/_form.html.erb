@@ -41,7 +41,7 @@
           <% is_photo_selected = @article.photos.any? { |existing_photo| existing_photo.id == photo.id } %>
           <%= photo_form.check_box :is_selected, { checked: is_photo_selected, class: "clickable-parent" } %>
           <%= label_tag "photo #{photo.id}" %>
-          <%= image_tag (@photos_dir + photo.select_fichier("thumbnail").filename) %><br />
+          <%= image_tag (@photos_dir + photo.thumbnail_fichier.filename) %><br />
         <% end %>
         </li>
       <% end %>

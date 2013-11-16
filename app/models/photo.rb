@@ -84,21 +84,17 @@ class Photo < ActiveRecord::Base
     end
   end
   
+  def method_missing(name, *args, &block)
+    if name =~ /(\w+)_fichier/
+      self.fichiers.find_by_filesize_type_id(FilesizeType[$1])
+    else
+      super(name, *args, &block)
+    end
+  end
+  
   def delete_tag(name)
     self.tags.delete(Tag.first(conditions: ["lower(name) = ?", name.downcase]))
   end
-
-	def select_fichier(name)
-	  self.fichiers.find_by_filesize_type_id(FilesizeType[name])
-	end
-	
-	def add_fichier(name)
-	  if (self.select_fichier(name) == nil)
-	    self.fichiers.create(filesize_type: FilesizeType[name])
-    else
-      self.select_fichier(name)
-    end
-	end
  
   # "f.file_field :load_photo_file" in the view triggers Rails to invoke this method
   # This method only store the information

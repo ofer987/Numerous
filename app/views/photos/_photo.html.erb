@@ -6,9 +6,9 @@
   tags="<% photo.tags.each { |tag| %><%= strip_tags(tag.name) %>,<% } %>">
 	<div class="image-vertical-align">
 	  <div class="image-horizontal-align">
-		  <% thumbnail_fichier = photo.select_fichier('thumbnail') %>
+		  <% thumbnail_fichier = photo.thumbnail_fichier %>
 		  <% unless thumbnail_fichier == nil %>
-	    	<%= link_to image_tag(@photos_dir + photo.select_fichier('thumbnail').filename,
+	    	<%= link_to image_tag(@photos_dir + thumbnail_fichier.filename,
     			class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
 		  <% end %>
       </div>
