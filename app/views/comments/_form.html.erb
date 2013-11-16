@@ -13,14 +13,14 @@
     </div>
   <% end %>
   
-  <%= raw negative_captcha @captcha %>
+  <%= raw negative_captcha @comment_captcha %>
 
   <div class="field">	  
-	  <%= f.negative_text_area @captcha, :content %>
+	  <%= f.negative_text_area @comment_captcha, :content %>
   </div>
   <div class="field">
-	  <%= f.negative_label @captcha, :user, "What is your name" %><br />
-	  <%= f.negative_text_field @captcha, :user %>
+	  <%= f.negative_label @comment_captcha, :user, "What is your name" %><br />
+	  <%= f.negative_text_field @comment_captcha, :user %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -10,14 +10,14 @@ Numerous::Application.routes.draw do
 
   resources :gazettes do
     resources :articles do
-      resources :comments
+      resources :comments, only: :create
     end
   end
   
   resources :articles do
     resources :comments
   end
-
+  
   get "books/read"
 
   resources :tags
@@ -41,7 +41,7 @@ Numerous::Application.routes.draw do
   end
 
   resources :photos do    
-    resources :comments
+    resources :comments, only: :create
   end
   
   get "cv" => "curriculum#index"

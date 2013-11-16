@@ -1,6 +1,9 @@
 class ArticlesController < ApplicationController
   skip_before_action :authorize, only: [:index, :show]
   
+  # Negative captcha
+  before_action :setup_comment_negative_captcha, only: :show
+  
   def index
     @articles = Article.where(gazette_id: params[:gazette_id]).order("published_at desc")
     
@@ -93,5 +96,14 @@ class ArticlesController < ApplicationController
   def article_params
     # maybe should be article_photos_attributes instead of article_photos
     params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, article_photos: [:is_selected, :id])
+  end
+  
+  def setup_comment_negative_captcha
+    @comment_captcha = RefusalCaptcha.new(
+      secret: Numerous::Application.config.negative_captcha_secret,
+      spinner: request.remote_ip,
+      fields: [:content, :user],
+      params: params
+      )
   end
 end

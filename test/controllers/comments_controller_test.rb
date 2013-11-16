@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
-  setup do
+  setup do    
     @commentless_photo = photos(:nobody_commented)
     @new_comment = {
       content: "Hello I am a new comment",

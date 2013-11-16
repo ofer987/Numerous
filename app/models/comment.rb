@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   #id: integer PKEY, NOT NULL
-  #photo_id: integer, FKEY, NOT NULL
+  #commentable_id: integer, FKEY, NOT NULL
+  #commentable_type: string, NOT NULL
   #content: text, NOT NULL
   #user: string, NOT NULL
   #created_at: datetime

@@ -131,7 +131,7 @@ class PhotosController < ApplicationController
   end
   
   def setup_comment_negative_captcha
-    @captcha = NegativeCaptcha.new(
+    @comment_captcha = RefusalCaptcha.new(
       secret: Numerous::Application.config.negative_captcha_secret,
       spinner: request.remote_ip,
       fields: [:content, :user],

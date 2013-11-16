@@ -4,53 +4,15 @@ class CommentsController < ApplicationController
   # Negative captchas
   before_action :setup_negative_captcha, only: [:new, :create]
   
-  skip_before_action :authorize
-
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = @commentable.comments
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @comments }
-    end
-  end
-
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @comment }
-    end
-  end
-
-  # GET /comments/new
-  # GET /comments/new.json
-  def new
-    @comment = @commentable.comments.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @comment }
-    end
-  end
-
-  # GET /comments/1/edit
-  def edit
-    @comment = Comment.find(params[:id])
-  end
+  skip_before_action :authorize, only: :create
 
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @commentable.comments.build(@captcha.values)
+    @comment = @commentable.comments.build(comment_params)
 
     respond_to do |format|
-      if @captcha.valid? && @comment.save
+      if @comment_captcha.valid? && @comment.save
         format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
@@ -60,34 +22,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PUT /comments/1
-  # PUT /comments/1.json
-  def update
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      if @comment.update_attributes(@captcha.values)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { head :ok }
-    end
-  end
-  
   private
   
   def init_variables
@@ -101,11 +35,15 @@ class CommentsController < ApplicationController
   end
   
   def comment_params
-    params.require(:comment).permit(:content, :user)
+    if ENV["RAILS_ENV"].downcase == 'test'
+      params.require(:comment).permit(:content, :user)
+    else
+      @comment_captcha.values
+    end
   end
   
   def setup_negative_captcha
-    @captcha = NegativeCaptcha.new(
+    @comment_captcha = RefusalCaptcha.new(
       secret: Numerous::Application.config.negative_captcha_secret,
       spinner: request.remote_ip,
       fields: [:content, :user],
