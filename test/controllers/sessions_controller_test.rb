@@ -32,7 +32,7 @@ class SessionsControllerTest < ActionController::TestCase
     
     # now log out
     delete :destroy
-    assert_redirected_to photos_url
+    assert_redirected_to root_url
   end
 
 end

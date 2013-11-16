@@ -1,9 +1,12 @@
 require 'test_helper'
+require 'test_fileable'
 
 class PhotosControllerTest < ActionController::TestCase
-  IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'assets', 'images')
+  include TestFileable
   
   setup do
+    setup_photo_files
+    
     @photo = photos(:eaton_college)  
     @all_tags_attributes = Hash.new
     Tag.all.each_with_index do |tag, index|
@@ -21,6 +24,10 @@ class PhotosControllerTest < ActionController::TestCase
         title: "My mom's photo"
     }
   end
+  
+  teardown do
+    teardown_photo_files
+  end
 
   test "should get index" do
     get :index
@@ -36,7 +43,7 @@ class PhotosControllerTest < ActionController::TestCase
     assert_difference('Photo.count') do
       post :create, photo: {
           description: @new_photo[:description],
-          load_photo_file: photo_data,
+          load_photo_file: self.photo_data,
           title: @new_photo[:title]
       }
     end
@@ -163,14 +170,5 @@ class PhotosControllerTest < ActionController::TestCase
     photo.fichiers.each do |fichier|
       puts `cp #{photos_test_dir}#{fichier.filename} #{photos_dir}`
     end
-  end
-  
-  def photo_data
-    ActionDispatch::Http::UploadedFile.new({
-                                               filename: 'DSC01740.JPG',
-                                               type: 'image/jpg',
-                                               tempfile: IMAGE_SOURCE_FOLDER.join('DSC01740.JPG'),
-                                               head: "Content-Disposition: form-data; name=\"photo[load_photo_file]\"; filename=\"DSC01740.JPG\"\r\nContent-Type: image/jpeg\r\n"
-                                           })
   end
 end

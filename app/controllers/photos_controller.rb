@@ -67,8 +67,6 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = Photo.new(photo_params)
-    
-    #@photo.tags_attributes = photo_params[:tags_attributes]
     @photo.new_tags = params[:new_tags]
     
     respond_to do |format|
