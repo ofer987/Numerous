@@ -9,6 +9,7 @@ class Photo < ActiveRecord::Base
   
   has_many :photo_tags, dependent: :destroy
   has_many :tags, through: :photo_tags
+  include Tagable
   
   has_many :fichiers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
@@ -21,15 +22,11 @@ class Photo < ActiveRecord::Base
 
   validates_presence_of :description, allow_blank: true
   validates_presence_of :title, allow_blank: true
-  #validates_length_of :title, minimum: 1, allow_nil: false, allow_blank: false, :message => "must be present"
   validates_presence_of :filename, on: :create, :message => "must be specified"
   validates_presence_of :taken_date, on: :create, :message => "must have a date, at least a default one"
   validates_format_of :filename, :with => /\.(jpg|png)\z/i, :message => "is invalid"
   
   validate :validate_has_unique_fichiers
-  
-  #validates_format_of :taken_date, :with => /^\d\d\d\d-\d\d-\d\d\s\d\d:\d\d:\d\d$/, :on => :create, 
-  #  :message => "is invalid, needs to be in date format YYYY-MM-DD HH:MM:SS"
  
   before_create :before_create
   before_update :before_update
@@ -37,10 +34,6 @@ class Photo < ActiveRecord::Base
   # Root directory of the photo public/photos
   def photo_store
     Rails.root.join('app', 'assets', 'images', 'photos')
-  end
-
-  def tags_attributes=(attributes)
-    add_remove_tags(attributes)
   end
   
   def new_tags=(new_tags)
@@ -61,39 +54,12 @@ class Photo < ActiveRecord::Base
     end
   end
 
-  def any_selected_tag_names?(tag_names)
-    if (tag_names != nil and !tag_names.empty?)
-      self.tags.any? { |tag| tag_names.any? { |selected_tag_name| Tag.name_equals?(selected_tag_name, tag.name) } }
-    else
-      self
-    end
-  end
-
-  def add_tag(name)
-    # Remove whitespace
-    name.strip!
-    
-    existing_tag = Tag.first(conditions: ["lower(name) = ?", name.downcase])
-    
-    if self.tags.first(conditions: ["lower(name) = ?", name.downcase])
-      raise "Photo already has a tag with this name"
-    elsif existing_tag != nil
-      self.photo_tags.create(tag_id: existing_tag.id)
-    else
-      self.tags.create(name: name)
-    end
-  end
-  
   def method_missing(name, *args, &block)
     if name =~ /(\w+)_fichier/
       self.fichiers.find_by_filesize_type_id(FilesizeType[$1])
     else
       super(name, *args, &block)
     end
-  end
-  
-  def delete_tag(name)
-    self.tags.delete(Tag.first(conditions: ["lower(name) = ?", name.downcase]))
   end
  
   # "f.file_field :load_photo_file" in the view triggers Rails to invoke this method
@@ -211,19 +177,6 @@ class Photo < ActiveRecord::Base
           errors.add(:base, "duplicate fichiers of type #{verify1.filesize_type.name}")
           return
         end
-      end
-    end
-  end
-  
-  # Add/remove existing tags to this photo's collection of tags
-  def add_remove_tags(tags_attributes)
-    tags_attributes.each do |index, tag|
-      # Remove tags that were not selected/deselected
-      self.photo_tags.where(tag_id: tag[:id].to_i).destroy_all if tag[:is_selected] == "0"
-      
-      # Add tags that are selected and had not been previously selected
-      if tag[:is_selected] == "1" && !self.photo_tags.any? { |pt| pt.tag_id == tag[:id].to_i }
-        self.photo_tags.build(tag_id: tag[:id].to_i)
       end
     end
   end

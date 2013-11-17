@@ -61,4 +61,14 @@ class PhotoTest < ActiveSupport::TestCase
              "Could not find the file (#{fichier.filename}) for photosize=#{fichier.filesize_type.name}"
     end
   end
+  
+  test "should assigned photo_tags using photo_tags_attributes=" do
+    photo = photos(:eaton_college)
+    
+    photo.photo_tags_attributes = [ {is_selected: '1', id: tags(:toronto).id.to_s }, {is_selected: '0', id: tags(:england).id.to_s } ]
+    assert photo.save!, "The photo is not valid. Errors: #{photo.errors.full_messages}"
+    
+    assert photo.tags.any? { |tag| tag.id == tags(:toronto).id }, "should have added the Toronto tag"
+    refute photo.tags.any? { |tag| tag.id == tags(:england).id }, "should have removed the England tag"
+  end
 end

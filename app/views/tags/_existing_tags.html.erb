@@ -4,12 +4,12 @@
 <%# existing_tags %>
 
 <ul class="select-existing-tags-list">
-<% Tag.all.each do |tag| %>
+<% Tag.all.each do |photo_tag| %>
   <li>
-  <%= parent_form.fields_for :tags, tag do |tag_form| %>
-    <% is_checked = existing_tags.any? { |existing_tag| existing_tag.id == tag.id } %>
-    <%= tag_form.check_box :is_selected, { checked: is_checked } %>
-    <%= tag_form.label :is_selected, tag.name %>
+  <%= parent_form.fields_for :photo_tags, photo_tag do |photo_tag_form| %>
+    <% is_checked = existing_tags.any? { |existing_tag| existing_tag.id == photo_tag.id } %>
+    <%= photo_tag_form.check_box :is_selected, { checked: is_checked } %>
+    <%= photo_tag_form.label :is_selected, photo_tag.name %>
   <% end %>
   </li>
 <% end %>

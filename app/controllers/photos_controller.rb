@@ -125,7 +125,7 @@ class PhotosController < ApplicationController
   end
   
   def photo_params
-    params.require(:photo).permit(:id, :title, :description, :load_photo_file, tags_attributes: [:is_selected, :id])
+    params.require(:photo).permit(:id, :title, :description, :load_photo_file, photo_tags_attributes: [:is_selected, :id])
   end
   
   def setup_comment_negative_captcha

@@ -4,9 +4,7 @@ class Tag < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
-  include Tagable
-  
-  has_many :photo_tags, dependent: :delete_all
+  has_many :photo_tags, dependent: :destroy
   has_many :photos, through: :photo_tags
   
   validates_presence_of :name, on: :create, message: "can't be blank"
