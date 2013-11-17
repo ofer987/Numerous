@@ -65,10 +65,25 @@ class PhotoTest < ActiveSupport::TestCase
   test "should assigned photo_tags using photo_tags_attributes=" do
     photo = photos(:eaton_college)
     
-    photo.photo_tags_attributes = [ {is_selected: '1', id: tags(:toronto).id.to_s }, {is_selected: '0', id: tags(:england).id.to_s } ]
+    photo.photo_tags_attributes = {'0' => {is_selected: '1', id: tags(:toronto).id.to_s }, '1' => {is_selected: '0', id: tags(:england).id.to_s }} 
     assert photo.save!, "The photo is not valid. Errors: #{photo.errors.full_messages}"
     
     assert photo.tags.any? { |tag| tag.id == tags(:toronto).id }, "should have added the Toronto tag"
     refute photo.tags.any? { |tag| tag.id == tags(:england).id }, "should have removed the England tag"
+  end
+  
+  test "should assign new tags using tags_attributes=" do
+    photo = photos(:eaton_college)
+    
+    photo.tags_attributes = 'tag1, tag2'
+    assert photo.save!, "The photo is not valid. Errors: #{photo.errors.full_messages}"
+    
+    tag1 = photo.tags.where(name: 'tag1').first
+    assert photo.tags.where(name: 'tag1').any?, "should have created tag1"
+    assert photo.photo_tags.where(tag_id: tag1.id).any?, "should have created photo_tag for tag1"
+    
+    tag2 = photo.tags.where(name: 'tag2').first
+    assert photo.tags.where(name: 'tag2').any?, "should have created tag2"
+    assert photo.photo_tags.where(tag_id: tag2.id).any?, "should have created photo_tag for tag2"
   end
 end

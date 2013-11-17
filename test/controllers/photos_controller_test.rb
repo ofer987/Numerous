@@ -8,15 +8,15 @@ class PhotosControllerTest < ActionController::TestCase
     setup_photo_files
     
     @photo = photos(:eaton_college)  
-    @all_tags_attributes = Hash.new
+    @all_photo_tags_attributes = Hash.new
     Tag.all.each_with_index do |tag, index|
-      @all_tags_attributes["#{index}"] = { id: tag.id.to_s, is_selected: "0" }
+      @all_photo_tags_attributes["#{index}"] = { id: tag.id.to_s, is_selected: "0" }
     end
     
     @eaton_college_update = {
       title: 'Lorem Ipsum Photo',
       description: 'Description for Lorem Ipsum',
-      tags_attributes: @all_tags_attributes
+      tags_attributes: @all_photo_tags_attributes
     }
     
     @new_photo = {
@@ -94,7 +94,7 @@ class PhotosControllerTest < ActionController::TestCase
     params = 
       { 
         id: package_photo.id,
-        tags_attributes: @all_tags_attributes
+        photo_tags_attributes: @all_photo_tags_attributes
       }
       
     # the photo should have these expected tags after the update
@@ -103,7 +103,7 @@ class PhotosControllerTest < ActionController::TestCase
     package_photo.tags.each do |existing_tag|
       expected_tags << existing_tag
     end
-    params[:tags_attributes].each do |index, tag_attributes|
+    params[:photo_tags_attributes].each do |index, tag_attributes|
       tag_attributes[:is_selected] = "1" if expected_tags.any? { |tag| tag.id == tag_attributes[:id].to_i } 
     end
     
@@ -123,7 +123,7 @@ class PhotosControllerTest < ActionController::TestCase
     package_photo = photos(:package)
     params = {
       id: package_photo.id,
-      tags_attributes: @all_tags_attributes
+      photo_tags_attributes: @all_photo_tags_attributes
     }
     
     # These are the expected tags post-update
@@ -133,8 +133,8 @@ class PhotosControllerTest < ActionController::TestCase
     package_photo.tags.to_a[1..-1].each do |existing_tag|
       expected_tags << existing_tag
     end
-    params[:tags_attributes].each do |index, tag_attributes|
-      tag_attributes[:is_selected] = "1" if expected_tags.any? { |tag| tag.id == tag_attributes[:id].to_i } 
+    params[:photo_tags_attributes].each do |index, photo_tag_attributes|
+      photo_tag_attributes[:is_selected] = "1" if expected_tags.any? { |tag| tag.id == photo_tag_attributes[:id].to_i } 
     end
     
     # update the photo: remove the first tag
@@ -156,12 +156,13 @@ class PhotosControllerTest < ActionController::TestCase
     # This photo has two new tags called "new tag", and "second_tag"
     params = {
       id: photo.to_param,
-      tags_attributes: @all_tags_attributes
+      photo_tags_attributes: @all_photo_tags_attributes,
+      tags_attributes: 'tag1, tag2'
     }
     
-    put :update, id: photo.id, photo: params, new_tags: "new tag, second_tag"
+    put :update, id: photo.id, photo: params
     
-    assert_equal photo.photo_tags.count, 2, "The two new tags were not created"
+    assert_equal photo.photo_tags.count, 2, "The two new tags were not created. Errors: #{assigns(:photo).errors.full_messages}"
   end
   
   # Set up the files for the photo

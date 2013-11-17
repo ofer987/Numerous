@@ -35,24 +35,6 @@ class Photo < ActiveRecord::Base
   def photo_store
     Rails.root.join('app', 'assets', 'images', 'photos')
   end
-  
-  def new_tags=(new_tags)
-    new_tags ||= ""
-    tag_names = new_tags.split(",")
-    
-    # Add tags
-    tag_names.each do |name|
-      name = name.strip.downcase
-      
-      # Create a new tag if it does not already exist
-      tag = Tag[name] || Tag.create(name: name)
-      
-      # Add the tag to this photo's tag collection unless it already exists in it
-      unless self.photo_tags.find_by_tag_id(tag.id)
-        self.photo_tags.build { |photo_tag| photo_tag.tag_id = tag.id }
-      end
-    end
-  end
 
   def method_missing(name, *args, &block)
     if name =~ /(\w+)_fichier/

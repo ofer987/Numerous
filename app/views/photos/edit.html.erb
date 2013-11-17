@@ -27,8 +27,8 @@
       <%= render partial: 'tags/existing_tags', locals: { parent_form: f, existing_tags: @photo.tags } %>
     </div>
     <div class="field">
-      <%= f.label :new_tags, "New Tags" %><br />
-      <%= text_field_tag :new_tags, params[:new_tags] %>
+      <%= f.label :tags_attributes, "New Tags" %><br />
+      <%= f.text_field :tags_attributes %>
     </div>
     <div class="actions">
       <%= f.submit %>
