@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_home_url
+    @local_photos_dir = "/images/photos/"
     @photos_dir = "photos/"
     @images_dir = "application/"
   end
