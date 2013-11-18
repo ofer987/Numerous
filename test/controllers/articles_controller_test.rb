@@ -5,9 +5,9 @@ class ArticlesControllerTest < ActionController::TestCase
     @peru_stories_gazette = gazettes(:peru_stories)
     @cusco_trip_article = articles(:cusco_trip)
     
-    @all_photos_attributes = Hash.new
+    @all_article_photos_attributes = Hash.new
     Photo.all.each_with_index do |photo, index|
-      @all_photos_attributes["#{index}"] = { is_selected: "0", id: "#{photo.id}" }
+      @all_article_photos_attributes["#{index}"] = { is_selected: "0", id: "#{photo.id}" }
     end
   end
 
@@ -37,9 +37,9 @@ class ArticlesControllerTest < ActionController::TestCase
     new_article = {
       gazette_id: @peru_stories_gazette.id,
       content: 'new story',
-      photos_attributes: @all_photos_attributes
+      article_photos_attributes: @all_article_photos_attributes
     }
-    new_article[:photos_attributes].each do |index, article_photo|
+    new_article[:article_photos_attributes].each do |index, article_photo|
       article_photo[:is_selected] = "1" if article_photo[:id].to_i == photos(:eaton_college).id || article_photo[:id].to_i == photos(:nobody_commented).id
     end
     
@@ -92,9 +92,9 @@ class ArticlesControllerTest < ActionController::TestCase
       { 
         id: article.id,
         gazette_id: article.gazette_id,
-        photos_attributes: @all_photos_attributes
+        article_photos_attributes: @all_article_photos_attributes
       }
-    params[:photos_attributes].each do |key, value|
+    params[:article_photos_attributes].each do |key, value|
       value[:is_selected] = "1" if value[:id].to_i == photo.id
     end
       
@@ -104,7 +104,7 @@ class ArticlesControllerTest < ActionController::TestCase
     
     article.photos.each do |existing_photo|
       expected_photos << existing_photo
-      params[:photos_attributes].each do |key, value|
+      params[:article_photos_attributes].each do |key, value|
         value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
       end
     end
@@ -112,7 +112,7 @@ class ArticlesControllerTest < ActionController::TestCase
     # update the article: add the new photo
     put :update, article: params, id: article.id, gazette_id: article.gazette_id, is_convert_to_html: false
     assert_redirected_to gazette_article_path(article.gazette_id, assigns(:article)) 
-    assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added. Errors: #{article.article_photos.errors.full_messages}"
+    assert_equal expected_photos.count, article.article_photos.count, "The new photo was not added. Errors: #{article.errors.full_messages}"
     
     # Does the article have all the expected_photos?
     expected_photos.each do |photo|
@@ -126,7 +126,7 @@ class ArticlesControllerTest < ActionController::TestCase
     params = {
       gazette_id: article.gazette_id,
       id: article.id,
-      photos_attributes: @all_photos_attributes
+      article_photos_attributes: @all_article_photos_attributes
     }
     
     # These are the expected photos post-update
@@ -135,7 +135,7 @@ class ArticlesControllerTest < ActionController::TestCase
     # Remove the first photo
     article.photos[1..-1].each do |existing_photo|
       expected_photos << existing_photo
-      params[:photos_attributes].each do |key, value|
+      params[:article_photos_attributes].each do |key, value|
         value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
       end
     end
