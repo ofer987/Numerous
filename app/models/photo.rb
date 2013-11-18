@@ -127,10 +127,12 @@ class Photo < ActiveRecord::Base
     @photo_data = nil
   end
 
+  # Store the date the image as taken
+  # Default date is DateTime.current (UTC)
   def set_metadata
-    # Store the date the image as taken
     image_datetime = @saved_image.get_exif_by_entry('DateTime')[0][1]
-    self.taken_date = DateTime.strptime(image_datetime, '%Y:%m:%d %H:%M:%S') if image_datetime != nil
+    image_datetime = @saved_image.get_exif_by_entry('DateTimeOriginal')[0][1] if image_datetime.nil?
+    self.taken_date = image_datetime.nil? ? DateTime.current : DateTime.strptime(image_datetime, '%Y:%m:%d %H:%M:%S')
   end
 
   def set_fichiers
