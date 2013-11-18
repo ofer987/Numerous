@@ -79,7 +79,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     
     @article.attributes = article_params
- 
     respond_to do |format|
       if @article.save
         format.html { redirect_to gazette_article_path(@article.gazette_id, @article) }
@@ -95,7 +94,7 @@ class ArticlesController < ApplicationController
   
   def article_params
     # maybe should be article_photos_attributes instead of article_photos
-    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, article_photos: [:is_selected, :id])
+    params.require(:article).permit(:gazette_id, :title, :sub_title, :content, :published_at, article_photos_attributes: [:is_selected, :id])
   end
   
   def setup_comment_negative_captcha
