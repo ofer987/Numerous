@@ -1,2 +1,2 @@
 # Run 'rake secret' and replace this token with it
-Numerous::Application.config.negative_captcha_secret = '787e44d8ca189667f14feedb241ab1e4fd26120966ea00947fac0f997e57c9103f06b124eabf17f78c3e2499de21ef76e29aaa321ff8eceda18f98e3188a7b8a'
+Numerous::Application.config.negative_captcha_secret = 'Get your own captcha! by running rake secret and copying and pasting the value into here'
