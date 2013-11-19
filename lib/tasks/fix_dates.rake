@@ -1,5 +1,5 @@
 # load project environment
-task fix_dates: :environment do |t, args|
+task fix_dates: :environment do
   puts "Environment: #{Rails.env}"
   Photo.all.each do |photo|
     puts "Photo.id = #{photo.id}"
