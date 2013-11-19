@@ -8,19 +8,14 @@ task fix_dates: :environment do |t, args|
   
     begin
       datetime = Magick::ImageList.new(Rails.root.join('public', 'images', 'photos', photo.filename)).get_exif_by_entry("DateTimeOriginal")[0][1]
+      
+      unless datetime.nil?      
+        photo.taken_date = DateTime.strptime(datetime, '%Y:%m:%d %H:%M:%S')
+        photo.save!
+      end
     rescue Exception => e
       puts "Error: #{e.message}"
       puts "Backtrace: #{e.backtrace}"
-    end
-    
-    unless datetime.nil?
-      photo.taken_date = DateTime.strptime(datetime, '%Y:%m:%d %H:%M:%S')
-      begin
-        photo.save!
-      rescue Exception => e
-        puts "Error: #{e.message}"
-        puts "Backtrace: #{e.backtrace}"
-      end
     end
   end
 end
