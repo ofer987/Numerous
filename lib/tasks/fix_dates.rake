@@ -15,7 +15,12 @@ task fix_dates: :environment do |t, args|
     
     unless datetime.nil?
       photo.taken_date = DateTime.strptime(datetime, '%Y:%m:%d %H:%M:%S')
-      photo.save!
+      begin
+        photo.save!
+      rescue Exception => e
+        puts "Error: #{e.message}"
+        puts "Backtrace: #{e.backtrace}"
+      end
     end
   end
 end
