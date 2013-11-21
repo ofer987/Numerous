@@ -5,7 +5,7 @@
 		<% end %>
 	</div>
 	<div class="photo">
-		<%= image_tag(@photos_dir + @displayed_fichier.filename, id: "displayed-photo") %>
+		<%= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo") %>
 		<ul class="sizes-list">
 			<li>
 			  <a href="<%= "#{@local_photos_dir}#{@photo.small_fichier.filename}" %>">Small</a>
