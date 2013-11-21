@@ -33,7 +33,7 @@ class Photo < ActiveRecord::Base
 
   # Root directory of the photo public/photos
   def photo_store
-    Rails.root.join('app', 'assets', 'images', 'photos')
+    Rails.root.join('public', 'images', 'photos')
   end
 
   def method_missing(name, *args, &block)

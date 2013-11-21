@@ -26,7 +26,7 @@ end
 
 gem 'rmagick', :require => "RMagick.rb"
 
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '> 3.0.0'
 
 gem 'goodreads', git: 'https://github.com/ofer987/goodreads'
 
