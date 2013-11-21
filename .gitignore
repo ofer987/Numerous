@@ -41,3 +41,9 @@ plans/*
 # Do not include the compiled-assets
 public/assets/*
 public/assets/**/
+
+# Include the public images directory but not the photos - they should
+# be machine-dependent
+public/images/*
+public/images/photos/*
+public/images/photos/**/
