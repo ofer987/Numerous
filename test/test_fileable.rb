@@ -1,5 +1,5 @@
 IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'resources', 'images')
-IMAGE_DEST_FOLDER = Rails.root.join('test', 'assets', 'images', 'photos')
+IMAGE_DEST_FOLDER = Rails.root.join('test', 'public', 'images', 'photos')
 
 # For testing purposes
 # The test photos should not be mixed in the real assets folder  
