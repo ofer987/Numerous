@@ -96,7 +96,7 @@ html {
 			
 				li {
 					float: left;
-					padding-left: 1.2em;
+					padding-left: 2em;
 				}
 			}	
 			
@@ -105,7 +105,7 @@ html {
 			
 				li {
 					float: right;
-					padding-right: 1.2em;
+					padding-right: 2em;
 				}
 			}		
 			
@@ -132,7 +132,7 @@ html {
 	}
 	
 	.page {
-		margin: 0 1.2em;
+		margin: 0 2em;
 		padding-top: 7em;
 		
 		.text-content {
@@ -148,6 +148,10 @@ html {
             font-size: inherit;
           }
         }
+		
+		.pagination {
+			text-align: center;
+		}
 	}
 	
 	footer {
