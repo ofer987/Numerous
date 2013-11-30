@@ -19,23 +19,37 @@
   </head>
   <body>
     <header>
-      <h1><a href="/">Dan Jakob Ofer</a></h1>
-      <ul class="navigation">
-        <li id="blogs-item"><%= link_to "Blog", "/blogs/index" %></li>
-        <li id="photos-item"><%= link_to "Photos", photos_path %></li>
-        <li id="books-item"><%= link_to "Books", books_read_path %></li>
-        <li id="cv-item"><%= link_to "About", "/cv" %></li>
-        <% if @is_logged_in %>
-          <li id="admin"><%= link_to "Admin", admin_url %></li>
-        <% end %>
-      </ul>
+		<ul class="navigation" id="left">
+			<li id="home-item">
+				<h1><a href="/">Dan Jakob Ofer</a></h1>
+			</li>
+		</ul>
+		<ul class="navigation" id="right">
+			<% if @is_logged_in %>
+			<li id="admin">
+				<h1><%= link_to "Admin", admin_url %></h1>
+			</li>
+			<% end %>
+			<li id="cv-item">
+				<h1><%= link_to "About", "/cv" %></h1>
+			</li>
+			<li id="books-item">
+				<h1><%= link_to "Books", books_read_path %></h1>
+			</li>
+			<li id="photos-item">
+				<h1><%= link_to "Photos", photos_path %></h1>
+			</li>
+			<li id="blogs-item">
+				<h1><%= link_to "Blog", "/blogs/index" %></h1>
+			</li>
+		</ul>
     </header>
     <div class="page">
-      <% if notice %>
-        <p id="notice"><%= notice %></p>
-      <% end %>
+		<% if notice %>
+			<p id="notice"><%= notice %></p>
+		<% end %>
       
-    	<%= yield %>
+	  	<%= yield %>
     </div>
     <footer>
       <p>danofer.com, 2013</p>
