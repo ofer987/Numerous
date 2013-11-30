@@ -23,6 +23,10 @@ class Article < ActiveRecord::Base
   validates_presence_of :content, allow_blank: true
   validates_presence_of :published_at
 
+  self.per_page = 3
+  
+  default_scope order('published_at DESC')
+
   def photos_attributes=(attributes)
     attributes[:load_photo_files].each do |uploaded_file|
       self.photos.build(title: '', load_photo_file: uploaded_file)

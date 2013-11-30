@@ -1,0 +1,4 @@
+- @articles.each do |article|
+  == render partial: 'articles/show', locals: { article: article }
+
+= will_paginate @articles

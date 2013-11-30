@@ -39,3 +39,5 @@ gem 'jquery-fileupload-rails'
 gem 'with_action'
 
 gem 'negative_captcha'
+
+gem 'will_paginate'
