@@ -109,14 +109,14 @@ class PhotosController < ApplicationController
     end
   end
   
+  private
+  
   def rotate_clockwise
     @photo = Photo.find(params[:id])
     @photo.rotate!
     
     redirect_to @photo
   end
-    
-  private
     
   def init_variables
     @sql_order = 'taken_date DESC'
