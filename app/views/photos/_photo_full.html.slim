@@ -25,26 +25,29 @@ div class="photo-full"
 			= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
 		
 	div class="meta-data indented"
-		h2 Tags
 		- if @edit_mode
-			= form_for(@photo) do |form|
-				div class="field"
-					== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
-				div class="field"
-					= form.label :tags_attributes, 'New Tags'
-					br
-			      	= form.text_field :tags_attributes
-				div class="actions"
-					= form.submit "Update Tags"
+			div class="tags"
+				h2 Tags
+				= form_for(@photo) do |form|
+					div class="field"
+						== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
+					div class="field"
+						= form.label :tags_attributes, 'New Tags'
+						br
+				      	= form.text_field :tags_attributes
+					div class="actions"
+						= form.submit "Update Tags"
 		- else
-			- if @photo.tags.count > 0				
-				ul class="tags-list"
-					- @photo.tags.each_index do |index|
-						li
-							- tag_name = strip_tags(@photo.tags.to_a[index].name)
-							- link_to tag_name, photos_path(tag: "#{tag_name}")
-							- if index < @photo.tags.count - 1
-								li class="seperation-item" Hello
+			- if @photo.tags.count > 0
+				div class="tags"
+					h2 Tags
+					ul class="tags-list"
+						- @photo.tags.each_index do |index|
+							li
+								- tag_name = strip_tags(@photo.tags.to_a[index].name)
+								- link_to tag_name, photos_path(tag: "#{tag_name}")
+								- if index < @photo.tags.count - 1
+									li class="seperation-item" Hello
 	
 		- if @edit_mode
 			div class="edit"
@@ -67,7 +70,7 @@ div class="photo-full"
 				div
 					= @photo.title
 			
-			h2 Description
+			h2 id="description" Description
 			- if @edit_mode
 				= form_for(@photo) do |form|
 					div class="field"

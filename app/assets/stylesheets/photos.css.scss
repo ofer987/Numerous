@@ -115,7 +115,6 @@ div.photo-full {
 	div.photo {
 		display: block;
 		float: left;
-		margin-bottom: 1em;
 		
 		img {
 			width: $max-photo-width;
@@ -158,20 +157,23 @@ div.photo-full {
 		clear: both;
 		width: $max-photo-width;
 		
-		ul.tags-list {
-			padding: 0;
-			margin: 0 0 1em 0;
-			list-style: none;
-			height: 1em;
+		div.tags {
+			margin-bottom: 1em;
+
+			ul.tags-list {
+				padding: 0;
+				list-style: none;
+				height: 1em;
 			
-			li {
-				float: left;
-				color: $text-color;
-			}
+				li {
+					float: left;
+					color: $text-color;
+				}
 			
-			li.seperation-item {
-				margin: 0 0.3em 0 0.3em;
-				color: $text-color;
+				li.seperation-item {
+					margin: 0 0.3em 0 0.3em;
+					color: $text-color;
+				}
 			}
 		}
 		
@@ -199,6 +201,10 @@ div.photo-full {
 			color: $text-color;
 			margin: 1em 0 1em 0;
 			padding-top: 1em;
+			
+			h2#description {
+				margin-top: 1em;
+			}
 			
 			textarea#photo_description {
 				resize: none;
