@@ -102,7 +102,15 @@ ul.photos-list {
 	}
 }
 
-div.photo-item {
+div.edit-mode {
+	ul {
+		list-style: none;
+	}
+}
+
+div.photo-full {
+	margin: 0 auto;
+	width: $max-photo-width + 100px; // max photo width + 50px * 2 for the two left and right buttons
 	
 	div.photo {
 		display: block;
@@ -170,13 +178,33 @@ div.photo-item {
 		div.edit {
 			clear: both;
 			color: $text-color;		
-			margin: 2em 0 1em 0;
+			margin: 1em 0 1em 0;
+			
+			ul.edit-list {
+				float: left;
+				margin: 0;
+				padding: 0;
+				
+				li {
+					list-style: none;
+					float: left;
+					margin-right: 1em;
+					font-size: 1em;
+				}
+			}
 		}
 		
 		div.description {
 			clear: both;
 			color: $text-color;
 			margin: 1em 0 1em 0;
+			padding-top: 1em;
+			
+			textarea#photo_description {
+				resize: none;
+				width: 50em;
+				height: 10em;
+			}
 		}  	
 	}
 

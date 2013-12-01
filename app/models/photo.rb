@@ -7,6 +7,8 @@ class Photo < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
+  default_scope { order('taken_date DESC') }
+  
   has_many :photo_tags, dependent: :destroy
   has_many :tags, through: :photo_tags
   include Tagable

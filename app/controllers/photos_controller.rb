@@ -1,16 +1,17 @@
 class PhotosController < ApplicationController
   before_action :init_variables
+  before_action :init_photo, only: [:show, :edit]
   
   # Negative captcha
-  before_action :setup_comment_negative_captcha, only: :show
+  before_action :setup_comment_negative_captcha, only: [:show, :edit]
   
   skip_before_action :authorize, only: [:index, :show]
   
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.order(@sql_order)
-    @all_tags = Tag.order('name ASC')
+    @photos = Photo.all
+    @all_tags = Tag.all
 
     @selected_tag_name = params[:tag]
     
@@ -23,27 +24,17 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    @photo = Photo.find(params[:id])
-    @displayed_fichier = @photo.small_fichier
+    init_photo
     
     if @displayed_fichier == nil
       redirect_to '/photos' 
       return
     end
     
-    @photos = Photo.order(@sql_order)
-    
-    @current_photo_index = @photos.rindex(@photo)
-    
-    @is_first_photo = @current_photo_index == 0
-    @is_last_photo = @current_photo_index == @photos.count - 1
-    
-    # new comment
-    @comment = @photo.comments.new
-    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @photo }
+      format.js
     end
   end
 
@@ -60,7 +51,12 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
-    @photo = Photo.find(params[:id])
+    init_photo
+    @edit_mode = true
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /photos
@@ -119,7 +115,21 @@ class PhotosController < ApplicationController
   private
     
   def init_variables
-    @sql_order = 'taken_date DESC'
+  end
+  
+  def init_photo
+    @photo = Photo.find(params[:id])
+    @displayed_fichier = @photo.small_fichier
+    
+    @photos = Photo.order(@sql_order)
+    
+    @current_photo_index = @photos.rindex(@photo)
+    
+    @is_first_photo = @current_photo_index == 0
+    @is_last_photo = @current_photo_index == @photos.count - 1
+    
+    # new comment
+    @comment = @photo.comments.new
   end
   
   def photo_params

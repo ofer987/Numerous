@@ -4,6 +4,8 @@ class Tag < ActiveRecord::Base
   #created_at: datetime
   #updated_at: datetime
   
+  default_scope { order('name ASC') }
+  
   has_many :photo_tags, dependent: :destroy
   has_many :photos, through: :photo_tags
   

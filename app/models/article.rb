@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
 
   self.per_page = 3
   
-  default_scope order('published_at DESC')
+  default_scope { order('published_at DESC') }
 
   def photos_attributes=(attributes)
     attributes[:load_photo_files].each do |uploaded_file|

@@ -1,0 +1,87 @@
+div class="photo-full"
+	div class="navigate-photo-link prev"
+		- unless @is_first_photo
+			= link_to image_tag(@images_dir + 'back.png'), photo_path(@photos[@current_photo_index - 1], tags: params[:tags])
+	div class="photo"
+		= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo")
+		ul class="sizes-list"
+			li
+				a href="#{@local_photos_dir}#{@photo.small_fichier.filename}"
+					| Small
+			- if @photo.medium_fichier != nil
+				li
+					a href="#{@local_photos_dir}#{@photo.medium_fichier.filename}"
+						| Medium
+			- if @photo.large_fichier != nil
+				li
+					a href="#{@local_photos_dir}#{@photo.large_fichier.filename}"
+						| Large
+			li
+				a href="#{@local_photos_dir}#{@photo.original_fichier.filename}"
+					| Original
+					
+	div class="navigate-photo-link next"
+		- unless @is_last_photo
+			= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
+		
+	div class="meta-data indented"
+		h2 Tags
+		- if @edit_mode
+			= form_for(@photo) do |form|
+				div class="field"
+					== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
+				div class="field"
+					= form.label :tags_attributes, 'New Tags'
+					br
+			      	= form.text_field :tags_attributes
+				div class="actions"
+					= form.submit "Update Tags"
+		- else
+			- if @photo.tags.count > 0				
+				ul class="tags-list"
+					- @photo.tags.each_index do |index|
+						li
+							- tag_name = strip_tags(@photo.tags.to_a[index].name)
+							- link_to tag_name, photos_path(tag: "#{tag_name}")
+							- if index < @photo.tags.count - 1
+								li class="seperation-item" Hello
+	
+		- if @edit_mode
+			div class="edit"
+				h2 Edit
+				ul class="edit-list"
+					li
+						= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch
+					li
+						= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }
+		
+		div class="description"
+			h2 Title
+			- if @edit_mode
+				= form_for(@photo) do |form|
+					div class="field"
+						= form.text_field :title
+					div class="actions"
+						= form.submit "Update Title"
+			- else
+				div
+					= @photo.title
+			
+			h2 Description
+			- if @edit_mode
+				= form_for(@photo) do |form|
+					div class="field"
+						= form.text_area :description
+					div class="actions"
+						= form.submit "Update Description"
+			- else
+				div 
+					= @photo.description
+			
+		div class="commentary"
+			h2 Comments
+			ul
+			div
+				button id="add-comment-button" New comment
+				div id="new-comment"
+		  			== render partial: 'comments/form', locals: { commentable: @photo }
