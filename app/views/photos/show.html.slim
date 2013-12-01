@@ -1,6 +1,6 @@
-div class="photo-item">
+div class="photo-item"
 	div class="navigate-photo-link prev"
-		- unless @is_first_photo)
+		- unless @is_first_photo
 			= link_to image_tag(@images_dir + 'back.png'), photo_path(@photos[@current_photo_index - 1], tags: params[:tags])
 	div class="photo"
 		= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo")
@@ -26,16 +26,28 @@ div class="photo-item">
 		
 	div class="meta-data indented"
 		- if @photo.tags.count > 0
-	h2 Tags
-	ul class="tags-list"
-		- @photo.tags.each_index do |index|
-		li
-			- tag_name = strip_tags(@photo.tags.to_a[index].name)
-			- link_to tag_name, photos_path(tag: "#{tag_name}")
-		- if index < @photo.tags.count - 1
-			li class="seperation-item" |
+			h2 Tags
+			ul class="tags-list"
+				- @photo.tags.each_index do |index|
+					li
+						- tag_name = strip_tags(@photo.tags.to_a[index].name)
+						- link_to tag_name, photos_path(tag: "#{tag_name}")
+						- if index < @photo.tags.count - 1
+							li class="seperation-item" Hello
 	
-	- if @is_logged_in
-		div class="edit"
-			h2 Edit
-			= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch
+		- if @is_logged_in
+			div class="edit"
+				h2 Edit
+				= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch
+		
+		div class="description"
+			h2 Description
+				 | #{@photo.description}
+			
+		div class="commentary"
+			h2 Comments
+			ul
+			div
+				button id="add-comment-button" New comment
+				div id="new-comment"
+		  			== render partial: 'comments/form', locals: { commentable: @photo }
