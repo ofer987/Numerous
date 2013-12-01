@@ -3,7 +3,7 @@ div class="photo-full"
 		- unless @is_first_photo
 			= link_to image_tag(@images_dir + 'back.png'), photo_path(@photos[@current_photo_index - 1], tags: params[:tags])
 	div class="photo"
-		= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo")
+		= link_to image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo"), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
 		ul class="sizes-list"
 			li
 				a href="#{@local_photos_dir}#{@photo.small_fichier.filename}"
