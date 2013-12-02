@@ -11,7 +11,7 @@ div class="meta-data indented"
 	- if @edit_mode
 		div class="tags"
 			h2 Tags
-			= form_for(@photo) do |form|
+			= form_for(@photo, remote: true) do |form|
 				div class="field"
 					== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
 				div class="field"
@@ -46,7 +46,7 @@ div class="meta-data indented"
 		div id="title"
 			h2 Title
 			- if @edit_mode
-				= form_for(@photo) do |form|
+				= form_for(@photo, remote: true) do |form|
 					div class="field"
 						= form.text_field :title
 					div class="actions"
@@ -58,7 +58,7 @@ div class="meta-data indented"
 		div id="description"
 			h2 Description
 			- if @edit_mode
-				= form_for(@photo) do |form|
+				= form_for(@photo, remote: true) do |form|
 					div class="field"
 						= form.text_area :description
 					div class="actions"

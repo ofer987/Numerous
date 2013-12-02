@@ -1,1 +1,30 @@
-== render partial: "photo_full"
+div class="photo-full"
+	div class="navigate-photo-link prev"
+		- unless @is_first_photo
+			= link_to image_tag(@images_dir + 'back.png'), photo_path(@photos[@current_photo_index - 1], tags: params[:tags])
+	div class="photo"
+		- if @is_last_photo
+			= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo")
+		- else
+			= link_to image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}", id: "displayed-photo"), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
+		ul class="sizes-list"
+			li
+				a href="#{@local_photos_dir}#{@photo.small_fichier.filename}"
+					| Small
+			- if @photo.medium_fichier != nil
+				li
+					a href="#{@local_photos_dir}#{@photo.medium_fichier.filename}"
+						| Medium
+			- if @photo.large_fichier != nil
+				li
+					a href="#{@local_photos_dir}#{@photo.large_fichier.filename}"
+						| Large
+			li
+				a href="#{@local_photos_dir}#{@photo.original_fichier.filename}"
+					| Original
+					
+	div class="navigate-photo-link next"
+		- unless @is_last_photo
+			= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
+	
+	== render partial: "edit"

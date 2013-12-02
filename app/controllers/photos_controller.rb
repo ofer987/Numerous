@@ -1,9 +1,9 @@
 class PhotosController < ApplicationController
   before_action :init_variables
-  before_action :init_photo, only: [:show, :edit]
+  before_action :init_photo, only: [:show, :edit, :update]
   
   # Negative captcha
-  before_action :setup_comment_negative_captcha, only: [:show, :edit]
+  before_action :setup_comment_negative_captcha, only: [:show, :edit, :update]
   
   skip_before_action :authorize, only: [:index, :show]
   
@@ -17,7 +17,6 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @photos }
     end
   end
 
@@ -45,7 +44,6 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @photo }
     end
   end
 
@@ -66,11 +64,9 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to photo_url(@photo), notice: 'Photo was successfully created.' }
-        format.json { render json: @photo, status: :created, location: @photo }
+        format.html { redirect_to photo_url(@photo) }
       else
         format.html { render action: "new" }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,11 +80,13 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to photo_url(@photo), notice: 'Photo was successfully updated.' }
-        format.json { head :ok }
+        format.js
       else
-        format.html { render action: "edit" }
-        format.json { render json: @photo.errors, status: :unprocessable_entity }
+        format.js do
+          # Failed to update photo, so keep update mode on
+          @edit_mode = true
+          render file: 'photos/update.js'
+        end
       end
     end
   end
@@ -101,7 +99,6 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to photos_url }
-      format.json { head :ok }
     end
   end
   
