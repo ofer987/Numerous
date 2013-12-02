@@ -55,15 +55,20 @@ class PhotosControllerTest < ActionController::TestCase
     get :show, id: @photo.to_param
     assert_response :success
   end
+  
+  test "should show photo again (using an AJAX call)" do
+    get :show, format: :js, id: @photo.to_param
+    assert_response :success
+  end
 
   test "should get edit" do
-    get :edit, id: @photo.to_param
+    get :edit, format: :js, id: @photo.to_param
     assert_response :success
   end
 
   test "should update photo" do
-    put :update, id: @photo.to_param, photo: @eaton_college_update
-    assert_redirected_to photo_path(assigns(:photo))
+    put :update, format: :js, id: @photo.to_param, photo: @eaton_college_update
+    assert assigns(:photo).title == @eaton_college_update[:title]
   end
 
   test "should destroy photo" do
@@ -108,9 +113,8 @@ class PhotosControllerTest < ActionController::TestCase
     end
     
     # update the photo: add the new tag
-    put :update, id: package_photo.id, photo: params
+    put :update, format: :js, id: package_photo.id, photo: params
     
-    assert_redirected_to photo_path(assigns(:photo)) 
     assert_equal expected_tags.count, package_photo.photo_tags.count, "The new tag was not added"
     
     # Does the photo have all the expected_tags?
@@ -138,9 +142,7 @@ class PhotosControllerTest < ActionController::TestCase
     end
     
     # update the photo: remove the first tag
-    put :update, id: package_photo.id, photo: params
-    
-    assert_redirected_to photo_path(assigns(:photo))
+    put :update, format: :js, id: package_photo.id, photo: params
     
     assert_equal expected_tags.count, package_photo.photo_tags.count, "The tag was not removed"
     
@@ -160,7 +162,7 @@ class PhotosControllerTest < ActionController::TestCase
       tags_attributes: 'tag1, tag2'
     }
     
-    put :update, id: photo.id, photo: params
+    put :update, format: :js, id: photo.id, photo: params
     
     assert_equal photo.photo_tags.count, 2, "The two new tags were not created. Errors: #{assigns(:photo).errors.full_messages}"
   end
