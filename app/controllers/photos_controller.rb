@@ -115,6 +115,7 @@ class PhotosController < ApplicationController
   private
     
   def init_variables
+    @edit_mode = false
   end
   
   def init_photo

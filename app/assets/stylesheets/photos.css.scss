@@ -102,12 +102,6 @@ ul.photos-list {
 	}
 }
 
-div.edit-mode {
-	ul {
-		list-style: none;
-	}
-}
-
 div.photo-full {
 	margin: 0 auto;
 	width: $max-photo-width + 100px; // max photo width + 50px * 2 for the two left and right buttons
@@ -156,12 +150,15 @@ div.photo-full {
 	div.meta-data {
 		clear: both;
 		width: $max-photo-width;
+		padding-top: 1em;
 		
 		div.tags {
+			clear: both;
 			margin-bottom: 1em;
 
 			ul.tags-list {
 				padding: 0;
+				margin: 0;
 				list-style: none;
 				height: 1em;
 			
@@ -177,10 +174,30 @@ div.photo-full {
 			}
 		}
 		
+		div.edit-mode {
+			clear: both;
+			float: left;
+			margin: 0 0 1em 0;
+			
+			ul {
+				float: left;
+				margin: 0;
+				padding: 0;
+				
+				li {
+					list-style: none;
+					float: left;
+					margin-right: 1em;
+					font-size: 1em;
+				}
+			}
+		}
+		
 		div.edit {
 			clear: both;
+			float: left;
 			color: $text-color;		
-			margin: 1em 0 1em 0;
+			margin: 0em 0 1em 0;
 			
 			ul.edit-list {
 				float: left;
@@ -199,17 +216,18 @@ div.photo-full {
 		div.description {
 			clear: both;
 			color: $text-color;
-			margin: 1em 0 1em 0;
-			padding-top: 1em;
+			margin: 0em 0 1em 0;
 			
-			h2#description {
-				margin-top: 1em;
+			div#title {
+				margin-bottom: 1em;
 			}
 			
-			textarea#photo_description {
-				resize: none;
-				width: 50em;
-				height: 10em;
+			div#description {			
+				textarea#photo_description {
+					resize: none;
+					width: 50em;
+					height: 10em;
+				}
 			}
 		}  	
 	}

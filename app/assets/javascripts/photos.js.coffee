@@ -70,13 +70,7 @@ $ ->
 # Set the height of the navigate left and right buttons to be 
 # at the middle of the photos' height	
 $ ->
-	$("#displayed-photo").load ->
-		imageHeight = $(this).height()
-		$(".navigate-photo-link").height(imageHeight)
-		
-		# -25px to align the image because it is 50px tall
-		alignImage = imageHeight / 2 - 25
-		$(".navigate-photo-link").children("a").css "bottom", alignImage
+	fixNavigationKeys()
 
 # show:
 # the left keyboard button: go to previous photo
@@ -94,3 +88,12 @@ NavigatePhoto = (e) ->
 		when 39
 			nextImageId = $(".next").find("a").attr("href").match("\\d*$")
 			window.location = "/photos/" + nextImageId
+
+fixNavigationKeys = ->
+	$("#displayed-photo").load ->
+		imageHeight = $(this).height()
+		$(".navigate-photo-link").height(imageHeight)
+		
+		# -25px to align the image because it is 50px tall
+		alignImage = imageHeight / 2 - 25
+		$(".navigate-photo-link").children("a").css "bottom", alignImage	
