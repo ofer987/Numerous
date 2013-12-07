@@ -3,9 +3,9 @@ div class="meta-data indented"
 		div class="edit-mode"
 			h2 Edit Mode
 			ul
-				li
+				li id='on'
 					= link_to "On", edit_photo_path(@photo), remote: true
-				li
+				li id='off' class='selected-item'
 					= link_to "Off", @photo, remote: true
 
 	- if @edit_mode

@@ -190,6 +190,12 @@ div.photo-full {
 					margin-right: 1em;
 					font-size: 1em;
 				}
+				
+				li.selected-item {
+					a {
+						color: black;
+					}
+				}
 			}
 		}
 		

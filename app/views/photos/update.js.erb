@@ -1,1 +1,8 @@
 $(".meta-data").replaceWith("<%= j render partial: 'edit' %>");
+
+alert('updated');
+
+$(document).ready(function() {
+   $(".edit-mode #off").removeClass('selected-item');	
+   $(".edit-mode #on").addClass('selected-item');
+});

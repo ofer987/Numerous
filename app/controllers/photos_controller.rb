@@ -80,6 +80,7 @@ class PhotosController < ApplicationController
     
     respond_to do |format|
       if @photo.save
+        @edit_mode = true
         format.js
       else
         format.js do
