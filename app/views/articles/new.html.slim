@@ -1,0 +1,18 @@
+= form_for([@gazette, @article], html: { id: 'new-article' }) do |f|
+	fieldset
+		div class="field"
+			= f.label :title
+			= f.text_field :title
+		div class="field"
+			= f.label :sub_title
+			= f.text_field :sub_title
+		div class="field"
+			= f.label :content
+			= f.text_area :content
+		div class="field"
+			= f.label :published_at
+			= f.date_select :published_at
+		div
+			= f.submit
+
+= link_to 'Back', articles_path

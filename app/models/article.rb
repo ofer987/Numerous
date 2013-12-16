@@ -12,18 +12,14 @@ class Article < ActiveRecord::Base
   has_many :photos, through: :article_photos
   
   has_many :comments, as: :commentable, dependent: :destroy
-  
-  belongs_to :gazette
 
   after_initialize :set_published_at_to_now
-  before_validation :gazette_exists?, :set_published_at_to_now
 
-  validates_presence_of :gazette_id
   validates_presence_of :title, allow_blank: true
   validates_presence_of :content, allow_blank: true
   validates_presence_of :published_at
 
-  self.per_page = 3
+  self.per_page = 5
   
   default_scope { order('published_at DESC') }
 
@@ -51,30 +47,7 @@ class Article < ActiveRecord::Base
     end
   end
   
-  def content_does_not_contain_whitespace
-    if (self.content =~ /\r/) != nil
-      errors.add(:base, "Content should not contain a carriage return")
-      return false
-    end
-    
-    if (self.content =~ /\n/) != nil
-      errors.add(:base, "Content should not contain a newline")
-      return false
-    end
-    
-    return true
-  end
-  
-  def gazette_exists?
-    if Gazette.all.any? { |gazette| gazette.id == self.gazette_id }
-      true
-    else
-      errors.add(:base, "Gazette #{self.gazette_id} does not exist")
-      false
-    end
-  end
-
   def set_published_at_to_now
-    self.published_at ||= DateTime.now
+    self.published_at ||= DateTime.now.getutc if self.new_record?
   end
 end

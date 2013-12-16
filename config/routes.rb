@@ -6,12 +6,12 @@ Numerous::Application.routes.draw do
     post 'stories/:article_id/create_photo' => :create_photo
   end
   
-  get "blogs/index"
-
-  resources :gazettes do
-    resources :articles do
-      resources :comments, only: :create
-    end
+  resources :articles do
+    resources :comments, only: :create
+  end  
+  
+  controller :articles do
+    post 'articles/:article_id/create_photo' => :create_photo
   end
   
   resources :articles do
@@ -95,7 +95,7 @@ Numerous::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'blogs#index'
+  root :to => 'stories#index'
 
   # See how all your routes lay out with "rake routes"
 

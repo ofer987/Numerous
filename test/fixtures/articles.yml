@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 cusco_trip:
-  gazette: peru_stories
   title: Cusco Trip
   sub_title: Cusco is amazing
   content: We arrived in cusco

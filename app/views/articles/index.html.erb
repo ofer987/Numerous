@@ -1,7 +1,0 @@
-<% @articles.each do |article| %>
-    <%= render partial: 'articles/show', locals: { article: article } %>
-<% end %>
-
-<% if @is_logged_in %>
-    <%= link_to 'New Article', new_gazette_article_path(params[:gazette_id]) %>
-<% end %>

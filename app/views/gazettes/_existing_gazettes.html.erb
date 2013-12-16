@@ -1,5 +1,0 @@
-<% Gazette.all.each do |gazette| %> 
-  <% is_checked = gazette.id == params[:gazette_id].to_i %>
-  <%= radio_button_tag "existing_gazettes", gazette.name, checked = is_checked %>
-  <%= label_tag gazette.name %>
-<% end %>

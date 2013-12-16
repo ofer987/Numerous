@@ -7,6 +7,10 @@ $text-color: gray;
 $background-color: white;
 $navigation-arrow-color: black;
 
+form#new-article {
+	margin-bottom: 1em;
+}
+
 .article {
   .date {
     font-weight: bold;

@@ -1,0 +1,15 @@
+/ locals: article
+
+div class="article"
+	h1
+		= link_to strip_tags(article.title), article_url(article)
+	h2
+		= strip_tags(article.sub_title)
+	div class="date"
+	  	= article.published_at.strftime("%A, %B %-d, %Y")
+  
+	/ We want to display the article's html tags
+	div class="content"
+		== article.content
+
+== render partial: 'photos/index', locals: { photos: article.photos }
