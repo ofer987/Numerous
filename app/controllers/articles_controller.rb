@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by_id(params[:id])
+    @edit_mode = false
     
     # New comment
     # Note: we do not know for which article this comment should be.
@@ -52,7 +53,9 @@ class ArticlesController < ApplicationController
   
   def edit
     @article = Article.find(params[:id])
-    @all_photos = Photo.all
+    @edit_mode = true
+    
+    render file: 'articles/edit.js'
   end
 
   def create

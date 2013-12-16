@@ -27,4 +27,5 @@ div class="photo-full"
 		- unless @is_last_photo
 			= link_to image_tag(@images_dir + 'next.png'), photo_path(@photos[@current_photo_index + 1], tags: params[:tags])
 	
-	== render partial: "edit"
+	div class="meta-data indented"
+		== render partial: "edit"

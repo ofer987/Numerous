@@ -1,76 +1,75 @@
-div class="meta-data indented"
-	- if @is_logged_in
-		div class="edit-mode"
-			h2 Edit Mode
-			ul
-				li id='on'
-					= link_to "On", edit_photo_path(@photo), remote: true
-				li id='off' class='selected-item'
-					= link_to "Off", @photo, remote: true
+- if @is_logged_in
+	div class="edit-mode"
+		h2 Edit Mode
+		ul
+			li id='on'
+				= link_to "On", edit_photo_path(@photo), remote: true
+			li id='off' class='selected-item'
+				= link_to "Off", @photo, remote: true
 
-	- if @edit_mode
+- if @edit_mode
+	div class="tags"
+		h2 Tags
+		= form_for(@photo, remote: true) do |form|
+			div class="field"
+				== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
+			div class="field"
+				= form.label :tags_attributes, 'New Tags'
+				br
+		      	= form.text_field :tags_attributes
+			div class="actions"
+				= form.submit "Update Tags"
+- else
+	- if @photo.tags.count > 0
 		div class="tags"
 			h2 Tags
+			ul class="tags-list"
+				- @photo.tags.each_index do |index|
+					li
+						- tag_name = strip_tags(@photo.tags.to_a[index].name)
+						= link_to tag_name, photos_path(tag: "#{tag_name}")
+						- if index < @photo.tags.count - 1
+							li class="seperation-item"
+								span |
+
+- if @edit_mode
+	div class="edit"
+		h2 Edit
+		ul class="edit-list"
+			li
+				= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch
+			li
+				= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }
+
+div class="description"
+	div id="title"
+		h2 Title
+		- if @edit_mode
 			= form_for(@photo, remote: true) do |form|
 				div class="field"
-					== render partial: 'tags/existing_tags', locals: { parent_form: form, existing_tags: @photo.tags }
-				div class="field"
-					= form.label :tags_attributes, 'New Tags'
-					br
-			      	= form.text_field :tags_attributes
+					= form.text_field :title
 				div class="actions"
-					= form.submit "Update Tags"
-	- else
-		- if @photo.tags.count > 0
-			div class="tags"
-				h2 Tags
-				ul class="tags-list"
-					- @photo.tags.each_index do |index|
-						li
-							- tag_name = strip_tags(@photo.tags.to_a[index].name)
-							= link_to tag_name, photos_path(tag: "#{tag_name}")
-							- if index < @photo.tags.count - 1
-								li class="seperation-item"
-									span |
-
-	- if @edit_mode
-		div class="edit"
-			h2 Edit
-			ul class="edit-list"
-				li
-					= link_to "Rotate Clockwise", "/photos/#{@photo.to_param}/rotate_clockwise", method: :patch
-				li
-					= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }
+					= form.submit "Update Title"
+		- else
+			div
+				= @photo.title
 	
-	div class="description"
-		div id="title"
-			h2 Title
-			- if @edit_mode
-				= form_for(@photo, remote: true) do |form|
-					div class="field"
-						= form.text_field :title
-					div class="actions"
-						= form.submit "Update Title"
-			- else
-				div
-					= @photo.title
-		
-		div id="description"
-			h2 Description
-			- if @edit_mode
-				= form_for(@photo, remote: true) do |form|
-					div class="field"
-						= form.text_area :description
-					div class="actions"
-						= form.submit "Update Description"
-			- else
-				div 
-					= @photo.description
-		
-	div class="commentary"
-		h2 Comments
-		ul
-		div
-			button id="add-comment-button" New comment
-			div id="new-comment"
-	  			== render partial: 'comments/form', locals: { commentable: @photo }
+	div id="description"
+		h2 Description
+		- if @edit_mode
+			= form_for(@photo, remote: true) do |form|
+				div class="field"
+					= form.text_area :description
+				div class="actions"
+					= form.submit "Update Description"
+		- else
+			div 
+				= @photo.description
+	
+div class="commentary"
+	h2 Comments
+	ul
+	div
+		button id="add-comment-button" New comment
+		div id="new-comment"
+  			== render partial: 'comments/form', locals: { commentable: @photo }

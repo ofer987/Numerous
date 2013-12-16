@@ -1,8 +1,5 @@
-<%# Locals: %>
-<%# photos %>
-
 <ul class="photos-list">
-	<% photos.each do |photo| %>
+	<% @photos.each do |photo| %>
 		<%= render photo %>
 	<% end %>
 </ul>

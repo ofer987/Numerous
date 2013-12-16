@@ -1,4 +1,5 @@
-== render partial: 'articles/show', locals: { article: @article }
+div id='article'
+	== render partial: 'articles/show'
 
 div class="meta-data"
 	div class="commentary"
@@ -16,14 +17,3 @@ div class="meta-data"
 			button id="add-comment-button" New comment
 			div id="new-comment"
 				== render partial: 'comments/form', locals: { commentable: @article }
-
-- if @is_logged_in
-	= form_for(@article.photos.build, url: "/gazettes/#{@gazette.to_param}/articles/#{@article.to_param}/create_photo") do |f|
-		div class="photo-dropbox"
-			div class="instructions" Drop Photos
-			= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
-
-- if @is_logged_in
-	= link_to 'Edit', edit_article_path(@article)
-	span |
-	= link_to 'Back', articles_path

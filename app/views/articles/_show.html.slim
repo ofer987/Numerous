@@ -1,15 +1,38 @@
-/ locals: article
-
 div class="article"
 	h1
-		= link_to strip_tags(article.title), article_url(article)
+		- if @edit_mode
+			- form_for(@article) do |form|
+				= form.text_field :title, size: 120
+		- else
+			= link_to strip_tags(@article.title), article_url(@article)
 	h2
-		= strip_tags(article.sub_title)
+		- if @edit_mode
+			- form_for(@article) do |form|
+				= form.text_field :sub_title, size: 120
+		else
+			= strip_tags(@article.sub_title)
 	div class="date"
-	  	= article.published_at.strftime("%A, %B %-d, %Y")
+		- if @edit_mode
+			- form_for(@article) do |form|
+				= form.date_select :published_at
+		else
+	  		= @article.published_at.strftime("%A, %B %-d, %Y")
   
+	/ Do not escape html
 	/ We want to display the article's html tags
-	div class="content"
-		== article.content
+	- if @edit_mode
+		- form_for(@article) do |form|
+			= form.text_area :content
+	- else
+		div class="content"
+			== @article.content
 
-== render partial: 'photos/index', locals: { photos: article.photos }
+- if @edit_mode
+	= form_for(@article.photos.build, url: "/stories/#{@article.to_param}/create_photo") do |form|
+		div class="photo-dropbox"
+			div class="instructions" Drop Photos
+			= form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, \
+				 name: 'photo[load_photo_file]', id: 'file-field'
+
+- @photos = @article.photos
+== render partial: 'photos/index'
