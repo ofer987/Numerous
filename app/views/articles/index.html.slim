@@ -2,6 +2,7 @@
 	= link_to 'New Article', new_article_path
 
 - @articles.each do |article|
-	== render partial: 'articles/show', locals: { article: article }
+	- @article = article
+	== render partial: 'articles/show'
 
 = will_paginate @articles

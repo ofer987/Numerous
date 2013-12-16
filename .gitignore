@@ -47,3 +47,7 @@ public/assets/**/
 public/images/*
 public/images/photos/*
 public/images/photos/**/
+
+# Do not include temporary files in the test directory
+test/public/*
+test/public/**/
