@@ -3,18 +3,21 @@ div class="article"
 		- if @edit_mode
 			- form_for(@article) do |form|
 				= form.text_field :title, size: 120
+				= form.submit
 		- else
 			= link_to strip_tags(@article.title), article_url(@article)
 	h2
 		- if @edit_mode
 			- form_for(@article) do |form|
 				= form.text_field :sub_title, size: 120
+				= form.submit
 		else
 			= strip_tags(@article.sub_title)
 	div class="date"
 		- if @edit_mode
 			- form_for(@article) do |form|
 				= form.date_select :published_at
+				= form.submit
 		else
 	  		= @article.published_at.strftime("%A, %B %-d, %Y")
   
@@ -23,6 +26,7 @@ div class="article"
 	- if @edit_mode
 		- form_for(@article) do |form|
 			= form.text_area :content
+			= form.submit
 	- else
 		div class="content"
 			== @article.content
@@ -33,6 +37,7 @@ div class="article"
 			div class="instructions" Drop Photos
 			= form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, \
 				 name: 'photo[load_photo_file]', id: 'file-field'
+			= form.submit
 
 - @photos = @article.photos
 == render partial: 'photos/index'

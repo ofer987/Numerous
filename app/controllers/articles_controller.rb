@@ -9,7 +9,6 @@ class ArticlesController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @articles }
     end
   end
   
@@ -23,7 +22,6 @@ class ArticlesController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @article }
     end
   end
   
@@ -36,10 +34,7 @@ class ArticlesController < ApplicationController
       flash[:notice] = e.message
     end
     
-    respond_to do |format|
-      format.html { redirect_to articles_url }
-      format.json { head :ok }
-    end
+    redirect_to articles_url
   end
 
   def new
@@ -47,7 +42,6 @@ class ArticlesController < ApplicationController
     
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @article }
     end
   end
   
@@ -60,28 +54,24 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    
-    respond_to do |format|
-      # Save the article first and then the dependent associations
-      if @article.save
-        format.html { redirect_to article_path(@article) }
-        format.json { render json: @article, status: :created, location: @article }
-      else
-        # Save failed
-        format.html { redirect_to new_article_path }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+
+    # Save the article first and then the dependent associations
+    if @article.save
+      redirect_to article_path(@article)
+    else
+      # Save failed
+      redirect_to new_article_path
     end
   end
   
   def create_photo
-    @article = Article.find_by_id(params[:article_id])    
+    @article = Article.find_by_id(params[:article_id])
     @photo = @article.photos.create(load_photo_file: photo_params[:load_photo_file])
 
     if @photo and @photo.valid?
       render file: 'articles/create_photo.js'
     else
-      render file: 'article/upload_file_error.js', locals: { notice: "Error uploading file" }
+      render file: 'articles/error.js', locals: { notice: "Error uploading file" }
     end
   end  
   
@@ -89,14 +79,10 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     
     @article.attributes = article_params
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to article_path(@article) }
-        format.json { head :ok }
-      else
-        format.html { redirect_to edit_article_path(@article) }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      render file: 'articles/show.js'
+    else
+      render file: 'articles/error.js', locals: { notice: "Error updating article" }
     end
   end
   

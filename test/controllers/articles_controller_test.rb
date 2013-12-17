@@ -23,17 +23,6 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should default published_at to now" do
-    new_article = {
-        content: 'new story',
-        published_at: nil
-    }
-
-    assert_difference('Article.count') do      
-      post :create, article: new_article, is_convert_to_html: false
-    end
-  end
-  
   test "should create article" do
     article = {
       content: 'new story',
@@ -41,7 +30,7 @@ class ArticlesControllerTest < ActionController::TestCase
     }
     
     assert_difference('Article.count') do
-      post :create, article: article
+      post :create, format: :js, article: article
     end
     
     assert_redirected_to article_path(assigns(:article))
@@ -70,7 +59,7 @@ class ArticlesControllerTest < ActionController::TestCase
   end
   
   test "should get edit" do
-    get :edit, id: @cusco_trip_article
+    get :edit, format: :js, id: @cusco_trip_article
     assert_response :success
   end
   
@@ -78,12 +67,19 @@ class ArticlesControllerTest < ActionController::TestCase
     old_content = @cusco_trip_article.content
     new_content = 'This is an awesome story'
     
-    put :update, id: @cusco_trip_article, article: { content: new_content }
-    assert_redirected_to article_path(assigns(:article))
+    put :update, format: :js, id: @cusco_trip_article, article: { content: new_content }
+    assert_response :success
     assert_equal(
       new_content, 
       assigns(:article).content, 
       "The article's content should have been updated")
+  end
+
+  test "should fail to update article" do
+    put :update, format: :js, id: @cusco_trip_article, article: { published_at: nil }
+    assert_response :success
+    refute assigns(:article).valid?,
+      "The article should not have been updated"
   end
   
   test "should delete article" do
@@ -99,7 +95,7 @@ class ArticlesControllerTest < ActionController::TestCase
     
     @cusco_trip_article.published_at = modified_date
     
-    post :update, id: @cusco_trip_article, article: { published_at: modified_date }
+    post :update, format: :js, id: @cusco_trip_article, article: { published_at: modified_date }
     assert assigns(:article).published_at == modified_date, 
       "The article should be able to modify its published_at datetime"
   end
@@ -165,7 +161,7 @@ class ArticlesControllerTest < ActionController::TestCase
     end
     
     # update the article: it should remove the first photo
-    put :update, article: params, id: article.id, is_convert_to_html: false
+    put :update, article: params, id: article.id
     assert_redirected_to article_path(assigns(:article))
     assert_equal expected_photos.count, assigns(:article).photos.count, "The photo was not removed"
     
@@ -182,9 +178,10 @@ class ArticlesControllerTest < ActionController::TestCase
     
     assert_difference('Photo.count', 1) do
       post :create_photo, 
-        remote: true, 
+        format: :js, 
         article_id: existing_article.id, 
         photo: { load_photo_file: self.photo_data } 
     end
+    assert_response :success
   end
 end
