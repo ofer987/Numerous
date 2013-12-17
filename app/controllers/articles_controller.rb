@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
     
     respond_to do |format|
       format.html # show.html.erb
+      format.js
     end
   end
   

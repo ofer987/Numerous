@@ -1,1 +1,1 @@
-$('#article').replaceWith("<%= j render partial: 'articles/show' %>");
+$("#article_<%= @article.to_param %>").replaceWith("<%= j render partial: 'articles/show' %>");
