@@ -26,8 +26,12 @@
 		</ul>
 		<ul class="navigation" id="right">
 			<% if @is_logged_in %>
-			<li id="admin">
-				<h1><%= link_to "Admin", admin_url %></h1>
+			<li id="logout">
+				<h1><%= link_to "Logout", logout_url %></h1>
+			</li>
+			<% else %>
+			<li id="login">
+				<h1><%= link_to "Login", login_url %></h1>
 			</li>
 			<% end %>
 			<li id="cv-item">

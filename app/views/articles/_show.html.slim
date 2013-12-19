@@ -47,5 +47,6 @@ div class="article" id="article_#{@article.to_param}"
 				= form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, \
 					 name: 'photo[load_photo_file]', id: 'file-field'
 
-	- @photos = @article.photos
+	/ Do not display the new photo (last photo) created by the file uploader
+	- @photos = @edit_mode ? @article.photos[0..-2] : @article.photos
 	== render partial: 'photos/index'

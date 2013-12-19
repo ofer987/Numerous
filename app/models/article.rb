@@ -12,6 +12,8 @@ class Article < ActiveRecord::Base
   has_many :photos, through: :article_photos
   
   has_many :comments, as: :commentable, dependent: :destroy
+  
+  has_many :article_tags, as: :tagable, dependent: :destroy
 
   after_initialize :set_published_at_to_now
 
