@@ -9,7 +9,8 @@ class ArticlesControllerTest < ActionController::TestCase
     
     @all_article_photos_attributes = Hash.new
     Photo.all.each_with_index do |photo, index|
-      @all_article_photos_attributes["#{index}"] = { is_selected: "0", id: "#{photo.id}" }
+      @all_article_photos_attributes["#{index}"] = 
+        { is_selected: "0", id: "#{photo.id}" }
     end
   end
 
@@ -64,7 +65,6 @@ class ArticlesControllerTest < ActionController::TestCase
   end
   
   test "should update article" do
-    old_content = @cusco_trip_article.content
     new_content = 'This is an awesome story'
     
     put :update, format: :js, id: @cusco_trip_article, article: { content: new_content }
@@ -83,11 +83,10 @@ class ArticlesControllerTest < ActionController::TestCase
   end
   
   test "should delete article" do
-    delete :destroy, id: @cusco_trip_article
+    assert_difference('Article.count', -1) do
+      delete :destroy, id: @cusco_trip_article.to_param
+    end
     assert_redirected_to articles_url
-    
-    assert Article.where(id: @cusco_trip_article).count == 0, 
-      'The cusco story article should have been deleted'
   end
   
   test "should be able to modify an article's published_at date" do
@@ -126,50 +125,17 @@ class ArticlesControllerTest < ActionController::TestCase
     end
     
     # update the article: add the new photo
-    put :update, article: params, id: article.id, is_convert_to_html: false
-    assert_redirected_to article_path(assigns(:article)) 
+    put :update, format: :js, article: params, id: article.id, is_convert_to_html: false
     assert_equal( 
       expected_photos.count, 
       article.article_photos.count, 
       "The new photo was not added. Errors: #{article.errors.full_messages}")
     
     # Does the article have all the expected_photos?
-    expected_photos.each do |photo|
+    expected_photos.each do |p|
       assert article.article_photos.any? { |verify_article_photo| 
-        verify_article_photo.photo_id == photo.id 
-      }, "The article is missing the photo #{photo.title}"
-    end
-  end
-  
-  test "should remove a photo from an article" do
-    # This article should have at least two photos
-    article = articles(:cusco_trip)
-    params = {
-      id: article.id,
-      article_photos_attributes: @all_article_photos_attributes
-    }
-    
-    # These are the expected photos post-update
-    expected_photos = []
-    
-    # Remove the first photo
-    article.photos[1..-1].each do |existing_photo|
-      expected_photos << existing_photo
-      params[:article_photos_attributes].each do |key, value|
-        value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
-      end
-    end
-    
-    # update the article: it should remove the first photo
-    put :update, article: params, id: article.id
-    assert_redirected_to article_path(assigns(:article))
-    assert_equal expected_photos.count, assigns(:article).photos.count, "The photo was not removed"
-    
-    # Check that the article does not have any extraneous photos
-    article.article_photos.each do |actual_article_photo|
-      assert expected_photos.any? { |expected_photo| 
-        expected_photo.id == actual_article_photo.photo_id
-      }, "The article did not delete the photo #{actual_article_photo.photo.title}"
+        verify_article_photo.photo_id == p.id 
+      }, "The article is missing the photo #{p.title}"
     end
   end
   
@@ -183,5 +149,19 @@ class ArticlesControllerTest < ActionController::TestCase
         photo: { load_photo_file: self.photo_data } 
     end
     assert_response :success
+  end
+
+  test 'should create article and assign it tags' do
+    article = {
+      title: 'new article',
+      content: 'Article with tags',
+      tags_attributes: 'england, quebec'
+    }
+    
+    assert_difference('Article.count', 1) do
+      post :create, format: :js, article: article
+    end
+    assert assigns(:article).tags.count == 2, 
+      'the two tags were not added to the article'
   end
 end

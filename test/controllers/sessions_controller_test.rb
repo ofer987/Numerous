@@ -15,7 +15,7 @@ class SessionsControllerTest < ActionController::TestCase
   test "should login" do
     admin_user = users(:admin)
     post :create, name: admin_user.name, password: 'The_Password1'
-    assert_redirected_to admin_url
+    assert_redirected_to root_url
     assert_equal admin_user.id, session[:user_id]
   end
   

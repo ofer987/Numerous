@@ -13,7 +13,9 @@ class Article < ActiveRecord::Base
   
   has_many :comments, as: :commentable, dependent: :destroy
   
-  has_many :article_tags, as: :tagable, dependent: :destroy
+  has_many :tag_links, as: :tagable, dependent: :destroy
+  has_many :tags, through: :tag_links
+  include Tagable 
 
   after_initialize :set_published_at_to_now
 

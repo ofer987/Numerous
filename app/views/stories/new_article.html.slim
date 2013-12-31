@@ -2,9 +2,6 @@
 	div id="dropbox"
 		fieldset
 			div class="field"
-				= f.label :gazette_id
-				= f.select :gazette_id, Gazette.all.map { |gazette| [gazette.name, gazette.id] }
-			div class="field"
 				= f.label :title
 				= f.text_field :title
 			div class="field"

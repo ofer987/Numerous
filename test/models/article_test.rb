@@ -31,4 +31,33 @@ class ArticleTest < ActiveSupport::TestCase
   test 'should save article' do
     assert @valid_article.save
   end
+
+  test 'article should have tags' do
+    article = articles(:cusco_trip)
+    assert article.tags.count == 1
+
+    article.tags << Tag['england']
+    article.tags << Tag.find_or_init_by_name('toronto')
+    article.save!
+
+    assert article.tags.count == 3
+    assert article.tags.find_by_name('england')
+    assert article.tags.find_by_name('toronto')
+  end
+
+  test 'should add tags when setting the tags_attributes property' do
+    article = Article.new(title: 'new article',
+                          content: 'Hello from Canada')
+    article.tags_attributes = 
+      { tags_attributes: 'toronto , montreal, quebec city' }
+    assert article.tags.to_a[0].name == 'toronto'
+    assert article.tags.to_a[1].name == 'montreal'
+    assert article.tags.to_a[2].name == 'quebec city'
+  end
+
+  test 'should convert tag names to lower case' do
+    article = Article.new
+    article.tags_attributes = { tags_attributes: 'Toronto' }
+    assert article.tags.to_a[0].name == 'toronto'
+  end
 end

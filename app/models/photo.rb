@@ -9,8 +9,8 @@ class Photo < ActiveRecord::Base
   
   default_scope { order('taken_date DESC') }
   
-  has_many :photo_tags, dependent: :destroy
-  has_many :tags, through: :photo_tags
+	has_many :tag_links, as: :tagable, dependent: :destroy
+	has_many :tags, through: :tag_links
   include Tagable
   
   has_many :fichiers, dependent: :destroy
@@ -24,9 +24,12 @@ class Photo < ActiveRecord::Base
 
   validates_presence_of :description, allow_blank: true
   validates_presence_of :title, allow_blank: true
-  validates_presence_of :filename, on: :create, :message => "must be specified"
-  validates_presence_of :taken_date, on: :create, :message => "must have a date, at least a default one"
-  validates_format_of :filename, :with => /\.(jpg|png)\z/i, :message => "is invalid"
+  validates_presence_of :filename, on: :create, 
+    :message => "must be specified"
+  validates_presence_of :taken_date, on: :create, 
+    :message => "must have a date, at least a default one"
+  validates_format_of :filename, :with => /\.(jpg|png)\z/i, 
+    :message => "is invalid"
   
   validate :validate_has_unique_fichiers
  

@@ -55,6 +55,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.tags_attributes = tags_params
 
     # Save the article first and then the dependent associations
     if @article.save
@@ -99,8 +100,13 @@ class ArticlesController < ApplicationController
   
   def article_params
     # maybe should be article_photos_attributes instead of article_photos
-    params.require(:article).permit(:title, :sub_title, :content, :published_at, 
+    params.require(:article).permit(:title, :sub_title, 
+                                    :content, :published_at, 
       article_photos_attributes: [:is_selected, :id])
+  end
+
+  def tags_params
+    params.require(:article).permit(:tags_attributes)
   end
   
   def setup_comment_negative_captcha

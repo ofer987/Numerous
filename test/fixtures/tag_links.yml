@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tag: england
+  tagable: eaton_college (Photo)
+
+two:
+  tag: quebec
+  tagable: package (Photo)
+
+three:
+  tag: england
+  tagable: cusco_trip (Article)
+
+four:
+  tag: england
+  tagable: nobody_commented (Photo)

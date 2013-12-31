@@ -9,7 +9,6 @@ class StoriesControllerTest < ActionController::TestCase
     setup_photo_files
     
     @article = {
-      gazette_id: gazettes(:peru_stories).to_param,
       title: 'Halloween',
       sub_title: 'Dan meets Sina for first time in 2013',
       content: 'Sina stopped to be a douche for one day and agreed to leave his house to see Oren and Dan',

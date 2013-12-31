@@ -1,4 +1,6 @@
 Numerous::Application.routes.draw do
+  resources :tag_links
+
   controller :stories do
     get 'stories/:article_id/new_photo' => :new_photo
     get 'stories/new_article' => :new_article

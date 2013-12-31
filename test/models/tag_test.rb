@@ -37,31 +37,34 @@ class TagTest < ActiveSupport::TestCase
   #  assert true;
   #end
   
-  test "tags are reusable" do
-    assert_equal photos(:eaton_college).tags.find_by_name(tags(:england).name), photos(:nobody_commented).tags.find_by_name(tags(:england).name), "should be the same tag"
+  test "destroying a tag should destroy the tag_links" do
+    # The England tag is used by two photos
+    tag = tags(:england)
+    assert_difference('TagLink.count', -3) do
+      tag.destroy
+    end
   end
-  
-  test "unused tags delete themselves" do
-    # The england tag is used by two photos
+
+  test 'tag should not be deleted when deleted it from a tagable' do
     tag = tags(:england)
     photo = photos(:eaton_college)
-    
-    # Remove the tag from the first photo
-    # The tag should still exist because it is in use by the second photo
-    photo.photo_tags.where(tag_id: tag.id).destroy_all
-    assert_not_nil Tag.find_by_id(tag.id)
-    
-    # Remove the tag from the second photo
-    # Tag is no longer used: the tag should have deleted itself
-    photos(:nobody_commented).photo_tags.where(tag_id: tag.id).destroy_all
-    assert_nil Tag.find_by_id(tag.id)
+
+    assert TagLink.where(tag_id: tag.id).count > 1,
+      "The selected tag #{tag.name} is only used by 0 or 1 tagables"
+    photo.tags.destroy(tag)
+    refute photo.tags.find_by_id(tag.id), 'should have removed the tag'
+    refute Tag.find_by_id(tag.id).nil?, 'Tag should not have been deleted'
   end
   
   test "tags are unique" do
-    tag = tags(:quebec)
-    
     new_tag_with_same_name = Tag.create(name: 'quebec')
     
-    assert new_tag_with_same_name.invalid?, 'tags should only have unique names'
+    assert new_tag_with_same_name.invalid?, 
+      'tags should only have unique names'
+  end
+
+  test 'should init tag that does not exist' do
+    name = 'new_tag'
+    assert Tag.find_or_init_by_name(name).new_record?
   end
 end
