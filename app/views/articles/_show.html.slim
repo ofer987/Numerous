@@ -1,4 +1,4 @@
-div class="article" id="article_#{@article.to_param}"
+div class="panel panel-default" id="article_#{@article.to_param}"
 	- if @is_logged_in
 		div class="edit-mode"
 			h2 Edit Mode
@@ -8,45 +8,40 @@ div class="article" id="article_#{@article.to_param}"
 				li id='off' class='selected-item'
 					= link_to "Off", @article, remote: true
 	
-	h1
+	div class="panel-heading"
+		h3
+			- if @edit_mode
+				= form_for(@article, remote: true) do |form|
+					= form.text_field :title, size: 120
+					= form.submit
+			- else
+				= link_to strip_tags(@article.title), article_url(@article)
+	ul class="list-group"	
+		li class="list-group-item"
+			- if @edit_mode
+				= form_for(@article, remote: true) do |form|
+					= form.date_select :published_at
+					= form.submit
+			- else
+				= @article.published_at.strftime("%A, %B %-d, %Y")
+		li class="list-group-item" style="display: none;"
+  
+	div class="panel-body"
+		/ Do not escape html
+		/ We want to display the article's html tags
 		- if @edit_mode
 			= form_for(@article, remote: true) do |form|
-				= form.text_field :title, size: 120
+				= form.text_area :content
 				= form.submit
 		- else
-			= link_to strip_tags(@article.title), article_url(@article)
-	h2
-		- if @edit_mode
-			= form_for(@article, remote: true) do |form|
-				= form.text_field :sub_title, size: 120
-				= form.submit
-		else
-			= strip_tags(@article.sub_title)
-	div class="date"
-		- if @edit_mode
-			= form_for(@article, remote: true) do |form|
-				= form.date_select :published_at
-				= form.submit
-		else
-	  		= @article.published_at.strftime("%A, %B %-d, %Y")
-  
-	/ Do not escape html
-	/ We want to display the article's html tags
-	- if @edit_mode
-		= form_for(@article, remote: true) do |form|
-			= form.text_area :content
-			= form.submit
-	- else
-		div class="content"
 			== @article.content
 
-	- if @edit_mode
-		= form_for(@article.photos.build, url: "/articles/#{@article.to_param}/create_photo", remote: true) do |form|
-			div class="photo-dropbox"
-				div class="instructions" Drop Photos
-				= form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, \
-					 name: 'photo[load_photo_file]', id: 'file-field'
+		- if @edit_mode
+			= form_for(@article.photos.build, url: "/articles/#{@article.to_param}/create_photo", remote: true) do |form|
+				div class="photo-dropbox"
+					div class="instructions" Drop Photos
+					= form.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
 
-	/ Do not display the new photo (last photo) created by the file uploader
-	- @photos = @edit_mode ? @article.photos[0..-2] : @article.photos
-	== render partial: 'photos/index'
+		/ Do not display the new photo (last photo) created by the file uploader
+		- @photos = @edit_mode ? @article.photos[0..-2] : @article.photos
+		== render partial: 'photos/index'

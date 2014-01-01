@@ -9,6 +9,7 @@
 //= require jquery-fileupload/basic
 //= require_tree .
 
+// Navbar: Set active item
 $(document).ready(function() {
   findPageNameRegExp = /^\/{1}(\w+)/i;
 	
@@ -16,17 +17,13 @@ $(document).ready(function() {
 	
 	if (pageNameMatch !== null && pageNameMatch.length > 1) {
 		pageName = pageNameMatch[1];
-		if (pageName === "articles" || pageName === "gazettes") {
-			pageName = "blogs";
-		}
-		
 		pageNameItem = pageName + "-item";
 		
-		$("li#" + pageNameItem).addClass("selected-item");
+		$("li#" + pageNameItem).addClass("active");
 	}
 	else if (window.location.pathname === "/") {
 		// Special case: the blogs#index page is the default page
-		$("li#blogs-item").addClass("selected-item");
+		$("li#articles-item").addClass("active");
 	}
 });
 

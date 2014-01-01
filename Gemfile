@@ -40,4 +40,5 @@ gem 'with_action'
 
 gem 'negative_captcha'
 
-gem 'will_paginate'
+# gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap'

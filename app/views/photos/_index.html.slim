@@ -1,0 +1,5 @@
+div class="row"
+  - @photos.select do |photo| \
+		not photo.thumbnail_fichier.nil? \
+	end.each do |photo|
+		== render photo

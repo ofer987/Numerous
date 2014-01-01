@@ -2,17 +2,12 @@
 <%# photo %>
 
 <% photo_date = photo.taken_date.strftime("%b %-d at %H:%M") %>
-<li class="photo-item" id="item_<%= photo.id %>" 
-  tags="<% photo.tags.each { |tag| %><%= strip_tags(tag.name) %>,<% } %>">
-	<div class="image-vertical-align">
-	  <div class="image-horizontal-align">
-		  <% thumbnail_fichier = photo.thumbnail_fichier %>
-		  <% unless thumbnail_fichier == nil %>
-	    	<%= link_to image_tag(@local_photos_dir + thumbnail_fichier.filename,
-    			class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
-		  <% end %>
-      </div>
-	</div>
-	<span class="photo-title"><%= strip_tags(photo.title) %></span>
-	<span class="photo-date"><%= strip_tags(photo_date) %></span>
-</li>
+<div class="col-sm-6 col-md-4" id="item_<%= photo.id %>">
+  <div class="thumbnail">
+    <%= link_to image_tag(@local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
+    <div class="caption">
+      <h3><%= strip_tags(photo.title) %></h3>
+      <p><%= strip_tags(photo_date) %></p>
+    </div>
+  </div>
+</div>
