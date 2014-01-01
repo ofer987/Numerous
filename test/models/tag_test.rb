@@ -67,4 +67,16 @@ class TagTest < ActiveSupport::TestCase
     name = 'new_tag'
     assert Tag.find_or_init_by_name(name).new_record?
   end
+
+  test 'should retrieve all Photo tags' do
+    expected_tags = Tag.joins(:tag_links).
+      where(tag_links: { tagable_type: 'Photo' })
+    actual_tags = Tag.all_tagable(Photo)
+
+    assert expected_tags.count == actual_tags.count
+
+    expected_tags.each_with_index do |expected_tag, index|
+      assert expected_tag.id == actual_tags.to_a[index].id
+    end
+  end
 end

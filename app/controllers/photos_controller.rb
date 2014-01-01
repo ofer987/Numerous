@@ -3,7 +3,8 @@ class PhotosController < ApplicationController
   before_action :init_photo, only: [:show, :edit, :update]
   
   # Negative captcha
-  before_action :setup_comment_negative_captcha, only: [:show, :edit, :update]
+  before_action :setup_comment_negative_captcha, 
+    only: [:show, :edit, :update]
   
   skip_before_action :authorize, only: [:index, :show]
   
@@ -11,7 +12,7 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @photos = Photo.all
-    @all_tags = Tag.all
+    @all_tags = Tag.all_tagable(Photo)
 
     @selected_tag_name = params[:tag]
     

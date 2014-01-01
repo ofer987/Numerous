@@ -5,6 +5,11 @@ class Tag < ActiveRecord::Base
   #updated_at: datetime
   
   default_scope { order('name ASC') }
+
+  scope :all_tagable, ->(tagable_class) do 
+    self.joins(:tag_links).
+      where(tag_links: { tagable_type: tagable_class.to_s } )
+  end
   
   has_many :tag_links, dependent: :destroy
   

@@ -34,7 +34,8 @@ DisplaySelectedPhotos = ->
 						isDisplayPhoto = true
 			
 			# Display the photo or not?
-			$(photoItem).css("display", if isDisplayPhoto then "block" else "none")
+			$(photoItem).css("display",
+        if isDisplayPhoto then "block" else "none")
 
 # index:
 # Add the click event handlers to the tags (both checkboxes and the adjecent text span)
