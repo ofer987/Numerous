@@ -2,7 +2,8 @@
 <%# photo %>
 
 <% photo_date = photo.taken_date.strftime("%b %-d at %H:%M") %>
-<div class="col-sm-6 col-md-4" id="item_<%= photo.id %>">
+<% tags = photo.tags.join(',') %> 
+<div class="col-sm-6 col-md-4 photo" id="item_<%= photo.id %>" tags="<%= tags %>">
   <div class="thumbnail">
     <%= link_to image_tag(@local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
     <div class="caption">

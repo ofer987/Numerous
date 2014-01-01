@@ -1,17 +1,15 @@
 <% if @all_tags.count > 0 %>
-<ul class="select-tags-list">
+<div class="btn-group" id="tags">
+  <button type="button" class="btn btn-warning" id="clear" value="clear">
+    clear
+  </button>
   <% @all_tags.each do |tag| %>
-  <% is_checked = @selected_tag_name == tag.name %>
-  <li>
-    <%= check_box_tag strip_tags(tag.name), strip_tags(tag.name), checked=is_checked,
-                      options={ class: "clickable-parent checkbox" } %>
-    <span class="text" id="<%= strip_tags(tag.name) %>"><%= strip_tags(tag.name) %></span>
-  </li>
-  <% end %>
-  <li>
-    <input class="clear-tags-button" type="submit" value="clear" />
-  </li>
-</ul>
+    <% tag_name = strip_tags(tag.name) %>
+    <button type="button" class="btn btn-default tag" value="<%= tag_name %>">
+      <%= tag_name %>
+    </button>
+    <% end %>
+  </div>
 <% end %>
 
 <%= render partial: 'photos/index' %> 

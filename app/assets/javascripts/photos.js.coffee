@@ -3,16 +3,16 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 DisplayAllPhotos = ->
-	$(photoItem).css "display", "inline-block" for photoItem in $(".photos-list").children(".photo-item")
+	$(photoItem).css "display", "block" for photoItem in $("#photos").children("div.photo")
 
 # index
 # Display only the photos that have the selected tags 
 DisplaySelectedPhotos = ->
 	selectedTags = []
-	for tagCheckBox in $(".select-tags-list").find("input.checkbox")
-		if $(tagCheckBox).prop("checked") == true
+	for button in $("#tags").children("button.tag")
+		if $(button).prop("selected") == true
 			# Put the name of the selected tag in the list
-			selectedTags.push $(tagCheckBox).attr("value")
+			selectedTags.push $(button).attr("value")
 	
 	# If no tags were selected then
 	# show all the photos
@@ -20,7 +20,7 @@ DisplaySelectedPhotos = ->
 		DisplayAllPhotos()
 	else
 		# Only display photos (DIVs) that have a tag in the selected tag list
-		for photoItem in $(".photos-list").children(".photo-item")
+		for photoItem in $("#photos").children("div.photo")
 			isDisplayPhoto = false
 			# Get the photos tags; 
 			# remove the trailing space;
@@ -29,27 +29,31 @@ DisplaySelectedPhotos = ->
 			
 			# Does the photo have a tag in the selected tags?
 			for photoTag in photoTags
-				for selectedTag in selectedTags 
+				for selectedTag in selectedTags
 					if photoTag == selectedTag
 						isDisplayPhoto = true
 			
 			# Display the photo or not?
-			$(photoItem).css("display", if isDisplayPhoto then "inline-block" else "none");
+			$(photoItem).css("display", if isDisplayPhoto then "block" else "none")
 
 # index:
 # Add the click event handlers to the tags (both checkboxes and the adjecent text span)
 # Add the functionality to the clear button (to show all the photos)
 $ ->
-	$(".select-tags-list").find("input.checkbox").click ->
-		DisplaySelectedPhotos()
+	$("#tags").children("button.tag").click ->
+    if $(this).prop("selected") == true
+      unselectTag(this)
+    else
+      selectTag(this)
+    DisplaySelectedPhotos()
 
-	$(".clear-tags-button").click ->
-		$(tagCheckBox).prop "checked", false for tagCheckBox in $(".select-tags-list").find("input.checkbox")
+	$("#tags > button#clear").click ->
+		unselectTag(button) for button in $("#tags").children("button.tag")
 		
 		DisplayAllPhotos()
 		
 		# Do not refresh the page
-		false;
+		false
 
 # index:
 # Display the photos with the selected tag
@@ -77,6 +81,17 @@ $ ->
 # the right keyboard button: go to next photo
 $ ->
   document.onkeyup = NavigatePhoto
+
+unselectTag = (tagButton) ->
+  $(tagButton).removeClass("btn-primary")
+  $(tagButton).addClass('btn-default')
+  $(tagButton).prop("selected", false)
+
+selectTag = (tagButton) ->
+  $(tagButton).addClass("btn-primary")
+  $(tagButton).removeClass('btn-default')
+  $(tagButton).prop("selected", true)
+
 
 NavigatePhoto = (e) ->
 	keyCode = if window.event then event.keyCode else e.keyCode
