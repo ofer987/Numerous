@@ -48,9 +48,12 @@ class ArticlesController < ApplicationController
   
   def edit
     @article = Article.find(params[:id])
+    @all_photos = Photo.all
     @edit_mode = true
-    
-    render file: 'articles/edit.js'
+
+    respond_to do |format|
+      format.html # edit.html
+    end
   end
 
   def create

@@ -56,17 +56,15 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    <div class="page">
-      <% if notice %>
-        <p class="alert" id="notice"><%= notice %></p>
-      <% end %>
+    <% if notice %>
+      <p class="alert" id="notice"><%= notice %></p>
+    <% end %>
       
-      <%= yield %>
+    <%= yield %>
 
-      <!-- Bootstrap core JavaScript
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <script src="js/bootstrap.min.js"></script>
-    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

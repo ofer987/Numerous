@@ -1,18 +1,2 @@
 == render partial: 'articles/show'
 
-div class="meta-data"
-	div class="commentary"
-  		h2 Comments
-  		ul
-  			- @article.comments.select { |c| c.id != nil }.each do |comment|
-  				- comment_date = comment.created_at.localtime.strftime("%b %-d at %-H:%-M")
-  				li 
-					| #{strip_tags(comment.content)} – by 
-						span class="user"
-							| #{strip_tags(comment.user)} on 
-							span class="date"
-								| #{strip_tags(comment_date)}
-		div
-			button id="add-comment-button" New comment
-			div id="new-comment"
-				== render partial: 'comments/form', locals: { commentable: @article }

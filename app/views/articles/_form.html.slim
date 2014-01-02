@@ -1,0 +1,24 @@
+= form_for(@article) do |f|
+  - if @article.errors.any?
+      div class="alert alert-danger"
+        | #{pluralize(@article.errors.count, "error")} prohibited this user from being saved
+      - @article.errors.full_messages.each do |msg|
+        div class="alert alert-danger"
+          | #{msg}
+
+  div class="input-group"
+    = f.label :title, class: "input-group-addon"
+    = f.text_field :title, class: "form-control"
+
+  div class="input-group"
+    = f.label :sub_title, class: "input-group-addon"
+    = f.text_field :sub_title, class: "form-control"
+
+  div class="input-group"
+    = f.label :content, class: "input-group-addon"
+    = f.text_area :content, class: "form-control"
+
+  div class="input-group"
+    = f.label :published_at, class: "input-group-addon"
+    = f.date_select :published_at, class: "form-control"
+    

@@ -24,6 +24,11 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get edit' do
+    get :edit, id: @cusco_trip_article.to_param
+    assert_response :success
+  end
+
   test "should create article" do
     article = {
       content: 'new story',
@@ -57,11 +62,6 @@ class ArticlesControllerTest < ActionController::TestCase
       post_article_photos_count, 
       "Did not add the two photos to the new article")
     assert_redirected_to article_path(assigns(:article))
-  end
-  
-  test "should get edit" do
-    get :edit, format: :js, id: @cusco_trip_article
-    assert_response :success
   end
   
   test "should update article" do
