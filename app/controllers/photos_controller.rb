@@ -26,9 +26,8 @@ class PhotosController < ApplicationController
   def show
     init_photo
     
-    if @displayed_fichier == nil
+    if @displayed_fichier.nil?
       redirect_to '/photos' 
-      return
     end
     
     respond_to do |format|
