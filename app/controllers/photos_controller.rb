@@ -53,7 +53,7 @@ class PhotosController < ApplicationController
     @edit_mode = true
 
     respond_to do |format|
-      format.js
+      format.html # edit.html
     end
   end
 

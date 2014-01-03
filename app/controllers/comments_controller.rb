@@ -13,11 +13,15 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment_captcha.valid? && @comment.save
-        format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
-        format.json { render json: @comment, status: :created, location: @comment }
+        format.html { redirect_to @commentable, 
+                      notice: 'Comment was successfully created.' }
+        format.json { render json: @comment, status: :created, 
+                      location: @comment }
       else
-        format.html { redirect_to photo_path(@commentable), notice: 'Fill in missing fields' }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.html { redirect_to @commentable,
+                      notice: 'Fill in missing fields' }
+        format.json { render json: @comment.errors, 
+                      status: :unprocessable_entity }
       end
     end
   end

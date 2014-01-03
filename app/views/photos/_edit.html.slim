@@ -66,10 +66,5 @@ div class="description"
 			div 
 				= @photo.description
 	
-div class="commentary"
-	h2 Comments
-	ul
-	div
-		button id="add-comment-button" New comment
-		div id="new-comment"
-  			== render partial: 'comments/form', locals: { commentable: @photo }
+	== render partial: 'comments/index', locals: { commentable: @photo }
+	== render partial: 'comments/form', locals: { commentable: @photo }

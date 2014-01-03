@@ -1,0 +1,21 @@
+/ locals: commentable
+
+= form_for([commentable, @comment]) do |f|
+  - if @comment.errors.any?
+    div class="alert alert-danger"
+      | #{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:
+  - @comment.errors.full_messages.each do |msg|
+    div class="alert alert-danger"
+      = msg
+  
+  == negative_captcha @comment_captcha
+
+  div class="input-group"
+    = f.negative_text_area @comment_captcha, :content,
+      class: 'form-control', placeholder: "Comment"
+    = f.negative_text_field @comment_captcha, :user,
+        class: 'form-control', placeholder: 'Name'
+
+  div class="input-group"
+    div class="input-group-btn"
+      = f.submit class: 'btn btn-default'

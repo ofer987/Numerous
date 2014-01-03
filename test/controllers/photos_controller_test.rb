@@ -57,7 +57,7 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, format: :js, id: @photo.to_param
+    get :edit, id: @photo.to_param
     assert_response :success
   end
 

@@ -1,0 +1,12 @@
+/ commentable
+
+div class="panel panel-default"
+	div class="panel-heading" Comments
+	ul class="list-group"
+		- commentable.comments.select { |c| c.id != nil }.each do |comment|
+			- comment_date = \
+				comment.created_at.localtime.strftime("%b %-d at %-H:%-M")
+			li class="list-group-item"
+				| #{strip_tags(comment.content)} – by 
+					#{strip_tags(comment.user)} on 
+						#{strip_tags(comment_date)}
