@@ -1,8 +1,6 @@
-- if @is_logged_in
-	= link_to 'New Article', new_article_path
-
-- @articles.each do |article|
-	- @article = article
-	== render partial: 'articles/show'
-
-== will_paginate @articles, renderer: BootstrapPagination::Rails
+div class="articles"
+	- @articles.each do |article|
+		- @article = article
+		== render partial: 'articles/show'
+	
+	== will_paginate @articles, renderer: BootstrapPagination::Rails

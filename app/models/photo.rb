@@ -78,6 +78,10 @@ class Photo < ActiveRecord::Base
       fichier.rotate!
     end
   end
+
+  def displayed_title
+    title.blank? ? '&nbsp;' : title
+  end
   
   private
 

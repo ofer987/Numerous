@@ -1,4 +1,5 @@
-== render partial: 'articles/show'
-
-== render partial: 'comments/index', locals: { commentable: @article }
-== render partial: 'comments/form', locals: { commentable: @article }
+div class="article"
+	== render partial: 'articles/show'
+	
+	== render partial: 'comments/index', locals: { commentable: @article }
+	== render partial: 'comments/form', locals: { commentable: @article }

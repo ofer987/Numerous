@@ -1,15 +1,13 @@
-div class="panel panel-default" id="article_#{@article.to_param}"
-	div class="panel-heading"
+div class="page-header" id="article_#{@article.to_param}"
+	h1
 		= link_to strip_tags(@article.title), article_url(@article)
-	ul class="list-group"	
-		li class="list-group-item"
-			= @article.published_at.strftime("%A, %B %-d, %Y")
-		li class="list-group-item" style="display: none;"
+		small
+			| &nbsp; #{@article.published_at.strftime("%A, %B %-d, %Y")}
   
-	div class="panel-body"
-		/ Do not escape html
-		/ We want to display the article's html tags
-		== @article.content
+div class=""
+	/ Do not escape html
+	/ We want to display the article's html tags
+	== @article.content
 
 /		- if @edit_mode
 /			= form_for(@article.photos.build, url: "/articles/#{@article.to_param}/create_photo", remote: true) do |form|
@@ -19,5 +17,5 @@ div class="panel panel-default" id="article_#{@article.to_param}"
 /
 /		/ Do not display the new photo (last photo) created by the file uploader
 /		- @photos = @edit_mode ? @article.photos[0..-2] : @article.photos
-	- @photos = @article.photos
-	== render partial: 'photos/index'
+- @photos = @article.photos
+== render partial: 'photos/index'

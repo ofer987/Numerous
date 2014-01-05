@@ -1,15 +1,20 @@
-<% if @all_tags.count > 0 %>
-<div class="btn-group" id="tags">
-  <button type="button" class="btn btn-warning" id="clear" value="clear">
-    clear
-  </button>
-  <% @all_tags.each do |tag| %>
-    <% tag_name = strip_tags(tag.name) %>
-    <button type="button" class="btn btn-default tag" value="<%= tag_name %>">
-      <%= tag_name %>
+<div class="photos">
+  <% if @all_tags.count > 0 %>
+  <div class="btn-group" id="tags">
+    <button type="button" class="btn btn-warning" id="clear" value="clear">
+      clear
     </button>
-    <% end %>
-  </div>
-<% end %>
-
-<%= render partial: 'photos/index' %> 
+    <% @all_tags.each do |tag| %>
+      <% tag_name = strip_tags(tag.name) %>
+      <button type="button" class="btn btn-default tag" 
+        value="<%= tag_name %>">
+        <%= tag_name %>
+      </button>
+      <% end %>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  
+  <%= render partial: 'photos/index' %> 
+</div>

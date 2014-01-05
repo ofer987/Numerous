@@ -70,4 +70,18 @@ class PhotoTest < ActiveSupport::TestCase
     assert photo.tag_links.where(tag_id: tag2.id).any?, 
       "should have created tag_links for tag2"
   end
+  
+  test 'title should display nbsp; if empty' do
+    photo = Photo.new(title: 'non-empty')
+    assert photo.displayed_title == 'non-empty'
+
+    photo = Photo.new(title: '')
+    assert photo.displayed_title == '&nbsp;'
+
+    photo = Photo.new(title: '  ')
+    assert photo.displayed_title == '&nbsp;'
+
+    photo = Photo.new(title: "\n")
+    assert photo.displayed_title == '&nbsp;'
+  end
 end
