@@ -3,5 +3,5 @@
 cusco_trip:
   title: Cusco Trip
   sub_title: Cusco is amazing
-  content: We arrived in cusco
+  content: <p>We arrived in cusco</p>
   published_at: '2013-09-09 03:28:28'

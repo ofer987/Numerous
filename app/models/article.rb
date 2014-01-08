@@ -27,6 +27,10 @@ class Article < ActiveRecord::Base
   
   default_scope { order('published_at DESC') }
 
+  def content
+    self[:content].html_safe
+  end
+
   def photos_attributes=(attributes)
     attributes[:load_photo_files].each do |uploaded_file|
       self.photos.build(title: '', load_photo_file: uploaded_file)
