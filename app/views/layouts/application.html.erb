@@ -43,7 +43,6 @@
           <ul class="nav navbar-nav">
             <li id="articles-item"><a href="/">Home</a></li>
             <li id="photos-item"><%= link_to "Photos", photos_url %></li>
-            <li id="books-item"><%= link_to "Books", books_read_url %></li>
             <li id="cv-item"><%= link_to "About", "/cv" %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -60,7 +59,9 @@
       <div class="alert alert-info" id="notice"><%= notice %></div>
     <% end %>
       
-    <%= yield %>
+    <div class="page">
+      <%= yield %>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

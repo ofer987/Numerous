@@ -2,3 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.curriculum {
+  .contact {
+    p {
+      padding: 10px 0 10px 0;
+
+      &#email {
+        background: url('/assets/application/googleplus.png') no-repeat 0 50%;
+      }
+
+      &#facebook {
+        background: url('/assets/application/facebook.png') no-repeat 0 50%;
+      }
+
+      &#linkedin {
+        background: url('/assets/application/linkedin.png') no-repeat 0 50%;
+      }
+  
+      a {
+       padding: 0 0 0 60px;
+      }
+    }
+  }
+}
