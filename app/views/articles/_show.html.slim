@@ -7,7 +7,7 @@ div class="page-header" id="article_#{@article.to_param}"
 div class=""
 	/ Do not escape html
 	/ We want to display the article's html tags
-	== @article.content
+	== raw @article.content
 
 /		- if @edit_mode
 /			= form_for(@article.photos.build, url: "/articles/#{@article.to_param}/create_photo", remote: true) do |form|
