@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
 
   scope :all_tagable, ->(tagable_class) do 
     self.joins(:tag_links).
-      where(tag_links: { tagable_type: tagable_class.to_s } )
+      where(tag_links: { tagable_type: tagable_class.to_s } ).distinct
   end
   
   has_many :tag_links, dependent: :destroy

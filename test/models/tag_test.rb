@@ -70,13 +70,26 @@ class TagTest < ActiveSupport::TestCase
 
   test 'should retrieve all Photo tags' do
     expected_tags = Tag.joins(:tag_links).
-      where(tag_links: { tagable_type: 'Photo' })
+      where(tag_links: { tagable_type: 'Photo' }).distinct
     actual_tags = Tag.all_tagable(Photo)
 
     assert expected_tags.count == actual_tags.count
 
     expected_tags.each_with_index do |expected_tag, index|
       assert expected_tag.id == actual_tags.to_a[index].id
+    end
+  end
+
+  test 'should retrieve all unique Photo tags' do
+    tags = Tag.all_tagable(Photo)
+
+    tags.each_with_index do |tag, i|
+      tags.each_with_index do |verify_tag, j|
+        unless i == j
+          refute tag.name == verify_tag.name, 
+            "the tag #{tag.name} exists more than once"
+        end
+      end
     end
   end
 end
