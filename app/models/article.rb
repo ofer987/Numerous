@@ -28,7 +28,7 @@ class Article < ActiveRecord::Base
   default_scope { order('published_at DESC') }
 
   def content
-    self[:content].html_safe
+    to_html self[:content]
   end
 
   def photos_attributes=(attributes)
@@ -44,6 +44,15 @@ class Article < ActiveRecord::Base
   end
   
   private
+
+  def to_html(content)
+    # It is assumed that the entry is written 
+    # in paragraph form (at least one p
+    html = "<p>#{content.strip}</p>"
+      
+    # replace every newline (and/or carriage return) with a </p<p>
+    html = html.gsub(/(\r{0,1}\n{1})+/, "</p><p>")
+  end
   
   def add_remove_photos(photos_attributes)
     photos_attributes.each do |index, photo|

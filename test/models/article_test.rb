@@ -60,4 +60,10 @@ class ArticleTest < ActiveSupport::TestCase
     article.tags_attributes = { tags_attributes: 'Toronto' }
     assert article.tags.to_a[0].name == 'toronto'
   end
+
+  test 'article content should be displayed in paragraph form' do
+    article = Article.new(content: "Hello\nWorld")
+
+    assert "<p>Hello</p><p>World</p>" == article.content
+  end
 end
