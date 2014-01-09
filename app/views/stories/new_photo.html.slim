@@ -3,8 +3,9 @@
 		div class="instructions" Drop Photos
 		= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
 		
-= link_to "Finish", gazette_article_path(@article.gazette, @article)		
+= link_to "Finish", article_path( @article)		
 		
 div id="notice"
 
-== render partial: 'photos/index', locals: { photos: @article.photos }
+- @photos = @article.photos
+== render partial: 'photos/index'
