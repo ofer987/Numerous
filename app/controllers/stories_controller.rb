@@ -21,9 +21,9 @@ class StoriesController < ApplicationController
   def create_photo
     @article = Article.find_by_id(params[:article_id])
   
-    @photo = @article.photos.new(load_photo_file: photo_params[:load_photo_file])
-    if @photo and @photo.valid?
-      @photo.save
+    @photo = Photo.new(load_photo_file: photo_params[:load_photo_file])
+    if @photo.valid?
+      @article.photos << @photo
       render file: 'stories/create_photo.js'
     else
       render file: 'stories/upload_file_error.js', locals: { notice: "Error uploading file" }
