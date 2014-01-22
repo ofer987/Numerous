@@ -1,41 +1,41 @@
 div class="photo"
-	div class="panel panel-primary"
-		div class="panel-heading"
-			div class="panel-title"
-				#{@photo.title.blank? ? "No Title" : @photo.title}
-		ul class="list-group"
-			li class="list-group-item"
-				- unless @is_first_photo
-					= link_to \
-						content_tag(:span, '', 
-							class: 'glyphicon glyphicon-chevron-left'),
-						photo_path(@photos[@current_photo_index - 1], 
-						tags: params[:tags]),
-						role: "button"
-				- unless @is_last_photo
-					= link_to \
-						content_tag(:span, '',
-							class: 'glyphicon glyphicon-chevron-right'),
-						photo_path(@photos[@current_photo_index + 1], 
-						tags: params[:tags]),
-						role: "button"
-			li class="list-group-item"
-				= image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}")
-			li class="list-group-item"	
-				div class="btn-group"
-					a [role="button" class="btn btn-warning"
-						href="#{@local_photos_dir}#{@photo.small_fichier.filename}"]
-						| Small
-					- unless @photo.medium_fichier.nil?
-						a [role="button" class="btn btn-primary" 
-							href="#{@local_photos_dir}#{@photo.medium_fichier.filename}"]
-							| Medium
-					- unless @photo.large_fichier.nil?
-						a [role="button" class="btn btn-success"
-							href="#{@local_photos_dir}#{@photo.large_fichier.filename}"]
-							| Large
-					a [role="button" class="btn btn-info"
-						href="#{@local_photos_dir}#{@photo.original_fichier.filename}"]
-						| Original
-			li class="list-group-item"
-				#{@photo.description}
+  div class="panel panel-primary"
+    div class="panel-heading"
+      div class="panel-title"
+        #{@photo.title.blank? ? "No Title" : @photo.title}
+    ul class="list-group"
+      li class="list-group-item"
+        - unless @is_first_photo
+          = link_to \
+            content_tag(:span, '', 
+              class: 'glyphicon glyphicon-chevron-left'),
+            photo_path(@photos[@current_photo_index - 1], 
+            tags: params[:tags]),
+            role: "button"
+        - unless @is_last_photo
+          = link_to \
+            content_tag(:span, '',
+              class: 'glyphicon glyphicon-chevron-right'),
+            photo_path(@photos[@current_photo_index + 1], 
+            tags: params[:tags]),
+            role: "button"
+      li class="list-group-item"
+        = image_tag("#{@local_photos_dir}#{@displayed_fichier.filename}")
+      li class="list-group-item"  
+        div class="btn-group"
+          a [role="button" class="btn btn-warning"
+            href="#{@local_photos_dir}#{@photo.small_fichier.filename}"]
+            | Small
+          - unless @photo.medium_fichier.nil?
+            a [role="button" class="btn btn-primary" 
+              href="#{@local_photos_dir}#{@photo.medium_fichier.filename}"]
+              | Medium
+          - unless @photo.large_fichier.nil?
+            a [role="button" class="btn btn-success"
+              href="#{@local_photos_dir}#{@photo.large_fichier.filename}"]
+              | Large
+          a [role="button" class="btn btn-info"
+            href="#{@local_photos_dir}#{@photo.original_fichier.filename}"]
+            | Original
+      li class="list-group-item"
+        #{@photo.description}
