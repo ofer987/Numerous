@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @place_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @place_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_place_type_path(@place_type) %> |
+<%= link_to 'Back', place_types_path %>
