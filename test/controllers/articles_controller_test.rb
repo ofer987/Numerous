@@ -67,16 +67,18 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should update article" do
     new_content = 'This is an awesome story'
     
-    put :update, format: :js, id: @cusco_trip_article, article: { content: new_content }
+    put :update, format: :js, id: @cusco_trip_article, 
+      article: { content: new_content }
     assert_response :success
     assert_equal(
-      new_content, 
+      "<p>#{new_content}</p>", 
       assigns(:article).content, 
       "The article's content should have been updated")
   end
 
   test "should fail to update article" do
-    put :update, format: :js, id: @cusco_trip_article, article: { published_at: nil }
+    put :update, format: :js, id: @cusco_trip_article, 
+      article: { published_at: nil }
     assert_response :success
     refute assigns(:article).valid?,
       "The article should not have been updated"

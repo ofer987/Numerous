@@ -8,7 +8,8 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   fixtures :filesize_types, :photos, :fichiers, :comments, :users, :tags,
-    :articles, :article_photos, :tag_links
+    :articles, :article_photos, :tag_links, :locations, :countries, :cities,
+    :places, :place_types
 
   # Add more helper methods to be used by all tests here...
   def login_as(user)

@@ -1,4 +1,14 @@
 Numerous::Application.routes.draw do
+  resources :places
+
+  resources :place_types
+
+  resources :cities
+
+  resources :countries
+
+  resources :locations
+
   resources :tag_links
 
   controller :stories do
