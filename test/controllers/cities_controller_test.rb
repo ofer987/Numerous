@@ -19,7 +19,7 @@ class CitiesControllerTest < ActionController::TestCase
 
   test "should create city" do
     assert_difference('City.count') do
-      post :create, city: { name: 'Quito', country_id: @country.id }
+      post :create, country_id: @country.id, city: { name: 'Quito' }
     end
 
     assert_redirected_to country_city_path(@country.id, assigns(:city))
