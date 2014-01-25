@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+cuenca:
+  name: Cuenca
+  country: ecuador
 
-two:
-  name: MyString
+lima:
+  name: Lima 
+  country: peru

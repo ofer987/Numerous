@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  place_type_id: 
-
-two:
-  name: MyString
-  place_type_id: 
+freddo:
+  name: Tutto Freddo
+  place_type: cafe

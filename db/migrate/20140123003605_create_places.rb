@@ -2,7 +2,7 @@ class CreatePlaces < ActiveRecord::Migration
   def change
     create_table :places do |t|
       t.string :name
-      t.references :place_type, index: true
+      t.references :place_type, index: true, null: false
 
       t.timestamps
     end

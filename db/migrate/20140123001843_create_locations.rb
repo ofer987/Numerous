@@ -1,6 +1,7 @@
 class CreateLocations < ActiveRecord::Migration
   def change
     create_table :locations do |t|
+      t.references :locationable, polymorphic: true, index: true, null: false
       t.string :name, default: ''
       t.string :address
       t.string :city
@@ -10,7 +11,5 @@ class CreateLocations < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_reference :locations, :locationable, polymorphic: true, index: true
   end
 end

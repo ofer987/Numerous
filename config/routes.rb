@@ -1,14 +1,12 @@
 Numerous::Application.routes.draw do
-  resources :places
+  resources :countries do
+    resources :cities do
+      resources :places
+    end
+  end
 
-  resources :place_types
-
-  resources :cities
-
-  resources :countries
-
+  # These should be removed and accessed using a different controller
   resources :locations
-
   resources :tag_links
 
   controller :stories do

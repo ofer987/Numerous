@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  address: MyString
-  city: MyString
-  country: MyString
-  postal_code: MyString
-  coordinates: MyString
+Ecuador:
+  locationable: Ecuador (Country)
+  name: Ecuador
+  address: 
+  city:
+  country: Ecuador
+  postal_code: 
+  coordinates: -1.7929665,-78.1368875
 
-two:
-  name: MyString
-  address: MyString
-  city: MyString
-  country: MyString
-  postal_code: MyString
-  coordinates: MyString
+Peru:
+  locationable: Peru (Country)
+  name: Peru
+  address: 
+  city: 
+  country: Peru
+  postal_code: 
+  coordinates: -9.1951786,-74.9904165
