@@ -2,7 +2,7 @@ require 'test_helper'
 
 class PlaceTypesControllerTest < ActionController::TestCase
   setup do
-    @place_type = place_types(:one)
+    @place_type = place_types(:cafe)
   end
 
   test "should get index" do
@@ -18,7 +18,9 @@ class PlaceTypesControllerTest < ActionController::TestCase
 
   test "should create place_type" do
     assert_difference('PlaceType.count') do
-      post :create, place_type: { description: @place_type.description, name: @place_type.name }
+      post :create, place_type: { 
+        description: @place_type.description, 
+        name: @place_type.name }
     end
 
     assert_redirected_to place_type_path(assigns(:place_type))
@@ -35,7 +37,10 @@ class PlaceTypesControllerTest < ActionController::TestCase
   end
 
   test "should update place_type" do
-    patch :update, id: @place_type, place_type: { description: @place_type.description, name: @place_type.name }
+    patch :update, id: @place_type, place_type: { 
+      description: @place_type.description, 
+      name: @place_type.name 
+    }
     assert_redirected_to place_type_path(assigns(:place_type))
   end
 

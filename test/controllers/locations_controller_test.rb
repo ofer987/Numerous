@@ -2,7 +2,15 @@ require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
   setup do
-    @location = locations(:one)
+    @location = locations(:ecuador)
+    @new_location = Location.new(address: '1 calle de parque calderon',
+                                 city: 'Cuenca',
+                                 country: 'Ecuador',
+                                 postal_code: '',
+                                 locationable: places(:freddo),
+                                 coordinates: "12, 45",
+                                 name: 'Tutto Freddo',
+                                )
   end
 
   test "should get index" do
@@ -18,7 +26,14 @@ class LocationsControllerTest < ActionController::TestCase
 
   test "should create location" do
     assert_difference('Location.count') do
-      post :create, location: { address: @location.address, city: @location.city, coordinates: @location.coordinates, country: @location.country, name: @location.name, postal_code: @location.postal_code }
+      post :create, location: { 
+        address: @new_location.address, 
+        city: @new_location.city, 
+        coordinates: @new_location.coordinates, 
+        country: @new_location.country, 
+        name: @new_location.name, 
+        postal_code: @new_location.postal_code 
+      }
     end
 
     assert_redirected_to location_path(assigns(:location))
@@ -35,7 +50,14 @@ class LocationsControllerTest < ActionController::TestCase
   end
 
   test "should update location" do
-    patch :update, id: @location, location: { address: @location.address, city: @location.city, coordinates: @location.coordinates, country: @location.country, name: @location.name, postal_code: @location.postal_code }
+    patch :update, id: @location, location: { 
+      address: @new_location.address, 
+      city: @new_location.city, 
+      coordinates: @new_location.coordinates, 
+      country: @new_location.country, 
+      name: @new_location.name, 
+      postal_code: @new_location.postal_code 
+    }
     assert_redirected_to location_path(assigns(:location))
   end
 

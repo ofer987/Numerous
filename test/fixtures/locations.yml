@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-Ecuador:
+ecuador:
   locationable: Ecuador (Country)
   name: Ecuador
   address: 
@@ -9,7 +9,7 @@ Ecuador:
   postal_code: 
   coordinates: -1.7929665,-78.1368875
 
-Peru:
+peru:
   locationable: Peru (Country)
   name: Peru
   address: 

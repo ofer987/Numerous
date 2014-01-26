@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 freddo:
+  city: cuenca
   name: Tutto Freddo
   place_type: cafe

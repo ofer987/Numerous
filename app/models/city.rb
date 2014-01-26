@@ -6,6 +6,7 @@ class City < ActiveRecord::Base
   # updated_at: datetime
 
   belongs_to :country
+  has_many :places, dependent: :destroy
 
   validates :country, presence: true
 end

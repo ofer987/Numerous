@@ -1,0 +1,11 @@
+p
+  strong Name:
+  = @place.name 
+
+p
+  strong Place type:
+  = @place.place_type 
+
+= link_to 'Edit', edit_country_city_place_path(@country, @city, @place)
+span |
+= link_to 'Back', country_city_places_path(@country, @city)
