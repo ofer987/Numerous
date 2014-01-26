@@ -14,12 +14,12 @@ table
         td
           = city.name
         td
-          = link_to 'Show', city
+          = link_to 'Show', [@country, city]
         td
-          = link_to 'Edit', edit_city_path(city)
+          = link_to 'Edit', edit_country_city_path(@country, city)
         td
-          = link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Destroy', [@country, city], method: :delete, data: { confirm: 'Are you sure?' }
 
 br
 
-= link_to 'New City', new_city_path 
+= link_to 'New City', new_country_city_path(@country)

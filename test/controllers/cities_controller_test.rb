@@ -36,13 +36,13 @@ class CitiesControllerTest < ActionController::TestCase
   end
 
   test "should update city" do
-    patch :update, id: @city, city: { name: 'Parque del Cajas' }
+    patch :update, id: @city, country_id: @country, city: { name: 'Parque del Cajas' }
     assert_redirected_to country_city_path(@country, assigns(:city))
   end
 
   test "should destroy city" do
     assert_difference('City.count', -1) do
-      delete :destroy, id: @city
+      delete :destroy, id: @city, country_id: @city.country
     end
 
     assert_redirected_to country_cities_path(@country)

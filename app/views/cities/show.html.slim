@@ -1,8 +1,7 @@
 p
-  strong
-    Name:
+  strong Name:
   = @city.name 
-p
 
-= link_to 'Edit', edit_city_path(@city) |
-= link_to 'Back', cities_path 
+= link_to 'Edit', edit_country_city_path(@country, @city)
+span |
+= link_to 'Back', country_cities_path(@country)

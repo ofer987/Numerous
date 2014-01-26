@@ -2,6 +2,6 @@ h1 Editing city
 
 == render 'form' 
 
-= link_to 'Show', @city
+= link_to 'Show', [@country, @city]
 span |
-= link_to 'Back', cities_path 
+= link_to 'Back', country_cities_path(@country)
