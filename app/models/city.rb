@@ -7,6 +7,7 @@ class City < ActiveRecord::Base
 
   belongs_to :country
   has_many :places, dependent: :destroy
+  has_many :locations, as: :locationable, dependent: :destroy
 
   validates :country, presence: true
 end

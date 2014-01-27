@@ -1,0 +1,2 @@
+module Locationable::CountriesHelper
+end

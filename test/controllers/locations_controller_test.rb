@@ -24,9 +24,12 @@ class LocationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create location" do
-    assert_difference('Location.count') do
-      post :create, location: { 
+  test "should fail to create a location when locationable not specified" do
+    assert_raises(ActionController::UrlGenerationError) do
+      post :create, 
+        location: { 
+        locationable_id: nil,
+        locationable_type: 'Place',
         address: @new_location.address, 
         city: @new_location.city, 
         coordinates: @new_location.coordinates, 
@@ -35,8 +38,6 @@ class LocationsControllerTest < ActionController::TestCase
         postal_code: @new_location.postal_code 
       }
     end
-
-    assert_redirected_to location_path(assigns(:location))
   end
 
   test "should show location" do

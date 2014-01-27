@@ -4,7 +4,7 @@ class Country < ActiveRecord::Base
   # created_at: datetime
   # updated_at: datetime
 
-  has_many :locations
+  has_many :locations, as: :locationable, dependent: :destroy
   has_many :cities
 
   validates :name, uniqueness: true, presence: true

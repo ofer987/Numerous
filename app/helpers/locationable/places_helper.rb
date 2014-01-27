@@ -1,0 +1,2 @@
+module Locationable::PlacesHelper
+end

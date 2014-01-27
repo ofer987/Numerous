@@ -36,7 +36,8 @@ class CitiesControllerTest < ActionController::TestCase
   end
 
   test "should update city" do
-    patch :update, id: @city, country_id: @country, city: { name: 'Parque del Cajas' }
+    patch :update, id: @city, country_id: @country, 
+      city: { name: 'Parque del Cajas' }
     assert_redirected_to country_city_path(@country, assigns(:city))
   end
 

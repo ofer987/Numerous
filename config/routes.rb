@@ -5,8 +5,28 @@ Numerous::Application.routes.draw do
     end
   end
 
+  resources :countries do
+    scope module: 'locationable' do
+      resources :countries, only: [:create, :update]
+    end
+    resources :locations, only: [:index, :edit, :show, :delete]
+  end
+
+  resources :cities do
+    scope module: 'locationable' do
+      resources :cities, only: [:create, :update]
+    end
+    resources :locations, only: [:index, :edit, :show, :delete]
+  end
+
+  resources :places do
+    scope module: 'locationable' do
+      resources :places, only: [:create, :update]
+    end
+    resources :locations, only: [:index, :edit, :show, :delete]
+  end
+
   # These should be removed and accessed using a different controller
-  resources :locations
   resources :tag_links
 
   controller :stories do
