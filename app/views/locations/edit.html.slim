@@ -1,0 +1,7 @@
+h1 Editing location
+
+== render 'form' 
+
+= link_to 'Show', [@locationable, @location]
+span |
+= link_to 'Back', polymorphic_path([@locationable, Location])

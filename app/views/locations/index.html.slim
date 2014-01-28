@@ -1,0 +1,41 @@
+h1 Listing locations
+
+table
+  thead
+    tr
+      th Name
+      th Address
+      th City
+      th Country
+      th Postal code
+      th Coordinates
+      th 
+      th 
+      th 
+
+  tbody
+    - @locations.each do |location| 
+      tr
+        td
+          = location.name 
+        td
+          = location.address 
+        td
+          = location.city 
+        td
+          = location.country 
+        td
+          = location.postal_code 
+        td
+          = location.coordinates 
+        td
+          = link_to 'Show', polymorphic_path([@locationable, location])
+        td
+          = link_to 'Edit', edit_polymorphic_path([@locationable, location]) 
+        td
+          = link_to 'Destroy', [@locationable, location], 
+            method: :delete, data: { confirm: 'Are you sure?' } 
+
+br
+
+= link_to 'New Location', new_polymorphic_path(@locationable) 

@@ -43,7 +43,8 @@ class LocationsController < ApplicationController
   # DELETE locations/1
   def destroy
     @location.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    redirect_to polymorphic_url([@locationable, Location]), 
+      notice: 'Location was successfully destroyed.'
   end
 
   private

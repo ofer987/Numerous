@@ -1,0 +1,44 @@
+= form_for([@locationable, @location]) do |f| 
+  - if @location.errors.any? 
+    div id="error_explanation"
+      h2
+        | #{pluralize(@location.errors.count, "error")} prohibited this 
+        | location from being saved:
+
+      ul
+        - @location.errors.full_messages.each do |msg| 
+          li
+            = msg 
+
+  div class="field"
+    = f.label :name 
+    br
+    = f.text_field :name 
+  
+  div class="field"
+    = f.label :address 
+    br
+    = f.text_field :address 
+  
+  div class="field"
+    = f.label :city 
+    br
+    = f.text_field :city 
+  
+  div class="field"
+    = f.label :country 
+    br
+    = f.text_field :country 
+  
+  div class="field"
+    = f.label :postal_code 
+    br
+    = f.text_field :postal_code 
+  
+  div class="field"
+    = f.label :coordinates 
+    br
+    = f.text_field :coordinates 
+  
+  div class="actions"
+    = f.submit 

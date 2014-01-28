@@ -1,0 +1,28 @@
+p
+  strong Name:
+  = @location.name 
+
+p
+  strong Address:
+  = @location.address 
+
+p
+  strong City:
+  = @location.city 
+
+p
+  strong Country:
+  = @location.country 
+
+p
+  strong Postal code:
+  = @location.postal_code 
+
+p
+  strong Coordinates:
+  = @location.coordinates 
+
+= link_to 'Edit', edit_polymorphic_path([@locationable, @location])
+span |
+= link_to 'Back', polymorphic_path([@locationable, Location]) 
+

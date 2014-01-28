@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 ecuador:
-  locationable: Ecuador (Country)
+  locationable: ecuador (Country)
   name: Ecuador
   address: 
   city:
@@ -10,10 +10,19 @@ ecuador:
   coordinates: -1.7929665,-78.1368875
 
 peru:
-  locationable: Peru (Country)
+  locationable: peru (Country)
   name: Peru
   address: 
   city: 
   country: Peru
   postal_code: 
   coordinates: -9.1951786,-74.9904165
+
+freddo_original:
+  locationable: freddo (Place)
+  name: Tutto Freddo
+  address: 2 calle de parque Calderon
+  city: Cuenca
+  country: Ecuador
+  postal_code:
+  coordinates: -9.213321,-54.233
