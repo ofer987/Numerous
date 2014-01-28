@@ -1,5 +1,5 @@
 class Locationable::CountriesController < LocationsController
-  before_action :set_location, only: [:show]
+  before_action :set_location, only: [:show, :edit, :update, :destroy]
   before_action :set_locationable
 
   def create
@@ -7,8 +7,6 @@ class Locationable::CountriesController < LocationsController
   end
 
   def show
-    @index_path = country_countries_path(@locationable)
-    @edit_path = edit_country_country_path(@locationable, @location)
   end
 
   private

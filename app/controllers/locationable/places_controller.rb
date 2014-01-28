@@ -1,5 +1,5 @@
 class Locationable::PlacesController < LocationsController
-  before_action :set_location, only: [:show, :edit, :destroy, :update]
+  before_action :set_location, only: [:show, :edit, :update, :destroy]
   before_action :set_locationable
 
   def create

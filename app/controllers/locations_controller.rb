@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
 
   # GET locations
   def index
-    @locations = Location.all
+    @locations = @locationable.locations
   end
 
   # GET locations/1
@@ -34,7 +34,8 @@ class LocationsController < ApplicationController
   # PATCH/PUT locations/1
   def update
     if @location.update(location_params)
-      redirect_to @location, notice: 'Location was successfully updated.'
+      redirect_to [@locationable, @location], 
+        notice: 'Location was successfully updated.'
     else
       render action: 'edit'
     end

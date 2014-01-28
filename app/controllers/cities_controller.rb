@@ -3,8 +3,8 @@ class CitiesController < ApplicationController
 
   # GET /cities
   def index
-    @cities = City.all
     @country = Country.find(params[:country_id])
+    @cities = @country.cities
   end
 
   # GET /cities/1
