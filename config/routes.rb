@@ -1,4 +1,6 @@
 Numerous::Application.routes.draw do
+  resources :place_types
+
   resources :countries do
     resources :cities do
       resources :places

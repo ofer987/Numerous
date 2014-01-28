@@ -1,0 +1,11 @@
+p
+  strong Name:
+  = @place_type.name 
+
+p
+  strong Description:
+  = @place_type.description 
+
+= link_to 'Edit', edit_place_type_path(@place_type)
+span |
+= link_to 'Back', place_types_path 
