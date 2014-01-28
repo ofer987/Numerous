@@ -7,10 +7,14 @@ class CityTest < ActiveSupport::TestCase
   end
 
   test 'destroying a city should delete places' do
-    city = cities(:cuenca)
-    city.destroy
+    cuenca = cities(:cuenca)
+    assert cuenca.places.size > 0, 
+      'the city of cuenca should have at least one place'
+    cuenca.destroy
 
-    assert Place.find_by_city_id(city.id).size == 0,
-      'did not delete the places associated with this city'
+    Place.all.each do |place|
+      refute place.city == cuenca, 
+        "oh no, cuenca's places have not been destroyed"
+    end
   end
 end
