@@ -2,6 +2,10 @@
 
 ecuador:
   name: Ecuador
+  description:
+  wikipedia_url:
 
 peru:
   name: Peru
+  description:
+  wikipedia_url:

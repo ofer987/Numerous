@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 cuenca:
-  name: Cuenca
   country: ecuador
+  name: Cuenca
+  description: 
+  wikipedia_url:
 
 lima:
-  name: Lima 
   country: peru
+  name: Lima 
+  description: 
+  wikipedia_url:

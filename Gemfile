@@ -32,7 +32,7 @@ gem 'goodreads', git: 'https://github.com/ofer987/goodreads'
 
 gem 'rake'
 
-gem 'slim'
+gem 'slim-rails'
 
 gem 'jquery-fileupload-rails'
 
