@@ -29,6 +29,9 @@ Gazette.delete_all
 Article.delete_all
 ArticlePhoto.delete_all
 User.delete_all
+Country.delete_all
+City.delete_all
+Place.delete_all
 
 # Create administrator account
 admin = User.new(name: 'admin', password: 'default', password_confirmation: 'default')
@@ -38,7 +41,7 @@ admin.save!
 start_datetime = DateTime.civil(2011, 12, 29, 0, 0, 0)
 for i in 1..6
   puts "Creating photo #{i}"
-  photo = Photo.create! do |p|
+  Photo.create! do |p|
     p.title = "Photo_#{i}"
     p.description = "This is photo #{i}"
     p.load_photo_file = photo_data
@@ -70,11 +73,50 @@ puts "Done adding photos to articles"
 
 # Create simple articles
 puts "Create 10 more articles"
-10.times do |i|
-  article = Article.create! do |article|
+10.times do |j|
+  Article.create! do |article|
     article.gazette = gazette_one
-    article.title = "Article #{i}"
+    article.title = "Article #{j}"
     article.content = "<p>Tearaway is about blending the real and digital worlds, pulling down the boundaries that separate us from what we're playing. To that end, you're not just a gamer when you're playing Tearaway; you're a godlike presence, representing both the ultimate goal and the protagonist.</p><p>In essence, then, you play two roles. One of those roles is as a sentient envelope on a mission. Your first decision is to take the reins of either the male envelope Iota or the female envelope Atoi. (Note the playful spelling trick.) Iota or Atoi becomes the protagonist, the driving force behind the narrative and the personality that other characters interact with. No matter which one you choose, the end goal is the same. Reach the sun--that's all you have to do. The twist is that the sun is you. Yes, you, the player.</p><p>Through the magic of the PS Vita's front camera, your face appears within the outline of the sun and becomes the visual embodiment of the second of your two roles. You smile; sun smiles. You frown; sun frowns. You point your Vita at your dog; sun becomes a dog. An ugly visage (in your case, perhaps less ugly) intruding and bearing down on the papercraft environment causes a bit of an understandable stir, so Iota (or Atoi) sets out to find the meaning behind and origin of the thing from another world.</p>"
     article.published_at = DateTime.now
   end
+end
+
+# Create country for Ecuador
+ecuador = Country.create! do |country|
+  country.name = 'Ecuador'
+  country.wikipedia_url = 'http://en.wikipedia.org/wiki/Ecuador'
+end
+
+# Create cities for Ecuador
+cuenca = City.create! do |city|
+  city.country = ecuador
+  city.name = 'Cuenca'
+  city.wikipedia_url = 'http://en.wikipedia.org/wiki/Cuenca,_Ecuador'
+end
+
+# Create places for Cuenca
+tutto_freddo = Place.create! do |place|
+  place.city = cuenca
+  place.name = 'Tutto Freddo'
+  place.description = 'This cafe, situated by the incredibly beautiful parque calderón boasts two locations, one small, and one larger. Both offer a convivial environment with good, respectable, and quick service. The servers and waitresses bring you delicious coffee. I recommend both the cappuchino and the mochachino. Drink one while munching on a strawberry or blueberry tart, and do not forget to a leave a small tip because this place merits it. It goes without further adieu that this place is recommended.'
+end
+
+# Create locations for Tutto Freddo
+Location.create! do |location|
+  location.place = tutto_freddo
+  location.name = 'Small Tutto Freddo'
+  location.address = '1 parque calderón'
+  location.city = 'cuenca'
+  location.country = 'Ecuador'
+  location.coordinates = ''
+end
+
+Location.create! do |location|
+  location.place = tutto_freddo
+  location.name = 'Large Tutto Freddo'
+  location.address = '2 parque calderón'
+  location.city = 'cuenca'
+  location.country = 'Ecuador'
+  location.coordinates = ''
 end
