@@ -1,6 +1,8 @@
 Numerous::Application.routes.draw do
   resources :place_types
 
+  resources :destinations, only: [:index]
+
   resources :countries do
     resources :cities do
       resources :places
@@ -8,31 +10,21 @@ Numerous::Application.routes.draw do
   end
 
   resources :countries do
-    # scope module: 'locationable' do
-    #   controller :countries do
-    #     get 'countries/:country_id/locations' => :index
-    #     get 'countries/:country_id/locations/new' => :new
-    #     get 'countries/:country_id/'
-    #   end
-    # end
     scope module: 'locationable' do
       resources :countries, as: 'locations'
     end
-    # resources :locations, only: [:index, :edit, :show, :destroy]
   end
 
   resources :cities do
     scope module: 'locationable' do
       resources :cities, as: 'locations'
     end
-    # resources :locations, only: [:index, :edit, :show, :destroy]
   end
 
   resources :places do
     scope module: 'locationable' do
       resources :places, as: 'locations'
     end
-    # resources :locations, only: [:index, :edit, :show, :destroy]
   end
 
   # These should be removed and accessed using a different controller
