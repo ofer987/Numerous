@@ -32,6 +32,7 @@ User.delete_all
 Country.delete_all
 City.delete_all
 Place.delete_all
+Location.delete_all
 
 # Create administrator account
 admin = User.new(name: 'admin', password: 'default', password_confirmation: 'default')
