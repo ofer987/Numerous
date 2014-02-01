@@ -1,6 +1,8 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :authorize, only: [:index, :show]
+
   # GET /cities
   def index
     @country = Country.find(params[:country_id])

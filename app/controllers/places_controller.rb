@@ -2,6 +2,8 @@ class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :set_tree
 
+  skip_before_action :authorize, only: [:index, :show]
+
   # GET /places
   def index
     @places = Place.all

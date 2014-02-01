@@ -1,11 +1,14 @@
-p
-  strong Name:
-  = @place.name 
+div class="jumbotron"
+  h1 #{@place.name}
+  p #{@place.description}
+  p #{@place.place_type.name} #{@place.place_type.description}
 
-p
-  strong Place type:
-  = @place.place_type 
+ul class="list-group"
+  li class="list-group-item"
+    - unless @place.wikipedia_url.blank?
+      a href="#{@place.wikipedia_url}" Wikipedia Article
 
-= link_to 'Edit', edit_country_city_place_path(@country, @city, @place)
-span |
-= link_to 'Back', country_city_places_path(@country, @city)
+- if @is_logged_in
+  = link_to 'Edit', edit_country_city_place_path(@country, @city, @place)
+  span &nbsp;|&nbsp;
+= link_to 'Back', destinations_path

@@ -8,11 +8,11 @@ class CreateFilesizeTypes < ActiveRecord::Migration
       t.timestamps
     end
     
-    FilesizeType.create(name: 'original')
-    FilesizeType.create(name: 'thumbnail',  width: 150,   height: 150)
-    FilesizeType.create(name: 'large',      width: 2000,  height: 2000)
-    FilesizeType.create(name: 'medium',     width: 1000,  height: 1000)
-    FilesizeType.create(name: 'small',      width: 800,   height: 800)
+    FilesizeType.create!(name: 'original')
+    FilesizeType.create!(name: 'thumbnail',  width: 150,   height: 150)
+    FilesizeType.create!(name: 'large',      width: 2000,  height: 2000)
+    FilesizeType.create!(name: 'medium',     width: 1000,  height: 1000)
+    FilesizeType.create!(name: 'small',      width: 800,   height: 800)
   end
   
   def down

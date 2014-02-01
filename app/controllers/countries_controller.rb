@@ -1,5 +1,7 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:show, :edit, :update, :destroy]
+  
+  skip_before_action :authorize, only: [:index, :show]
 
   # GET /countries
   def index
