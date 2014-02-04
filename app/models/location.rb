@@ -5,6 +5,7 @@ class Location < ActiveRecord::Base
   # name: nvarchar(255)
   # address: nvarchar(255)
   # city: nvarchar(255)
+  # province: nvarchar(255)
   # country: nvarchar(255)
   # postal_code: nvarchar(255)
   # coordinates: nvarchar(255)
@@ -12,4 +13,11 @@ class Location < ActiveRecord::Base
   # updated_at: datetime
   
   belongs_to :locationable, polymorphic: true
+
+  def full_address
+    "#{address}\n" +
+      "#{city}, #{province}\n" +
+      "#{postal_code}\n" +
+      "#{country}"
+  end
 end

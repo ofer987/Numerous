@@ -1,7 +1,23 @@
-p
-  strong Name:
-  = @city.name 
+div class="jumbotron"
+  h1 #{@city.name}
+  p #{@city.description}
+  p #{@city.place_type.name} #{@city.place_type.description}
 
-= link_to 'Edit', edit_country_city_path(@country, @city)
-span |
-= link_to 'Back', country_cities_path(@country)
+ul class="list-group"
+  - unless @city.wikipedia_url.blank?
+    li class="list-group-item"
+      a href="#{@city.wikipedia_url}" Wikipedia Article
+  - unless @city.home_url.blank?
+    li class="list-group-item"
+      a href="#{@city.home_url}" Home Page
+
+div id="locations"
+  - @city.locations.each_with_index do |location, index|
+    div [class="map-canvas" id="location-#{index}"
+      latitude="#{@city.locations.first.latitude}"
+      longitude="#{@city.locations.first.longitude}"]
+
+- if @is_logged_in
+  = link_to 'Edit', edit_country_city_place_path(@country, @city, @city)
+  span &nbsp;|&nbsp;
+= link_to 'Back', destinations_path

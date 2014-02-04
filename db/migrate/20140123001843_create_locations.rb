@@ -5,9 +5,11 @@ class CreateLocations < ActiveRecord::Migration
       t.string :name, default: ''
       t.string :address
       t.string :city
+      t.string :province
       t.string :country
       t.string :postal_code
-      t.string :coordinates
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end

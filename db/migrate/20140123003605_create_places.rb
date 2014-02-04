@@ -5,7 +5,8 @@ class CreatePlaces < ActiveRecord::Migration
       t.references :place_type, index: true, null: false
       t.string :name
       t.text :description
-      t.text :wikipedia_url
+      t.string :wikipedia_url
+      t.string :home_url
 
       t.timestamps
     end

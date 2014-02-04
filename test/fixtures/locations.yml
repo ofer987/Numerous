@@ -7,7 +7,8 @@ ecuador:
   city:
   country: Ecuador
   postal_code: 
-  coordinates: -1.7929665,-78.1368875
+  latitude: -1.7929665
+  longitude: -78.1368875
 
 peru:
   locationable: peru (Country)
@@ -16,7 +17,8 @@ peru:
   city: 
   country: Peru
   postal_code: 
-  coordinates: -9.1951786,-74.9904165
+  latitude: -9.1951786
+  longitude: -74.9904165
 
 freddo_original:
   locationable: freddo (Place)
@@ -25,4 +27,5 @@ freddo_original:
   city: Cuenca
   country: Ecuador
   postal_code:
-  coordinates: -9.213321,-54.233
+  latitude: -9.213321
+  longitude: -54.233

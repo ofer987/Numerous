@@ -88,7 +88,8 @@ Location.create! do |location|
   location.locationable = ecuador
   location.name = 'Ecuador'
   location.country = 'Ecuador'
-  location.coordinates = '45, -45'
+  location.latitude = -2.8974913
+  location.longitude = -79.0043379
 end
 
 # Create cities for Ecuador
@@ -106,7 +107,8 @@ Location.create! do |location|
   location.name = 'Cuenca'
   location.city = 'Cuenca'
   location.country = 'Ecuador'
-  location.coordinates = '12.231231,45'
+  location.latitude = -1.7929665
+  location.longitude = -78.1368875
 end
 
 # Create places for Cuenca
@@ -115,7 +117,8 @@ tutto_freddo = Place.create! do |place|
   place.city = cuenca
   place.place_type = PlaceType.find_by_name('Cafe')
   place.name = 'Tutto Freddo'
-  place.description = 'This cafe, situated by the incredibly beautiful parque calderón boasts two locations, one small, and one larger. Both offer a convivial environment with good, respectable, and quick service. The servers and waitresses bring you delicious coffee. I recommend both the cappuchino and the mochachino. Drink one while munching on a strawberry or blueberry tart, and do not forget to a leave a small tip because this place merits it. It goes without further adieu that this place is recommended.'
+  place.description = 'This cafe, situated by the incredibly beautiful parque Abdón Calderón boasts two locations, one small, and one larger. Both offer a convivial environment with good, respectable, and quick service. The servers and waitresses bring you delicious coffee. I recommend both the cappuchino and the mochachino. Drink one while munching on a strawberry or blueberry tart, and do not forget to a leave a small tip because this place merits it. It goes without further ado that this place is recommended.'
+  place.home_url = 'http://www.tuttofreddo.ec'
 end
 
 # Create locations for Tutto Freddo
@@ -124,18 +127,20 @@ puts "\tCreating first location"
 Location.create! do |location|
   location.locationable = tutto_freddo
   location.name = 'Small Tutto Freddo'
-  location.address = '1 parque calderón'
-  location.city = 'cuenca'
+  location.address = 'Parque Abdón Calderón'
+  location.city = 'Cuenca'
   location.country = 'Ecuador'
-  location.coordinates = '43.856314,-76.31289'
+  location.latitude = -2.8966129
+  location.longitude = -79.0046871
 end
 
 puts "\tCreating second location"
 Location.create! do |location|
   location.locationable = tutto_freddo
   location.name = 'Large Tutto Freddo'
-  location.address = '2 parque calderón'
-  location.city = 'cuenca'
+  location.address = 'Parque Abdón Calderón'
+  location.city = 'Cuenca'
   location.country = 'Ecuador'
-  location.coordinates = '43.856314,-79.31289'
+  location.latitude = -2.8973512
+  location.longitude = -79.0056416
 end
