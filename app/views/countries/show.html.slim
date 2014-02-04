@@ -1,6 +1,20 @@
-p
-  strong Name:
-  = @country.name
+ol class="breadcrumb"
+  li class="active" #{@country.name}
 
-= link_to 'Edit', edit_country_path(@country)
-= link_to 'Back', countries_path
+div class="jumbotron"
+  h1 #{@country.name}
+  p #{@country.description}
+
+ul class="list-group"
+  - unless @country.wikipedia_url.blank?
+    li class="list-group-item"
+      a href="#{@country.wikipedia_url}" Wikipedia Article
+
+== render partial: 'locations/index', locals: { locations: @country.locations }
+
+ul class="pager"
+  - if @is_logged_in
+    li
+      = link_to 'Edit', edit_country_path(@country)
+  li
+    = link_to 'Back', destinations_path

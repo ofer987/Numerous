@@ -22,18 +22,7 @@ div class="list-group"
     a class="list-group-item" href="#{@place.home_url}"
       | Home Page
 
-div id="locations"
-  h3 Locations
-  div class="row"
-    - @place.locations.each_with_index do |location, index|
-      div class="col-sm-1 col-md-8"
-        div class="thumbnail"
-          div [class="map-canvas" id="location-#{index}"
-            latitude="#{location.latitude}"
-            longitude="#{location.longitude}"]
-          div class="caption"
-            h4 #{location.name}
-            p #{location.full_address}
+== render partial: 'locations/index', locals: { locations: @place.locations }
 
 ul class="pager"
   - if @is_logged_in

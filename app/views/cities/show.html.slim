@@ -1,23 +1,23 @@
+ol class="breadcrumb"
+  li
+    = link_to @city.country.name,
+      country_path(@city.country)
+  li class="active" #{@city.name}
+
 div class="jumbotron"
   h1 #{@city.name}
   p #{@city.description}
-  p #{@city.place_type.name} #{@city.place_type.description}
 
 ul class="list-group"
   - unless @city.wikipedia_url.blank?
     li class="list-group-item"
       a href="#{@city.wikipedia_url}" Wikipedia Article
-  - unless @city.home_url.blank?
-    li class="list-group-item"
-      a href="#{@city.home_url}" Home Page
 
-div id="locations"
-  - @city.locations.each_with_index do |location, index|
-    div [class="map-canvas" id="location-#{index}"
-      latitude="#{@city.locations.first.latitude}"
-      longitude="#{@city.locations.first.longitude}"]
+== render partial: 'locations/index', locals: { locations: @city.locations }
 
-- if @is_logged_in
-  = link_to 'Edit', edit_country_city_place_path(@country, @city, @city)
-  span &nbsp;|&nbsp;
-= link_to 'Back', destinations_path
+ul class="pager"
+  - if @is_logged_in
+    li
+      = link_to 'Edit', edit_country_city_path(@country, @city)
+  li
+    = link_to 'Back', destinations_path

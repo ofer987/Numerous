@@ -100,7 +100,7 @@ cuenca = City.create! do |city|
   city.wikipedia_url = 'http://en.wikipedia.org/wiki/Cuenca,_Ecuador'
 end
 
-# Create location for Ecuador
+# Create location for Cuenca
 puts 'Creating location information for city=Cuenca'
 Location.create! do |location|
   location.locationable = cuenca

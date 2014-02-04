@@ -1,0 +1,13 @@
+// parameters locations
+div id="locations"
+  h3 Locations
+  div class="row"
+    - locations.each_with_index do |location, index|
+      div class="col-sm-1 col-md-8"
+        div class="thumbnail"
+          div [class="map-canvas" id="location-#{index}"
+            latitude="#{location.latitude}"
+            longitude="#{location.longitude}"]
+          div class="caption"
+            h4 #{location.name}
+            p #{location.full_address}
