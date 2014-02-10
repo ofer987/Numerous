@@ -10,6 +10,7 @@ class Locationable::CitiesControllerTest < ActionController::TestCase
                                  locationable: @city,
                                  latitude: 19,
                                  longitude: 45,
+                                 zoom_level: 14,
                                  name: 'Cuenca',
                                 )
   end
@@ -23,6 +24,7 @@ class Locationable::CitiesControllerTest < ActionController::TestCase
         city: @new_location.city, 
         latitude: @new_location.latitude, 
         longitude: @new_location.longitude,
+        zoom_level: @new_location.zoom_level,
         country: @new_location.country, 
         name: @new_location.name, 
         postal_code: @new_location.postal_code 

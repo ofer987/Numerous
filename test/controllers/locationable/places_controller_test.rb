@@ -15,6 +15,7 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
                                  locationable: @place,
                                  latitude: 12, 
                                  longitude: 45,
+                                 zoom_level: 18,
                                  name: 'Tutto Freddo',
                                 )
   end
@@ -40,6 +41,7 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
         city: @new_location.city, 
         latitude: @new_location.latitude, 
         longitude: @new_location.longitude,
+        zoom_level: @new_location.zoom_level,
         country: @new_location.country, 
         name: @new_location.name, 
         postal_code: @new_location.postal_code 

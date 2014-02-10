@@ -10,6 +10,7 @@ table
       th Postal code
       th Latitude
       th Longitude
+      th Zoom Level
       th 
       th 
       th 
@@ -31,6 +32,8 @@ table
           = location.latitude 
         td
           = location.longitude
+        td
+          = location.zoom_level
         td
           = link_to 'Show', polymorphic_path([@locationable, location])
         td

@@ -18,8 +18,13 @@ $(document).ready(function() {
 	if (pageNameMatch !== null && pageNameMatch.length > 1) {
 		pageName = pageNameMatch[1];
 		pageNameItem = pageName + "-item";
-		
-		$("li#" + pageNameItem).addClass("active");
+    if (pageName === 'countries' || pageName == 'cities' || 
+       pageName === 'places') {
+      $('li#destinations-item').addClass('active');
+    }
+    else {
+		  $("li#" + pageNameItem).addClass("active");
+    }
 	}
 	else if (window.location.pathname === "/") {
 		// Special case: the blogs#index page is the default page

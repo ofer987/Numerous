@@ -1,12 +1,14 @@
 - @countries.each do |country|
   div class="panel panel-default"
     div class="panel-heading"
-      h3 class="panel-title" #{country.name}
+      h3 class="panel-title" 
+        = link_to country.name, country
     div class="panel-body"
       - country.cities.each do |city|
         div class="panel panel-default"
           div class="panel-heading"
-            h3 class="panel-title" #{city.name}
+            h3 class="panel-title" 
+              = link_to city.name, [country, city]
           div class="panel-body"
             ul class="list-group"
               - city.places.each do |place|

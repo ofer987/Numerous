@@ -1,4 +1,6 @@
 ol class="breadcrumb"
+  li class="text-danger"
+    = link_to 'All Destinations', destinations_path
   li
     = link_to @place.city.country.name,
       country_path(@place.city.country)

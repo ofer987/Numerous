@@ -10,7 +10,7 @@ initialize = ->
 
     mapOptions =
       center: locationLatlng
-      zoom: 18
+      zoom: parseInt($(mapCanvas).attr('zoom-level'))
       mapTypeId: google.maps.MapTypeId.ROADMAP
     map = new google.maps.Map mapCanvas, mapOptions
 

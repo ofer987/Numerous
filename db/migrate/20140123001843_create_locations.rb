@@ -10,6 +10,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :postal_code
       t.float :latitude
       t.float :longitude
+      t.integer :zoom_level
 
       t.timestamps
     end

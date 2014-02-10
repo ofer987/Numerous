@@ -90,6 +90,7 @@ Location.create! do |location|
   location.country = 'Ecuador'
   location.latitude = -2.8974913
   location.longitude = -79.0043379
+  location.zoom_level = 4
 end
 
 # Create cities for Ecuador
@@ -109,6 +110,7 @@ Location.create! do |location|
   location.country = 'Ecuador'
   location.latitude = -1.7929665
   location.longitude = -78.1368875
+  location.zoom_level = 13
 end
 
 # Create places for Cuenca
@@ -132,6 +134,7 @@ Location.create! do |location|
   location.country = 'Ecuador'
   location.latitude = -2.8966129
   location.longitude = -79.0046871
+  location.zoom_level = 18
 end
 
 puts "\tCreating second location"
@@ -143,4 +146,5 @@ Location.create! do |location|
   location.country = 'Ecuador'
   location.latitude = -2.8973512
   location.longitude = -79.0056416
+  location.zoom_level = 18
 end

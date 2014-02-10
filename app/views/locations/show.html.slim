@@ -26,6 +26,10 @@ p
   strong Longitude:
   = @location.longitude 
 
+p
+  strong Zoom Level:
+  = @location.zoom_level
+
 = link_to 'Edit', edit_polymorphic_path([@locationable, @location])
 span |
 = link_to 'Back', polymorphic_path([@locationable, Location]) 
