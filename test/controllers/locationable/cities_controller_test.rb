@@ -8,7 +8,8 @@ class Locationable::CitiesControllerTest < ActionController::TestCase
                                  country: 'Ecuador',
                                  postal_code: '',
                                  locationable: @city,
-                                 coordinates: "19, 45",
+                                 latitude: 19,
+                                 longitude: 45,
                                  name: 'Cuenca',
                                 )
   end
@@ -20,7 +21,8 @@ class Locationable::CitiesControllerTest < ActionController::TestCase
         locationable_type: @city.class.to_s,
         address: @new_location.address, 
         city: @new_location.city, 
-        coordinates: @new_location.coordinates, 
+        latitude: @new_location.latitude, 
+        longitude: @new_location.longitude,
         country: @new_location.country, 
         name: @new_location.name, 
         postal_code: @new_location.postal_code 

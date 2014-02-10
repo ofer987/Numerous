@@ -8,7 +8,8 @@ table
       th City
       th Country
       th Postal code
-      th Coordinates
+      th Latitude
+      th Longitude
       th 
       th 
       th 
@@ -27,7 +28,9 @@ table
         td
           = location.postal_code 
         td
-          = location.coordinates 
+          = location.latitude 
+        td
+          = location.longitude
         td
           = link_to 'Show', polymorphic_path([@locationable, location])
         td

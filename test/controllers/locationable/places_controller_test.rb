@@ -13,7 +13,8 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
                                  country: 'Ecuador',
                                  postal_code: '',
                                  locationable: @place,
-                                 coordinates: "12, 45",
+                                 latitude: 12, 
+                                 longitude: 45,
                                  name: 'Tutto Freddo',
                                 )
   end
@@ -37,7 +38,8 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
         locationable_type: @place.class.to_s,
         address: @new_location.address, 
         city: @new_location.city, 
-        coordinates: @new_location.coordinates, 
+        latitude: @new_location.latitude, 
+        longitude: @new_location.longitude,
         country: @new_location.country, 
         name: @new_location.name, 
         postal_code: @new_location.postal_code 
@@ -63,6 +65,5 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to polymorphic_path([@locationable, Location])
-    # assert_redirected_to place_locations_path(@locationable)
   end
 end

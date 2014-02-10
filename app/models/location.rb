@@ -8,7 +8,8 @@ class Location < ActiveRecord::Base
   # province: nvarchar(255)
   # country: nvarchar(255)
   # postal_code: nvarchar(255)
-  # coordinates: nvarchar(255)
+  # latitude: integer
+  # longitude: integer
   # created_at: datetime
   # updated_at: datetime
   

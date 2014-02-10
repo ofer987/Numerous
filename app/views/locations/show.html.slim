@@ -19,8 +19,12 @@ p
   = @location.postal_code 
 
 p
-  strong Coordinates:
-  = @location.coordinates 
+  strong Latitude:
+  = @location.latitude 
+
+p
+  strong Longitude:
+  = @location.longitude 
 
 = link_to 'Edit', edit_polymorphic_path([@locationable, @location])
 span |
