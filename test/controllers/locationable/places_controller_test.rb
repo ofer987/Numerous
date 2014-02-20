@@ -49,6 +49,9 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to [@place, assigns(:location)]
+    assert assigns(:location).latitude == @new_location.latitude
+    assert assigns(:location).longitude == @new_location.longitude
+    assert assigns(:location).zoom_level == @new_location.zoom_level
   end
 
   test "should show location" do
