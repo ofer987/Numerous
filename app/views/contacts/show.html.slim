@@ -10,9 +10,12 @@ p
   strong Directions:
   = @contact.directions
 p
+  strong Direction Type:
+  = @contact.direction_type
+p
   strong Info:
   = @contact.info
 
-= link_to 'Edit', edit_contact_path(@contact)
+= link_to 'Edit', edit_country_city_place_contact_path(@country, @city, @place, @contact)
 '|
-= link_to 'Back', contacts_path
+= link_to 'Back', country_city_place_contacts_path(@country, @city, @place)

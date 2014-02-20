@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-tutto_phone:
+freddo_phone:
+  place: freddo
   contact_type: phone
   name: Tutto Freddo
   directions: 123-456-789
@@ -8,6 +9,7 @@ tutto_phone:
   info:
 
 rolls_23_email:
+  place: rolls_23
   contact_type: email
   name: Paul Robert Parra Arias
   directions: MyString

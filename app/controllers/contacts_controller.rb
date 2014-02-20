@@ -1,9 +1,10 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_tree
 
   # GET /contacts
   def index
-    @contacts = Contact.all
+    @contacts = @place.contacts
   end
 
   # GET /contacts/1
@@ -12,7 +13,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @contact = @place.contacts.build
   end
 
   # GET /contacts/1/edit
@@ -21,10 +22,10 @@ class ContactsController < ApplicationController
 
   # POST /contacts
   def create
-    @contact = Contact.new(contact_params)
+    @contact = @place.contacts.build(contact_params)
 
     if @contact.save
-      redirect_to @contact, notice: 'Contact was successfully created.'
+      redirect_to [@country, @city, @place, @contact], notice: 'Contact was successfully created.'
     else
       render action: 'new'
     end
@@ -33,7 +34,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   def update
     if @contact.update(contact_params)
-      redirect_to @contact, notice: 'Contact was successfully updated.'
+      redirect_to [@country, @city, @place, @contact], notice: 'Contact was successfully updated.'
     else
       render action: 'edit'
     end
@@ -42,13 +43,19 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   def destroy
     @contact.destroy
-    redirect_to contacts_url, notice: 'Contact was successfully destroyed.'
+    redirect_to country_city_place_contacts_url(@country, @city, @place), notice: 'Contact was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
+    end
+
+    def set_tree
+      @place = Place.find(params[:place_id])
+      @city = City.find(params[:city_id])
+      @country = Country.find(params[:country_id])
     end
 
     # Only allow a trusted parameter "white list" through.

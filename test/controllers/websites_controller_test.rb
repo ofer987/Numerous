@@ -9,7 +9,7 @@ class WebsitesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index, country: @country, city: @city, place: @place
+    get :index, country_id: @country, city_id: @city, place_id: @place
     assert_response :success
     assert_not_nil assigns(:websites)
 
@@ -19,44 +19,44 @@ class WebsitesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, country: @country, city: @city, place: @place
+    get :new, country_id: @country, city_id: @city, place_id: @place
     assert_response :success
   end
 
   test "should create website" do
     assert_difference('Website.count') do
-      post :create, country: @country, city: @city, place: @place, 
+      post :create, country_id: @country, city_id: @city, place_id: @place, 
         website: { place_id: @website.place_id, 
                    url_type: @website.url_type, url: @website.url }
     end
 
-    assert_redirected_to website_path(assigns(:website))
+    assert_redirected_to country_city_place_website_path(@country, @city, @place, assigns(:website))
   end
 
   test "should show website" do
-    get :show, id: @website, country: @country, city: @city, place: @place
+    get :show, id: @website, country_id: @country, city_id: @city, place_id: @place
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @website, country: @country, city: @city, place: @place
+    get :edit, id: @website, country_id: @country, city_id: @city, place_id: @place
     assert_response :success
   end
 
   test "should update website" do
-    patch :update, id: @website, country: @country, city: @city, 
-      place: @place, website: { place_id: @website.place_id, 
+    patch :update, id: @website, country_id: @country, city_id: @city, 
+      place_id: @place, website: { place_id: @website.place_id, 
                                 url_type: @website.url_type, 
                                 url: @website.url }
-    assert_redirected_to website_path(assigns(:website))
+    assert_redirected_to country_city_place_website_path(@country, @city, @place, assigns(:website))
   end
 
   test "should destroy website" do
     assert_difference('Website.count', -1) do
-      delete :destroy, id: @website, country: @country, city: @city, 
-        place: @place
+      delete :destroy, id: @website, country_id: @country, city_id: @city, 
+        place_id: @place
     end
 
-    assert_redirected_to websites_path
+    assert_redirected_to country_city_place_websites_path(@country, @city, @place)
   end
 end

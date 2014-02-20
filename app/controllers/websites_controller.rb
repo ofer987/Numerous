@@ -43,7 +43,7 @@ class WebsitesController < ApplicationController
   # DELETE /websites/1
   def destroy
     @website.destroy
-    redirect_to websites_url, notice: 'Website was successfully destroyed.'
+    redirect_to country_city_place_websites_url(@country, @city, @place), notice: 'Website was successfully destroyed.'
   end
 
   private

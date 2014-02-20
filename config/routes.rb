@@ -1,6 +1,4 @@
 Numerous::Application.routes.draw do
-  resources :contacts
-
   resources :place_types
 
   resources :destinations, only: [:index]
@@ -9,6 +7,7 @@ Numerous::Application.routes.draw do
     resources :cities do
       resources :places do
         resources :websites
+        resources :contacts
       end
     end
   end
