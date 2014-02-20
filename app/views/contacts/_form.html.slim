@@ -1,14 +1,16 @@
 = form_for [@country, @city, @place, @contact] do |f|
   - if @contact.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@contact.errors.count, "error")} prohibited this contact from being saved:"
+      h2 
+        = "#{pluralize(@contact.errors.count, "error")} prohibited this contact from being saved:"
       ul
         - @contact.errors.full_messages.each do |message|
           li = message
 
   .field
-    = f.label :contact_type
-    = f.text_field :contact_type
+    = f.label :contact_type_id
+    = f.select :contact_type_id, 
+      ContactType.all.map { |ct| [ct.name, ct.id] }
   .field
     = f.label :name
     = f.text_field :name
