@@ -11,24 +11,40 @@ class PlacesControllerTest < ActionController::TestCase
     get :index, city_id: @city, country_id: @country
     assert_response :success
     assert_not_nil assigns(:places)
+
+    assigns(:places).each do |place|
+      assert place.city_id == @city.id,
+        "Place#index displays places for wrong country/city"
+    end
   end
 
   test "should get new" do
     get :new, city_id: @city, country_id: @country
     assert_response :success
+    assert assigns(:place).city.id == @city.id,
+      "the new place should belong to a city"
   end
 
   test "should create place" do
+    description = 'This is a beautiful place'
+
     assert_difference('Place.count') do
       post :create, city_id: @city, country_id: @country,
         place: { 
         name: @place.name, 
-        place_type_id: @place.place_type_id 
+        place_type_id: @place.place_type_id,
+        description: description
       }
     end
 
     assert_redirected_to country_city_place_path(@country, @city,
                                                 assigns(:place))
+    assert assigns(:place).name == @place.name,
+      "place's name was not set"
+    assert assigns(:place).place_type_id == @place.place_type_id,
+      "place's place_type_id was not set"
+    assert assigns(:place).description == description,
+      "place's description was not set"
   end
 
   test "should show place" do

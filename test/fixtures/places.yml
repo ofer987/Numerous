@@ -5,3 +5,9 @@ freddo:
   name: Tutto Freddo
   description: 
   place_type: cafe
+
+rolls_23:
+  city: lima
+  name: Rolls 23
+  description:
+  place_type: restaurant

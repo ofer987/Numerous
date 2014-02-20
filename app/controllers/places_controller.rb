@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
 
   # GET /places
   def index
-    @places = Place.all
+    @places = @city.places
   end
 
   # GET /places/1
@@ -15,7 +15,7 @@ class PlacesController < ApplicationController
 
   # GET /places/new
   def new
-    @place = Place.new
+    @place = @city.places.build
   end
 
   # GET /places/1/edit
@@ -64,6 +64,7 @@ class PlacesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def place_params
-      params.require(:place).permit(:name, :place_type_id)
+      params.require(:place).permit(:name, :place_type_id, :description,
+                                    :home_url, :wikipedia_url)
     end
 end

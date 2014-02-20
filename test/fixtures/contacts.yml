@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tutto_phone:
+  contact_type: phone
+  name: Tutto Freddo
+  directions: 123-456-789
+  direction_type: work
+  info:
+
+rolls_23_email:
+  contact_type: email
+  name: Paul Robert Parra Arias
+  directions: MyString
+  direction_type: main
+  info: Gerente General

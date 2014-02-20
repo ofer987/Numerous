@@ -17,12 +17,9 @@ div class="jumbotron"
 div class="list-group"
   a class="list-group-item active"
     | More Data
-  - unless @place.wikipedia_url.blank?
+  - @place.websites.each do |website|
     a class="list-group-item"
-      | #{@place.wikipedia_url} Wikipedia Article
-  - unless @place.home_url.blank?
-    a class="list-group-item" href="#{@place.home_url}"
-      | Home Page
+      | #{website.url} | #{website.url_type}
 
 == render partial: 'locations/index', locals: { locations: @place.locations }
 

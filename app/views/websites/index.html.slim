@@ -1,0 +1,23 @@
+h1 Listing websites
+
+table
+  tr
+    th Place
+    th Url
+    th Type
+    th
+    th
+    th
+
+  - @websites.each do |website|
+    tr
+      td = website.place.name
+      td = website.url
+      td = website.url_type
+      td = link_to 'Show', [@country, @city, @place, website]
+      td = link_to 'Edit', edit_country_city_place_website_path(@country, @city, @place, website)
+      td = link_to 'Destroy', [@country, @city, @place, website], data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Website', new_country_city_place_website_path(@country, @city, @place)

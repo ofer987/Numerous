@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rolls_23_home:
+  place: rolls_23
+  url: www.rolls.com
+  url_type: home
+
+rolls_23_facebook:
+  place: rolls_23
+  url: www.facebook.com/rolls23
+  url_type: facebook
+
+freddo_home:
+  place: freddo
+  url: www.freddo.com
+  url_type: home
