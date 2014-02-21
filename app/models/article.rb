@@ -28,7 +28,7 @@ class Article < ActiveRecord::Base
   default_scope { order('published_at DESC') }
 
   def content
-    to_html self[:content]
+    RedCloth.new(self[:content]).to_html
   end
 
   def photos_attributes=(attributes)
