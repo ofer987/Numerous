@@ -40,5 +40,7 @@ gem 'with_action'
 
 gem 'negative_captcha'
 
-# gem 'bootstrap-will_paginate'
 gem 'will_paginate-bootstrap'
+
+gem 'RedCloth'
+gem 'github-markup'
