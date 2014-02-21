@@ -64,6 +64,6 @@ class ArticleTest < ActiveSupport::TestCase
   test 'article content should be displayed in paragraph form' do
     article = Article.new(content: "Hello\nWorld")
 
-    assert "<p>Hello</p><p>World</p>" == article.content
+    assert "<p>Hello<br />\nWorld</p>" == article.content
   end
 end

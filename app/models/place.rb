@@ -5,4 +5,8 @@ class Place < ActiveRecord::Base
   has_many :locations, as: :locationable, dependent: :destroy
   has_many :websites, dependent: :destroy
   has_many :contacts, dependent: :destroy
+
+  def description
+    RedCloth.new(self[:description]).to_html
+  end
 end

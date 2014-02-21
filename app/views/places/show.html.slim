@@ -12,7 +12,7 @@ ol class="breadcrumb"
 div class="jumbotron"
   h1 #{@place.name}
   h2 #{@place.place_type.name}
-  p #{@place.description}
+  == sanitize(@place.description)
 
 div class="list-group"
   a class="list-group-item active"
