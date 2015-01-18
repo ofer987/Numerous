@@ -1,0 +1,37 @@
+h1 class="content-intro" Admin
+
+ul class="new-content"
+  li id="photos"
+    div
+      = link_to 'Add new photo', new_photo_url
+  li id="blog"
+    div
+      = link_to 'Add new article', new_article_url
+
+ul
+  - @countries.each_with_index do |country, index|
+    li id="countries_#{index}"
+      div
+        = link_to country.name, edit_country_url(country)
+    ul
+      - country.cities.each_with_index do |city, index|
+        li id="city_#{index}"
+          div
+            = link_to city.name, edit_country_city_url(country, city)
+        ul
+          - city.places.each_with_index do |place, index|
+            li id="place_#{index}"
+              div
+                = link_to place.name, edit_country_city_place_url(country, city, place)
+          li id="new_place"
+            div
+              = link_to "New place", new_country_city_place_url(country, city)
+      li id="new_city"
+        div
+          = link_to 'Add new city', new_country_city_url(country)
+  li id="new_country"
+    div
+      = link_to 'Add new country', new_country_url
+
+div class="logout"
+  = link_to 'Logout', logout_url
