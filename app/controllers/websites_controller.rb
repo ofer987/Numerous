@@ -25,7 +25,8 @@ class WebsitesController < ApplicationController
     @website = @place.websites.build(website_params)
 
     if @website.save
-      redirect_to [@country, @city, @place, @website], notice: 'Website was successfully created.'
+      redirect_to [@country, @city, @place, @website],
+        notice: 'Website was successfully created.'
     else
       render action: 'new'
     end
@@ -34,7 +35,8 @@ class WebsitesController < ApplicationController
   # PATCH/PUT /websites/1
   def update
     if @website.update(website_params)
-      redirect_to [@country, @city, @place, @website], notice: 'Website was successfully updated.'
+      redirect_to [@country, @city, @place, @website],
+        notice: 'Website was successfully updated.'
     else
       render action: 'edit'
     end
@@ -43,23 +45,25 @@ class WebsitesController < ApplicationController
   # DELETE /websites/1
   def destroy
     @website.destroy
-    redirect_to country_city_place_websites_url(@country, @city, @place), notice: 'Website was successfully destroyed.'
+    redirect_to country_city_place_websites_url(@country, @city, @place),
+      notice: 'Website was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_website
-      @website = Website.find(params[:id])
-    end
 
-    def set_tree
-      @country = Country.find(params[:country_id])
-      @city = City.find(params[:city_id])
-      @place = Place.find(params[:place_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_website
+    @website = Website.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def website_params
-      params.require(:website).permit(:place_id, :url, :url_type)
-    end
+  def set_tree
+    @country = Country.find(params[:country_id])
+    @city = City.find(params[:city_id])
+    @place = Place.find(params[:place_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def website_params
+    params.require(:website).permit(:place_id, :url, :url_type)
+  end
 end
