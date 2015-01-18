@@ -25,13 +25,16 @@ ul
                 = link_to place.name, edit_country_city_place_url(country, city, place)
           li id="new_place"
             div
-              = link_to "New place", new_country_city_place_url(country, city)
+              b
+                = link_to "New place", new_country_city_place_url(country, city)
       li id="new_city"
         div
-          = link_to 'Add new city', new_country_city_url(country)
+          b
+            = link_to 'Add new city', new_country_city_url(country)
   li id="new_country"
     div
-      = link_to 'Add new country', new_country_url
+      b
+        = link_to 'Add new country', new_country_url
 
 div class="logout"
   = link_to 'Logout', logout_url
