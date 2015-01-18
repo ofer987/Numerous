@@ -1,8 +1,7 @@
+require 'controllers/locations_controller_test'
 require 'test_helper'
 
 class Locationable::PlacesControllerTest < ActionController::TestCase
-  include ActionDispatch::Routing::PolymorphicRoutes
-
   setup do
     @place = places(:freddo)
     @location = locations(:freddo_original)
@@ -20,55 +19,11 @@ class Locationable::PlacesControllerTest < ActionController::TestCase
                                 )
   end
 
-  test "should get index for place=cafe" do
-    get :index, @locationable_key => @locationable
-    assert_response :success
-    assert_not_nil assigns(:locations)
-  end
-
-  test "should get new for place=cafe" do
-    get :new, @locationable_key => @locationable
-    assert_response :success
-  end
-
-  test "should create location for cafe Tutto Freddo" do
-    assert_difference('Location.count') do
-      post :create, place_id: @place,
-        location: { 
-        locationable_id: @place,
-        locationable_type: @place.class.to_s,
-        address: @new_location.address, 
-        city: @new_location.city, 
-        latitude: @new_location.latitude, 
-        longitude: @new_location.longitude,
-        zoom_level: @new_location.zoom_level,
-        country: @new_location.country, 
-        name: @new_location.name, 
-        postal_code: @new_location.postal_code 
-      }
+  LocationsControllerTest.methods(false).each do |method|
+    test method.to_s do
+      LocationsControllerTest.send(method)
     end
-
-    assert_redirected_to [@place, assigns(:location)]
-    assert assigns(:location).latitude == @new_location.latitude
-    assert assigns(:location).longitude == @new_location.longitude
-    assert assigns(:location).zoom_level == @new_location.zoom_level
   end
-
-  test "should show location" do
-    get :show, id: @location, @locationable_key => @locationable
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @location, @locationable_key => @locationable
-    assert_response :success
-  end
-
-  test "should destroy location for cafe" do
-    assert_difference('Location.count', -1) do
-      delete :destroy, id: @location, @locationable_key => @locationable
-    end
-
-    assert_redirected_to polymorphic_path([@locationable, Location])
-  end
+  # require LocationsControllerTest
+  # require 'controllers/locations_controller_test'
 end

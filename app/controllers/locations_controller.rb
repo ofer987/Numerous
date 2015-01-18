@@ -24,10 +24,24 @@ class LocationsController < ApplicationController
     @location = @locationable.locations.build(location_params)
 
     if @location.save
-      redirect_to [@locationable, @location], 
-        notice: 'Location was successfully created.'
+      respond_to do |format|
+        format.js do
+          render file: 'create.js'
+        end
+        format.html do
+          redirect_to [@locationable, @location], 
+            notice: 'Location was successfully created.'
+        end
+      end
     else
-      render action: 'new'
+      respond_to do |format|
+        format.js do
+          render text: ''
+        end
+        format.html do
+          render action: 'new'
+        end
+      end
     end
   end
 

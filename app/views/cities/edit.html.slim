@@ -1,7 +1,17 @@
+ol class="breadcrumb"
+  li
+    = link_to 'All Destinations', destinations_path
+  li
+    = link_to @city.country.name,
+      country_path(@city.country)
+  li class="active" #{@city.name}
+
 h1 Editing city
 
 == render 'form' 
 
-= link_to 'Show', [@country, @city]
-span |
-= link_to 'Back', country_cities_path(@country)
+ul class="pager"
+  li
+    = link_to 'Show', [@country, @city]
+  li
+    = link_to 'Back', destinations_path
