@@ -1,4 +1,8 @@
 Numerous::Application.routes.draw do
+  resources :recipes do
+    resources :ingredients
+  end
+
   resources :place_types
 
   resources :destinations, only: [:index]

@@ -42,4 +42,5 @@ gem 'negative_captcha'
 gem 'will_paginate-bootstrap'
 
 gem 'RedCloth'
+gem 'redcarpet'
 gem 'github-markup'

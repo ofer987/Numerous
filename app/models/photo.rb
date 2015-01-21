@@ -6,16 +6,16 @@ class Photo < ActiveRecord::Base
   #taken_date: datetime, NOT NULL, DEFAULT: DateTime.current
   #created_at: datetime
   #updated_at: datetime
-  
+
   default_scope { order('taken_date DESC') }
-  
-	has_many :tag_links, as: :tagable, dependent: :destroy
-	has_many :tags, through: :tag_links
+
+  has_many :tag_links, as: :tagable, dependent: :destroy
+  has_many :tags, through: :tag_links
   include Tagable
-  
+
   has_many :fichiers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
-  
+
   has_many :article_photos, dependent: :delete_all
   has_many :articles, through: :article_photos
 
@@ -24,15 +24,15 @@ class Photo < ActiveRecord::Base
 
   validates_presence_of :description, allow_blank: true
   validates_presence_of :title, allow_blank: true
-  validates_presence_of :filename, on: :create, 
+  validates_presence_of :filename, on: :create,
     :message => "must be specified"
-  validates_presence_of :taken_date, on: :create, 
+  validates_presence_of :taken_date, on: :create,
     :message => "must have a date, at least a default one"
-  validates_format_of :filename, :with => /\.(jpg|png)\z/i, 
+  validates_format_of :filename, :with => /\.(jpg|png)\z/i,
     :message => "is invalid"
-  
+
   validate :validate_has_unique_fichiers
- 
+
   before_create :before_create
   before_update :before_update
 
@@ -48,7 +48,7 @@ class Photo < ActiveRecord::Base
       super(name, *args, &block)
     end
   end
- 
+
   # "f.file_field :load_photo_file" in the view triggers Rails to invoke this method
   # This method only store the information
   # The file saving is done in before_save
@@ -68,11 +68,11 @@ class Photo < ActiveRecord::Base
   def set_description
     self.description ||= ''
   end
-  
+
   def set_title
     self.title ||= ''
   end
-  
+
   def rotate!
     self.fichiers.each do |fichier|
       fichier.rotate!
@@ -82,7 +82,7 @@ class Photo < ActiveRecord::Base
   def displayed_title
     title.blank? ? '&nbsp;' : title
   end
-  
+
   private
 
   def before_update
@@ -161,7 +161,7 @@ class Photo < ActiveRecord::Base
       end
     end
   end
- 
+
   def validate_has_unique_fichiers
     self.fichiers.each do |verify1|
       self.fichiers.each do |verify2|

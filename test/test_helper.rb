@@ -9,25 +9,26 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :filesize_types, :photos, :fichiers, :comments, :users, :tags,
     :articles, :article_photos, :tag_links, :countries, :cities, :places,
-    :place_types, :locations, :websites, :contact_types, :contacts
+    :place_types, :locations, :websites, :contact_types, :contacts,
+    :recipes, :ingredients
 
   # Add more helper methods to be used by all tests here...
   def login_as(user)
     session[:user_id] = users(user).id
   end
-  
+
   def logout
     session.delete :user_id
   end
-  
+
   def setup
     login_as(:admin) if defined? session and !@manual_login
-  end 
-  
+  end
+
   def photos_test_dir
     "test/photos/"
   end
-  
+
   def photos_dir
     "app/assets/images/photos/"
   end

@@ -1,0 +1,9 @@
+h2
+  = recipe.title
+p
+  = raw @markdown.render(recipe.description)
+
+ol
+  - recipe.ingredients.each do |ingredient|
+    li
+      #{ingredient.name}, quanity: #{ingredient.quantity}
