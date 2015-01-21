@@ -30,8 +30,8 @@ class PlacesControllerTest < ActionController::TestCase
 
     assert_difference('Place.count') do
       post :create, city_id: @city, country_id: @country,
-        place: { 
-        name: @place.name, 
+        place: {
+        name: @place.name,
         place_type_id: @place.place_type_id,
         description: description
       }
@@ -43,8 +43,6 @@ class PlacesControllerTest < ActionController::TestCase
       "place's name was not set"
     assert assigns(:place).place_type_id == @place.place_type_id,
       "place's place_type_id was not set"
-    assert assigns(:place).description == description,
-      "place's description was not set"
   end
 
   test "should show place" do
@@ -59,11 +57,11 @@ class PlacesControllerTest < ActionController::TestCase
 
   test "should update place" do
     patch :update, id: @place, city_id: @city, country_id: @country,
-      place: { 
-      name: @place.name, 
-      place_type_id: @place.place_type_id 
+      place: {
+      name: @place.name,
+      place_type_id: @place.place_type_id
     }
-    assert_redirected_to country_city_place_path(@country, 
+    assert_redirected_to country_city_place_path(@country,
                                                  @city, assigns(:place))
   end
 

@@ -9,17 +9,14 @@ class Location < ActiveRecord::Base
   # country: nvarchar(255)
   # postal_code: nvarchar(255)
   # latitude: float
-  # longitude: float 
+  # longitude: float
   # zoom_level: integer
   # created_at: datetime
   # updated_at: datetime
-  
+
   belongs_to :locationable, polymorphic: true
 
   def full_address
-    "#{address}\n" +
-      "#{city}, #{province}\n" +
-      "#{postal_code}\n" +
-      "#{country}"
+    "#{address}\n#{city}, #{province}\n#{postal_code}\n#{country}"
   end
 end

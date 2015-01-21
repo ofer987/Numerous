@@ -1,6 +1,20 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
+  setup do
+    @new_location = {
+      address: '231 Hex Street',
+      city: 'Orion City',
+      latitude: 21,
+      longitude: 23,
+      zoom_level: 2,
+      country: 'Orion',
+      name: 'Place 1',
+      postal_code: '32878'
+    }
+
+    @lima = cities(:lima)
+  end
   # include ActionDispatch::Routing::PolymorphicRoutes
 
   # test "should get index" do
@@ -14,26 +28,17 @@ class LocationsControllerTest < ActionController::TestCase
   #   assert_response :success
   # end
 
-  def self.new
-    get :new, @locationable_key => @locationable
+  test "should get new" do
+    get :new, city_id: @lima
     assert_response :success
   end
 
-  def self.create 
-    assert_difference('Location.count') do
-      post :create, place_id: @place,
-        location: { 
+  test "should create location" do
+    assert_difference('Location.count', 1) do
+      post :create, place_id: @place, location: @new_location.merge({
         locationable_id: @place,
-        locationable_type: @place.class.to_s,
-        address: @new_location.address, 
-        city: @new_location.city, 
-        latitude: @new_location.latitude, 
-        longitude: @new_location.longitude,
-        zoom_level: @new_location.zoom_level,
-        country: @new_location.country, 
-        name: @new_location.name, 
-        postal_code: @new_location.postal_code 
-      }
+        locationable_type: @place.class.to_s
+      })
     end
 
     assert_redirected_to [@place, assigns(:location)]
@@ -42,17 +47,17 @@ class LocationsControllerTest < ActionController::TestCase
     assert assigns(:location).zoom_level == @new_location.zoom_level
   end
 
-  def self.show
+  test "should show location" do
     get :show, id: @location, @locationable_key => @locationable
     assert_response :success
   end
 
-  def self.edit
+  test "should get edit" do
     get :edit, id: @location, @locationable_key => @locationable
     assert_response :success
   end
 
-  def self.destroy 
+  test "should destroy ingredient" do
     assert_difference('Location.count', -1) do
       delete :destroy, id: @location, @locationable_key => @locationable
     end

@@ -7,6 +7,9 @@ class Place < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
 
   def description
-    RedCloth.new(self[:description]).to_html
+    markdown_renderer = Redcarpet::Render::HTML.new
+    markdown = Redcarpet::Markdown.new(markdown_renderer)
+
+    markdown.render(self[:description] || '')
   end
 end

@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
           render file: 'create.js'
         end
         format.html do
-          redirect_to [@locationable, @location], 
+          redirect_to [@locationable, @location],
             notice: 'Location was successfully created.'
         end
       end
@@ -48,7 +48,7 @@ class LocationsController < ApplicationController
   # PATCH/PUT locations/1
   def update
     if @location.update(location_params)
-      redirect_to [@locationable, @location], 
+      redirect_to [@locationable, @location],
         notice: 'Location was successfully updated.'
     else
       render action: 'edit'
@@ -58,7 +58,7 @@ class LocationsController < ApplicationController
   # DELETE locations/1
   def destroy
     @location.destroy
-    redirect_to polymorphic_url([@locationable, Location]), 
+    redirect_to polymorphic_url([@locationable, Location]),
       notice: 'Location was successfully destroyed.'
   end
 
