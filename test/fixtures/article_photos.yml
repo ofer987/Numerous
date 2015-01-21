@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-llama_photo:
-  article: cusco_trip
-  photo: llama
-  
-keren_photo:
-  article: cusco_trip
-  photo: eaton_college
