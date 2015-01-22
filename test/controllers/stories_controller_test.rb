@@ -7,7 +7,7 @@ class StoriesControllerTest < ActionController::TestCase
   def setup
     super
     setup_photo_files
-    
+
     @article = {
       title: 'Halloween',
       sub_title: 'Dan meets Sina for first time in 2013',
@@ -15,7 +15,7 @@ class StoriesControllerTest < ActionController::TestCase
       published_at: DateTime.new(2013, 11, 2)
     }
   end
-  
+
   def teardown
     teardown_photo_files
   end
@@ -29,13 +29,13 @@ class StoriesControllerTest < ActionController::TestCase
     assert_difference('Article.count', 1) do
       post :create_article, article: @article
     end
-        
+
     assert_redirected_to "/stories/#{assigns(:article).id}/new_photo", 'Did not redirect to Stories#NewPhoto'
   end
 
   test "should post new photo to existing article" do
-    existing_article = articles(:cusco_trip)
-    
+    existing_article = billets(:cusco_trip)
+
     assert_difference('Photo.count', 1) do
       post :create_photo, { remote: true, article_id: existing_article.id, photo: { load_photo_file: self.photo_data } }
     end

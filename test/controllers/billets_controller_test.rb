@@ -42,27 +42,27 @@ class BilletsControllerTest < ActionController::TestCase
     assert_redirected_to billet_path(assigns(:billet))
   end
 
-  test "should create billet and add two photos" do
-    new_billet = {
-      content: 'new story',
-      billet_photos_attributes: @all_billet_photos_attributes
-    }
-    new_billet[:billet_photos_attributes].each do |index, billet_photo|
-      billet_photo[:is_selected] = "1" if billet_photo[:id].to_i == photos(:eaton_college).id || billet_photo[:id].to_i == photos(:nobody_commented).id
-    end
-
-    pre_billet_photos_count = BilletPhoto.count
-    assert_difference('Billet.count') do
-      post :create, billet: new_billet, is_convert_to_html: false
-    end
-    post_billet_photos_count = BilletPhoto.count
-
-    assert_equal(
-      pre_billet_photos_count + 2,
-      post_billet_photos_count,
-      "Did not add the two photos to the new billet")
-    assert_redirected_to billet_path(assigns(:billet))
-  end
+  # test "should create billet and add two photos" do
+  #   new_billet = {
+  #     content: 'new story',
+  #     billet_photos_attributes: @all_billet_photos_attributes
+  #   }
+  #   new_billet[:billet_photos_attributes].each do |index, billet_photo|
+  #     billet_photo[:is_selected] = "1" if billet_photo[:id].to_i == photos(:eaton_college).id || billet_photo[:id].to_i == photos(:nobody_commented).id
+  #   end
+  #
+  #   pre_billet_photos_count = BilletPhoto.count
+  #   assert_difference('Billet.count') do
+  #     post :create, billet: new_billet, is_convert_to_html: false
+  #   end
+  #   post_billet_photos_count = BilletPhoto.count
+  #
+  #   assert_equal(
+  #     pre_billet_photos_count + 2,
+  #     post_billet_photos_count,
+  #     "Did not add the two photos to the new billet")
+  #   assert_redirected_to billet_path(assigns(:billet))
+  # end
 
   test "should update billet" do
     new_content = 'This is an awesome story'
@@ -91,7 +91,7 @@ class BilletsControllerTest < ActionController::TestCase
     assert_redirected_to billets_url
   end
 
-  test "should be able to modify an billet's published_at date" do
+  test "should be able to modify a billet's published_at date" do
     modified_date = DateTime.new(2010, 5, 12)
 
     @cusco_trip_billet.published_at = modified_date
@@ -101,57 +101,17 @@ class BilletsControllerTest < ActionController::TestCase
       "The billet should be able to modify its published_at datetime"
   end
 
-  test "should add a photo to an billet" do
-    billet = billets(:cusco_trip)
-
-    # Add the photo package
-    photo = photos(:package)
-    params =
-      {
-        id: billet.id,
-        billet_photos_attributes: @all_billet_photos_attributes
-      }
-    params[:billet_photos_attributes].each do |key, value|
-      value[:is_selected] = "1" if value[:id].to_i == photo.id
-    end
-
-    # the photo should have these expected tags after the update, including its current photos
-    expected_photos = []
-    expected_photos << photo
-
-    billet.photos.each do |existing_photo|
-      expected_photos << existing_photo
-      params[:billet_photos_attributes].each do |key, value|
-        value[:is_selected] = "1" if value[:id].to_i == existing_photo.id
-      end
-    end
-
-    # update the billet: add the new photo
-    put :update, format: :js, billet: params, id: billet.id, is_convert_to_html: false
-    assert_equal(
-      expected_photos.count,
-      billet.billet_photos.count,
-      "The new photo was not added. Errors: #{billet.errors.full_messages}")
-
-    # Does the billet have all the expected_photos?
-    expected_photos.each do |p|
-      assert billet.billet_photos.any? { |verify_billet_photo|
-        verify_billet_photo.photo_id == p.id
-      }, "The billet is missing the photo #{p.title}"
-    end
-  end
-
-  test "should post new photo to existing billet" do
-    existing_billet = billets(:cusco_trip)
-
-    assert_difference('Photo.count', 1) do
-      post :create_photo,
-        format: :js,
-        billet_id: existing_billet.id,
-        photo: { load_photo_file: self.photo_data }
-    end
-    assert_response :success
-  end
+  # test "should post new photo to existing billet" do
+  #   existing_billet = billets(:cusco_trip)
+  #
+  #   assert_difference('Photo.count', 1) do
+  #     post :create_photo,
+  #       format: :js,
+  #       billet_id: existing_billet.id,
+  #       photo: { load_photo_file: self.photo_data }
+  #   end
+  #   assert_response :success
+  # end
 
   test 'should create billet and assign it tags' do
     billet = {

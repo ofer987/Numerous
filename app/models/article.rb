@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
   # published_at: datetime, NOT NULL, Default: now
   # updated_at: datetime
   # created_at: datetime
+  # type: string for single table inheritance
 
   has_many :photos
 

@@ -39,12 +39,12 @@ Numerous::Application.routes.draw do
 
   controller :stories do
     get 'stories/:article_id/new_photo' => :new_photo
-    get 'stories/new_billet' => :new_billet
-    post 'stories' => :create_billet
+    get 'stories/new_article' => :new_article
+    post 'stories' => :create_article
     post 'stories/:article_id/create_photo' => :create_photo
   end
 
-  resources :articles do
+  resources :billets do
     resources :comments, only: :create
   end
 

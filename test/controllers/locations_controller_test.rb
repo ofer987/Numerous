@@ -57,7 +57,7 @@ class LocationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should destroy ingredient" do
+  test "should destroy location" do
     assert_difference('Location.count', -1) do
       delete :destroy, id: @location, @locationable_key => @locationable
     end
