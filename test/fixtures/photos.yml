@@ -4,17 +4,17 @@ eaton_college:
   title: Keren sticks out her tongue
   description: "On the first day of arriving in Windsor England, Keren took me to visit Eaton College"
   filename: keren.jpg
-  
+
 nobody_commented:
   title: Celina
   description: My cat
   filename: celina_the_cat.jpg
-  
+
 package:
   title: This is the only example of a photo with files
   description: It has files!
   filename: img_3137A.jpg
-  
+
 no_tags:
   title: No name
   description: This photo does not have an existing tags
@@ -24,3 +24,4 @@ llama:
   title: llama
   description: He tried to spit on me
   filename: llama.jpg
+  article: cusco_trip

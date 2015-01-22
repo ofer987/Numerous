@@ -2,7 +2,7 @@ IMAGE_SOURCE_FOLDER = Rails.root.join('test', 'resources', 'images')
 IMAGE_DEST_FOLDER = Rails.root.join('test', 'public', 'images', 'photos')
 
 # For testing purposes
-# The test photos should not be mixed in the real assets folder  
+# The test photos should not be mixed in the real assets folder
 class Photo
   def photo_store
     IMAGE_DEST_FOLDER
@@ -11,26 +11,26 @@ end
 
 module TestFileable
   module ClassMethods
-    
+
   end
-  
+
   module InstanceMethods
     def setup_photo_files
       # Recreate the destination subdir
-      FileUtils.mkdir_p(IMAGE_DEST_FOLDER)    
+      FileUtils.mkdir_p(IMAGE_DEST_FOLDER)
     end
-    
+
     def teardown_photo_files
       # Remove the destination subdir
       FileUtils.rm_rf(IMAGE_DEST_FOLDER)
 
       # Recreate the destination  subdir
       FileUtils.mkdir_p(IMAGE_DEST_FOLDER)
-    
+
       # Delete the temporary file
       @tmpfile.unlink unless @tmpfile == nil
     end
-    
+
     def photo_data
       filename = 'DSC01740.JPG'
       @tmpfile = Tempfile.new(filename)
@@ -45,7 +45,7 @@ module TestFileable
                                              })
     end
   end
-  
+
   def self.included(receiver)
     receiver.extend         ClassMethods
     receiver.send :include, InstanceMethods

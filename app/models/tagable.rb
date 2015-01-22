@@ -1,11 +1,11 @@
 module Tagable
   module ClassMethods
   end
-  
+
   module InstanceMethods
-    def tags_attributes      
+    def tags_attributes
     end
-    
+
     def tags_attributes=(attributes)
       tags = attributes[:tags_attributes]
       unless tags.nil?
@@ -16,11 +16,11 @@ module Tagable
       end
     end
   end
-  
+
   def self.included(receiver)
     receiver.extend         ClassMethods
     receiver.send :include, InstanceMethods
-    
+
     receiver.class_eval do
     end
   end

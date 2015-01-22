@@ -9,10 +9,10 @@ class ArticleTest < ActiveSupport::TestCase
       article.published_at = DateTime.now
     end
   end
-  
+
   test "should be able to modify an article's published_at date" do
     new_article = Article.new(published_at: DateTime.new(2012, 5, 12).getutc)
-    
+
     assert new_article.save, "should be able to modify an article's published_at datetime"
     assert new_article.published_at.getutc == DateTime.new(2012, 5, 12).getutc, "the article cannot save its selected datetime"
   end
@@ -27,7 +27,7 @@ class ArticleTest < ActiveSupport::TestCase
 
     assert new_article.valid?
   end
-  
+
   test 'should save article' do
     assert @valid_article.save
   end
@@ -48,7 +48,7 @@ class ArticleTest < ActiveSupport::TestCase
   test 'should add tags when setting the tags_attributes property' do
     article = Article.new(title: 'new article',
                           content: 'Hello from Canada')
-    article.tags_attributes = 
+    article.tags_attributes =
       { tags_attributes: 'toronto , montreal, quebec city' }
     assert article.tags.to_a[0].name == 'toronto'
     assert article.tags.to_a[1].name == 'montreal'
@@ -65,5 +65,15 @@ class ArticleTest < ActiveSupport::TestCase
     article = Article.new(content: "Hello\nWorld")
 
     assert "<p>Hello<br />\nWorld</p>" == article.content
+  end
+
+  test 'deleting an article should set associated photos to article_id = nil' do
+    article = articles(:cusco_trip)
+
+    assert article.photos.count > 0, 'article should have photos in order to perform test'
+    photos = article.photos
+
+    article.destroy
+    assert photos.count > 0, 'photos should not have been deleted'
   end
 end

@@ -4,7 +4,7 @@ class PlaceTest < ActiveSupport::TestCase
   test 'should convert description to markup' do
     place = Place.new(description: 'Hello World')
 
-    assert place.description == '<p>Hello World</p>',
+    assert (place.description =~ /\<p\>Hello World\<\/p\>/) >= 0,
       'description was not converted to markup'
   end
 end

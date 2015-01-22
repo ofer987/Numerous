@@ -16,8 +16,7 @@ class Photo < ActiveRecord::Base
   has_many :fichiers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_many :article_photos, dependent: :delete_all
-  has_many :articles, through: :article_photos
+  belongs_to :article
 
   after_initialize :set_description
   after_initialize :set_title

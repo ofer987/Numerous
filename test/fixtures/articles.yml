@@ -5,3 +5,9 @@ cusco_trip:
   sub_title: Cusco is amazing
   content: We arrived in cusco
   published_at: '2013-09-09 03:28:28'
+
+story_1:
+  title: Story 1
+  sub_title: This is a short story
+  content: A lot of content
+  published_at: '2013-09-10 03:28:28'
