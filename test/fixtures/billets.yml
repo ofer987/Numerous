@@ -1,11 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+cusco_trip:
+  title: Cusco Trip
+  sub_title: Cusco is amazing
+  content: We arrived in cusco
+  published_at: '2013-09-09 03:28:28'
+
+story_1:
+  title: Story 1
+  sub_title: This is a short story
+  content: A lot of content
+  published_at: '2013-09-10 03:28:28'
