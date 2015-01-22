@@ -39,35 +39,37 @@ Numerous::Application.routes.draw do
 
   controller :stories do
     get 'stories/:article_id/new_photo' => :new_photo
-    get 'stories/new_article' => :new_article
-    post 'stories' => :create_article
+    get 'stories/new_billet' => :new_billet
+    post 'stories' => :create_billet
     post 'stories/:article_id/create_photo' => :create_photo
   end
-  
+
   resources :articles do
     resources :comments, only: :create
-  end  
-  
+  end
+
+  resources :billets
+
   controller :articles do
     post 'articles/:article_id/create_photo' => :create_photo
   end
-  
-  resources :articles do
-    resources :comments
-  end
-  
+
+  # resources :articles do
+  #   resources :comments
+  # end
+
   get "books/read"
 
   resources :tags
 
   get "admin" => "admin#index"
-  
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     get 'logout' => :destroy
   end
-  
+
   get "sessions/new"
   get "sessions/create"
   get "sessions/destroy"
@@ -75,13 +77,13 @@ Numerous::Application.routes.draw do
   resources :users
 
   controller :photos do
-    patch 'photos/:id/rotate_clockwise' => :rotate_clockwise 
+    patch 'photos/:id/rotate_clockwise' => :rotate_clockwise
   end
 
-  resources :photos do    
+  resources :photos do
     resources :comments, only: :create
   end
-  
+
   get "cv" => "curriculum#index"
 
   # The priority is based upon order of creation:
@@ -133,7 +135,7 @@ Numerous::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'articles#index'
+  root :to => 'billets#index'
 
   # See how all your routes lay out with "rake routes"
 
