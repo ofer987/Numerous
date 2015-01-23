@@ -27,7 +27,10 @@ class Article < ActiveRecord::Base
   default_scope { order('published_at DESC') }
 
   def content
-    RedCloth.new(self[:content]).to_html
+    markdown_renderer = Redcarpet::Render::HTML.new
+    markdown = Redcarpet::Markdown.new(markdown_renderer)
+
+    markdown.render(self[:content])
   end
 
   def photos_attributes=(attributes)
@@ -37,15 +40,6 @@ class Article < ActiveRecord::Base
   end
 
   private
-
-  def to_html(content)
-    # It is assumed that the entry is written
-    # in paragraph form (at least one p
-    html = "<p>#{content.strip}</p>"
-
-    # replace every newline (and/or carriage return) with a </p<p>
-    html = html.gsub(/(\r{0,1}\n{1})+/, "</p><p>")
-  end
 
   def set_published_at_to_now
     self.published_at ||= DateTime.now.getutc if self.new_record?

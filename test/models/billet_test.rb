@@ -64,7 +64,8 @@ class BilletTest < ActiveSupport::TestCase
   test 'billet content should be displayed in paragraph form' do
     billet = Billet.new(content: "Hello\nWorld")
 
-    assert "<p>Hello<br />\nWorld</p>" == billet.content
+    assert (billet.content =~ /<p>Hello\nWorld<\/p>\n/) >= 0,
+      "billet's content was not converted to markdown"
   end
 
   test 'deleting an billet should set associated photos to billet_id = nil' do

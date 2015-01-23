@@ -1,7 +1,7 @@
 h2
   = recipe.title
 p
-  = raw @markdown.render(recipe.content)
+  = raw recipe.content
 
 ol
   - recipe.ingredients.each do |ingredient|
