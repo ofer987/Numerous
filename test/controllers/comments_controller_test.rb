@@ -18,7 +18,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should create comment for billet" do
-    billet = billets(:cusco_trip)
+    billet = articles(:cusco_trip)
 
     assert_difference('Comment.count') do
       post :create, billet_id: billet.id, comment: @new_comment

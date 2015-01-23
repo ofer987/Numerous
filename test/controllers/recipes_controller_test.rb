@@ -2,7 +2,7 @@ require 'test_helper'
 
 class RecipesControllerTest < ActionController::TestCase
   setup do
-    @recipe = recipes(:avena)
+    @recipe = articles(:avena)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class RecipesControllerTest < ActionController::TestCase
 
   test "should create recipe" do
     assert_difference('Recipe.count') do
-      post :create, recipe: { description: @recipe.description, title: @recipe.title }
+      post :create, recipe: { content: @recipe.content, title: @recipe.title }
     end
 
     assert_redirected_to recipe_path(assigns(:recipe))
@@ -35,7 +35,7 @@ class RecipesControllerTest < ActionController::TestCase
   end
 
   test "should update recipe" do
-    patch :update, id: @recipe, recipe: { description: @recipe.description, title: @recipe.title }
+    patch :update, id: @recipe, recipe: { content: @recipe.content, title: @recipe.title }
     assert_redirected_to recipe_path(assigns(:recipe))
   end
 

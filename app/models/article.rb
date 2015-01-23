@@ -1,10 +1,9 @@
 class Article < ActiveRecord::Base
   # id: integer, PKEY, NOT NULL
-  # gazette_id: integer, PKEY, FKEY, NOT NULL
   # title: string, NOT NULL, Default ''
   # sub_title: string
   # content: text, NOT NULL, Default ''
-  # published_at: datetime, NOT NULL, Default: now
+  # published_at: datetime, NOT NULL, Default: now (utc)
   # updated_at: datetime
   # created_at: datetime
   # type: string for single table inheritance

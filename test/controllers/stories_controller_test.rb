@@ -36,7 +36,7 @@ class StoriesControllerTest < ActionController::TestCase
   end
 
   test "should post new photo to existing article" do
-    existing_article = billets(:cusco_trip)
+    existing_article = articles(:cusco_trip)
 
     assert_difference('Photo.count', 1) do
       post :create_photo, {

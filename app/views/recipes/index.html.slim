@@ -3,7 +3,7 @@ h1 Listing recipes
 table
   tr
     th Title
-    th Description
+    th Content
     th
     th
     th
@@ -11,7 +11,7 @@ table
   - @recipes.each do |recipe|
     tr
       td = recipe.title
-      td = recipe.description
+      td = recipe.content
       td = link_to 'Show', recipe
       td = link_to 'Edit', edit_recipe_path(recipe)
       td = link_to 'Destroy', recipe, data: {:confirm => 'Are you sure?'}, :method => :delete

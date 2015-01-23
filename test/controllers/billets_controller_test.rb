@@ -5,7 +5,7 @@ class BilletsControllerTest < ActionController::TestCase
   include TestFileable
 
   setup do
-    @cusco_trip_billet = billets(:cusco_trip)
+    @cusco_trip_billet = articles(:cusco_trip)
 
     @all_billet_photos_attributes = Hash.new
     Photo.all.each_with_index do |photo, index|
@@ -102,7 +102,7 @@ class BilletsControllerTest < ActionController::TestCase
   end
 
   # test "should post new photo to existing billet" do
-  #   existing_billet = billets(:cusco_trip)
+  #   existing_billet = articles(:cusco_trip)
   #
   #   assert_difference('Photo.count', 1) do
   #     post :create_photo,

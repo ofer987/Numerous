@@ -1,3 +1,3 @@
-class Recipe < ActiveRecord::Base
+class Recipe < Article
   has_many :ingredients
 end

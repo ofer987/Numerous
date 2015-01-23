@@ -1,4 +1,10 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+avena:
+  title: Avena
+  content: This is Edith's favourite meal in the mornings and at night. Delicious with Quinoa
+  published_at: '2015-01-23 12:18:28'
+  type: Recipe
 
 cusco_trip:
   title: Cusco Trip

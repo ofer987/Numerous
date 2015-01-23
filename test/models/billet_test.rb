@@ -33,7 +33,7 @@ class BilletTest < ActiveSupport::TestCase
   end
 
   test 'billet should have tags' do
-    billet = billets(:cusco_trip)
+    billet = articles(:cusco_trip)
     assert billet.tags.count == 1
 
     billet.tags << Tag['england']
@@ -68,7 +68,7 @@ class BilletTest < ActiveSupport::TestCase
   end
 
   test 'deleting an billet should set associated photos to billet_id = nil' do
-    billet = billets(:cusco_trip)
+    billet = articles(:cusco_trip)
 
     assert billet.photos.count > 0, 'billet should have photos in order to perform test'
     photos = billet.photos
