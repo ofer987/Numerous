@@ -71,7 +71,7 @@ class BilletsControllerTest < ActionController::TestCase
       billet: { content: new_content }
     assert_response :success
     assert_equal(
-      "<p>#{new_content}</p>",
+      "<p>#{new_content}</p>\n",
       assigns(:billet).content,
       "The billet's content should have been updated")
   end
