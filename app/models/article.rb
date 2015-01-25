@@ -27,10 +27,9 @@ class Article < ActiveRecord::Base
   default_scope { order('published_at DESC') }
 
   def content
-    markdown_renderer = Redcarpet::Render::HTML.new
-    markdown = Redcarpet::Markdown.new(markdown_renderer)
+    my_mardown_processor = MyMarkdown.new(self[:content])
 
-    markdown.render(self[:content])
+    my_mardown_processor.content
   end
 
   def photos_attributes=(attributes)

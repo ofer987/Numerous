@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   #id: integer, PKEY, NOT NULL
+  #article_id, integer, FOREIGN KEY to Article, NOT NULL
   #title: varchar(255), NOT NULL
   #description: text, NOT NULL, DEFAULT: ''
   #filename: varchar(255), NOT NULL
@@ -39,6 +40,10 @@ class Photo < ActiveRecord::Base
   # Root directory of the photo public/photos
   def photo_store
     Rails.root.join('public', 'images', 'photos')
+  end
+
+  def self.local_photos_dir
+    '/images/photos/'
   end
 
   def method_missing(name, *args, &block)
