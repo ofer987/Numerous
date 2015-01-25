@@ -15,10 +15,10 @@ class MyMarkdown
   private
 
   def processed_content
-    raw_content.gsub(/(\[[^\[\]]*\])/) { |place_holder| replace_photo(place_holder[1..-2]) }
+    raw_content.gsub(/(\[[^\[\]]*\])/) { |token| replace_photo_tokens(token[1..-2]) }
   end
 
-  def replace_photo(title)
+  def replace_photo_tokens(title)
     photo = Photo.find_by_title(title)
 
     return '' if photo.nil?
