@@ -3,23 +3,24 @@ require 'test_fileable'
 
 class PhotosControllerTest < ActionController::TestCase
   include TestFileable
-  
+
   setup do
     setup_photo_files
-    
-    @photo = photos(:eaton_college)  
-    
+
+    @photo = photos(:eaton_college)
+    @article = @photo.article
+
     @eaton_college_update = {
       title: 'Lorem Ipsum Photo',
       description: 'Description for Lorem Ipsum',
     }
-    
+
     @new_photo = {
         description: 'This is a beautiful new photo',
         title: "My mom's photo"
     }
   end
-  
+
   teardown do
     teardown_photo_files
   end
@@ -50,7 +51,7 @@ class PhotosControllerTest < ActionController::TestCase
     get :show, id: @photo.to_param
     assert_response :success
   end
-  
+
   test "should show photo again (using an AJAX call)" do
     get :show, format: :js, id: @photo.to_param
     assert_response :success
@@ -62,7 +63,7 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should update photo" do
-    put :update, format: :js, id: @photo.to_param, 
+    put :update, format: :js, id: @photo.to_param,
       photo: @eaton_college_update
     assert assigns(:photo).title == @eaton_college_update[:title]
   end
@@ -74,11 +75,11 @@ class PhotosControllerTest < ActionController::TestCase
 
     # Before delete the photos we need to know the fichiers that
     # have been destroyed as well
-    
+
     assert_difference('Photo.count', -1) do
       delete :destroy, id: @package.to_param
     end
-    
+
     # Are all the files of the fichiers deleted?
     #@package.fichiers.each do |fichier|
     #  assert !File.exist?("#{photos_dir}#{fichier.filename}"), "The file #{fichier.filename} was not deleted!"
@@ -86,7 +87,7 @@ class PhotosControllerTest < ActionController::TestCase
 
     assert_redirected_to photos_path
   end
-  
+
   # Set up the files for the photo
   # By copying them from the test dir to the assets dir
   def copy_fichier_files(photo)

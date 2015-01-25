@@ -1,10 +1,10 @@
 = form_for(@article.photos.build, url: "/stories/#{@article.to_param}/create_photo") do |f|
-	div class="photo-dropbox"
-		div class="instructions" Drop Photos
-		= f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
-		
-= link_to "Finish", article_path( @article)		
-		
+  div class="photo-dropbox"
+    div class="instructions" Drop Photos
+    = f.file_field :load_photo_file, accept: 'image/jpeg', multiple: true, name: 'photo[load_photo_file]', id: 'file-field'
+
+= link_to "Finish", @article
+
 div id="notice"
 
 - @photos = @article.photos

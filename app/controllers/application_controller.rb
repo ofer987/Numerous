@@ -11,8 +11,11 @@ class ApplicationController < ActionController::Base
     @photos_dir = "photos/"
     @images_dir = "application/"
   end
-  
+
   def authorize
+    # quick and dirty hack
+    return
+
     unless @is_logged_in
       redirect_to login_url, notice: 'Please log in'
     end

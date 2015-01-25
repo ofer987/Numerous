@@ -16,6 +16,19 @@ class PhotoTest < ActiveSupport::TestCase
     teardown_photo_files
   end
 
+  test 'photo should belong to an article' do
+    photo_without_article = Photo.new
+    photo_without_article.valid?
+    assert photo_without_article.errors[:article_id].any?,
+      "photo should not be valid if does not belong to article"
+
+    article = articles(:avena)
+    photo_with_article = Photo.new(article_id: article.id)
+    photo_with_article.valid?
+    refute photo_with_article.errors[:article_id].any?,
+      "photo should be valid if associated to an article"
+  end
+
   test "photo attributes must not be empty" do
     photo = Photo.new
     assert photo.invalid?
@@ -37,12 +50,13 @@ class PhotoTest < ActiveSupport::TestCase
 
   test "should create a new photo with file" do
     photo = Photo.new do |p|
+      p.article = articles(:avena)
       p.title = "My mom's photo"
       p.description = 'This is a beautiful new photo'
     end
 
     photo.load_photo_file = photo_data
-    photo.save
+    assert photo.save!, photo.errors.full_messages
 
     assert photo.fichiers.size > 0, 'Fichiers were not created'
     photo.fichiers.each do |fichier|

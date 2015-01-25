@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_action :init_variables
   before_action :init_photo, only: [:show, :edit, :update]
+  before_action :init_article
 
   # Negative captcha
   before_action :setup_comment_negative_captcha,
@@ -11,7 +12,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = @article.photos
     @all_tags = Tag.all_tagable(Photo)
 
     @selected_tag_name = params[:tag]
@@ -24,8 +25,6 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    init_photo
-
     if @displayed_fichier.nil?
       redirect_to '/photos'
     end
@@ -49,7 +48,6 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
-    init_photo
     @edit_mode = true
 
     respond_to do |format|
@@ -129,6 +127,10 @@ class PhotosController < ApplicationController
 
     # new comment
     @comment = @photo.comments.new
+  end
+
+  def init_article
+    @article = Article.find(params[:article_id])
   end
 
   def photo_params

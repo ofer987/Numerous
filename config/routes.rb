@@ -3,6 +3,10 @@ Numerous::Application.routes.draw do
     resources :ingredients
   end
 
+  resources :articles do
+    resources :photos
+  end
+
   resources :place_types
 
   resources :destinations, only: [:index]

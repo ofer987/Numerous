@@ -21,6 +21,7 @@ class Photo < ActiveRecord::Base
   after_initialize :set_description
   after_initialize :set_title
 
+  validates_presence_of :article_id
   validates_presence_of :description, allow_blank: true
   validates_presence_of :title, allow_blank: true
   validates_presence_of :filename, on: :create,
