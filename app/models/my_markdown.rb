@@ -1,21 +1,27 @@
+include ActionView::Helpers::AssetTagHelper
+include ActionView::Helpers::UrlHelper
+
 class MyMarkdown
   attr_reader :raw_content
 
-  def initialize(raw_content)
+  def initialize(raw_content, replacement_values = nil)
     @raw_content = raw_content
+    @replacement_values = replacement_values
 
     markdown_renderer = Redcarpet::Render::HTML.new
     @markdown = Redcarpet::Markdown.new(markdown_renderer)
   end
 
   def content
-    @markdown.render(processed_content)
+    marked_content = @markdown.render(@raw_content)
+
+    replace_tokens(marked_content)
   end
 
   private
 
-  def processed_content
-    raw_content.gsub(/(\[[^\[\]]*\])/) { |token| replace_photo_tokens(token[1..-2]) }
+  def replace_tokens(content)
+    content.gsub(/(\[[^\[\]]*\])/) { |token| replace_photo_tokens(token[1..-2]) }
   end
 
   def replace_photo_tokens(title)
@@ -26,7 +32,7 @@ class MyMarkdown
     <<-HTML
       <div id="item_<%= photo.id %>">
         <div class="thumbnail">
-          <%= link_to image_tag(#{Photo.local_photos_dir + photo.thumbnail_fichier.filename}, class: "photo-thumbnail"), photo_path(photo, tags: params[:tags]) %>
+          #{link_to image_tag(Photo.local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail"), "#{@replacement_values[:article].id}/photos/#{photo.id}"}
         </div>
       </div>
     HTML

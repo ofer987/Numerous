@@ -27,7 +27,7 @@ class Article < ActiveRecord::Base
   default_scope { order('published_at DESC') }
 
   def content
-    my_mardown_processor = MyMarkdown.new(self[:content])
+    my_mardown_processor = MyMarkdown.new(self[:content], article: self)
 
     my_mardown_processor.content
   end

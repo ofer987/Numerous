@@ -26,18 +26,18 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, article_id: @article
     assert_response :success
   end
 
   test "should get new" do
-    get :new
+    get :new, article_id: @article
     assert_response :success
   end
 
   test "should create photo" do
     assert_difference('Photo.count') do
-      post :create, photo: {
+      post :create, article_id: @article.id, photo: {
           description: @new_photo[:description],
           load_photo_file: self.photo_data,
           title: @new_photo[:title]
@@ -48,22 +48,22 @@ class PhotosControllerTest < ActionController::TestCase
   end
 
   test "should show photo" do
-    get :show, id: @photo.to_param
+    get :show, article_id: @photo.article, id: @photo.to_param
     assert_response :success
   end
 
   test "should show photo again (using an AJAX call)" do
-    get :show, format: :js, id: @photo.to_param
+    get :show, format: :js, id: @photo.to_param, article_id: @photo.article_id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @photo.to_param
+    get :edit, id: @photo.to_param, article_id: @photo.article_id
     assert_response :success
   end
 
   test "should update photo" do
-    put :update, format: :js, id: @photo.to_param,
+    put :update, format: :js, id: @photo.to_param, article_id: @photo.article_id,
       photo: @eaton_college_update
     assert assigns(:photo).title == @eaton_college_update[:title]
   end
@@ -77,7 +77,7 @@ class PhotosControllerTest < ActionController::TestCase
     # have been destroyed as well
 
     assert_difference('Photo.count', -1) do
-      delete :destroy, id: @package.to_param
+      delete :destroy, id: @package.to_param, article_id: @photo.article_id
     end
 
     # Are all the files of the fichiers deleted?

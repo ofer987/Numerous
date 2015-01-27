@@ -1,30 +1,30 @@
 = form_for(@photo) do |f|
-	- if @photo.errors.any?
-		div class="alert alert-danger"
-			| #{pluralize(@photo.errors.count, "error")} 
-			' prohibited this photo from being saved:
+  - if @photo.errors.any?
+    div class="alert alert-danger"
+      | #{pluralize(@photo.errors.count, "error")}
+      ' prohibited this photo from being saved:
 
-		- @photo.errors.full_messages.each do |msg|
-			div class="alert alert-danger"
-				| #{msg}
+    - @photo.errors.full_messages.each do |msg|
+      div class="alert alert-danger"
+        | #{msg}
 
-	div class="input-group"
-		= f.label :title, class: "input-group-addon"
-		= f.text_field :title, class: 'form-control'
-	div class="input-group"
-		= f.label :description, class: "input-group-addon"
-		= f.text_area :description, class: 'form-control description'
-	div class="input-group"
-		= f.label :tags_attributes, "New Tags", class: "input-group-addon"
-		= f.text_field :tags_attributes, class: 'form-control'
-	div class="input-group"
-		= f.label :load_photo_file, class: "input-group-addon"
-		= f.file_field :load_photo_file, accept: "image/jpeg",
-			class: 'form-control'
-	br
+  div class="input-group"
+    = f.label :title, class: "input-group-addon"
+    = f.text_field :title, class: 'form-control'
+  div class="input-group"
+    = f.label :description, class: "input-group-addon"
+    = f.text_area :description, class: 'form-control description'
+  div class="input-group"
+    = f.label :tags_attributes, "New Tags", class: "input-group-addon"
+    = f.text_field :tags_attributes, class: 'form-control'
+  div class="input-group"
+    = f.label :load_photo_file, class: "input-group-addon"
+    = f.file_field :load_photo_file, accept: "image/jpeg",
+      class: 'form-control'
+  br
 
-	div class="input-group"
-		div class="button-group"
-			= f.submit class: "btn btn-primary"
-			= link_to "Cancel", photos_path, class: "btn btn-danger",
-				role: "button"
+  div class="input-group"
+    div class="button-group"
+      = f.submit class: "btn btn-primary"
+      = link_to "Cancel", photos_path, class: "btn btn-danger",
+        role: "button"

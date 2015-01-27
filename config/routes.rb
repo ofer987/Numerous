@@ -1,5 +1,6 @@
 Numerous::Application.routes.draw do
   resources :recipes do
+    resources :photos
     resources :ingredients
   end
 
