@@ -1,13 +1,16 @@
-h1 class="content-intro" Admin
+p#notice = notice
+
+h2 class="content-intro" Admin
 
 ul class="new-content"
   li id="photos"
-    div
+    b
       = link_to 'Add new photo', new_photo_url
   li id="blog"
-    div
+    b
       = link_to 'Add new billet for blog', new_billet_url
 
+h3 Destinations
 ul
   - @countries.each_with_index do |country, index|
     li id="countries_#{index}"
@@ -35,6 +38,15 @@ ul
     div
       b
         = link_to 'Add new country', new_country_url
+
+h3 Listing recipes
+ul
+  - @recipes.each_with_index do |recipe, index|
+    li id="recipe_#{index}"
+      = link_to recipe.title, edit_recipe_path(recipe)
+  li id="new_recipe"
+    b
+      = link_to 'New Recipe', new_recipe_path
 
 div class="logout"
   = link_to 'Logout', logout_url

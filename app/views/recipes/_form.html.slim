@@ -8,8 +8,19 @@
 
   .field
     = f.label :title
+    br
     = f.text_field :title
   .field
     = f.label :content
+    br
     = f.text_area :content
-  .actions = f.submit 'Save'
+  br
+  = link_to "Add photos", article_photos_path(@recipe), class: "btn btn-primary"
+  br
+  br
+  div class="btn-group" role="group"
+    button type="submit" class="btn btn-primary"
+      | Save
+    = link_to "Cancel", admin_path, class: "btn btn-info"
+    = link_to 'Destroy', @recipe, data: {:confirm => 'Are you sure?'}, :method => :delete,
+      class: "btn btn-danger"

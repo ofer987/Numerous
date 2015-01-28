@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     # quick and dirty hack
-    return
+    @is_logged_in = true
 
     unless @is_logged_in
       redirect_to login_url, notice: 'Please log in'

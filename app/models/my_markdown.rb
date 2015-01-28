@@ -25,14 +25,15 @@ class MyMarkdown
   end
 
   def replace_photo_tokens(title)
-    photo = Photo.find_by_title(title)
+    article = @replacement_values[:article]
+    photo = article.photos.find_by_title(title)
 
     return '' if photo.nil?
 
     <<-HTML
-      <div id="item_<%= photo.id %>">
+      <div id="item_#{photo.id}">
         <div class="thumbnail">
-          #{link_to image_tag(Photo.local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail"), "#{@replacement_values[:article].id}/photos/#{photo.id}"}
+          #{image_tag(Photo.local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail")}
         </div>
       </div>
     HTML

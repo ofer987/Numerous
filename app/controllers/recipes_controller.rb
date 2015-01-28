@@ -4,15 +4,10 @@ class RecipesController < ApplicationController
   # GET /recipes
   def index
     @recipes = Recipe.all
-
-    markdown_renderer = Redcarpet::Render::HTML.new
-    @markdown = Redcarpet::Markdown.new(markdown_renderer)
   end
 
   # GET /recipes/1
   def show
-    markdown_renderer = Redcarpet::Render::HTML.new
-    @markdown = Redcarpet::Markdown.new(markdown_renderer)
   end
 
   # GET /recipes/new
@@ -29,7 +24,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      redirect_to @recipe, notice: 'Recipe was successfully created.'
+      redirect_to admin_path, notice: 'Recipe was successfully created.'
     else
       render action: 'new'
     end
@@ -38,7 +33,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   def update
     if @recipe.update(recipe_params)
-      redirect_to @recipe, notice: 'Recipe was successfully updated.'
+      redirect_to admin_path, notice: 'Recipe was successfully updated.'
     else
       render action: 'edit'
     end
@@ -47,7 +42,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   def destroy
     @recipe.destroy
-    redirect_to recipes_url, notice: 'Recipe was successfully destroyed.'
+    redirect_to admin_path, notice: 'Recipe was successfully destroyed.'
   end
 
   private

@@ -21,7 +21,7 @@ class RecipesControllerTest < ActionController::TestCase
       post :create, recipe: { content: @recipe.content, title: @recipe.title }
     end
 
-    assert_redirected_to recipe_path(assigns(:recipe))
+    assert_redirected_to admin_path
   end
 
   test "should show recipe" do
@@ -36,7 +36,7 @@ class RecipesControllerTest < ActionController::TestCase
 
   test "should update recipe" do
     patch :update, id: @recipe, recipe: { content: @recipe.content, title: @recipe.title }
-    assert_redirected_to recipe_path(assigns(:recipe))
+    assert_redirected_to admin_path
   end
 
   test "should destroy recipe" do
@@ -44,6 +44,6 @@ class RecipesControllerTest < ActionController::TestCase
       delete :destroy, id: @recipe
     end
 
-    assert_redirected_to recipes_path
+    assert_redirected_to admin_path
   end
 end
