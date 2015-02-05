@@ -4,23 +4,14 @@
 
 .curriculum {
   .contact {
-    p {
-      padding: 10px 0 10px 0;
-
-      &#email {
-        background: url('/assets/application/googleplus.png') no-repeat 0 50%;
+    a {
+      img {
+        width: 32px;
+        height: 32px;
       }
 
-      &#facebook {
-        background: url('/assets/application/facebook.png') no-repeat 0 50%;
-      }
-
-      &#linkedin {
-        background: url('/assets/application/linkedin.png') no-repeat 0 50%;
-      }
-  
-      a {
-       padding: 0 0 0 60px;
+      p {
+        padding: 10px 0 10px 0;
       }
     }
   }

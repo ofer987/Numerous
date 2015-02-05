@@ -1,0 +1,158 @@
+---
+## Technical Skills
+**Like:** microsoft, .net, c#, asp.net, mvc, ruby, rails, ruby-on-rails, html, css, javascript, coffeescript, dart, jquery, sql-server, tsql, tmux
+
+---
+##Experience
+
+**Architect**, Groupe Média TFO, *August 2014 - January 2015*
+
+.net, c#, sql, sql-server, scheduled-tasks, iis
+
+- Responsable for the architecture of the web systems
+- Automation of deployments of websites and service tasks
+- Responsable for assuring that new video content appeared on TFO&#39;s websites
+- Advised management with regards to technical decisions and cost-benefit analysis
+- In collaboration with the IT infrastructure team, we successfully migrated our entire technical infrastructure to Amazon Web Services
+
+---
+
+**Senior Software Developer**, Firmex Inc., *February 2014 - August 2014*
+
+.net, c#, asp.net-mvc, ruby, rspec, sql, sql-server
+
+- Firmex provides cloud-based virtual dataroom technology offered as a Software-as-a-Service for law firms, banks, and other end-users to securely transfer documents in a permission-based environment
+- Wrote technical requirement documents by using the business requirements provided by the project managers
+- Developed the testing framework in the Ruby language using RSpec
+- Designed and developed new features and functionality in C#, .NET, and SQL Server
+- Developed the API service used by the Firmex website and by third-parties companies
+
+---
+
+**Full Stack Software Developer**, Ficstar Software Solutions, *July 2013 - January 2014*
+
+c#, .net, css, javascript, mysql, mongodb, rest, json, ormlite, nunit, tdd, nlog, zeromq, servicestack
+
+- Developed configurable internet data-mining software to extract arbitrary data from websites
+- Developed tools to configure the data-mining workers, a server to control the workers, 
+a database to store the data, and monitoring tools to control the workers
+- Server-client communication using ZeroMQ
+- Test-driven development using NUnit for functional and for regression testing
+- Hybrid database approach: MySQL to store relational data, and MongoDB to store 
+data where the schema was decided at runtime
+- Involved in all stages of software development lifecycle: from project conception to 
+design, development and testing
+- Agile development methodology, involving SOLID design principles and design 
+patterns
+- Developed using the .NET Framework 4.5 and C# 5.0
+
+---
+
+**Software Developer**, Showcare Event Solutions, *October 2010 - February 2013*
+
+microsoft, .net, c#, asp.net, html, css, javascript, jquery, sql-server, tsql, stored-procedures
+
+&lt;p&gt;I worked in a group of eight developers under the Vice President of Technology to implement next-generation software for managing large-scale conferences and events used around the wold. Our software was used by dozens of conferences per year, with 100,000s of users.&lt;/p&gt;
+- Implemented in .NET using object-oriented design, relational database to object modeling, URL-routing, and database schema design for large-scale applications
+- Utilized T-SQL, object-oriented programming, functional programming, LINQ, ASP.NET page life cycle, ASP.NET controls, and the ViewState and Session variables
+- Used XQuery to transform XML information stored in a SQL Server database
+- Designed the front-end using HTML, CSS, Sass, and JavaScript with jQuery
+- Development environment in Windows 7 with Visual Studio 2010, and ReSharper for extra functionality and code navigation, coupled with StyleCop to ensure proper code guidelines
+
+---
+
+**Enterprise Resource Planning Engineer**, C&D Zodiac Aerospace, *February 2009 - September 2010*
+
+c#, .net, asp.net, progress-4gl, openedge
+
+- Implemented an Enterprise Resource Planning (ERP) based system that managed and stored data pertaining to the company’s business
+- Collaborated with other developers and business analysts on the analysis, design, and implementation of database driven applications
+- Responsible for understanding business analyst’s requirements and delivering appropriate solutions that fit their needs
+- Used Progress 4GL, C#, ASP, .NET, HTML, JavaScript, and Perl
+
+---
+
+**Software Tester**, IBM, *May 2007 - August 2007*
+
+c, c++
+
+- Tested the IBM XL C/C++ Compiler for the IBM Cell Processor
+- Developed test cases, monitored runs, and investigated test failures
+- Studied failures in order to pinpoint the root causes
+- Worked with developers to understand the root causes of failures and resolve them
+
+---
+
+**Software Developer**, IBM, *May 2006 - August 2006*
+
+perl, html, css, javascript
+
+- Developed a load-balancing and reporting tool for the DB2 build servers
+- The reporting data could be accessed through an internal web site
+- Development environment in Linux, programmed in Perl for the backend, and in HTML and CSS for the front-end
+
+---
+
+##Education
+
+**BASc. Electrical Engineering**, University of Toronto, *2004 - 2008*
+
+
+Contributed to writing software tools to the university&#39;s solar car project: &quot;Bluesky Solar Racing Team&quot;
+
+---
+
+
+##Projects &amp; Interests
+
+**GitHub - www.DanOfer.com**, [https://github.com/ofer987/Numerous](https://github.com/ofer987/Numerous), *August 2012 - January 2015*
+
+ruby, rails, ruby-on-rails, sqlite, html, css, javascript, coffescript, jquery
+
+Blogging Engine
+  
+- Designed and developed my personal blog
+- Coded in Ruby on Rails 4.0 while adhering to MVC practices and to a test-driven development process
+- Used Ruby language features such as functional programming and proper naming conventions for constants, variables, methods, classes, and modules
+- Used ImageMagick and the associated RMagick gem for image processing; and the bcrypt-ruby gem for password hashing
+- Ajax and jQuery for asynchronous webpage rendering
+- Designed the front-end using HTML, CSS, and CoffeeScript with jQuery
+- Development environment in OS X with TextMate, SQLite, and iTerm2
+- Published on a Ubuntu 12.04 server on the Windows Azure cloud
+- Source code repository on github at https://github.com/ofer987/Numerous
+
+---
+
+**CodePlex - RMT E-Commerce Website**, [https://rmtweb.codeplex.com/](https://rmtweb.codeplex.com/), *November 2007 - December 2007*
+
+c#, asp.net, sql-server
+
+Website kit for creating websites for Registered Massage Therapist (RMT) businesses. Project supports RMT and client profiles. Clients can view a list of available RMTs and their services, and then book appointments. And RMTs can view their work schedules.
+  
+- Backend consisted of C# and ASP.NET
+- SQL Server 2005
+
+---
+
+**Google Code - P2P Maze**, [https://code.google.com/p/p2pmaze/](https://code.google.com/p/p2pmaze/)
+
+c++, p2p, sdl, opengl, sockets
+
+University of Toronto fourth year design project from September 2007 to April 2008
+  
+- A full year design project as part of a fourth year engineering course
+- A peer-to-peer multiplayer online game system
+- Each client is also a server to optimize CPU and network load
+- Designed the peer-to-peer infrastructure
+- Implemented in C++ using OpenGL, sockets, and SDL_net
+- Demoed at the University of Toronto Engineering Design Fair on April 1, 2008
+
+---
+
+
+
+
+## Background
+I am a competent software developer: At the age of 12 I learned the C programming language using the coveted book, &quot;Teach Yourself C Second Edition&quot; by the well-respected author Herbert Schildt. It was love at first site. At the age of 14 I was introduced to object-oriented languages, first from Java and then from C++. At the age of 19 I learned Perl. And finally by age 21 I learned C# and Ruby.
+
+International man of mystery: I speak English, French, Hebrew, and Spanish.
