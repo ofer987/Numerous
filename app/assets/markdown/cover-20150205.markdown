@@ -1,9 +1,7 @@
-## I am a Ruby on Rails developer who has been developing robust software enjoyed by the industry since 2008
+## Dan Jakob Ofer is a Ruby on Rails developer in Toronto since 2008
 
 - I have created large-scale web applications, accessed by hundreds of thousands of users
 
 - Experience in both SQL (SQL Server and MySQL) and NoSQL databases (MongoDB)
 
 - My code is clear and maintainable. My colleagues benefit from easy-to-read code because it follows conventions
-
-- Always keeping up-to-date with new languages and frameworks (currently learning Dart and AngularDart) and books (see my list of read books!)
