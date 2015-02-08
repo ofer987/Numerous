@@ -4,19 +4,19 @@ class Fichier < ActiveRecord::Base
   #filesize_type_id: integer, FKEY, NOT NULL
   #created_at: datetime
   #updated_at: datetime
-  
+
   belongs_to :photo
   belongs_to :filesize_type
-  
+
   before_validation :ensure_filesize_type_exists
   before_validation :ensure_belongs_to_photo
-  
+
   before_destroy :before_destroy
-  
+
   attr_accessor :saved_image
 
   before_save :write_file
-  
+
   # get the filename
   def filename
     if (self.filesize_type.name == 'original')
@@ -26,36 +26,36 @@ class Fichier < ActiveRecord::Base
       $1 + "_" + self.filesize_type.name + "." + $2
     end
   end
-  
+
   def absolute_filename
     File.join(self.photo.photo_store, self.filename)
   end
-  
+
   def find_by_filesize_type(name)
     self.find_by_filesize_type_id(FilesizeType.find_by_name(name))
   end
-  
+
   def rotate!
     begin
       image = Magick::ImageList.new(self.absolute_filename)
     rescue Exception => e
       errors.add(:base, "Could not open the file #{self.absolute_filename} to rotate")
     end
-    
+
     image.rotate!(90)
     if image == nil
       errors.add(:base, "Failed to rotate the image #{self.absolute_filename}")
     else
-      begin    
+      begin
         image.write(self.absolute_filename)
       rescue Exception => e
         errors.add(:base, "Failed to save the rotated image #{self.absolute_filename}")
       end
     end
   end
-  
+
   private
-  
+
   def ensure_filesize_type_exists
     if FilesizeType.all.any? { |filesize_type| filesize_type.id == self.filesize_type_id }
       true
@@ -80,7 +80,7 @@ class Fichier < ActiveRecord::Base
     rescue Exception => e
       errors.add(:base, e.message)
       return false
-    end 
+    end
   end
 
   def write_file

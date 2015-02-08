@@ -1,0 +1,15 @@
+// Expects @article and photo variables
+
+- photo_date = photo.taken_date.strftime("%b %-d at %H:%M")
+- tags = photo.tags.join(',')
+div class="col-sm-6 col-md-4 photo" id="item_#{photo.id}" tags="#{tags}"
+  div class="thumbnail"
+    = link_to image_tag(@local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail"), article_photo_path(@article, photo, tags: params[:tags])
+    div class="caption"
+      - if photo.title.blank?
+        h3 &nbsp;
+      - else
+        h3
+          = photo.displayed_title
+      p
+        = strip_tags(photo_date)

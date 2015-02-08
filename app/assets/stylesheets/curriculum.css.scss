@@ -15,4 +15,39 @@
       }
     }
   }
+
+  .workplaces {
+    a.workplace {
+      img {
+        margin: 3em 0 3em 6em;
+        height: 64px;
+      }
+    }
+  }
+
+  .abilities {
+    ul {
+      list-style: none;
+      margin-top: 2em;
+      padding-left: 6em;
+
+      li {
+        margin-bottom: 1em;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        span {
+          font-size: 1.5em;
+          margin: 0 0 0 0.5em;
+        }
+      }
+
+      li.last {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

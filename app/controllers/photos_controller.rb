@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :init_variables
-  before_action :init_photo, only: [:show, :edit, :update]
   before_action :init_article
+  before_action :init_photo, only: [:show, :edit, :update]
 
   # Negative captcha
   before_action :setup_comment_negative_captcha,
@@ -25,10 +25,6 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    if @displayed_fichier.nil?
-      redirect_to '/photos'
-    end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @photo }
@@ -115,8 +111,9 @@ class PhotosController < ApplicationController
   end
 
   def init_photo
-    @photo = Photo.find(params[:id])
-    @displayed_fichier = @photo.small_fichier
+    @photo = @article.photos.find(params[:id])
+    displayed_fichier = @photo.small_fichier
+    @displayed_fichier_name = displayed_fichier_name = displayed_fichier.name
 
     @photos = Photo.order(@sql_order)
 

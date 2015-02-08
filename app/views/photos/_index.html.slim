@@ -1,5 +1,7 @@
+// Expects @article and @photo variables
+
 div class="row" id="photos"
   - @photos.select do |photo| \
-		not photo.thumbnail_fichier.nil? \
-	end.each do |photo|
-		== render photo
+    not photo.thumbnail_fichier.nil? \
+  end.each do |photo|
+    == render photo

@@ -18,4 +18,5 @@ div id="content"
 /   / Do not display the new photo (last photo) created by the file uploader
 /   - @photos = @edit_mode ? @billet.photos[0..-2] : @billet.photos
 - @photos = @billet.photos
+- @article = @billet
 == render partial: 'photos/index'
