@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PhotoTest < ActiveSupport::TestCase
+class MyMarkdownTest < ActiveSupport::TestCase
   setup do
     @standard_markdown = <<-MARK
       # Hello

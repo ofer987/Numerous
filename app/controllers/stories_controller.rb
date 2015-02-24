@@ -21,7 +21,7 @@ class StoriesController < ApplicationController
   def create_photo
     @article = Article.find_by_id(params[:article_id])
 
-    @photo = Photo.new(load_photo_file: photo_params[:load_photo_file])
+    @photo = @article.photos.build(load_photo_file: photo_params[:load_photo_file])
     if @photo.valid?
       @article.photos << @photo
       render file: 'stories/create_photo.js'

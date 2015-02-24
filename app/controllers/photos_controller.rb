@@ -3,10 +3,6 @@ class PhotosController < ApplicationController
   before_action :init_article
   before_action :init_photo, only: [:show, :edit, :update]
 
-  # Negative captcha
-  before_action :setup_comment_negative_captcha,
-    only: [:show, :edit, :update]
-
   skip_before_action :authorize, only: [:index, :show]
 
   # GET /photos
@@ -126,9 +122,6 @@ class PhotosController < ApplicationController
 
     @is_first_photo = @current_photo_index == 0
     @is_last_photo = @current_photo_index == @photos.count - 1
-
-    # new comment
-    @comment = @photo.comments.new
   end
 
   def init_article
@@ -137,14 +130,5 @@ class PhotosController < ApplicationController
 
   def photo_params
     params.require(:photo).permit(:id, :title, :description, :load_photo_file, :tags_attributes, photo_tags_attributes: [:is_selected, :id])
-  end
-
-  def setup_comment_negative_captcha
-    @comment_captcha = RefusalCaptcha.new(
-      secret: Numerous::Application.config.negative_captcha_secret,
-      spinner: request.remote_ip,
-      fields: [:content, :user],
-      params: params
-      )
   end
 end

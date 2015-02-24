@@ -6,7 +6,7 @@
     </button>
     <% @all_tags.each do |tag| %>
       <% tag_name = strip_tags(tag.name) %>
-      <button type="button" class="btn btn-default tag" 
+      <button type="button" class="btn btn-default tag"
         value="<%= tag_name %>">
         <%= tag_name %>
       </button>
@@ -15,6 +15,6 @@
   <% end %>
   <br>
   <br>
-  
-  <%= render partial: 'photos/index' %> 
+
+  <%= render partial: 'photos/index' %>
 </div>

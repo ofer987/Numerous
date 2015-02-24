@@ -1,13 +1,13 @@
 / locals: commentable
 
-= form_for([commentable, @comment]) do |f|
+= form_for([@user, commentable, @comment]) do |f|
   - if @comment.errors.any?
     div class="alert alert-danger"
       | #{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:
   - @comment.errors.full_messages.each do |msg|
     div class="alert alert-danger"
       = msg
-  
+
   == negative_captcha @comment_captcha
 
   div class="input-group"

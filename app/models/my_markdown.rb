@@ -25,9 +25,12 @@ class MyMarkdown
   end
 
   def replace_photo_tokens(title)
-    article = @replacement_values[:article]
-    photo = article.photos.find_by_title(title)
+    return '' if @replacement_values.nil?
 
+    article = @replacement_values[:article]
+    return '' if article.nil?
+
+    photo = article.photos.find_by_title(title)
     return '' if photo.nil?
 
     <<-HTML

@@ -129,18 +129,16 @@ class ArticlesController < ApplicationController
       )
   end
 
-  def facebooker
-    unless defined? @graph and not @graph.nil?
-      binding.pry
-      access_token = facebook_cookies["access_token"]
-      binding.pry
-      @graph = Koala::Facebook::API.new(access_token)
-    end
-
-    Facebooker.new @graph
-  end
-
-  def facebook_cookies
-    @facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
-  end
+  # def facebooker
+  #   unless defined? @graph and not @graph.nil?
+  #     access_token = facebook_cookies["access_token"]
+  #     @graph = Koala::Facebook::API.new(access_token)
+  #   end
+  #
+  #   Facebooker.new @graph
+  # end
+  #
+  # def facebook_cookies
+  #   @facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
+  # end
 end

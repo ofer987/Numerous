@@ -1,0 +1,21 @@
+/ not possible to access @user generated in application controller
+- user = User.find_by_id(session[:user_id])
+
+div class="navbar navbar-default navbar-fixed-top" role="navigation"
+  div class="container"
+    div class="navbar-header"
+      button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
+        span class="sr-only">Toggle navigation
+        span class="icon-bar">
+        span class="icon-bar">
+        span class="icon-bar">
+      a class="navbar-brand" href="/" HoverBoards
+    div class="navbar-collapse collapse"
+      ul class="nav navbar-nav"
+        li id="articles-item"
+          a href="/" Home
+        li id="destinations-item"
+          = link_to "My articles", user_articles_url(user)
+      ul class="nav navbar-nav navbar-right"
+        li id="admin-item"
+          = link_to "My Account", user_admin_index_url(user)

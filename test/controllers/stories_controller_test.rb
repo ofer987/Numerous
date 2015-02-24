@@ -41,8 +41,7 @@ class StoriesControllerTest < ActionController::TestCase
     assert_difference('Photo.count', 1) do
       post :create_photo, {
         remote: true,
-        article_id:
-        existing_article.id,
+        article_id: existing_article.id,
         photo: { load_photo_file: self.photo_data }
       }
     end

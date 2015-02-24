@@ -3,11 +3,11 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:admin)
-    
+
     @input_attributes = {
       name: "dan",
       password: "private",
-      password_confirmation: "private"      
+      password_confirmation: "private"
     }
   end
 
@@ -51,13 +51,5 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to users_path
-  end
-  
-  test "should never delete last user" do
-    User.all.each do |user|
-      delete :destroy, id: user.to_param
-    end
-    
-    assert_equal 1, User.count
   end
 end

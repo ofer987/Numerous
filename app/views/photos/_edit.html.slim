@@ -63,8 +63,5 @@ div class="description"
         div class="actions"
           = form.submit "Update Description"
     - else
-      div 
+      div
         = @photo.description
-
-  == render partial: 'comments/index', locals: { commentable: @photo }
-  == render partial: 'comments/form', locals: { commentable: @photo }

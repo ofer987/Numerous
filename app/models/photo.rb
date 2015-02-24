@@ -15,7 +15,6 @@ class Photo < ActiveRecord::Base
   include Tagable
 
   has_many :fichiers, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
 
   belongs_to :article
 

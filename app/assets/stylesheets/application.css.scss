@@ -6,6 +6,9 @@
  *= require_tree . 
 */
 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 body {
   padding: 70px 0 20px 0;
 }

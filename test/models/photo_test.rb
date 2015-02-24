@@ -43,11 +43,6 @@ class PhotoTest < ActiveSupport::TestCase
     end
   end
 
-  test "photo can have no comments" do
-    photo = photos(:nobody_commented)
-    assert photo.comments.count == 0
-  end
-
   test "should create a new photo with file" do
     photo = Photo.new do |p|
       p.article = articles(:avena)

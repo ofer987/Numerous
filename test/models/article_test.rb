@@ -78,4 +78,9 @@ class ArticleTest < ActiveSupport::TestCase
     article.destroy
     assert photos.count > 0, 'photos should not have been deleted'
   end
+
+  test "article can have no comments" do
+    article = articles(:avena)
+    assert article.comments.count == 0
+  end
 end
