@@ -11,3 +11,7 @@ oren:
 edith:
   name: Edith Rojas Romero
   password_digest: <%= BCrypt::Password.create('The_Password1') %>
+
+dan:
+  name: Dan Jakob Ofer
+  password_digest: <%= BCrypt::Password.create('The_Password1') %>

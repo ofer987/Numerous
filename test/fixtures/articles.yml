@@ -21,6 +21,7 @@ story_1:
   published_at: '2013-09-10 03:28:28'
 
 windsor_trip:
+  user: dan
   title: Keren and Dan at Windsor and Eaton
   sub_title: Winter 2009
   content: A lot of content
