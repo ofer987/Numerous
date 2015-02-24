@@ -27,6 +27,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_main_bar
-    @main_bar = @is_logged_in ? 'layouts/mainbar/logged' : 'layouts/mainbar/general'
+    @main_bar = @is_logged_in ? 'layouts/main_bar/logged' : 'layouts/main_bar/general'
   end
 end
