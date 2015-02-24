@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :authorize, only: [:create, :new]
-  
+
   def new
   end
 
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by_name(params[:name])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to admin_url
+      redirect_to user_admin_index_url(user)
     else
       redirect_to login_url, notice: "Invalid user name/password"
     end

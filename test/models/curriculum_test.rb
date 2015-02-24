@@ -2,12 +2,6 @@ require 'test_helper'
 
 class CurriculumTest < ActiveSupport::TestCase
   setup do
-    @valid_billet = Billet.new do |billet|
-      billet.title = "Interesting Story"
-      billet.sub_title = "You Should Read This!"
-      billet.content = "Lots of interesting things to read here."
-      billet.published_at = DateTime.now
-    end
   end
 
   test 'should get resume' do

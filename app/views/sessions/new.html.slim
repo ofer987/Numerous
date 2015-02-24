@@ -1,0 +1,14 @@
+= form_tag 'login', class: "form-signin" do
+  h2 class="form-signin-heading" Please sign in
+
+  = label_tag :name, 'Name:', class: "sr-only"
+  = text_field_tag :name, params[:name], class: "form-control", placeholder: "Name"
+
+  = label_tag :password, 'Password:', class: "sr-only"
+  = password_field_tag :password, params[:password], class: "form-control", placeholder: "Password"
+
+  = submit_tag 'Login', class: "btn btn-lg btn-primary btn-block"
+
+div class="register"
+  h2 Do not have an account yet?
+  = link_to 'Register', new_user_path, class: "btn btn-lg btn-primary btn-block"

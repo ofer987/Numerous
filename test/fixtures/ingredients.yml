@@ -1,6 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-leche:
-  name: Leche
-  quantity: 0.5 Litres
-  recipe: avena

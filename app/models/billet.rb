@@ -1,2 +1,0 @@
-class Billet < Article
-end

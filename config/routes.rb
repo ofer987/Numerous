@@ -1,8 +1,6 @@
 Numerous::Application.routes.draw do
-  resources :recipes do
-    resources :photos
-    resources :ingredients
-  end
+  get "frontpages/index"
+  get "frontpage/index"
 
   resources :articles do
     resources :photos
@@ -49,11 +47,13 @@ Numerous::Application.routes.draw do
     post 'stories/:article_id/create_photo' => :create_photo
   end
 
-  resources :billets do
-    resources :comments, only: :create
-  end
+  resources :users do
+    resources :articles do
+      resources :comments, only: :create
+    end
 
-  resources :billets
+    resources :admin, only: :index
+  end
 
   controller :articles do
     post 'articles/:article_id/create_photo' => :create_photo
@@ -66,8 +66,6 @@ Numerous::Application.routes.draw do
   get "books/read"
 
   resources :tags
-
-  get "admin" => "admin#index"
 
   controller :sessions do
     get 'login' => :new
@@ -140,7 +138,7 @@ Numerous::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'billets#index'
+  root :to => 'frontpages#index'
 
   # See how all your routes lay out with "rake routes"
 

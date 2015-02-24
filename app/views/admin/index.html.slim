@@ -8,7 +8,7 @@ ul class="new-content"
       = link_to 'Add new photo', new_photo_url
   li id="blog"
     b
-      = link_to 'Add new billet for blog', new_billet_url
+      = link_to 'Add new article for blog', new_user_article_url(@user)
 
 h3 Destinations
 ul
@@ -38,15 +38,6 @@ ul
     div
       b
         = link_to 'Add new country', new_country_url
-
-h3 Listing recipes
-ul
-  - @recipes.each_with_index do |recipe, index|
-    li id="recipe_#{index}"
-      = link_to recipe.title, edit_recipe_path(recipe)
-  li id="new_recipe"
-    b
-      = link_to 'New Recipe', new_recipe_path
 
 div class="logout"
   = link_to 'Logout', logout_url

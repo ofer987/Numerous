@@ -1,0 +1,6 @@
+development:
+  app_id: 268728946605340
+  secret: '36a0330413f42d8975d2b1196ce0254d'
+test:
+  app_id: 268728946605340
+  secret: '36a0330413f42d8975d2b1196ce0254d'

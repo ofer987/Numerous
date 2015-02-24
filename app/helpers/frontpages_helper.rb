@@ -1,0 +1,2 @@
+module FrontpagesHelper
+end

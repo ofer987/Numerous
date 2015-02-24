@@ -5,14 +5,14 @@ ol class="breadcrumb"
     = link_to @place.city.country.name,
       country_path(@place.city.country)
   li
-    = link_to @place.city.name, 
+    = link_to @place.city.name,
       country_city_path(@place.city.country, @place.city)
   li class="active" #{@place.name}
 
 div class="jumbotron"
   h1 #{@place.name}
   h2 #{@place.place_type.name}
-  == sanitize(@place.description)
+  == sanitize(@place.description || '')
 
 div class="list-group"
   a class="list-group-item active"
@@ -24,13 +24,13 @@ div class="list-group"
     a class="list-group-item"
       | #{contact.name} | #{contact.directions} | #{contact.direction_type}
 
-== render partial: 'locations/index', 
+== render partial: 'locations/index',
   locals: { locations: @place.locations }
 
 ul class="pager"
   - if @is_logged_in
     li
-      = link_to 'Edit', 
+      = link_to 'Edit',
         edit_country_city_place_path(@country, @city, @place)
   li
     = link_to 'Back', destinations_path

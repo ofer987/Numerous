@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   # id: integer, PKEY, NOT NULL
+  # user_id: integer, FKEY, NULL
   # title: string, NOT NULL, Default ''
   # sub_title: string
   # content: text, NOT NULL, Default ''
@@ -7,6 +8,8 @@ class Article < ActiveRecord::Base
   # updated_at: datetime
   # created_at: datetime
   # type: string for single table inheritance
+
+  belongs_to :user
 
   has_many :photos
 

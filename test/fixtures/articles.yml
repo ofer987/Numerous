@@ -1,28 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 avena:
+  user: edith
   title: Avena
   content: This is Edith's favourite meal in the mornings and at night. Delicious with Quinoa
   published_at: '2015-01-23 12:18:28'
-  type: Recipe
 
 cusco_trip:
+  user: edith
   title: Cusco Trip
   sub_title: Cusco is amazing
   content: We arrived in cusco
   published_at: '2013-09-09 03:28:28'
-  type: Billet
 
 story_1:
+  user: oren
   title: Story 1
   sub_title: This is a short story
   content: A lot of content
   published_at: '2013-09-10 03:28:28'
-  type: Billet
 
 windsor_trip:
   title: Keren and Dan at Windsor and Eaton
   sub_title: Winter 2009
   content: A lot of content
   published_at: '2009-12-26 12:28:28'
-  type: Billet

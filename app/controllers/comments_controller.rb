@@ -31,8 +31,8 @@ class CommentsController < ApplicationController
   def init_variables
     if params[:photo_id] != nil
       @commentable = Photo.find_by_id params[:photo_id]
-    elsif params[:billet_id] != nil
-      @commentable = Billet.find_by_id params[:billet_id]
+    elsif params[:article_id] != nil
+      @commentable = Article.find_by_id params[:article_id]
     else
       raise "Who does comment belong to?"
     end

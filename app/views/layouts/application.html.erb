@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog">
+    <meta name="description" content="Blogs">
     <meta name="author" content="Dan Jakob Ofer">
     <link rel="shortcut icon" href="">
 
-    <title>Dan Jakob Ofer</title>
+    <title>HoverBoards</title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -22,7 +22,7 @@
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-44599252-1', 'danofer.com');
+        ga('create', 'UA-44599252-1', 'hoverboards.mobi');
         ga('send', 'pageview');
     </script>
     <!-- Google API -->
@@ -39,24 +39,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Dan Jakob Ofer</a>
+          <a class="navbar-brand" href="/">HoverBoards</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li id="articles-item"><a href="/">Home</a></li>
             <li id="destinations-item">
-              <%= link_to "Destinations", destinations_url %>
+              <%= link_to "My articles", articles_url %>
             </li>
-            <li id="recipes-item">
-              <%= link_to "Food", recipes_url %>
-            </li>
-            <li id="photos-item"><%= link_to "Photos", photos_url %></li>
-            <li id="cv-item"><%= link_to "About", "/cv" %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% if @is_logged_in %>
-              <li id="admin-item"><%= link_to "Admin", admin_url %></li>
-            <% end %>
+            <%# <% if @is_logged_in and defined? @user and not @user.nil? %>
+            <%#   <li id="admin-item"><%= link_to "Admin", user_admin_index_url(@user) %></li>
+            <%# <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

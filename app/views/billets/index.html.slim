@@ -1,6 +1,0 @@
-div class="billets"
-  - @billets.each do |billet|
-    - @billet = billet
-    == render partial: 'billets/show'
-
-  == will_paginate @billets, renderer: BootstrapPagination::Rails

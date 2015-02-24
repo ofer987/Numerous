@@ -25,10 +25,17 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @photo }
-      format.js
+    if defined? @displayed_fichier and not @displayed_fichier.nil?
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @photo }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render file: 'public/404.html' }
+        format.json { render json: 'error' }
+      end
     end
   end
 
@@ -112,9 +119,7 @@ class PhotosController < ApplicationController
 
   def init_photo
     @photo = @article.photos.find(params[:id])
-    displayed_fichier = @photo.small_fichier
-    @displayed_fichier_name = displayed_fichier_name = displayed_fichier.name
-
+    @displayed_fichier = @photo.small_fichier
     @photos = Photo.order(@sql_order)
 
     @current_photo_index = @photos.rindex(@photo)

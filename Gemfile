@@ -44,3 +44,6 @@ gem 'will_paginate-bootstrap'
 gem 'RedCloth'
 gem 'redcarpet'
 gem 'github-markup'
+
+# Facebook
+gem "koala", "~> 1.11.0rc"

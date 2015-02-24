@@ -17,13 +17,13 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to @commentless_photo
   end
 
-  test "should create comment for billet" do
-    billet = articles(:cusco_trip)
+  test "should create comment for article" do
+    article = articles(:cusco_trip)
 
     assert_difference('Comment.count') do
-      post :create, billet_id: billet.id, comment: @new_comment
+      post :create, article_id: article.id, comment: @new_comment
     end
 
-    assert_redirected_to billet
+    assert_redirected_to article
   end
 end

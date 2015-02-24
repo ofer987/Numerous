@@ -9,8 +9,7 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :filesize_types, :photos, :fichiers, :comments, :users, :tags,
     :articles, :tag_links, :countries, :cities, :places,
-    :place_types, :locations, :websites, :contact_types, :contacts,
-    :ingredients
+    :place_types, :locations, :websites, :contact_types, :contacts
 
   # Add more helper methods to be used by all tests here...
   def login_as(user)

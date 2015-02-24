@@ -1,9 +1,0 @@
-h2
-  = recipe.title
-p
-  = raw recipe.content
-
-ol
-  - recipe.ingredients.each do |ingredient|
-    li
-      #{ingredient.name}, quanity: #{ingredient.quantity}
