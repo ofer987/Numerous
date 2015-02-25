@@ -8,10 +8,10 @@ class Contact < ActiveRecord::Base
   belongs_to :contact_type
   belongs_to :place
 
-  validates :contact_type, 
+  validates :contact_type,
     presence: { allow_nil: false, allow_blank: false }
-  validates :place, 
+  validates :place,
     presence: { allow_nil: false, allow_blank: false }
-  validates :directions, 
+  validates :directions,
     presence: { allow_nil: false, allow_blank: false }
 end
