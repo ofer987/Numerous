@@ -38,7 +38,8 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should create article" do
     article = {
       content: 'new story',
-      published_at: DateTime.now
+      published_at: DateTime.now,
+      user_id: users(:edith).to_param
     }
 
     assert_difference('Article.count') do
@@ -121,7 +122,7 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test 'should create article for user and assign it tags' do
     article = {
-      user: @edith,
+      user_id: @edith.to_param,
       title: 'new article',
       content: 'Article with tags',
       tags_attributes: 'england, quebec'

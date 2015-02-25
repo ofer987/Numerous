@@ -24,6 +24,7 @@ class Article < ActiveRecord::Base
   validates_presence_of :title, allow_blank: true
   validates_presence_of :content, allow_blank: true
   validates_presence_of :published_at
+  validates_presence_of :user_id, allow_nil: false, allow_blank: false
 
   self.per_page = 5
 

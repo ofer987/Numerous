@@ -69,6 +69,7 @@ class ArticlesController < ApplicationController
       redirect_to user_article_path(@user, @article)
     else
       # Save failed
+      flash[:notice] = "Failure to save article because #{@article.errors.full_messages}"
       redirect_to new_user_article_path(@user)
     end
   end
@@ -111,9 +112,13 @@ class ArticlesController < ApplicationController
 
   def article_params
     # maybe should be article_photos_attributes instead of article_photos
-    params.require(:article).permit(:user_id, :title, :sub_title,
+    params1 = params.require(:article).permit(:user_id, :title, :sub_title,
                                     :content, :published_at,
       article_photos_attributes: [:is_selected, :id])
+
+    params2 = { user_id: params[:user_id] }
+
+    params1.merge(params2)
   end
 
   def tags_params
@@ -132,6 +137,7 @@ class ArticlesController < ApplicationController
   # def facebooker
   #   unless defined? @graph and not @graph.nil?
   #     access_token = facebook_cookies["access_token"]
+  #     binding.pry
   #     @graph = Koala::Facebook::API.new(access_token)
   #   end
   #

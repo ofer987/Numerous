@@ -12,7 +12,7 @@ class ArticleTest < ActiveSupport::TestCase
   end
 
   test "should be able to modify an article's published_at date" do
-    new_article = Article.new(published_at: DateTime.new(2012, 5, 12).getutc)
+    new_article = Article.new(published_at: DateTime.new(2012, 5, 12).getutc, user: users(:edith))
 
     assert new_article.save, "should be able to modify an article's published_at datetime"
     assert new_article.published_at.getutc == DateTime.new(2012, 5, 12).getutc, "the article cannot save its selected datetime"
@@ -20,13 +20,13 @@ class ArticleTest < ActiveSupport::TestCase
 
   test "article's default time published_at is now" do
     now_expected = DateTime.now.getutc
-    new_article = Article.new
+    new_article = Article.new(user: users(:edith))
 
     assert new_article.published_at.getutc.year == now_expected.year &&
                new_article.published_at.getutc.month == now_expected.month &&
                new_article.published_at.getutc.day == now_expected.day
 
-    assert new_article.valid?
+    assert new_article.valid?, new_article.errors.full_messages
   end
 
   test 'should save article' do
@@ -82,5 +82,15 @@ class ArticleTest < ActiveSupport::TestCase
   test "article can have no comments" do
     article = articles(:avena)
     assert article.comments.count == 0
+  end
+
+  test "article should have user" do
+    article = articles(:avena)
+
+    article.user = nil
+    refute article.valid?, "article accepts a nil user"
+
+    article.user_id = ''
+    refute article.valid?, "article accepts a blank user"
   end
 end
