@@ -1,0 +1,26 @@
+= form_for(@user, html: { class: "pure-form pure-form-aligned" }) do |f|
+  - if @user.errors.any?
+    div id="error_explanation"
+      h2
+        | #{pluralize(@user.errors.count, "error")} prohibited this user from being saved:
+
+      ul
+      - @user.errors.full_messages.each do |msg|
+        li
+          = msg
+
+  fieldset
+    div class="pure-control-group"
+      = f.label :name
+      = f.text_field :name, size: 40, placeholder: "Full Name"
+
+    div class="pure-control-group"
+      = f.label :password, "Password"
+      = f.password_field :password, size: 40, placeholder: "Password"
+
+    div class="pure-control-group"
+      = f.label :password_confirmation, "Confirm"
+      = f.password_field :password_confirmation, size: 40, placeholder: "Confirm the Password"
+
+    div class="pure-controls"
+      = f.submit "Submit", class: "pure-button pure-button-primary"
