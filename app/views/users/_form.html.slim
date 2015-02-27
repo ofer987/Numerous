@@ -15,6 +15,10 @@
       = f.text_field :name, size: 40, placeholder: "Full Name"
 
     div class="pure-control-group"
+      = f.label :username
+      = f.text_field :username, size: 40, placeholder: "Unique Username"
+
+    div class="pure-control-group"
       = f.label :password, "Password"
       = f.password_field :password, size: 40, placeholder: "Password"
 

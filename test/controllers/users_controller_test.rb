@@ -5,7 +5,8 @@ class UsersControllerTest < ActionController::TestCase
     @user = users(:admin)
 
     @input_attributes = {
-      name: "dan",
+      username: "ryan",
+      name: "Ryan Rolando",
       password: "private",
       password_confirmation: "private"
     }

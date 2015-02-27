@@ -1,17 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 admin:
-  name: admin
+  username: admin
+  name: Admin
   password_digest: <%= BCrypt::Password.create('The_Password1') %>
 
 oren:
-  name: oren
+  username: oren
+  name: Oren Reinstein
   password_digest: <%= BCrypt::Password.create('The_Password1') %>
 
 edith:
+  username: edith
   name: Edith Rojas Romero
   password_digest: <%= BCrypt::Password.create('The_Password1') %>
 
 dan:
+  username: dan
   name: Dan Jakob Ofer
   password_digest: <%= BCrypt::Password.create('The_Password1') %>
