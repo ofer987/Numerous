@@ -30,15 +30,13 @@ class MyMarkdown
     article = @replacement_values[:article]
     return '' if article.nil?
 
-    photo = article.photos.find_by_title(title)
+    photo = Photo.find_by_title(title)
     return '' if photo.nil?
 
     <<-HTML
-      <div id="item_#{photo.id}">
-        <div class="thumbnail">
-          #{image_tag(Photo.local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail")}
-        </div>
-      </div>
+      <span class="thumbnail">
+        #{image_tag(Photo.local_photos_dir + photo.thumbnail_fichier.filename, class: "photo-thumbnail")}
+      </span>
     HTML
   end
 end

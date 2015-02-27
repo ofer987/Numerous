@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   before_action :setup_comment_negative_captcha, only: :show
 
   def index
-    @articles = @user.articles.paginate(page: selected_page)
+    @articles = @user.articles.find_by_tags(tag_names).paginate(page: selected_page)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,9 +90,9 @@ class ArticlesController < ApplicationController
 
     @article.attributes = article_params
     if @article.save
-      render file: 'articles/show.js'
+      render file: 'articles/show.html'
     else
-      render file: 'articles/error.js', locals: { notice: "Error updating article" }
+      render file: 'articles/error.html', locals: { notice: "Error updating article" }
     end
   end
 
@@ -100,6 +100,10 @@ class ArticlesController < ApplicationController
 
   def init_user
     @user = User.find_by_id(params[:user_id])
+  end
+
+  def tag_names
+    (params[:tags] || '').split(',')
   end
 
   def selected_page

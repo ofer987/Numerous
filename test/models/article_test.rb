@@ -93,4 +93,16 @@ class ArticleTest < ActiveSupport::TestCase
     article.user_id = ''
     refute article.valid?, "article accepts a blank user"
   end
+
+  test "should find all articles with tags" do
+    search_tag = tags(:england)
+    expected_articles = Array(articles(:cusco_trip))
+
+    actual_articles = Article.find_by_tags(search_tag)
+
+    assert_equal expected_articles.size, actual_articles.size, "arrays are not the same size"
+    actual_articles.each do |actual_article|
+      assert_includes expected_articles, actual_article, "The article #{actual_article} was erroneously retrieved"
+    end
+  end
 end

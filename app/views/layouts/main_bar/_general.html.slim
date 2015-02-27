@@ -1,16 +1,7 @@
-div class="navbar navbar-default navbar-fixed-top" role="navigation"
-  div class="container"
-    div class="navbar-header"
-      button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
-        span class="sr-only">Toggle navigation
-        span class="icon-bar">
-        span class="icon-bar">
-        span class="icon-bar">
-      a class="navbar-brand" href="/" HoverBoards
-    div class="navbar-collapse collapse"
-      ul class="nav navbar-nav"
-        li id="articles-item"
-          a href="/" Home
-      ul class="nav navbar-nav navbar-right"
-        li id="admin-item"
-          = link_to "Login", login_url
+div class="pure-menu pure-menu-horizontal"
+  a class="pure-menu-heading pure-menu-link" href="/" Word Count
+  ul class="pure-menu-list"
+    li class="pure-menu-item" id="articles-item"
+      a class="pure-menu-link" href="/" Home
+    li class="pure-menu-item" id="admin-item"
+      = link_to "Login", login_url, class: "pure-menu-link"

@@ -1,6 +1,5 @@
 div class="articles"
   - @articles.each do |article|
-    - @article = article
-    == render partial: 'articles/show'
+    == render partial: 'articles/show', locals: { article: article }
 
-  == will_paginate @articles, renderer: BootstrapPagination::Rails
+  == will_paginate @articles, renderer: WillPaginate::ActionView::LinkRenderer

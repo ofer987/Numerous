@@ -1,4 +1,11 @@
 class TagLink < ActiveRecord::Base
+  # id, int, PKEY
+  # tag_id, int, FKEY
+  # tagable_id, int, FKEY
+  # tagable_type, string
+  # created_at, datetime
+  # updated_at, datetime
+
   belongs_to :tag
   belongs_to :tagable, polymorphic: true
 

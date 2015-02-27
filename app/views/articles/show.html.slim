@@ -1,5 +1,5 @@
 div class="article"
-  == render partial: 'articles/show'
+  == render partial: 'articles/show', locals: { article: @article }
 
-  == render partial: 'comments/index', locals: { commentable: @article }
-  == render partial: 'comments/form', locals: { commentable: @article }
+  /== render partial: 'comments/index', locals: { commentable: @article }
+  /== render partial: 'comments/form', locals: { commentable: @article }

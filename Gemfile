@@ -5,10 +5,11 @@ gem 'rails', '~> 4.0.0'
 
 gem 'sqlite3'
 
-gem 'bootstrap-sass'
 gem 'sass-rails', "~> 4.0.0"
 gem 'coffee-rails', "~> 4.0.0"
 gem 'uglifier', '>= 1.3.0'
+gem 'purecss'
+gem 'purecss-will_paginate'
 
 gem 'jquery-rails'
 
@@ -40,8 +41,6 @@ gem 'jquery-fileupload-rails'
 gem 'with_action'
 
 gem 'negative_captcha'
-
-gem 'will_paginate-bootstrap'
 
 gem 'RedCloth'
 gem 'redcarpet'

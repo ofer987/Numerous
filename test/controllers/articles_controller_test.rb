@@ -15,10 +15,12 @@ class ArticlesControllerTest < ActionController::TestCase
     end
   end
 
-  # test "should get index for all articles" do
-  #   get :index
-  #   assert_response :success
-  # end
+  test "should get index for all articles that belong to a tag for user" do
+    tags_to_view = [ tags(:toronto), tags(:montreal) ]
+
+    get :index, user_id: @edith, tags: tags_to_view.join(",")
+    assert_response :success
+  end
 
   test "should get index for all articles for user" do
     get :index, user_id: @edith
@@ -48,28 +50,6 @@ class ArticlesControllerTest < ActionController::TestCase
 
     assert_redirected_to user_article_path(@edith, assigns(:article))
   end
-
-  # test "should create article and add two photos" do
-  #   new_article = {
-  #     content: 'new story',
-  #     article_photos_attributes: @all_article_photos_attributes
-  #   }
-  #   new_article[:article_photos_attributes].each do |index, article_photo|
-  #     article_photo[:is_selected] = "1" if article_photo[:id].to_i == photos(:eaton_college).id || article_photo[:id].to_i == photos(:nobody_commented).id
-  #   end
-  #
-  #   pre_article_photos_count = ArticlePhoto.count
-  #   assert_difference('Article.count') do
-  #     post :create, article: new_article, is_convert_to_html: false
-  #   end
-  #   post_article_photos_count = ArticlePhoto.count
-  #
-  #   assert_equal(
-  #     pre_article_photos_count + 2,
-  #     post_article_photos_count,
-  #     "Did not add the two photos to the new article")
-  #   assert_redirected_to article_path(assigns(:article))
-  # end
 
   test "should update article" do
     new_content = 'This is an awesome story'
@@ -107,18 +87,6 @@ class ArticlesControllerTest < ActionController::TestCase
     assert assigns(:article).published_at == modified_date,
       "The article should be able to modify its published_at datetime"
   end
-
-  # test "should post new photo to existing article" do
-  #   existing_article = articles(:cusco_trip)
-  #
-  #   assert_difference('Photo.count', 1) do
-  #     post :create_photo,
-  #       format: :js,
-  #       article_id: existing_article.id,
-  #       photo: { load_photo_file: self.photo_data }
-  #   end
-  #   assert_response :success
-  # end
 
   test 'should create article for user and assign it tags' do
     article = {

@@ -7,7 +7,6 @@ class Article < ActiveRecord::Base
   # published_at: datetime, NOT NULL, Default: now (utc)
   # updated_at: datetime
   # created_at: datetime
-  # type: string for single table inheritance
 
   belongs_to :user
 
@@ -29,6 +28,13 @@ class Article < ActiveRecord::Base
   self.per_page = 5
 
   default_scope { order('published_at DESC') }
+
+  def self.find_by_tags(tags)
+    tags_array = Array(tags)
+
+    Article.joins("INNER JOIN tag_links ON tag_links.tagable_id = articles.id AND tag_links.tagable_type = 'Article'").joins("INNER JOIN tags ON tags.id = tag_links.tag_id").where("tags.name IN (#{tags_array.map { |tag| "'" + tag.to_s + "'" }.join(',')})")
+
+  end
 
   def content
     my_mardown_processor = MyMarkdown.new(self[:content], article: self)

@@ -3,12 +3,12 @@ html
   head
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
-    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="description" content="Blogs"
     meta name="author" content="Dan Jakob Ofer"
     link rel="shortcut icon" href=""
 
-    title HoverBoards
+    title Word Count
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -19,17 +19,18 @@ html
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-44599252-1', 'hoverboards.mobi');
+      ga('create', 'UA-44599252-1', 'wordcount.club');
       ga('send', 'pageview');
     /! Google API
     script src="https://maps.googleapis.com/maps/api/js?sensor=false"
   body
-    - if notice
-      div class="alert alert-info" id="notice"
-        = notice
+    div id="layout"
+      - if notice
+        div class="alert alert-info" id="notice"
+          = notice
 
-    /! Fixed navbar
-    = render @main_bar
+      /! Fixed navbar
+      = render @main_bar
 
-    div class="page container"
-      = yield
+      div class="content"
+        = yield

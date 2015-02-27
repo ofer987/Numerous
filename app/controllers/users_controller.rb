@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize, :new
+
   # GET /users
   # GET /users.json
   def index
