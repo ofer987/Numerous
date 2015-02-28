@@ -28,7 +28,8 @@ class UsersControllerTest < ActionController::TestCase
       post :create, user: @input_attributes
     end
 
-    assert_redirected_to users_path
+    assert_not_nil assigns(:user)
+    assert_redirected_to user_admin_index_path(assigns(:user))
   end
 
   test "should show user" do

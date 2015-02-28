@@ -1,14 +1,17 @@
-= form_tag 'login', class: "form-signin" do
-  h2 class="form-signin-heading" Please sign in
+= form_tag 'login', class: "pure-form pure-form-aligned" do
+  fieldset
+    div class="pure-control-group"
+      = label_tag :username, 'Account'
+      = text_field_tag :username, params[:username], size: 40, placeholder: "Username"
 
-  = label_tag :name, 'Name:', class: "sr-only"
-  = text_field_tag :name, params[:name], class: "form-control", placeholder: "Name"
+    div class="pure-control-group"
+      = label_tag :password, 'Password'
+      = text_field_tag :password, params[:password], size: 40, placeholder: "Password"
 
-  = label_tag :password, 'Password:', class: "sr-only"
-  = password_field_tag :password, params[:password], class: "form-control", placeholder: "Password"
+    div class="pure-controls"
+      = submit_tag 'Login', class: "pure-button pure-button-primary"
 
-  = submit_tag 'Login', class: "btn btn-lg btn-primary btn-block"
-
-div class="register"
+div class="pure-form"
   h2 Do not have an account yet?
-  = link_to 'Register', new_user_path, class: "btn btn-lg btn-primary btn-block"
+  div class="pure-controls"
+    = link_to 'Register', new_user_path, class: "pure-button pure-button-primary"

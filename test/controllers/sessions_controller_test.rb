@@ -14,21 +14,21 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "should login" do
     admin_user = users(:admin)
-    post :create, name: admin_user.name, password: 'The_Password1'
+    post :create, username: admin_user.username, password: 'The_Password1'
     assert_redirected_to user_admin_index_url(admin_user)
     assert_equal admin_user.id, session[:user_id]
   end
 
   test "should fail login" do
     admin_user = users(:admin)
-    post :create, name: admin_user.name, password: 'The_wrong_password!'
+    post :create, username: admin_user.username, password: 'The_wrong_password!'
     assert_redirected_to login_url
   end
 
   test "should logout" do
     # log in first
     admin_user = users(:admin)
-    post :create, name: admin_user.name, password: 'The_Password1'
+    post :create, username: admin_user.username, password: 'The_Password1'
 
     # now log out
     delete :destroy
