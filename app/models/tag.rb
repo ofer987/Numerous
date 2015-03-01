@@ -37,6 +37,10 @@ class Tag < ActiveRecord::Base
     self.name
   end
 
+  def to_param
+    self.name
+  end
+
   private
 
   def self.name_equals?(lhs, rhs)
