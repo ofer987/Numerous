@@ -11,6 +11,8 @@ Numerous::Application.routes.draw do
     post 'stories/:article_id/create_photo' => :create_photo
   end
 
+  resources :users
+
   scope ':username', as: :user do
     resources :articles do
       resources :comments, only: :create

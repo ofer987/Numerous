@@ -6,7 +6,7 @@ class AdminControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index, user_id: @edith
+    get :index, username: @edith.username
     assert_response :success
   end
 end

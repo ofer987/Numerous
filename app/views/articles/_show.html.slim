@@ -10,7 +10,7 @@ section class="post" id="article_#{article.to_param}"
       - if article.tags.size > 0
         | &nbsp;under&nbsp;
         - article.tags.each do |tag|
-          = link_to tag.name, user_articles_path(article.user, tags: tag), class: "post-category"
+          = link_to tag.name, user_articles_path(article.user, tags: tag.name), class: "post-category"
 
     /small
     /  | &nbsp; #{article.published_at.strftime("%A, %B %-d, %Y")}

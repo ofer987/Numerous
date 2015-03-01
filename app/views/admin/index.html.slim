@@ -3,7 +3,7 @@ h2 class="content-intro" My Account
 ul class="new-content"
   li id="blog"
     b
-      = link_to 'Add new article for blog', new_user_article_url(@user)
+      = link_to 'Add new article for blog', new_user_article_url(@user.username)
 
 div class="logout"
   = link_to 'Logout', logout_url

@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
   def index
-    @user = params[:user_id]
+    @user = User.find_by_username params[:username]
   end
 end
