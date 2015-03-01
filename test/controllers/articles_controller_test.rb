@@ -18,22 +18,22 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should get index for all articles that belong to a tag for user" do
     tags_to_view = [ tags(:toronto), tags(:montreal) ]
 
-    get :index, user_id: @edith, tags: tags_to_view.join(",")
+    get :index, username: @edith, tags: tags_to_view.join(",")
     assert_response :success
   end
 
   test "should get index for all articles for user" do
-    get :index, user_id: @edith
+    get :index, username: @edith
     assert_response :success
   end
 
   test "should get new for user" do
-    get :new, user_id: @edith
+    get :new, username: @edith
     assert_response :success
   end
 
   test 'should get edit' do
-    get :edit, id: @cusco_trip_article.to_param, user_id: @edith
+    get :edit, id: @cusco_trip_article.to_param, username: @edith
     assert_response :success
   end
 
@@ -41,11 +41,11 @@ class ArticlesControllerTest < ActionController::TestCase
     article = {
       content: 'new story',
       published_at: DateTime.now,
-      user_id: users(:edith).to_param
+      username: users(:edith).to_param
     }
 
     assert_difference('Article.count') do
-      post :create, user_id: @edith, format: :js, article: article
+      post :create, username: @edith, article: article
     end
 
     assert_redirected_to user_article_path(@edith, assigns(:article))
@@ -54,7 +54,7 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should update article" do
     new_content = 'This is an awesome story'
 
-    put :update, user_id: @edith, format: :js, id: @cusco_trip_article,
+    put :update, username: @edith, format: :js, id: @cusco_trip_article,
       article: { content: new_content }
     assert_response :success
     assert_equal(
@@ -64,7 +64,7 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should fail to update article" do
-    put :update, user_id: @edith, format: :js, id: @cusco_trip_article,
+    put :update, username: @edith, format: :js, id: @cusco_trip_article,
       article: { published_at: nil }
     assert_response :success
     refute assigns(:article).valid?,
@@ -73,7 +73,7 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should delete article" do
     assert_difference('Article.count', -1) do
-      delete :destroy, user_id: @edith, id: @cusco_trip_article.to_param
+      delete :destroy, username: @edith, id: @cusco_trip_article.to_param
     end
     assert_redirected_to user_articles_url(@edith)
   end
@@ -83,21 +83,21 @@ class ArticlesControllerTest < ActionController::TestCase
 
     @cusco_trip_article.published_at = modified_date
 
-    post :update, user_id: @edith, format: :js, id: @cusco_trip_article, article: { published_at: modified_date }
+    post :update, username: @edith, format: :js, id: @cusco_trip_article, article: { published_at: modified_date }
     assert assigns(:article).published_at == modified_date,
       "The article should be able to modify its published_at datetime"
   end
 
   test 'should create article for user and assign it tags' do
     article = {
-      user_id: @edith.to_param,
+      username: @edith.to_param,
       title: 'new article',
       content: 'Article with tags',
       tags_attributes: 'england, quebec'
     }
 
     assert_difference('Article.count', 1) do
-      post :create, user_id: @edith, format: :js, article: article
+      post :create, username: @edith, format: :js, article: article
     end
 
     assert assigns(:article).tags.count == 2,

@@ -61,7 +61,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = @user.articles.build(article_params)
     @article.tags_attributes = tags_params
 
     # Save the article first and then the dependent associations
@@ -99,7 +99,7 @@ class ArticlesController < ApplicationController
   private
 
   def init_user
-    @user = User.find_by_id(params[:user_id])
+    @user = User.find_by_username(params[:username])
   end
 
   def tag_names
@@ -116,13 +116,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     # maybe should be article_photos_attributes instead of article_photos
-    params1 = params.require(:article).permit(:user_id, :title, :sub_title,
+    params.require(:article).permit(:title, :sub_title,
                                     :content, :published_at,
       article_photos_attributes: [:is_selected, :id])
-
-    params2 = { user_id: params[:user_id] }
-
-    params1.merge(params2)
   end
 
   def tags_params

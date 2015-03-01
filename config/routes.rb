@@ -1,6 +1,5 @@
 Numerous::Application.routes.draw do
   get "frontpages/index"
-  get "frontpage/index"
 
   resources :articles do
     resources :photos
@@ -47,9 +46,20 @@ Numerous::Application.routes.draw do
     post 'stories/:article_id/create_photo' => :create_photo
   end
 
-  resources :users do
+  # get '/:username', to: 'users#show' do
+  #   resources :articles
+  # end
+
+  # resources :users do
+  #   resources :articles do
+  #     resources :comments, only: :create
+  #   end
+  #
+  #   resources :admin, only: :index
+  # end
+
+  scope ':username', as: :user do
     resources :articles do
-      resources :comments, only: :create
     end
 
     resources :admin, only: :index
@@ -76,8 +86,6 @@ Numerous::Application.routes.draw do
   get "sessions/new"
   get "sessions/create"
   get "sessions/destroy"
-
-  resources :users
 
   controller :photos do
     patch 'photos/:id/rotate_clockwise' => :rotate_clockwise
