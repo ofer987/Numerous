@@ -5,37 +5,6 @@ Numerous::Application.routes.draw do
     resources :photos
   end
 
-  resources :place_types
-
-  resources :destinations, only: [:index]
-
-  resources :countries do
-    resources :cities do
-      resources :places do
-        resources :websites
-        resources :contacts
-      end
-    end
-  end
-
-  resources :countries do
-    scope module: 'locationable' do
-      resources :countries, as: 'locations'
-    end
-  end
-
-  resources :cities do
-    scope module: 'locationable' do
-      resources :cities, as: 'locations'
-    end
-  end
-
-  resources :places do
-    scope module: 'locationable' do
-      resources :places, as: 'locations'
-    end
-  end
-
   # These should be removed and accessed using a different controller
   resources :tag_links
 
@@ -46,20 +15,9 @@ Numerous::Application.routes.draw do
     post 'stories/:article_id/create_photo' => :create_photo
   end
 
-  # get '/:username', to: 'users#show' do
-  #   resources :articles
-  # end
-
-  # resources :users do
-  #   resources :articles do
-  #     resources :comments, only: :create
-  #   end
-  #
-  #   resources :admin, only: :index
-  # end
-
   scope ':username', as: :user do
     resources :articles do
+      resources :comments, only: :create
     end
 
     resources :admin, only: :index
