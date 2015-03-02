@@ -11,7 +11,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should create comment for article" do
     assert_difference('Comment.count') do
-      post :create, user_id: @commentless_article.user,
+      post :create, username: @commentless_article.user.username,
         article_id: @commentless_article.id, comment: @new_comment
     end
 

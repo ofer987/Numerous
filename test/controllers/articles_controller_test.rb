@@ -37,10 +37,14 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should show article' do
+    get :show, id: @cusco_trip_article.to_param, username: @edith.username
+  end
+
   test "should create article" do
     article = {
+      title: 'a new story with a title',
       content: 'new story',
-      published_at: DateTime.now,
       username: users(:edith).username
     }
 
@@ -48,7 +52,7 @@ class ArticlesControllerTest < ActionController::TestCase
       post :create, username: @edith.username, article: article
     end
 
-    assert_redirected_to user_article_path(@edith, assigns(:article))
+    assert_redirected_to user_article_path(@edith.username, assigns(:article))
   end
 
   test "should update article" do
@@ -64,8 +68,8 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should fail to update article" do
-    put :update, username: @edith.username, format: :js, id: @cusco_trip_article,
-      article: { published_at: nil }
+    put :update, username: @edith.username, id: @cusco_trip_article,
+      article: { content: nil }
     assert_response :success
     refute assigns(:article).valid?,
       "The article should not have been updated"
@@ -76,16 +80,6 @@ class ArticlesControllerTest < ActionController::TestCase
       delete :destroy, username: @edith.username, id: @cusco_trip_article.to_param
     end
     assert_redirected_to user_articles_url(@edith)
-  end
-
-  test "should be able to modify a article's published_at date" do
-    modified_date = DateTime.new(2010, 5, 12)
-
-    @cusco_trip_article.published_at = modified_date
-
-    post :update, username: @edith.username, id: @cusco_trip_article, article: { published_at: modified_date }
-    assert assigns(:article).published_at == modified_date,
-      "The article should be able to modify its published_at datetime"
   end
 
   test 'should create article for user and assign it tags' do

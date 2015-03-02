@@ -43,4 +43,16 @@ class MyMarkdownTest < ActiveSupport::TestCase
       "the invalid photo was not replaced by the empty string" +
       "result is:\n#{my_markdown.content}"
   end
+
+  test 'MyMarkdown returns blank string if input is nil or blank' do
+    nil_content = MyMarkdown.new(nil).content
+
+    refute nil_content.nil?
+    assert nil_content.blank?
+
+    blank_content = MyMarkdown.new('').content
+
+    refute blank_content.nil?
+    assert blank_content.blank?
+  end
 end

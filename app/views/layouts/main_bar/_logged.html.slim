@@ -7,6 +7,6 @@ div class="pure-menu pure-menu-horizontal"
     li class="pure-menu-item" id="articles-item"
       a class="pure-menu-link" href="/" Home
     li class="pure-menu-item" id="destinations-item"
-      = link_to "My Articles", user_articles_url(user), class: "pure-menu-link"
+      = link_to "My Articles", user_articles_url(user.username), class: "pure-menu-link"
     li class="pure-menu-item" id="admin-item"
-      = link_to "My Account", user_admin_index_url(user), class: "pure-menu-link"
+      = link_to "My Account", user_admin_index_url(user.username), class: "pure-menu-link"

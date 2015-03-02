@@ -20,14 +20,15 @@ class Article < ActiveRecord::Base
 
   after_initialize :set_published_at_to_now
 
-  validates_presence_of :title, allow_blank: true
-  validates_presence_of :content, allow_blank: true
-  validates_presence_of :published_at
-  validates_presence_of :user_id, allow_nil: false, allow_blank: false
+  validates_presence_of :title, :content, :user_id, allow_nil: false, allow_blank: false
 
   self.per_page = 5
 
   default_scope { order('published_at DESC') }
+
+  before_create do
+    self[:published_at]= DateTime.now.getutc
+  end
 
   def self.find_by_tags(tags)
     tags_array = Array(tags)
@@ -46,6 +47,10 @@ class Article < ActiveRecord::Base
     attributes[:load_photo_files].each do |uploaded_file|
       self.photos.build(title: '', load_photo_file: uploaded_file)
     end
+  end
+
+  def published_at=(value)
+    # value is computed at the time of saving a new record
   end
 
   private

@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by_id(params[:id])
+    @article = @user.articles.find_by_id(params[:id])
     @edit_mode = false
 
     # New comment
@@ -66,11 +66,11 @@ class ArticlesController < ApplicationController
 
     # Save the article first and then the dependent associations
     if @article.save
-      redirect_to user_article_path(@user, @article)
+      redirect_to user_article_path(@user.username, @article)
     else
       # Save failed
       flash[:notice] = "Failure to save article because #{@article.errors.full_messages}"
-      redirect_to new_user_article_path(@user)
+      redirect_to new_user_article_path(@user.username)
     end
   end
 

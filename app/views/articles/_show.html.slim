@@ -3,14 +3,14 @@
 section class="post" id="article_#{article.to_param}"
   header class="post-header"
     h2 class="post-title"
-      = link_to strip_tags(article.title), user_article_url(article.user, article)
+      = link_to strip_tags(article.title), user_article_path(article.user.username, article)
     p class="post-meta"
       | by&nbsp;
-      = link_to strip_tags(article.user.name), user_articles_url(article.user), class: "post-author"
+      = link_to strip_tags(article.user.name), user_articles_path(article.user.username), class: "post-author"
       - if article.tags.size > 0
         | &nbsp;under&nbsp;
         - article.tags.each do |tag|
-          = link_to tag.name, user_articles_path(article.user, tags: tag.name), class: "post-category"
+          = link_to tag.name, user_articles_path(article.user.username, tags: tag.name), class: "post-category"
 
     /small
     /  | &nbsp; #{article.published_at.strftime("%A, %B %-d, %Y")}

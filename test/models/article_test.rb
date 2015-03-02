@@ -2,31 +2,33 @@ require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
   setup do
-    @valid_article = Article.new do |article|
-      article.user = users(:edith)
-      article.title = "Interesting Story"
-      article.sub_title = "You Should Read This!"
-      article.content = "Lots of interesting things to read here."
-      article.published_at = DateTime.now
-    end
+    @valid_article_params = {
+      user: users(:edith),
+      title: "Interesting Story",
+      sub_title: "You Should Read This!",
+      content: "Lots of interesting things to read here.",
+      published_at: DateTime.now.getutc
+    }
+
+    @valid_article = Article.new @valid_article_params
   end
 
-  test "should be able to modify an article's published_at date" do
-    new_article = Article.new(published_at: DateTime.new(2012, 5, 12).getutc, user: users(:edith))
+  test "should not be able to modify an existing article's published_at date" do
+    article = articles(:cusco_trip)
+    old_published_at = article.published_at
+    new_published_at = DateTime.new(2012, 5, 12).getutc
+    article.published_at = new_published_at
 
-    assert new_article.save, "should be able to modify an article's published_at datetime"
-    assert new_article.published_at.getutc == DateTime.new(2012, 5, 12).getutc, "the article cannot save its selected datetime"
+    assert_equal old_published_at, article.published_at
   end
 
-  test "article's default time published_at is now" do
-    now_expected = DateTime.now.getutc
-    new_article = Article.new(user: users(:edith))
+  test "new article cannot set automatically their published_at" do
+    custom_published_at = DateTime.new(2012, 5, 12).getutc
+    article = Article.new(@valid_article_params.merge(published_at: custom_published_at))
 
-    assert new_article.published_at.getutc.year == now_expected.year &&
-               new_article.published_at.getutc.month == now_expected.month &&
-               new_article.published_at.getutc.day == now_expected.day
-
-    assert new_article.valid?, new_article.errors.full_messages
+    assert article.published_at.nil?
+    assert article.valid?,
+      "the article should have been valid prior to saving it. Errors: #{article.errors.full_messages}"
   end
 
   test 'should save article' do

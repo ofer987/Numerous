@@ -13,8 +13,9 @@ class MyMarkdown
   end
 
   def content
-    marked_content = @markdown.render(@raw_content)
+    return '' if @raw_content.nil?
 
+    marked_content = @markdown.render(@raw_content)
     replace_tokens(marked_content)
   end
 

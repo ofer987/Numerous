@@ -1,4 +1,5 @@
-= form_for([@user, @article]) do |f|
+= form_for([@user, @article], url: user_articles_path,
+  html: { class: "article pure-form pure-form-aligned" }) do |f|
   - if @article.errors.any?
     div class="alert alert-danger"
       | #{pluralize(@article.errors.count, "error")}
@@ -7,26 +8,17 @@
         div class="alert alert-danger"
           #{msg}
 
-            div class="input-group"
-              = f.label :title, class: "input-group-addon"
-    = f.text_field :title, class: "form-control"
+  fieldset
+    div class="pure-control-group"
+      = f.label :title
+      = f.text_field :title, placeholder: "Title", class: "title"
 
-  div class="input-group"
-    = f.label :sub_title, class: "input-group-addon"
-    = f.text_field :sub_title, class: "form-control"
+    div class="pure-control-group"
+      = f.label :content
+      = f.text_area :content, placeholder: "Story", class: "content"
+      /, class: "form-control content-area"
 
-  div class="input-group"
-    = f.label :content, class: "input-group-addon"
-    = f.text_area :content, class: "form-control content-area"
-
-  div class="input-group"
-    = f.label :published_at, class: "input-group-addon"
-    = f.date_select :published_at, class: "form-control"
-
-  br
-
-  div class="input-group"
-    div class="btn-group"
-      = f.submit class: "btn btn-primary"
-      = link_to "Cancel", user_articles_path(@user),
-        class: "btn btn-danger", role: "button"
+    div class="pure-controls"
+      = f.submit "Submit", class: "pure-button pure-button-primary"
+      = link_to "Cancel", user_articles_path(@user.username),
+          class: "pure-button pure-button-primary"
