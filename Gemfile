@@ -31,8 +31,6 @@ gem 'rmagick', :require => "RMagick.rb"
 
 gem 'bcrypt-ruby', '> 3.0.0'
 
-gem 'goodreads', git: 'https://github.com/ofer987/goodreads'
-
 gem 'rake'
 
 gem 'slim-rails'
@@ -43,9 +41,5 @@ gem 'with_action'
 
 gem 'negative_captcha'
 
-gem 'RedCloth'
 gem 'redcarpet'
 gem 'github-markup'
-
-# Facebook
-gem "koala", "~> 1.11.0rc"

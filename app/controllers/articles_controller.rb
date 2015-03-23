@@ -43,8 +43,6 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
 
-    # facebooker
-
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -130,21 +128,6 @@ class ArticlesController < ApplicationController
       secret: Numerous::Application.config.negative_captcha_secret,
       spinner: request.remote_ip,
       fields: [:content, :user],
-      params: params
-      )
+      params: params)
   end
-
-  # def facebooker
-  #   unless defined? @graph and not @graph.nil?
-  #     access_token = facebook_cookies["access_token"]
-  #     binding.pry
-  #     @graph = Koala::Facebook::API.new(access_token)
-  #   end
-  #
-  #   Facebooker.new @graph
-  # end
-  #
-  # def facebook_cookies
-  #   @facebook_cookies ||= Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
-  # end
 end
