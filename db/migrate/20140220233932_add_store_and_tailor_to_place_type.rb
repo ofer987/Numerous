@@ -1,11 +1,15 @@
 class AddStoreAndTailorToPlaceType < ActiveRecord::Migration
   def up
-    PlaceType.create!(name: 'Store')
-    PlaceType.create!(name: 'Tailor')
+    if defined? PlaceType
+      PlaceType.create!(name: 'Store')
+      PlaceType.create!(name: 'Tailor')
+    end
   end
 
   def down
-    PlaceType.where(name: 'Store').destroy_all
-    PlaceType.where(name: 'Tailor').destroy_all
+    if defined? PlaceType
+      PlaceType.where(name: 'Store').destroy_all
+      PlaceType.where(name: 'Tailor').destroy_all
+    end
   end
 end

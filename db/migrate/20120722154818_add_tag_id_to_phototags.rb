@@ -3,7 +3,7 @@ class AddTagIdToPhototags < ActiveRecord::Migration
     add_column :phototags, :tag_id, :int, null: true
     remove_column :phototags, :name
   end
-  
+
   def down
     remove_column :phototags, :tag_id
     add_column :phototags, :name, :string, null: false, default: ""

@@ -2,12 +2,14 @@ class DropArticlePhoto < ActiveRecord::Migration
   def up
     add_column :photos, :article_id, :int, null: true
 
-    ArticlePhoto.all.each do |article_photo|
-      execute <<-SQL
+    if defined? ArticlePhoto
+      ArticlePhoto.all.each do |article_photo|
+        execute <<-SQL
         UPDATE photos
         SET article_id = #{article_photo.article_id}
         WHERE id = #{article_photo.photo_id}
-      SQL
+        SQL
+      end
     end
 
     drop_table :article_photos

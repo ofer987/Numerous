@@ -1,11 +1,15 @@
 class AddHospitalToPlaceType < ActiveRecord::Migration
   def up
-    PlaceType.create!(name: 'Hospital')
-    PlaceType.create!(name: 'Clinique')
+    if defined? PlaceType
+      PlaceType.create!(name: 'Hospital')
+      PlaceType.create!(name: 'Clinique')
+    end
   end
 
   def down
-    PlaceType.where(name: 'Hospital').destroy_all
-    PlaceType.where(name: 'Clinique').destroy_all
+    if defined? PlaceType
+      PlaceType.where(name: 'Hospital').destroy_all
+      PlaceType.where(name: 'Clinique').destroy_all
+    end
   end
 end

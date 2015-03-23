@@ -7,12 +7,14 @@ class CreatePlaceTypes < ActiveRecord::Migration
       t.timestamps
     end
 
-    PlaceType.create!(name: 'Cafe')
-    PlaceType.create!(name: 'Restaurant')
-    PlaceType.create!(name: 'Hotel')
-    PlaceType.create!(name: 'Hostel')
-    PlaceType.create!(name: 'Bed and Breakfast')
-    PlaceType.create!(name: 'Airport')
-    PlaceType.create!(name: 'Bus Terminal')
+    if defined? PlaceType
+      PlaceType.create!(name: 'Cafe')
+      PlaceType.create!(name: 'Restaurant')
+      PlaceType.create!(name: 'Hotel')
+      PlaceType.create!(name: 'Hostel')
+      PlaceType.create!(name: 'Bed and Breakfast')
+      PlaceType.create!(name: 'Airport')
+      PlaceType.create!(name: 'Bus Terminal')
+    end
   end
 end

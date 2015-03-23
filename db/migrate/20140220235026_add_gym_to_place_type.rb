@@ -1,9 +1,13 @@
 class AddGymToPlaceType < ActiveRecord::Migration
   def up
-    PlaceType.create!(name: 'Gym')
+    if defined? PlaceType
+      PlaceType.create!(name: 'Gym')
+    end
   end
 
   def down
-    PlaceType.where(name: 'Gym').destroy_all
+    if defined? PlaceType
+      PlaceType.where(name: 'Gym').destroy_all
+    end
   end
 end

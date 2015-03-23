@@ -7,7 +7,9 @@ class CreateContactTypes < ActiveRecord::Migration
       t.timestamps
     end
 
-    ContactType.create!(name: 'email', description: 'email')
-    ContactType.create!(name: 'phone', description: 'phone')
+    if defined? ContactType
+      ContactType.create!(name: 'email', description: 'email')
+      ContactType.create!(name: 'phone', description: 'phone')
+    end
   end
 end
