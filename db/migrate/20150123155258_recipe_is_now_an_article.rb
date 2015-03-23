@@ -1,6 +1,6 @@
 class RecipeIsNowAnArticle < ActiveRecord::Migration
   def up
-    if defined? Recipe && defined? Article
+    if defined?(Recipe) && defined?(Article)
       Recipe.all.each do |recipe|
         Article.create(title: recipe.title, sub_title: nil,
                        content: recipe.description, published_at: DateTime.now.utc,
